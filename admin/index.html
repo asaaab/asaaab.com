@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.4 system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+</head><body>
+<title>asaaab Pit Crew</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@600;800;900&family=Nunito:wght@500;700;800;900&display=swap">
+<style>
+/* Layout: a single-column garage clipboard. Green GPS header, then tabbed panels for cars, odds, links and analytics, with a sticky save bar. */
+:root{
+  color-scheme:light;
+  --bg:#eef1f3; --panel:#ffffff; --ink:#16191c; --muted:#5b6268; --line:#d7dbdf;
+  --guide:#3f9a2f; --guide-dk:#2f7a22; --route:#d930c9; --warn:#f7d117;
+  --r-common:#7c838a; --r-uncommon:#3f9a2f; --r-rare:#2f7fe0; --r-legend:#d930c9;
+  --ok:#2f7a22; --bad:#c62f26;
+  --hwy:"Overpass","Arial Narrow",system-ui,sans-serif;
+  --ui:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0; background:var(--bg); color:var(--ink); font-family:var(--ui); font-size:15px; line-height:1.45;
+  padding-left:max(16px, env(safe-area-inset-left, 0px)); padding-right:max(16px, env(safe-area-inset-right, 0px)); padding-block:0 110px}
+.wrap{max-width:900px; margin:0 auto}
+header.top{margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px))); background:var(--guide); color:#fff;
+  padding:14px max(16px, env(safe-area-inset-right, 0px)) 14px max(16px, env(safe-area-inset-left, 0px))}
+.top-in{max-width:900px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap}
+.top h1{margin:0; font-family:var(--hwy); font-weight:900; font-size:26px; line-height:1}
+.top h1 small{display:block; font-size:11px; letter-spacing:.2em; font-weight:800; opacity:.85; margin-bottom:4px}
+.status{font-family:var(--hwy); font-weight:900; font-size:12px; letter-spacing:.1em; background:var(--guide-dk); border-radius:999px; padding:6px 12px 4px}
+.status.ok{background:#fff; color:var(--ok)} .status.bad{background:#fff; color:var(--bad)}
+
+.panel{background:var(--panel); border:2px solid var(--ink); border-radius:14px; padding:16px; margin-top:16px}
+.panel h2{margin:0 0 4px; font-family:var(--hwy); font-weight:900; font-size:22px}
+.panel p.help{margin:0 0 12px; color:var(--muted)}
+label{display:block; font-family:var(--hwy); font-weight:800; font-size:12px; letter-spacing:.1em; color:var(--muted); margin-bottom:4px}
+input[type=text],input[type=password],input[type=url],select{width:100%; font:inherit; font-weight:700; padding:10px 12px; border:2px solid var(--ink); border-radius:10px; background:#fff; color:var(--ink); min-width:0}
+input:focus-visible,select:focus-visible,button:focus-visible{outline:3px solid var(--route); outline-offset:2px}
+.row{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+@media (max-width:620px){ .row{grid-template-columns:1fr} }
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:44px; padding:0 16px; border-radius:10px; border:2px solid var(--ink); background:#fff; color:var(--ink);
+  font-family:var(--hwy); font-weight:900; font-size:16px; cursor:pointer; box-shadow:0 3px 0 var(--ink); text-decoration:none}
+.btn:active{transform:translateY(2px); box-shadow:0 1px 0 var(--ink)}
+.btn.primary{background:var(--route); color:#fff}
+.btn.green{background:var(--guide); color:#fff}
+.btn[disabled]{opacity:.5; cursor:not-allowed}
+
+.tabs{display:flex; gap:6px; margin-top:16px; flex-wrap:wrap}
+.tab{font-family:var(--hwy); font-weight:900; font-size:15px; padding:9px 14px 7px; border-radius:999px; border:2px solid var(--ink); background:#fff; cursor:pointer}
+.tab[aria-selected=true]{background:var(--ink); color:#fff}
+
+/* cars */
+.add{display:grid; grid-template-columns:1fr 160px auto; gap:8px; align-items:end; margin-bottom:14px}
+@media (max-width:620px){ .add{grid-template-columns:1fr 1fr} .add .btn{grid-column:1/-1} }
+.tiers{display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:12px}
+@media (max-width:620px){ .tiers{grid-template-columns:1fr} }
+.tier{border:2.5px solid var(--c); border-radius:12px; padding:12px; min-width:0}
+.tier-h{display:flex; align-items:baseline; justify-content:space-between; gap:8px; margin-bottom:8px}
+.tier-h b{font-family:var(--hwy); font-weight:900; font-size:16px; color:var(--c); letter-spacing:.06em}
+.tier-h small{color:var(--muted); font-weight:700; font-size:12px}
+.chips{display:flex; flex-wrap:wrap; gap:6px}
+.chip{display:inline-flex; align-items:center; gap:4px; border:1.5px solid var(--c); border-radius:999px; padding:3px 4px 3px 10px; font-weight:800; font-size:13px; background:#fff; max-width:100%}
+.chip span{overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.chip select{width:auto; padding:0 2px; border:0; font-size:11px; font-weight:800; background:transparent; color:var(--muted)}
+.chip button{border:0; background:none; cursor:pointer; width:22px; height:22px; border-radius:50%; display:grid; place-items:center; color:var(--muted); font-weight:900}
+.chip button:hover{background:#f1f2f4; color:var(--bad)}
+
+/* odds */
+.odds{display:flex; flex-direction:column; gap:14px}
+.odd{display:grid; grid-template-columns:120px 1fr 64px; gap:12px; align-items:center}
+.odd b{font-family:var(--hwy); font-weight:900; color:var(--c)}
+.odd output{font-family:var(--hwy); font-weight:900; font-size:18px; text-align:right; font-variant-numeric:tabular-nums}
+input[type=range]{width:100%; accent-color:var(--route)}
+.bar{display:flex; height:22px; border-radius:6px; overflow:hidden; border:2px solid var(--ink); margin-top:6px}
+.bar div{height:100%}
+.est{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:10px; margin-top:14px}
+.est div{background:#f6f7f8; border-radius:10px; padding:10px}
+.est small{display:block; font-family:var(--hwy); font-weight:800; font-size:11px; letter-spacing:.12em; color:var(--muted)}
+.est b{font-family:var(--hwy); font-weight:900; font-size:24px; font-variant-numeric:tabular-nums}
+
+/* analytics */
+.events{margin:0; padding:0; list-style:none; display:grid; gap:6px}
+.events li{display:grid; grid-template-columns:minmax(0,220px) 1fr; gap:10px; padding:8px 10px; background:#f6f7f8; border-radius:8px}
+.events code{font-family:ui-monospace,Menlo,Consolas,monospace; font-size:13px; font-weight:700; overflow-wrap:anywhere}
+@media (max-width:620px){ .events li{grid-template-columns:1fr} }
+
+.savebar{position:fixed; left:0; right:0; bottom:0; z-index:5; background:#fff; border-top:2px solid var(--ink);
+  padding:10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px))}
+.savebar-in{max-width:900px; margin:0 auto; display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+.savebar .msg{flex:1; min-width:180px; font-weight:800; color:var(--muted)}
+.savebar .msg.ok{color:var(--ok)} .savebar .msg.bad{color:var(--bad)}
+.dirty{display:inline-block; width:10px; height:10px; border-radius:50%; background:var(--warn); border:2px solid var(--ink); margin-right:6px; vertical-align:-1px}
+[hidden]{display:none!important}
+</style>
+
+<header class="top">
+  <div class="top-in">
+    <h1><small>ASAAAB.COM · OWNER PORTAL</small>Pit Crew</h1>
+    <span class="status" id="status">NOT CONNECTED</span>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="panel" id="connect">
+    <h2>Connect to the site</h2>
+    <p class="help">Changes save straight to the site's GitHub repo and go live in about a minute. Paste a GitHub fine-grained token that can edit <b>Contents</b> on the site repo. It stays in this browser only.</p>
+    <div class="row">
+      <div><label for="repo">REPO</label><input type="text" id="repo" value="asaaab/asaaab.com" autocomplete="off"></div>
+      <div><label for="token">GITHUB TOKEN</label><input type="password" id="token" placeholder="github_pat_…" autocomplete="off"></div>
+    </div>
+    <div style="display:flex; gap:10px; margin-top:12px; flex-wrap:wrap">
+      <button class="btn green" type="button" id="connectBtn">Connect &amp; load</button>
+      <button class="btn" type="button" id="forget">Forget token</button>
+    </div>
+  </section>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" role="tab" aria-selected="true" data-tab="cars" id="t-cars">Cars</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="odds" id="t-odds">Traffic &amp; odds</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="links" id="t-links">Links</button>
+    <button class="tab" role="tab" aria-selected="false" data-tab="stats" id="t-stats">Analytics</button>
+  </div>
+
+  <section class="panel" data-panel="cars" role="tabpanel" aria-labelledby="t-cars">
+    <h2>Cars on the route</h2>
+    <p class="help"><b>Traffic</b> is plain traffic: parked on the road, never counted. <b>Uncommon, rare and legendary</b> are spots that get circled, counted, and stamped in the passport.</p>
+    <div class="add">
+      <div><label for="newCar">ADD A CAR</label><input type="text" id="newCar" placeholder="e.g. Saab 9-2X"></div>
+      <div><label for="newTier">AS</label>
+        <select id="newTier"><option value="common">Traffic</option><option value="uncommon">Uncommon</option><option value="rare" selected>Rare</option><option value="legendary">Legendary</option></select></div>
+      <button class="btn primary" type="button" id="addCar">Add car</button>
+    </div>
+    <div class="tiers" id="tiers"></div>
+  </section>
+
+  <section class="panel" data-panel="odds" role="tabpanel" aria-labelledby="t-odds" hidden>
+    <h2>Traffic &amp; odds</h2>
+    <p class="help">How often each kind of car gets parked on the road, and how packed the road is. Every visitor's drive is rolled from these.</p>
+    <div class="odds" id="odds"></div>
+    <div class="bar" id="mix" aria-hidden="true"></div>
+    <div style="margin-top:18px">
+      <label for="density">TRAFFIC DENSITY · <span id="densityV"></span></label>
+      <input type="range" id="density" min="0.5" max="2" step="0.1">
+    </div>
+    <div class="est">
+      <div><small>PARKED CARS / DRIVE</small><b id="eParked">0</b></div>
+      <div><small>SPOTS / DRIVE</small><b id="eSpots">0</b></div>
+      <div><small>LEGENDARY CHANCE</small><b id="eLegend">0%</b></div>
+    </div>
+  </section>
+
+  <section class="panel" data-panel="links" role="tabpanel" aria-labelledby="t-links" hidden>
+    <h2>Links</h2>
+    <p class="help">Used by the Fast travel menu and the stops. Leave one blank to show it as "coming soon".</p>
+    <div class="row">
+      <div><label for="l-youtube">YOUTUBE</label><input type="url" id="l-youtube" data-l="youtube"></div>
+      <div><label for="l-tiktok">TIKTOK</label><input type="url" id="l-tiktok" data-l="tiktok"></div>
+      <div><label for="l-bluesky">BLUESKY</label><input type="url" id="l-bluesky" data-l="bluesky" placeholder="https://bsky.app/profile/…"></div>
+      <div><label for="l-discord">DISCORD INVITE</label><input type="url" id="l-discord" data-l="discord" placeholder="https://discord.gg/…"></div>
+    </div>
+  </section>
+
+  <section class="panel" data-panel="stats" role="tabpanel" aria-labelledby="t-stats" hidden>
+    <h2>Analytics</h2>
+    <p class="help">Visits and events are counted by GoatCounter (free, no cookies, no personal data). Open the dashboard to see visitors, where they came from, and every event below.</p>
+    <a class="btn green" href="https://asaaab.goatcounter.com" target="_blank" rel="noopener">Open analytics dashboard →</a>
+    <h2 style="margin-top:18px; font-size:18px">Events the site sends</h2>
+    <ul class="events">
+      <li><code>start-carspotting</code><span>Pressed Start carspotting (autopilot + music)</span></li>
+      <li><code>fasttravel-open</code><span>Opened the Fast travel menu</span></li>
+      <li><code>fasttravel-youtube / tiktok / bluesky / discord / beamng</code><span>Picked a Fast travel destination</span></li>
+      <li><code>passport-reached</code><span>Drove all the way to the passport</span></li>
+      <li><code>legendary-&lt;car&gt;</code><span>Finished a drive with that legendary car stamped</span></li>
+      <li><code>share-passport</code><span>Tapped Share my passport</span></li>
+      <li><code>discord-join</code><span>Tapped Join the Discord (once the invite is set)</span></li>
+    </ul>
+  </section>
+</div>
+
+<div class="savebar">
+  <div class="savebar-in">
+    <span class="msg" id="msg">Load the live config, make changes, then publish.</span>
+    <button class="btn" type="button" id="dl">Download config</button>
+    <button class="btn primary" type="button" id="save" disabled>Publish to site</button>
+  </div>
+</div>
+
+<script>
+(() => {
+const DEFAULT = {
+  density: 1,
+  links: { youtube: "https://www.youtube.com/@asaaab93x", tiktok: "https://www.tiktok.com/@asaaab", bluesky: "", discord: "" },
+  pool: {
+    common:    { w: 60, cars: ["Toyota Camry","Honda Civic","Toyota Corolla","Honda Accord","Nissan Altima","Toyota Prius","Ford F-150","Honda CR-V","Toyota RAV4","Hyundai Elantra","Toyota Tacoma","Chevy Malibu"] },
+    uncommon:  { w: 28, cars: ["Volvo 240 Wagon","Volvo V70","Subaru Outback","Honda Element","Scion xB","Toyota Previa","Mazda Miata","Honda Passport","Mercury Grand Marquis","Buick LeSabre","Ford Ranger","Toyota Echo"] },
+    rare:      { w: 10, cars: ["Saab 900","Saab 9-3 Aero","Saab 9-5 Wagon","Volvo V60","Pontiac Aztek","Subaru Baja","Mitsubishi Delica","Chevrolet SSR","Isuzu VehiCROSS"] },
+    legendary: { w: 2,  cars: ["Saab 9-3X","Saab 900 SPG","GM EV1","Honda Fit EV","Toyota RAV4 EV","Ford Ranger EV","CODA Sedan","Th!nk City","BMW ActiveE","Toyota Highlander FCEV","Saab Sonett III"] }
+  }
+};
+const TIERS = [
+  { k: "common", name: "TRAFFIC", c: "var(--r-common)" },
+  { k: "uncommon", name: "UNCOMMON", c: "var(--r-uncommon)" },
+  { k: "rare", name: "RARE", c: "var(--r-rare)" },
+  { k: "legendary", name: "LEGENDARY", c: "var(--r-legend)" },
+];
+const $ = id => document.getElementById(id);
+const store = { get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }, set(k,v){ try { localStorage.setItem(k,v); } catch(e){} }, del(k){ try { localStorage.removeItem(k); } catch(e){} } };
+let cfg = JSON.parse(JSON.stringify(DEFAULT)), sha = null, connected = false, dirty = false;
+
+const setMsg = (t, cls = "") => { const m = $("msg"); m.className = "msg " + cls; m.innerHTML = t; };
+const markDirty = () => { dirty = true; setMsg('<span class="dirty"></span>Unsaved changes', ""); $("save").disabled = !connected; };
+const setStatus = (t, cls) => { const s = $("status"); s.textContent = t; s.className = "status " + (cls || ""); };
+
+// tabs
+document.querySelectorAll(".tab").forEach(t => t.addEventListener("click", () => {
+  document.querySelectorAll(".tab").forEach(x => x.setAttribute("aria-selected", x === t));
+  document.querySelectorAll("[data-panel]").forEach(p => p.hidden = p.dataset.panel !== t.dataset.tab);
+}));
+
+// ---- cars
+function renderTiers(){
+  const wrap = $("tiers"); wrap.replaceChildren();
+  for (const t of TIERS) {
+    const box = document.createElement("div"); box.className = "tier"; box.style.setProperty("--c", t.c);
+    const list = cfg.pool[t.k].cars;
+    box.innerHTML = `<div class="tier-h"><b>${t.name}</b><small>${list.length} car${list.length === 1 ? "" : "s"}${t.k === "common" ? " · not counted" : " · counts as a spot"}</small></div><div class="chips"></div>`;
+    const chips = box.querySelector(".chips");
+    list.forEach((name, i) => {
+      const ch = document.createElement("span"); ch.className = "chip"; ch.style.setProperty("--c", t.c);
+      const nm = document.createElement("span"); nm.textContent = name; nm.title = name;
+      const sel = document.createElement("select"); sel.setAttribute("aria-label", `Move ${name}`);
+      TIERS.forEach(o => { const op = document.createElement("option"); op.value = o.k; op.textContent = o.name; if (o.k === t.k) op.selected = true; sel.appendChild(op); });
+      sel.addEventListener("change", () => { list.splice(i, 1); cfg.pool[sel.value].cars.push(name); renderTiers(); renderOdds(); markDirty(); });
+      const x = document.createElement("button"); x.type = "button"; x.textContent = "×"; x.setAttribute("aria-label", `Remove ${name}`);
+      x.addEventListener("click", () => { if (list.length <= 1) { setMsg("Each tier needs at least one car.", "bad"); return; } list.splice(i, 1); renderTiers(); renderOdds(); markDirty(); });
+      ch.append(nm, sel, x); chips.appendChild(ch);
+    });
+    wrap.appendChild(box);
+  }
+}
+$("addCar").addEventListener("click", () => {
+  const name = $("newCar").value.trim().replace(/\s+/g, " ");
+  if (!name) return;
+  const exists = TIERS.find(t => cfg.pool[t.k].cars.some(c => c.toLowerCase() === name.toLowerCase()));
+  if (exists) { setMsg(`${name} is already listed under ${exists.name.toLowerCase()}.`, "bad"); return; }
+  cfg.pool[$("newTier").value].cars.push(name); $("newCar").value = ""; renderTiers(); renderOdds(); markDirty();
+});
+$("newCar").addEventListener("keydown", e => { if (e.key === "Enter") $("addCar").click(); });
+
+// ---- odds
+function renderOdds(){
+  const wrap = $("odds"); wrap.replaceChildren();
+  const total = TIERS.reduce((s, t) => s + cfg.pool[t.k].w, 0) || 1;
+  for (const t of TIERS) {
+    const row = document.createElement("div"); row.className = "odd"; row.style.setProperty("--c", t.c);
+    const id = "w-" + t.k;
+    row.innerHTML = `<label for="${id}" style="margin:0"><b>${t.name}</b></label><input type="range" id="${id}" min="0" max="100" step="1" value="${cfg.pool[t.k].w}"><output for="${id}">${Math.round(cfg.pool[t.k].w / total * 100)}%</output>`;
+    row.querySelector("input").addEventListener("input", e => { cfg.pool[t.k].w = +e.target.value; renderOdds(); markDirty(); document.getElementById(id).focus(); });
+    wrap.appendChild(row);
+  }
+  $("mix").innerHTML = TIERS.map(t => `<div style="width:${cfg.pool[t.k].w / total * 100}%; background:${t.c}"></div>`).join("");
+  $("density").value = cfg.density; $("densityV").textContent = cfg.density.toFixed(1) + "×";
+  const parked = Math.round(36 * cfg.density);
+  $("eParked").textContent = parked;
+  $("eSpots").textContent = "≈ " + Math.round(parked * (1 - cfg.pool.common.w / total));
+  const pL = 1 - Math.pow(1 - cfg.pool.legendary.w / total, parked);
+  $("eLegend").textContent = Math.round(pL * 100) + "%";
+}
+$("density").addEventListener("input", e => { cfg.density = +e.target.value; renderOdds(); markDirty(); });
+
+// ---- links
+function renderLinks(){ document.querySelectorAll("[data-l]").forEach(i => { i.value = cfg.links[i.dataset.l] || ""; }); }
+document.querySelectorAll("[data-l]").forEach(i => i.addEventListener("input", () => { cfg.links[i.dataset.l] = i.value.trim(); markDirty(); }));
+
+const renderAll = () => { renderTiers(); renderOdds(); renderLinks(); };
+
+// ---- GitHub
+const b64e = s => btoa(String.fromCharCode(...new TextEncoder().encode(s)));
+const b64d = s => new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\n/g, "")), c => c.charCodeAt(0)));
+const api = (path, opts = {}) => fetch(`https://api.github.com/repos/${$("repo").value.trim()}/${path}`, {
+  ...opts, headers: { "Accept": "application/vnd.github+json", "Authorization": "Bearer " + $("token").value.trim(), "X-GitHub-Api-Version": "2022-11-28", ...(opts.headers || {}) }
+});
+function normalize(c){
+  const out = JSON.parse(JSON.stringify(DEFAULT));
+  if (c && c.pool) for (const t of TIERS) if (c.pool[t.k]) {
+    if (Number.isFinite(+c.pool[t.k].w)) out.pool[t.k].w = +c.pool[t.k].w;
+    if (Array.isArray(c.pool[t.k].cars) && c.pool[t.k].cars.length) out.pool[t.k].cars = c.pool[t.k].cars.map(String);
+  }
+  if (c && c.links) for (const k of Object.keys(out.links)) if (typeof c.links[k] === "string") out.links[k] = c.links[k];
+  if (c && Number.isFinite(+c.density)) out.density = +c.density;
+  return out;
+}
+$("connectBtn").addEventListener("click", async () => {
+  if (!$("token").value.trim()) { setMsg("Paste a GitHub token first.", "bad"); return; }
+  store.set("pitcrew-repo", $("repo").value.trim()); store.set("pitcrew-token", $("token").value.trim());
+  setMsg("Connecting…");
+  try {
+    const r = await api("contents/config.json");
+    if (r.status === 404) { sha = null; cfg = normalize(null); connected = true; setStatus("CONNECTED · NEW CONFIG", "ok"); setMsg("Connected. No config yet, so you're starting from the current defaults.", "ok"); }
+    else if (!r.ok) { throw new Error(r.status === 401 ? "That token was rejected." : r.status === 403 ? "That token can't read this repo." : "GitHub said " + r.status + "."); }
+    else { const j = await r.json(); sha = j.sha; cfg = normalize(JSON.parse(b64d(j.content))); connected = true; setStatus("CONNECTED", "ok"); setMsg("Loaded the live config.", "ok"); }
+    dirty = false; $("save").disabled = true; renderAll();
+  } catch (e) { connected = false; setStatus("NOT CONNECTED", "bad"); setMsg((e && e.message) || "Couldn't reach GitHub.", "bad"); }
+});
+$("forget").addEventListener("click", () => { store.del("pitcrew-token"); $("token").value = ""; connected = false; $("save").disabled = true; setStatus("NOT CONNECTED"); setMsg("Token removed from this browser."); });
+$("save").addEventListener("click", async () => {
+  if (!connected) return;
+  $("save").disabled = true; setMsg("Publishing…");
+  try {
+    const body = { message: "Update site config from Pit Crew", content: b64e(JSON.stringify(cfg, null, 2) + "\n") };
+    if (sha) body.sha = sha;
+    const r = await api("contents/config.json", { method: "PUT", body: JSON.stringify(body), headers: { "Content-Type": "application/json" } });
+    if (r.status === 409 || r.status === 422) throw new Error("Someone changed the config since you loaded it. Reconnect to reload, then redo your edit.");
+    if (!r.ok) throw new Error(r.status === 403 || r.status === 404 ? "That token can't write to this repo." : "GitHub said " + r.status + ".");
+    const j = await r.json(); sha = j.content.sha; dirty = false;
+    setMsg("Published. The live site picks it up in about a minute.", "ok");
+  } catch (e) { $("save").disabled = false; setMsg(e.message || "Publish failed.", "bad"); }
+});
+$("dl").addEventListener("click", () => {
+  const blob = new Blob([JSON.stringify(cfg, null, 2) + "\n"], { type: "application/json" });
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "config.json"; document.body.appendChild(a); a.click(); a.remove();
+});
+addEventListener("beforeunload", e => { if (dirty) { e.preventDefault(); e.returnValue = ""; } });
+
+// restore
+const savedRepo = store.get("pitcrew-repo"), savedTok = store.get("pitcrew-token");
+if (savedRepo) $("repo").value = savedRepo;
+if (savedTok) { $("token").value = savedTok; $("connectBtn").click(); }
+renderAll();
+})();
+</script>
+</body></html>
