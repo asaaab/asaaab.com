@@ -1,0 +1,1011 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.4 system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}</style>
+<meta property="og:title" content="asaaab">
+<meta property="og:description" content="Certified carcissist carspotter. Take a drive, spot cars hidden in plain traffic, and collect your carspotting passport.">
+<meta property="og:url" content="https://asaaab.com">
+<meta name="theme-color" content="#3f9a2f">
+</head><body>
+<title>asaaab</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="asaaab — certified carcissist carspotter. Scroll to drive, spot cars hidden in plain traffic, and collect your carspotting passport.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@600;800;900&family=Nunito:wght@500;700;800;900&display=swap">
+<style>
+/* Layout: a car GPS in day mode with a jet engine bolted on. Scrolling drives a little jet-car up a winding road; stops pop cards; every visitor gets their own random cars to spot and leaves with a passport. Single bright look by design. */
+:root{
+  color-scheme:light;
+  --page:#e6eef4;        /* sky the GPS floats in */
+  --bezel:#24272b;
+  --land:#eef0e3;
+  --park:#cfe4b2;
+  --park-2:#bcd99c;
+  --water:#a7d3ef;
+  --street:#ffffff;
+  --street-edge:#d9dacf;
+  --road:#f5c242;
+  --road-edge:#cf8e17;
+  --route:#d930c9;       /* magenta route line */
+  --car:#2f7fe0;
+  --guide:#3f9a2f;
+  --guide-dk:#2f7a22;
+  --sign:#0b6b3c;        /* Caltrans guide-sign green */
+  --warn:#f7d117;
+  --ink:#16191c;
+  --muted:#5b6268;
+  --card:#ffffff;
+  --paper:#fbf6e9;       /* passport page */
+  --yt:#e1261c;
+  --dc:#5865f2;
+  --flame:#ff7a1a;
+  --r-common:#7c838a;
+  --r-uncommon:#3f9a2f;
+  --r-rare:#2f7fe0;
+  --r-legend:#d930c9;
+  --hwy:"Overpass","Arial Narrow",system-ui,sans-serif;
+  --ui:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  background:var(--page); color:var(--ink); font-family:var(--ui); font-size:15px; line-height:1.4;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));
+  padding-right:max(16px, env(safe-area-inset-right, 0px));
+  padding-block:0;
+}
+.drive{height:760vh; position:relative}
+.stage{
+  position:sticky; top:env(safe-area-inset-top, 0px);
+  height:calc(100svh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  display:grid; place-items:center; padding-block:10px;
+}
+.device{
+  position:relative; width:100%; max-width:980px; height:100%; max-height:700px;
+  background:var(--bezel); border-radius:22px; padding:8px;
+  box-shadow:0 18px 40px -18px rgba(20,30,40,.45);
+  display:flex; flex-direction:column;
+}
+.brand{display:none}
+@media (min-width:700px){
+  .device{padding:16px 16px 40px; border-radius:26px}
+  .brand{display:flex; align-items:center; gap:8px; position:absolute; right:26px; bottom:9px; color:#cfd3d7; font-family:var(--hwy); font-weight:900; letter-spacing:.18em; font-size:17px}
+  .brand svg{width:26px; height:14px}
+}
+.screen{position:relative; flex:1; border-radius:14px; overflow:hidden; background:var(--land); isolation:isolate}
+#map{position:absolute; inset:0; width:100%; height:100%; display:block}
+
+/* sky layer: clouds + flyovers */
+.sky{position:absolute; inset:0; z-index:2; pointer-events:none; overflow:hidden}
+.cloud{position:absolute; width:180px; height:60px; border-radius:50%; background:#fff; opacity:0; filter:blur(2px); transition:opacity .6s ease;
+  box-shadow:50px -18px 0 6px #fff, 100px 0 0 -4px #fff}
+.sky.high .cloud{opacity:.55}
+.cloud.c1{top:28%; left:-220px; animation:drift 26s linear infinite}
+.cloud.c2{top:52%; left:-220px; animation:drift 34s linear -12s infinite; transform:scale(.7)}
+.cloud.c3{top:16%; left:-220px; animation:drift 30s linear -20s infinite; transform:scale(1.2)}
+@keyframes drift{to{left:110%}}
+.jet{position:absolute; width:70px; height:70px; left:-90px; top:80%; opacity:0}
+.jet .shadow{position:absolute; inset:0; transform:translate(26px, 34px) scale(.9); opacity:.18; filter:blur(1px)}
+.jet.fly{animation:flyover 3.2s cubic-bezier(.3,.1,.6,1) forwards}
+@keyframes flyover{0%{opacity:1; left:-90px; top:85%} 100%{opacity:1; left:110%; top:-10%}}
+
+/* guidance banner */
+.banner{position:absolute; left:0; right:0; top:0; z-index:5; display:flex; min-height:58px; background:var(--guide); color:#fff}
+.banner .dist{display:flex; align-items:center; gap:8px; padding:6px 14px; background:var(--guide-dk); font-family:var(--hwy); font-weight:900; font-size:22px; white-space:nowrap}
+.banner .dist small{font-size:14px; font-weight:800}
+.banner .dist svg{width:30px; height:30px}
+.banner .next{display:flex; align-items:center; gap:10px; padding:6px 14px; min-width:0; flex:1}
+.banner .next b{font-family:var(--hwy); font-weight:900; font-size:22px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; min-width:0}
+.chip{flex:none; background:#fff; color:var(--ink); border:2px solid var(--ink); border-radius:4px; font-family:var(--hwy); font-weight:900; font-size:16px; padding:2px 8px 0; line-height:1.3}
+
+/* map overlays */
+.ahead{position:absolute; left:10px; top:70px; z-index:4; display:flex; gap:8px; align-items:center; transition:opacity .25s}
+.ahead.off{opacity:0}
+.plate{background:var(--warn); border:2px solid var(--ink); border-radius:4px; text-align:center; font-family:var(--hwy); font-weight:900; padding:3px 7px 1px; line-height:1}
+.plate small{display:block; font-size:10px; font-weight:800}
+.plate span{font-size:22px}
+.diamond{width:38px; height:38px; background:var(--warn); border:2px solid var(--ink); transform:rotate(45deg); border-radius:4px; display:grid; place-items:center}
+.diamond svg{transform:rotate(-45deg); width:22px; height:22px}
+.hud{position:absolute; right:10px; top:70px; z-index:4; display:flex; flex-direction:column; align-items:flex-end; gap:6px}
+.pill{background:#fff; border:2px solid var(--ink); border-radius:999px; padding:4px 10px 3px; font-family:var(--hwy); font-weight:900; font-size:13px; letter-spacing:.06em; display:flex; align-items:center; gap:6px}
+.pill svg{width:18px; height:18px}
+.pill.pop{animation:pop .35s ease}
+@keyframes pop{50%{transform:scale(1.15)}}
+.ab,.sb{color:#fff; border-color:var(--ink); opacity:0; transform:translateY(-4px); transition:opacity .2s, transform .2s}
+.ab{background:var(--flame)}
+.sb{background:var(--ink)}
+.ab.on,.sb.on{opacity:1; transform:none}
+.restart{cursor:pointer; font:inherit; font-family:var(--hwy); font-weight:900; font-size:13px; letter-spacing:.06em; color:var(--ink)}
+.restart:hover{background:#f1f2f4}
+.restart:focus-visible{outline:3px solid var(--route); outline-offset:2px}
+.toast{position:absolute; left:50%; top:70px; z-index:6; transform:translate(-50%, -8px); opacity:0; pointer-events:none;
+  background:#fff; border:2px solid var(--ink); border-radius:12px; padding:7px 12px 6px; box-shadow:0 4px 0 var(--ink);
+  display:flex; align-items:center; gap:8px; max-width:calc(100% - 20px); transition:opacity .2s, transform .2s}
+.toast.on{opacity:1; transform:translate(-50%, 0)}
+.toast .rar{flex:none; font-family:var(--hwy); font-weight:900; font-size:10px; letter-spacing:.12em; color:#fff; border-radius:999px; padding:2px 7px 1px}
+.toast b{font-family:var(--hwy); font-weight:900; font-size:15px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+@media (max-width:520px){ .toast{top:112px} }
+
+/* bottom bar */
+.bar{position:absolute; left:0; right:0; bottom:0; z-index:5; display:flex; align-items:stretch; gap:6px; padding:6px}
+.navbtn{flex:none; width:46px; border:0; border-radius:8px; background:#2c3035; color:#fff; display:grid; place-items:center; cursor:pointer}
+.navbtn svg{width:22px; height:22px}
+.navbtn:focus-visible{outline:3px solid var(--route); outline-offset:2px}
+.navbtn.music{background:#fff; border:2px solid var(--ink)}
+.navbtn.music.on{background:var(--route); border-color:var(--route)}
+.navbtn[hidden]{display:none}
+.box{background:#fff; border-radius:8px; padding:4px 10px; display:flex; flex-direction:column; justify-content:center; align-items:center; box-shadow:0 1px 0 rgba(0,0,0,.08)}
+.box b{font-family:var(--hwy); font-weight:900; font-size:22px; line-height:1; font-variant-numeric:tabular-nums}
+.box b sup{font-size:11px; margin-left:1px}
+.box small{font-weight:800; font-size:12px}
+.road{flex:1; min-width:0; justify-content:center; background:rgba(255,255,255,.92)}
+.road b{font-size:16px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%}
+.speed{min-width:70px}
+.eta{min-width:84px}
+@media (max-width:440px){ .road{display:none} .eta{min-width:0; flex:1} }
+
+/* stop cards */
+.card{
+  position:absolute; z-index:7; left:10px; right:10px; bottom:70px; max-width:470px; margin:0 auto;
+  max-height:calc(100% - 140px); overflow:auto;
+  background:var(--card); border-radius:14px; padding:16px 16px 18px;
+  box-shadow:0 10px 30px -10px rgba(20,30,40,.45), 0 0 0 2px var(--ink);
+  opacity:0; visibility:hidden; transform:translateY(16px) scale(.98);
+  transition:opacity .25s ease, transform .25s ease, visibility 0s linear .25s;
+}
+.card.show{opacity:1; visibility:visible; transform:none; transition:opacity .25s ease, transform .25s ease}
+.eyebrow{display:flex; align-items:center; gap:8px; font-family:var(--hwy); font-weight:900; font-size:12px; letter-spacing:.14em; color:var(--muted); margin-bottom:6px}
+.eyebrow .n{display:grid; place-items:center; width:24px; height:24px; border-radius:50%; background:var(--route); color:#fff; font-size:13px; letter-spacing:0; padding-top:2px}
+.card h1,.card h2{margin:0; font-family:var(--hwy); font-weight:900; line-height:.95; text-wrap:balance}
+.card h1{font-size:clamp(44px, 13vw, 58px); letter-spacing:-.01em; display:flex; align-items:center; gap:10px}
+.card h1 svg{width:54px; height:30px; flex:none}
+.card h2{font-size:30px}
+.card p{margin:6px 0 0; color:#3b4147}
+.tag{font-weight:800; color:var(--ink)!important; font-size:16px}
+.motto{font-family:var(--hwy); font-weight:900; font-size:12px; letter-spacing:.2em; color:var(--route)!important}
+.ctas{display:flex; flex-direction:column; gap:10px; margin-top:14px}
+.cta{
+  display:flex; align-items:center; justify-content:center; gap:10px; width:100%;
+  min-height:50px; padding:0 16px; border-radius:10px; border:2px solid var(--ink); cursor:pointer; text-decoration:none;
+  font-family:var(--hwy); font-weight:900; font-size:18px; color:#fff; background:var(--route);
+  box-shadow:0 3px 0 var(--ink); transition:transform .1s ease, box-shadow .1s ease;
+}
+.card > .cta{margin-top:14px}
+.cta:hover{transform:translateY(-1px)}
+.cta:active{transform:translateY(2px); box-shadow:0 1px 0 var(--ink)}
+.cta:focus-visible{outline:3px solid var(--car); outline-offset:3px}
+.cta svg{width:20px; height:20px; flex:none}
+.cta.yt{background:var(--yt)}
+.cta.ghost{background:#fff; color:var(--ink)}
+.card.menu{z-index:8}
+.card.menu.open{opacity:1; visibility:visible; transform:none; transition:opacity .2s ease, transform .2s ease}
+.menu-top{display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px}
+.menu-top .eyebrow{margin:0}
+.x{width:36px; height:36px; border-radius:50%; border:2px solid var(--ink); background:#fff; display:grid; place-items:center; cursor:pointer}
+.x svg{width:16px; height:16px}
+.dests{display:flex; flex-direction:column; gap:8px}
+.dest{display:flex; align-items:center; gap:12px; width:100%; padding:10px 12px; border-radius:10px; border:2px solid var(--ink); background:#fff; color:var(--ink); text-decoration:none; text-align:left; font:inherit; cursor:pointer; box-shadow:0 3px 0 var(--ink); transition:transform .1s ease}
+.dest:hover{transform:translateX(3px)}
+.dest:focus-visible,.x:focus-visible{outline:3px solid var(--route); outline-offset:2px}
+.dest .ico{flex:none; width:38px; height:38px; border-radius:10px; display:grid; place-items:center; border:2px solid var(--ink)}
+.dest .ico svg{width:22px; height:22px}
+.dest .t{display:flex; flex-direction:column; min-width:0; flex:1}
+.dest b{font-family:var(--hwy); font-weight:900; font-size:18px; line-height:1.1}
+.dest small{color:var(--muted); font-weight:700; font-size:13px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+.dest .go{font-family:var(--hwy); font-weight:900; font-size:18px}
+.dest.soon{opacity:.55; box-shadow:none; border-style:dashed; cursor:default; pointer-events:none}
+.dest.soon .go{font-size:11px; letter-spacing:.1em}
+.navbtn.music.nudge{animation:pop 1s ease 3}
+/* phones: keep cards short so the car and road stay in view above them */
+@media (max-width:520px){
+  .card[data-stop="1"],.card[data-stop="2"],.card[data-stop="3"]{max-height:58%}
+  .card[data-stop="2"] .facts{display:none}
+  .card[data-stop="2"] .sign-in{padding:10px; gap:8px}
+  .card[data-stop="2"] .shield{width:34px; height:38px; font-size:17px}
+  .card[data-stop="2"] .sign-top b{font-size:20px}
+  .card[data-stop="2"] .ip{font-size:16px; padding:7px 10px 5px}
+  .card[data-stop="2"] .steps{gap:6px}
+  .card[data-stop="2"] .steps li{font-size:13px; grid-template-columns:22px 1fr; gap:8px}
+  .card[data-stop="2"] .steps li::before{width:22px; height:22px; font-size:12px}
+  .card[data-stop="2"] .eyebrow{margin-bottom:0}
+  .card .cta{min-height:46px; font-size:17px}
+}
+.cta.auto{display:none; position:relative; overflow:hidden}
+.autopilot .cta.auto{display:flex}
+.cta.auto .fill{position:absolute; left:0; top:0; bottom:0; width:0; background:rgba(255,255,255,.32); pointer-events:none}
+.cta.auto span,.cta.auto svg{position:relative}
+.ap{background:var(--route); color:#fff; border-color:var(--ink); opacity:0; transform:translateY(-4px); transition:opacity .2s, transform .2s}
+.autopilot .ap{opacity:1; transform:none}
+.cta.stby{background:#f2f3f5; color:var(--muted); border-style:dashed; box-shadow:none; cursor:default}
+.hint{display:flex; align-items:center; justify-content:center; gap:6px; margin-top:10px; font-weight:800; font-size:13px; color:var(--muted)}
+.hint svg{width:16px; height:16px; animation:nudge 1.4s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateY(4px)}}
+
+/* crest */
+.sign{margin-top:12px; background:var(--sign); color:#fff; border-radius:10px; padding:5px}
+.sign-in{border:2.5px solid #fff; border-radius:7px; padding:12px; display:flex; flex-direction:column; gap:10px}
+.sign-top{display:flex; align-items:center; gap:10px}
+.shield{flex:none; width:44px; height:48px; display:grid; place-items:center; padding-top:3px; background:#fff; color:var(--sign); font-family:var(--hwy); font-weight:900; font-size:22px;
+  clip-path:polygon(50% 0, 100% 14%, 92% 70%, 50% 100%, 8% 70%, 0 14%)}
+.sign-top b{font-family:var(--hwy); font-weight:900; font-size:24px; line-height:1}
+.sign-top small{display:block; font-family:var(--hwy); font-weight:800; font-size:11px; letter-spacing:.16em; opacity:.9}
+.ip{font-family:var(--hwy); font-weight:900; font-size:18px; background:rgba(0,0,0,.22); border-radius:6px; padding:9px 12px 7px; user-select:all; overflow-wrap:anywhere}
+.steps{margin:0; padding:0; list-style:none; display:flex; flex-direction:column; gap:8px; counter-reset:s}
+.steps li{display:grid; grid-template-columns:26px 1fr; gap:10px; font-size:14px; counter-increment:s}
+.steps li::before{content:counter(s); display:grid; place-items:center; width:26px; height:26px; border-radius:50%; border:2px solid #fff; font-family:var(--hwy); font-weight:900; font-size:14px; padding-top:2px}
+.steps a{color:#fff; font-weight:900}
+.facts{display:flex; flex-wrap:wrap; gap:6px}
+.facts span{font-family:var(--hwy); font-weight:800; font-size:11px; letter-spacing:.08em; border:1.5px solid rgba(255,255,255,.7); border-radius:999px; padding:3px 8px 1px}
+
+/* passport */
+.card.passport{background:var(--paper); padding:0; max-width:500px}
+.pp-cover{background:var(--sign); color:#fff; padding:14px 16px 12px; display:flex; align-items:center; gap:12px; border-radius:12px 12px 0 0}
+.pp-cover svg{width:46px; height:46px; flex:none}
+.pp-cover small{display:block; font-family:var(--hwy); font-weight:800; font-size:10px; letter-spacing:.2em; opacity:.85}
+.pp-cover b{display:block; font-family:var(--hwy); font-weight:900; font-size:22px; line-height:1}
+.pp-cover i{display:block; font-style:normal; font-family:var(--hwy); font-weight:800; font-size:12px; letter-spacing:.14em; margin-top:3px; color:#ffe57a}
+.pp-body{padding:14px 16px 16px;
+  background-image:repeating-radial-gradient(circle at 80% 10%, transparent 0 9px, rgba(11,107,60,.05) 9px 10px)}
+.pp-meta{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:8px; margin-bottom:12px}
+.pp-meta div{border-bottom:1.5px dashed #c9bfa4; padding-bottom:4px; min-width:0}
+.pp-meta small{display:block; font-family:var(--hwy); font-weight:800; font-size:9px; letter-spacing:.16em; color:var(--muted)}
+.pp-meta b{display:block; font-family:var(--hwy); font-weight:900; font-size:17px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-variant-numeric:tabular-nums}
+.pp-best{display:flex; align-items:center; gap:10px; background:#fff; border:2px solid var(--ink); border-radius:10px; padding:8px 10px; margin-bottom:12px}
+.pp-best small{display:block; font-family:var(--hwy); font-weight:800; font-size:10px; letter-spacing:.16em; color:var(--muted)}
+.pp-best b{font-family:var(--hwy); font-weight:900; font-size:18px; line-height:1.1}
+.stamps{display:grid; grid-template-columns:repeat(auto-fill, minmax(118px, 1fr)); gap:10px}
+.stamp{position:relative; border:2.5px solid var(--c); color:var(--c); border-radius:10px; padding:8px 8px 6px; text-align:center; transform:rotate(var(--rot)); background:rgba(255,255,255,.55); min-width:0}
+.stamp::after{content:""; position:absolute; inset:3px; border:1px dashed var(--c); border-radius:7px; opacity:.6; pointer-events:none}
+.stamp b{display:block; font-family:var(--hwy); font-weight:900; font-size:13px; line-height:1.1; color:var(--ink); overflow-wrap:anywhere}
+.stamp small{display:block; font-family:var(--hwy); font-weight:900; font-size:9px; letter-spacing:.14em; margin-top:3px}
+.stamp .x{position:absolute; top:-9px; right:-7px; background:var(--c); color:#fff; border-radius:999px; font-family:var(--hwy); font-weight:900; font-size:11px; padding:2px 6px 0}
+.pp-empty{color:var(--muted); font-weight:700}
+.pp-note{margin-top:12px!important; font-size:13px; color:var(--muted)!important; text-align:center}
+.brag{margin-top:12px; background:#fff; border:2px dashed var(--route); border-radius:10px; padding:10px 12px; font-weight:800; font-size:15px; line-height:1.35}
+.brag:empty{display:none}
+.legend{display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; justify-content:center}
+.legend span{font-family:var(--hwy); font-weight:900; font-size:10px; letter-spacing:.1em; color:#fff; border-radius:999px; padding:2px 8px 1px}
+
+@media (prefers-reduced-motion: reduce){
+  .card,.card.show,.ahead,.toast,.ab{transition:none}
+  .hint svg,.pill.pop{animation:none}
+  .cloud,.jet.fly{animation:none; display:none}
+}
+</style>
+
+<div class="drive" id="drive">
+  <div class="stage">
+    <div class="device">
+      <div class="screen" id="screen">
+        <svg id="map" aria-hidden="true"><g id="world"></g></svg>
+
+        <div class="sky" id="sky" aria-hidden="true">
+          <div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div>
+          <div class="jet" id="jet">
+            <svg class="shadow" viewBox="0 0 70 70"><path d="M35 4 L39 26 L62 46 L62 52 L39 44 L38 58 L45 64 L45 67 L35 64 L25 67 L25 64 L32 58 L31 44 L8 52 L8 46 L31 26 Z" fill="#000" transform="rotate(45 35 35)"/></svg>
+            <svg viewBox="0 0 70 70" style="position:absolute;inset:0"><g transform="rotate(45 35 35)"><path d="M35 4 L39 26 L62 46 L62 52 L39 44 L38 58 L45 64 L45 67 L35 64 L25 67 L25 64 L32 58 L31 44 L8 52 L8 46 L31 26 Z" fill="#9aa6b2" stroke="#16191c" stroke-width="1.6" stroke-linejoin="round"/><path d="M27 22 L35 18 L43 22 L35 20Z" fill="#9aa6b2" stroke="#16191c" stroke-width="1.2"/><ellipse cx="35" cy="17" rx="2.6" ry="5" fill="#bfe0f5" stroke="#16191c" stroke-width="1"/><path d="M33 67 L35 74 L37 67Z" fill="#ff7a1a"/></g></svg>
+          </div>
+        </div>
+
+        <div class="banner" aria-live="polite">
+          <div class="dist"><span id="turn"></span><span><span id="dist">1.4</span><small> mi</small></span></div>
+          <div class="next"><b id="next">YouTube</b><span class="chip" id="chip">1</span></div>
+        </div>
+
+        <div class="ahead off" id="ahead" aria-hidden="true">
+          <div class="plate"><small>AHEAD</small><span>25</span></div>
+          <div class="diamond"><svg viewBox="0 0 24 24"><path d="M9 21c0-4 6-4 6-8s-6-4-6-8" stroke="#16191c" stroke-width="2.6" fill="none" stroke-linecap="round"/><path d="M6.5 6 9 2.5 11.5 6" stroke="#16191c" stroke-width="2.4" fill="none" stroke-linejoin="round"/></svg></div>
+        </div>
+
+        <div class="hud">
+          <div class="pill" id="spotted" title="Parked cars spotted on this drive">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12Z" fill="none" stroke="#16191c" stroke-width="2"/><circle cx="12" cy="12" r="3.2" fill="#d930c9"/></svg>
+            <span>SPOTTED <span id="spotN">0</span></span>
+          </div>
+          <button class="pill restart" type="button" id="restart" aria-label="Restart from the beginning and stop the music">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7" fill="none" stroke="#16191c" stroke-width="2.6" stroke-linecap="round"/><path d="M4 3v5h5" fill="none" stroke="#16191c" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            RESTART
+          </button>
+          <div class="pill ap" aria-hidden="true">AUTOPILOT</div>
+          <div class="pill ab" id="ab" aria-hidden="true">AFTERBURNER</div>
+          <div class="pill sb" id="sb" aria-hidden="true">SPEEDBRAKE</div>
+        </div>
+
+        <div class="toast" id="toast" role="status"><span class="rar" id="toastR">RARE</span><b id="toastT"></b></div>
+
+        <!-- stop cards -->
+        <section class="card show" data-stop="intro">
+          <h1>asaaab
+            <svg viewBox="0 0 54 30" aria-hidden="true" style="transform:scaleX(-1)"><path d="M2 15 L18 13 L30 2 L35 2 L28 13 L46 12 L52 6 L54 6 L52 15 L54 24 L52 24 L46 18 L28 17 L35 28 L30 28 L18 17 Z" fill="#d930c9" stroke="#16191c" stroke-width="1.5" stroke-linejoin="round"/><path d="M2 15 L-8 13 L-8 17Z" fill="#ff7a1a"/></svg>
+          </h1>
+          <p class="tag">certified carcissist carspotter</p>
+          <p>this is your new home for everything asaaab. scroll to take off, spot the cars hidden in plain traffic, and collect your passport at the finish.</p>
+          <p class="motto">MOVE YOUR MIND</p>
+          <div class="ctas">
+            <button class="cta yt" type="button" id="ftOpen" aria-haspopup="dialog" aria-controls="menu">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h11m-4-5 5 5-5 5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M17 6v12" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>
+              Fast travel to…
+            </button>
+            <button class="cta" type="button" id="start">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6S2 12 2 12Z" fill="none" stroke="#fff" stroke-width="2.4"/><circle cx="12" cy="12" r="3.2" fill="#fff"/></svg>
+              Start carspotting
+            </button>
+          </div>
+          <div class="hint"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v15m-6-6 6 6 6-6" stroke="currentColor" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>or scroll to take off</div>
+        </section>
+
+        <section class="card menu" id="menu" role="dialog" aria-labelledby="menuT">
+          <div class="menu-top">
+            <div class="eyebrow" id="menuT">FAST TRAVEL · WHERE TO?</div>
+            <button class="x" type="button" id="ftClose" aria-label="Close fast travel">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" stroke="#16191c" stroke-width="3" stroke-linecap="round"/></svg>
+            </button>
+          </div>
+          <div class="dests">
+            <a class="dest" data-link="youtube" target="_blank" rel="noopener">
+              <span class="ico" style="background:#e1261c"><svg viewBox="0 0 24 24"><path d="M9 6v12l9-6Z" fill="#fff"/></svg></span>
+              <span class="t"><b>YouTube</b><small>Project cars, BeamNG, Hidden In Plain Traffic</small></span><span class="go">→</span>
+            </a>
+            <a class="dest" data-link="tiktok" target="_blank" rel="noopener">
+              <span class="ico" style="background:#16191c"><svg viewBox="0 0 24 24"><path d="M10 17V5l9-2v11" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/><circle cx="7.5" cy="17" r="2.6" fill="#fff"/><circle cx="16.5" cy="14.5" r="2.6" fill="#fff"/></svg></span>
+              <span class="t"><b>TikTok</b><small>@asaaab · daily carspotting</small></span><span class="go">→</span>
+            </a>
+            <a class="dest" data-link="bluesky" target="_blank" rel="noopener">
+              <span class="ico" style="background:#2f7fe0"><svg viewBox="0 0 24 24"><path d="M7 17h10a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.8 9.5 3.8 3.8 0 0 0 7 17Z" fill="#fff"/></svg></span>
+              <span class="t"><b>Bluesky</b><small>Posts and carspot drops</small></span><span class="go">→</span>
+            </a>
+            <a class="dest" data-link="discord" target="_blank" rel="noopener">
+              <span class="ico" style="background:#5865f2"><svg viewBox="0 0 24 24"><path d="M5 6h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1h-7l-4 3v-3H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z" fill="#fff"/></svg></span>
+              <span class="t"><b>Discord</b><small>The rest stop: friends, spots, hangouts</small></span><span class="go">→</span>
+            </a>
+            <button class="dest" type="button" data-ft="2">
+              <span class="ico" style="background:#0b6b3c"><svg viewBox="0 0 24 24"><path d="M12 2 20 4.8 19 13 12 21 5 13 4 4.8Z" fill="#fff"/><text x="12" y="14.5" text-anchor="middle" font-family="Overpass, sans-serif" font-weight="900" font-size="9" fill="#0b6b3c">2</text></svg></span>
+              <span class="t"><b>BeamNG</b><small>Jump to the Angelish Crest server</small></span><span class="go">↯</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="card" data-stop="1">
+          <div class="eyebrow"><span class="n">1</span>PITSTOP</div>
+          <h2>YouTube</h2>
+          <p>Project cars, BeamNG content, and presubscribe for <b>Hidden In Plain Traffic</b>.</p>
+          <a class="cta yt" href="https://www.youtube.com/@asaaab93x" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7Z" fill="#fff"/></svg>
+            Watch asaaab on YouTube
+          </a>
+          <button class="cta auto" type="button" data-continue><span class="fill"></span><span>Continue on route</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12m-5-6 6 6-6 6" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </section>
+
+        <section class="card" data-stop="2">
+          <div class="eyebrow"><span class="n">2</span>STOP 2 · DRIVE WITH ME</div>
+          <div class="sign">
+            <div class="sign-in">
+              <div class="sign-top">
+                <div class="shield" aria-hidden="true">2</div>
+                <div><small>BEAMMP SERVER</small><b>Angelish Crest</b></div>
+              </div>
+              <div class="ip" id="ip">104.238.220.130:27080</div>
+              <ol class="steps">
+                <li><span>Own <a href="https://store.steampowered.com/app/284160/BeamNGdrive/" target="_blank" rel="noopener">BeamNG.drive</a> on Steam.</span></li>
+                <li><span>Install the free <a href="https://beammp.com/" target="_blank" rel="noopener">BeamMP launcher</a> and open it.</span></li>
+                <li><span>Direct Connect → IP <b>104.238.220.130</b>, port <b>27080</b> → Connect. Mods download automatically.</span></li>
+              </ol>
+              <div class="facts"><span>GUESTS WELCOME</span><span>1 CAR EACH</span><span>20 PLAYERS</span><span>FREEROAM</span></div>
+            </div>
+          </div>
+          <button class="cta" id="copy" type="button">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="12" rx="2" fill="none" stroke="#fff" stroke-width="2.4"/><path d="M5 15V5a1 1 0 0 1 1-1h9" fill="none" stroke="#fff" stroke-width="2.4"/></svg>
+            <span id="copy-t">Copy server IP</span>
+          </button>
+          <button class="cta auto" type="button" data-continue style="margin-top:10px"><span class="fill"></span><span>Continue on route</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12m-5-6 6 6-6 6" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </section>
+
+        <section class="card" data-stop="3">
+          <div class="eyebrow"><span class="n">3</span>REST STOP</div>
+          <h2>Discord</h2>
+          <p>Pull over to find friends, post your carspots, or just hang out in this digital third space.</p>
+          <span class="cta stby" id="dc">Opening soon</span>
+          <button class="cta auto" type="button" data-continue style="margin-top:10px"><span class="fill"></span><span>Continue on route</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12m-5-6 6 6-6 6" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </section>
+
+        <section class="card passport" data-stop="end" aria-labelledby="pp-title">
+          <div class="pp-cover">
+            <svg viewBox="0 0 46 46" aria-hidden="true"><circle cx="23" cy="23" r="21" fill="none" stroke="#fff" stroke-width="2"/><circle cx="23" cy="23" r="15" fill="none" stroke="#fff" stroke-width="1.2" stroke-dasharray="2 3"/><path d="M23 9 L27 21 L38 23 L27 25 L23 37 L19 25 L8 23 L19 21Z" fill="#ffe57a"/></svg>
+            <div><small>CARSPOTTING PASSPORT</small><b id="pp-title">Hidden In Plain Traffic</b><i>WHAT DID YOU FIND?</i></div>
+          </div>
+          <div class="pp-body">
+            <div class="pp-meta">
+              <div><small>DRIVER NO.</small><b id="ppNo">0000</b></div>
+              <div><small>SPOTTED</small><b id="ppN">0</b></div>
+              <div><small>DATE</small><b id="ppDate">—</b></div>
+            </div>
+            <div class="pp-best" id="ppBest"></div>
+            <div class="stamps" id="stamps"></div>
+            <div class="legend">
+              <span style="background:var(--r-uncommon)">UNCOMMON</span><span style="background:var(--r-rare)">RARE</span><span style="background:var(--r-legend)">LEGENDARY</span>
+            </div>
+            <div class="brag" id="brag"></div>
+            <p class="pp-note">Every driver gets different cars. Send it to a friend and see who finds the rarest one.</p>
+            <div class="ctas">
+              <button class="cta" type="button" id="share">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3m-5 5 5-5 5 5" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"/></svg>
+                <span id="share-t">Share my passport</span>
+              </button>
+              <a class="cta yt" href="https://www.youtube.com/@asaaab93x" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7Z" fill="#fff"/></svg>
+                Watch asaaab on YouTube
+              </a>
+              <button class="cta ghost" type="button" id="again">New drive, new cars</button>
+            </div>
+          </div>
+        </section>
+
+        <div class="bar">
+          <button class="navbtn" type="button" id="prev" aria-label="Previous stop"><svg viewBox="0 0 24 24"><path d="M15 4 7 12l8 8" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="box speed"><b id="spd">0<sup>mph</sup></b><small>Speed</small></div>
+          <div class="box road"><b id="road">Carspotter Ln</b></div>
+          <div class="box eta"><b id="eta">3:02</b><small>Arrival</small></div>
+          <button class="navbtn music" type="button" id="music" aria-label="Play theme song" aria-pressed="false" hidden><svg viewBox="0 0 24 24"><path d="M9 18V5l11-2v13" fill="none" stroke="#16191c" stroke-width="2.4" stroke-linejoin="round"/><circle cx="6.5" cy="18" r="2.8" fill="#16191c"/><circle cx="17.5" cy="16" r="2.8" fill="#16191c"/></svg></button>
+          <button class="navbtn" type="button" id="nextBtn" aria-label="Next stop"><svg viewBox="0 0 24 24"><path d="M9 4l8 8-8 8" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+      </div>
+      <div class="brand" aria-hidden="true">
+        <svg viewBox="0 0 54 30" style="transform:scaleX(-1)"><path d="M2 15 L18 13 L30 2 L35 2 L28 13 L46 12 L52 6 L54 6 L52 15 L54 24 L52 24 L46 18 L28 17 L35 28 L30 28 L18 17 Z" fill="#cfd3d7"/></svg>
+        ASAAAB
+      </div>
+    </div>
+  </div>
+</div>
+<audio id="theme" src="theme.mp3" loop preload="metadata"></audio>
+
+<script>
+(() => {
+/* ===== Settings you may edit ===== */
+/* config.json (edited from the owner portal) overrides anything here when the site is live */
+const LINKS = {
+  youtube: "https://www.youtube.com/@asaaab93x",
+  tiktok:  "https://www.tiktok.com/@asaaab",
+  bluesky: "",                    // paste profile link when ready
+  discord: "",                    // paste the invite when the server exists
+};
+let DENSITY = 1;                  // parked cars along the road: 0.5 = sparse, 2 = packed
+const TOTAL_MILES = 4.2;          // banner readout only
+const SITE_URL = "https://asaaab.com";
+const GOATCOUNTER = "asaaab";     // analytics site code (asaaab.goatcounter.com)
+/* Spot pool: weight = how often it shows up. Common = plain traffic (not counted). */
+const POOL = {
+  common:    { w: 60, color: "var(--r-common)", label: "COMMON", cars: ["Toyota Camry","Honda Civic","Toyota Corolla","Honda Accord","Nissan Altima","Toyota Prius","Ford F-150","Honda CR-V","Toyota RAV4","Hyundai Elantra","Toyota Tacoma","Chevy Malibu"] },
+  uncommon:  { w: 28, color: "var(--r-uncommon)", label: "UNCOMMON", cars: ["Volvo 240 Wagon","Volvo V70","Subaru Outback","Honda Element","Scion xB","Toyota Previa","Mazda Miata","Honda Passport","Mercury Grand Marquis","Buick LeSabre","Ford Ranger","Toyota Echo"] },
+  rare:      { w: 10, color: "var(--r-rare)", label: "RARE", cars: ["Saab 900","Saab 9-3 Aero","Saab 9-5 Wagon","Volvo V60","Pontiac Aztek","Subaru Baja","Mitsubishi Delica","Chevrolet SSR","Isuzu VehiCROSS"] },
+  legendary: { w: 2,  color: "var(--r-legend)", label: "LEGENDARY", cars: ["Saab 9-3X","Saab 900 SPG","GM EV1","Honda Fit EV","Toyota RAV4 EV","Ford Ranger EV","CODA Sedan","Th!nk City","BMW ActiveE","Toyota Highlander FCEV","Saab Sonett III"] }
+};
+const RANK = { common: 0, uncommon: 1, rare: 2, legendary: 3 };
+/* ================================== */
+
+const NS = "http://www.w3.org/2000/svg";
+const svg = document.getElementById("map");
+const world = document.getElementById("world");
+const el = (tag, attrs = {}, parent = world) => { const n = document.createElementNS(NS, tag); for (const k in attrs) n.setAttribute(k, attrs[k]); parent.appendChild(n); return n; };
+const mkRng = s => () => (s = (s * 16807) % 2147483647) / 2147483647;
+
+// the map itself is the same for everyone
+const rnd = mkRng(93);
+
+// each visitor keeps their own lucky number; "new drive" rolls a fresh one
+const store = { get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }, set(k,v){ try { localStorage.setItem(k,v); } catch(e){} } };
+let visitorSeed = parseInt(store.get("asaaab-seed"), 10);
+if (!visitorSeed) { visitorSeed = 1 + Math.floor(Math.random() * 2147483000); store.set("asaaab-seed", visitorSeed); }
+
+// ---- route
+const pts = [[200,2600],[205,2480],[140,2360],[150,2240],[285,2140],[275,2020],[125,1930],[115,1820],
+  [300,1740],[310,1660],[100,1600],[90,1520],[300,1460],[310,1380],[100,1320],[90,1240],[290,1180],[300,1100],
+  [170,1000],[160,900],[300,800],[290,680],[130,580],[140,460],[260,360],[225,230],[200,110]];
+let d = `M${pts[0][0]} ${pts[0][1]}`;
+for (let i = 0; i < pts.length - 1; i++) {
+  const p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2;
+  const c1 = [p1[0] + (p2[0] - p0[0]) / 6, p1[1] + (p2[1] - p0[1]) / 6];
+  const c2 = [p2[0] - (p3[0] - p1[0]) / 6, p2[1] - (p3[1] - p1[1]) / 6];
+  d += ` C${c1[0].toFixed(1)} ${c1[1].toFixed(1)} ${c2[0].toFixed(1)} ${c2[1].toFixed(1)} ${p2[0]} ${p2[1]}`;
+}
+
+// ---- base map
+el("rect", { x: -900, y: -600, width: 2200, height: 3900, fill: "var(--land)" });
+const streets = el("g", {});
+const gridZone = (y0, y1, step, skew) => {
+  for (const [w, c] of [[9, "var(--street-edge)"], [6, "var(--street)"]]) {
+    for (let y = y0; y <= y1; y += step) el("line", { x1: -900, y1: y, x2: 1300, y2: y + skew, stroke: c, "stroke-width": w }, streets);
+    for (let x = -880; x <= 1280; x += step + 14) el("line", { x1: x, y1: y0 - 40, x2: x + skew, y2: y1 + 40, stroke: c, "stroke-width": w }, streets);
+  }
+};
+gridZone(2040, 2900, 78, 18);
+gridZone(-300, 740, 92, -22);
+for (let i = 0; i < 70; i++) {
+  el("rect", { x: -500 + rnd() * 1400, y: 2080 + rnd() * 760, width: 18 + rnd() * 26, height: 14 + rnd() * 22, rx: 3, fill: rnd() > .5 ? "#e3e2d6" : "#dfe6ea" });
+}
+el("path", { d: "M-900 1900 C-500 1860 -200 1960 120 1900 S600 1840 1300 1910 L1300 860 C900 900 600 820 300 870 S-300 820 -900 880 Z", fill: "var(--park)" });
+for (let i = 0; i < 26; i++) {
+  const cx = -500 + rnd() * 1500, cy = 950 + rnd() * 880, r = 40 + rnd() * 90;
+  el("ellipse", { cx, cy, rx: r, ry: r * (.6 + rnd() * .5), fill: "var(--park-2)", opacity: .7 });
+  el("ellipse", { cx, cy, rx: r * .55, ry: r * .4, fill: "none", stroke: "#a9c98a", "stroke-width": 2, opacity: .7 });
+}
+el("path", { d: "M470 1300 C540 1240 640 1290 630 1380 S560 1520 500 1500 S410 1360 470 1300 Z", fill: "var(--water)" });
+el("path", { d: "M-900 1100 C-600 1120 -400 1060 -200 1120 S-40 1200 40 1150", fill: "none", stroke: "var(--water)", "stroke-width": 8, "stroke-linecap": "round" });
+el("path", { d: "M380 300 C460 260 560 300 560 380 S480 480 400 450 S320 340 380 300 Z", fill: "var(--park)" });
+
+// a little airstrip at the start — you're born from a runway
+{ const g = el("g", { transform: "translate(-40 2470) rotate(-8)" });
+  el("rect", { x: -60, y: -14, width: 190, height: 28, rx: 3, fill: "#c9ccd0" }, g);
+  for (let x = -50; x < 120; x += 22) el("rect", { x, y: -1.5, width: 12, height: 3, fill: "#fff" }, g);
+  const t = el("text", { x: -56, y: -19, "font-family": "Overpass, sans-serif", "font-weight": 900, "font-size": 10, fill: "#5b6268", "letter-spacing": "1.5" }, g); t.textContent = "RWY 93"; }
+
+// ---- road
+const roadEdge = el("path", { d, fill: "none", stroke: "var(--road-edge)", "stroke-width": 17, "stroke-linecap": "round", "stroke-linejoin": "round" });
+el("path", { d, fill: "none", stroke: "var(--road)", "stroke-width": 12, "stroke-linecap": "round", "stroke-linejoin": "round" });
+const route = el("path", { d, fill: "none", stroke: "var(--route)", "stroke-width": 7, "stroke-linecap": "round", "stroke-linejoin": "round", opacity: .95 });
+const trail = el("path", { d, fill: "none", stroke: "#fff", "stroke-width": 5, "stroke-linecap": "round", opacity: .75 });
+const L = roadEdge.getTotalLength();
+const at = f => roadEdge.getPointAtLength(Math.max(0, Math.min(1, f)) * L);
+const angleAt = f => { const a = at(f - .002), b = at(f + .002); return Math.atan2(b.y - a.y, b.x - a.x) * 180 / Math.PI; };
+
+// ---- stops
+const STOPS = [
+  { key: "intro", f: 0.00, name: "Carspotter Ln", chip: "GO" },
+  { key: "1",     f: 0.22, name: "YouTube",        chip: "1", road: "Carspotter Ln" },
+  { key: "2",     f: 0.52, name: "Angelish Crest", chip: "2", road: "CA-2 Angelish Crest" },
+  { key: "3",     f: 0.74, name: "Discord",        chip: "3", road: "Lobby Ln" },
+  { key: "end",   f: 1.00, name: "Passport",       chip: "★", road: "Lobby Ln" },
+];
+const pin = (f, fill, inner) => {
+  const p = at(f), a = angleAt(f) * Math.PI / 180, side = 30;
+  const g = el("g", { transform: `translate(${(p.x - Math.sin(a) * side).toFixed(1)} ${(p.y + Math.cos(a) * side).toFixed(1)})` });
+  el("path", { d: "M0 14 C-4 8 -14 2 -14 -8 A14 14 0 1 1 14 -8 C14 2 4 8 0 14Z", fill, stroke: "#16191c", "stroke-width": 2 }, g);
+  inner(g);
+};
+pin(STOPS[1].f, "#e1261c", g => el("path", { d: "M-4 -14 L7 -8 L-4 -2Z", fill: "#fff" }, g));
+pin(STOPS[2].f, "#0b6b3c", g => { el("path", { d: "M0 -19 L8 -16 L7 -6 L0 -1 L-7 -6 L-8 -16Z", fill: "#fff" }, g); const t = el("text", { x: 0, y: -6.5, "text-anchor": "middle", "font-family": "Overpass, sans-serif", "font-weight": 900, "font-size": 11, fill: "#0b6b3c" }, g); t.textContent = "2"; });
+pin(STOPS[3].f, "#5865f2", g => { el("rect", { x: -8, y: -15, width: 16, height: 11, rx: 4, fill: "#fff" }, g); el("path", { d: "M-3 -4 L-5 0 L1 -4Z", fill: "#fff" }, g); });
+// roadside billboard: asaaab.shop, under construction
+{ const f = 0.885, p = at(f), a = angleAt(f) * Math.PI / 180, side = -52;
+  const g = el("g", { transform: `translate(${(p.x - Math.sin(a) * side).toFixed(1)} ${(p.y + Math.cos(a) * side).toFixed(1)})` });
+  el("rect", { x: -24, y: 6, width: 3, height: 16, fill: "#5b6268" }, g);
+  el("rect", { x: 21, y: 6, width: 3, height: 16, fill: "#5b6268" }, g);
+  el("rect", { x: -38, y: -22, width: 76, height: 30, rx: 2, fill: "#fff", stroke: "#16191c", "stroke-width": 2 }, g);
+  el("rect", { x: -38, y: -22, width: 76, height: 9, fill: "#f7d117", stroke: "#16191c", "stroke-width": 2 }, g);
+  for (let x = -36; x < 38; x += 8) el("path", { d: `M${x} -13.5 L${x + 4} -21 L${x + 7} -21 L${x + 3} -13.5Z`, fill: "#16191c" }, g);
+  const t1 = el("text", { x: 0, y: -1, "text-anchor": "middle", "font-family": "Overpass, sans-serif", "font-weight": 900, "font-size": 11, fill: "#d930c9" }, g); t1.textContent = "asaaab.shop";
+  const t2 = el("text", { x: 0, y: 5.5, "text-anchor": "middle", "font-family": "Overpass, sans-serif", "font-weight": 800, "font-size": 5.2, "letter-spacing": ".6", fill: "#16191c" }, g); t2.textContent = "UNDER CONSTRUCTION";
+  // cones
+  for (const [cx, cy] of [[-30, 26], [-18, 28], [30, 26]]) { el("path", { d: `M${cx - 3.5} ${cy} L${cx} ${cy - 9} L${cx + 3.5} ${cy}Z`, fill: "#ff7a1a", stroke: "#16191c", "stroke-width": .8 }, g); el("rect", { x: cx - 2, y: cy - 5, width: 4, height: 1.4, fill: "#fff" }, g); } }
+{ const p = at(1); const g = el("g", { transform: `translate(${p.x + 18} ${p.y - 10})` });
+  el("line", { x1: 0, y1: 0, x2: 0, y2: 28, stroke: "#16191c", "stroke-width": 2.5 }, g);
+  el("rect", { x: 1, y: 0, width: 20, height: 13, fill: "#fff", stroke: "#16191c", "stroke-width": 1.5 }, g);
+  for (let i = 0; i < 4; i++) for (let j = 0; j < 3; j++) if ((i + j) % 2 === 0) el("rect", { x: 1 + i * 5, y: j * 4.33, width: 5, height: 4.33, fill: "#16191c" }, g); }
+[0.44, 0.62].forEach(f => {
+  const p = at(f); const g = el("g", { transform: `translate(${p.x - 30} ${p.y})` });
+  el("path", { d: "M0 -11 L10 -8 L9 3 L0 9 L-9 3 L-10 -8Z", fill: "#fff", stroke: "#0b6b3c", "stroke-width": 2 }, g);
+  const t = el("text", { x: 0, y: 3, "text-anchor": "middle", "font-family": "Overpass, sans-serif", "font-weight": 900, "font-size": 11, fill: "#0b6b3c" }, g); t.textContent = "2";
+});
+
+// ---- parked cars: same curb spots for everyone, but WHICH car is parked there is yours
+const CAR_COLORS = ["#e1261c", "#2f7fe0", "#f2f2f2", "#1d1f22", "#3f9a2f", "#f5a623", "#8a8f96", "#7a4bd1", "#c9b48a", "#0f7f86"];
+let slots = [];
+function buildSlots(density){
+  const r = mkRng(4242); slots = [];
+  const d = Math.max(0.3, Math.min(3, density || 1));
+  for (let f = 0.035; f < 0.985; f += (0.018 + r() * 0.02) / d) {
+    if (STOPS.some(s => Math.abs(s.f - f) < 0.025)) continue;
+    slots.push({ f, side: r() > .5 ? 1 : -1 });
+  }
+}
+buildSlots(DENSITY);
+const carLayer = el("g", {});
+let parked = [];
+function pickTier(r){ let x = r() * 100; for (const k of ["legendary","rare","uncommon","common"]) { x -= POOL[k].w; if (x < 0) return k; } return "common"; }
+function buildCars(seed){
+  carLayer.replaceChildren();
+  const r = mkRng(seed);
+  parked = slots.map(({ f, side }) => {
+    const tier = pickTier(r), list = POOL[tier].cars, name = list[Math.floor(r() * list.length)];
+    const p = at(f), ang = angleAt(f), a = ang * Math.PI / 180;
+    const g = el("g", { transform: `translate(${(p.x - Math.sin(a) * 15 * side).toFixed(1)} ${(p.y + Math.cos(a) * 15 * side).toFixed(1)}) rotate(${(ang + 90).toFixed(1)})` }, carLayer);
+    const ring = el("circle", { r: tier === "legendary" ? 13 : 11, fill: "none", stroke: POOL[tier].color, "stroke-width": tier === "common" ? 2 : 3, opacity: 0 }, g);
+    if (tier === "legendary") { const sp = el("path", { d: "M0 -20 L2 -15 L7 -14 L3 -11 L4 -6 L0 -9 L-4 -6 L-3 -11 L-7 -14 L-2 -15Z", fill: "#ffd23f", stroke: "#16191c", "stroke-width": .8 }, g); sp.setAttribute("opacity", .9); }
+    el("rect", { x: -4, y: -7.5, width: 8, height: 15, rx: 2.4, fill: CAR_COLORS[Math.floor(r() * CAR_COLORS.length)], stroke: "#16191c", "stroke-width": 1 }, g);
+    el("rect", { x: -3, y: -3.5, width: 6, height: 4, rx: 1, fill: "#bfe0f5", opacity: .9 }, g);
+    return { f, ring, tier, name, seen: false };
+  });
+}
+buildCars(visitorSeed);
+
+// ---- own vehicle: a little red car (with a jet engine where the trunk should be)
+const car = el("g", {});
+const flame = el("path", { d: "M-4 13 L0 34 L4 13 Z", fill: "var(--flame)", opacity: 0 }, car);
+const flameCore = el("path", { d: "M-2 13 L0 24 L2 13 Z", fill: "#fff3b0", opacity: 0 }, car);
+el("ellipse", { cx: 1.5, cy: 2, rx: 10, ry: 15, fill: "#000", opacity: .18 }, car);             // shadow
+el("rect", { x: -8.5, y: -9, width: 2.5, height: 5, rx: 1, fill: "#1d1f22" }, car);            // tires
+el("rect", { x: 6, y: -9, width: 2.5, height: 5, rx: 1, fill: "#1d1f22" }, car);
+el("rect", { x: -8.5, y: 5, width: 2.5, height: 5, rx: 1, fill: "#1d1f22" }, car);
+el("rect", { x: 6, y: 5, width: 2.5, height: 5, rx: 1, fill: "#1d1f22" }, car);
+el("rect", { x: -7, y: -13, width: 14, height: 26, rx: 3.5, fill: "#e5483c", stroke: "#8f1d16", "stroke-width": 1.2 }, car); // body
+el("path", { d: "M-5.5 -6 L5.5 -6 L4.5 -1.5 L-4.5 -1.5 Z", fill: "#3b6fd6" }, car);           // windshield
+el("rect", { x: -4.5, y: -1.5, width: 9, height: 7, rx: 1.2, fill: "#ef5f52" }, car);          // roof
+el("path", { d: "M-4.5 5.5 L4.5 5.5 L5.3 8.5 L-5.3 8.5 Z", fill: "#3b6fd6" }, car);             // rear glass
+el("rect", { x: -2.6, y: 10.2, width: 5.2, height: 1.8, rx: .5, fill: "#f2f2f2" }, car);        // plate
+el("circle", { cx: -4.6, cy: -11.6, r: 1.1, fill: "#fff6c8" }, car);                           // headlights
+el("circle", { cx: 4.6, cy: -11.6, r: 1.1, fill: "#fff6c8" }, car);
+el("rect", { x: -9.3, y: -5, width: 2.2, height: 1.6, rx: .6, fill: "#c7392e" }, car);          // mirrors
+el("rect", { x: 7.1, y: -5, width: 2.2, height: 1.6, rx: .6, fill: "#c7392e" }, car);
+
+// ---- DOM
+const drive = document.getElementById("drive");
+const screen = document.getElementById("screen");
+const cards = [...document.querySelectorAll(".card[data-stop]")];
+const $ = id => document.getElementById(id);
+const distEl = $("dist"), nextEl = $("next"), chipEl = $("chip"), turnEl = $("turn"), roadEl = $("road"),
+      spdEl = $("spd"), etaEl = $("eta"), aheadEl = $("ahead"), spotEl = $("spotN"), spotBox = $("spotted"),
+      abEl = $("ab"), sky = $("sky"), jet = $("jet"), toast = $("toast"), toastR = $("toastR"), toastT = $("toastT");
+const ARROWS = {
+  straight: '<svg viewBox="0 0 32 32"><path d="M16 28V8m-7 7 7-8 7 8" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  right: '<svg viewBox="0 0 32 32"><path d="M10 28V16a4 4 0 0 1 4-4h10m-5-6 6 6-6 6" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  left: '<svg viewBox="0 0 32 32"><path d="M22 28V16a4 4 0 0 0-4-4H8m5-6-6 6 6 6" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+  flag: '<svg viewBox="0 0 32 32"><path d="M8 4v25" stroke="#fff" stroke-width="3"/><path d="M9 5h16v11H9z" fill="#fff"/></svg>'
+};
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const maxScroll = () => Math.max(1, drive.offsetHeight - innerHeight);
+const prog = () => Math.max(0, Math.min(1, scrollY / maxScroll()));
+// jumps move the page instantly; the car then drives there under the speed limit
+const goTo = f => scrollTo({ top: f * maxScroll(), behavior: "auto" });
+
+let topSpeed = 0, vp = prog(), dwellUntil = 0, needsRender = true, anchorY = null;
+let lastY = scrollY, lastT = performance.now(), speed = 0, spottedCount = -1, ticking = false, toastTimer = 0, lastJetP = -1, passportBuilt = "";
+
+function showToast(c){
+  toastR.textContent = POOL[c.tier].label; toastR.style.background = POOL[c.tier].color; toastT.textContent = c.name;
+  toast.classList.add("on"); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove("on"), 1700);
+}
+
+function render(p){
+  const W = screen.clientWidth, H = screen.clientHeight;
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  const pos = at(p), ang = angleAt(p);
+  const s = Math.min(2.1, Math.max(1.25, W / 330));
+  // keep the car in the open map above whatever card is up, gliding there like a GPS re-centering
+  const shown = cards.find(c => c.classList.contains("show"));
+  const desired = shown ? Math.max(96, (58 + shown.offsetTop) / 2 + 8) : H * 0.58;
+  if (anchorY == null) anchorY = desired;
+  anchorY += (desired - anchorY) * (reduce ? 1 : 0.1);
+  if (Math.abs(desired - anchorY) > 0.5) needsRender = true;
+  world.setAttribute("transform", `translate(${(W / 2 - pos.x * s).toFixed(1)} ${(anchorY - pos.y * s).toFixed(1)}) scale(${s.toFixed(3)})`);
+  car.setAttribute("transform", `translate(${pos.x.toFixed(1)} ${pos.y.toFixed(1)}) rotate(${(ang + 90).toFixed(1)}) scale(1.45)`);
+  const t = p * L;
+  route.setAttribute("stroke-dasharray", `0 ${t.toFixed(1)} ${L.toFixed(1)}`);
+  const tl = Math.min(t, 90);
+  trail.setAttribute("stroke-dasharray", `0 ${(t - tl).toFixed(1)} ${tl.toFixed(1)} ${L.toFixed(1)}`);
+
+  let showKey = null;
+  if (p < 0.06) showKey = "intro";
+  else if (p > 0.955) showKey = "end";
+  else for (const st of STOPS.slice(1, 5)) if (Math.abs(p - st.f) < 0.055) showKey = st.key;
+  cards.forEach(c => c.classList.toggle("show", c.dataset.stop === showKey));
+
+  const atStop = showKey && showKey !== "intro" && showKey !== "end" ? STOPS.find(st => st.key === showKey) : null;
+  const next = atStop || STOPS.find(st => st.f > p + 0.004) || STOPS[STOPS.length - 1];
+  distEl.textContent = (Math.max(0, next.f - p) * TOTAL_MILES).toFixed(1);
+  nextEl.textContent = next.key === "end" ? (p > 0.99 ? "Arrived" : "Passport") : next.name;
+  chipEl.textContent = next.chip;
+  if (p > 0.99) turnEl.innerHTML = ARROWS.flag;
+  else { let dA = angleAt(Math.min(1, p + 0.03)) - ang; dA = ((dA + 540) % 360) - 180;
+    turnEl.innerHTML = dA > 18 ? ARROWS.right : dA < -18 ? ARROWS.left : ARROWS.straight; }
+
+  const onCrest = p > 0.34 && p < 0.66;
+  const cur = [...STOPS].reverse().find(st => st.f <= p + 0.0001) || STOPS[0];
+  roadEl.textContent = onCrest ? "CA-2 Angelish Crest" : (cur.road || "Carspotter Ln");
+  aheadEl.classList.toggle("off", !onCrest);
+  sky.classList.toggle("high", onCrest);
+
+  // flyovers at a few points on the drive
+  for (const jp of [0.12, 0.45, 0.81]) if (!reduce && lastJetP < jp && p >= jp) { jet.classList.remove("fly"); void jet.offsetWidth; jet.classList.add("fly"); }
+  lastJetP = p;
+
+  // spotting
+  let newest = null;
+  parked.forEach(c => {
+    const passed = c.f < p;
+    const counts = c.tier !== "common";   // commons are just plain traffic
+    c.ring.setAttribute("opacity", passed && counts ? (p - c.f < 0.02 ? 1 : .45) : 0);
+    if (passed && !c.seen) { c.seen = true; if (counts && (!newest || RANK[c.tier] >= RANK[newest.tier])) newest = c; }
+    if (!passed) c.seen = false;
+  });
+  if (newest) showToast(newest);
+  const n = parked.filter(c => c.seen && c.tier !== "common").length;
+  if (n !== spottedCount) { if (spottedCount >= 0 && n > spottedCount) { spotBox.classList.remove("pop"); void spotBox.offsetWidth; spotBox.classList.add("pop"); }
+    spottedCount = n; spotEl.textContent = n; }
+  if (showKey === "end") buildPassport();
+
+  const eta = new Date(Date.now() + (1 - p) * 12 * 60000);
+  let h = eta.getHours(), m = eta.getMinutes(); const pm = h >= 12; h = h % 12 || 12;
+  etaEl.innerHTML = `${h}:${String(m).padStart(2, "0")}<sup>${pm ? "PM" : "AM"}</sup>`;
+}
+
+function buildPassport(){
+  const found = parked.filter(c => c.seen && c.tier !== "common");
+  const sig = visitorSeed + ":" + found.length + ":" + Math.round(topSpeed / 5);
+  if (sig === passportBuilt) return;
+  if (!passportBuilt) { track("passport-reached"); found.filter(c => c.tier === "legendary").forEach(c => track("legendary-" + c.name.toLowerCase().replace(/[^a-z0-9]+/g, "-"))); }
+  passportBuilt = sig;
+  const byName = new Map();
+  found.forEach(c => { const e = byName.get(c.name) || { name: c.name, tier: c.tier, n: 0 }; e.n++; byName.set(c.name, e); });
+  const list = [...byName.values()].sort((a, b) => RANK[b.tier] - RANK[a.tier] || a.name.localeCompare(b.name));
+  $("ppNo").textContent = String(visitorSeed % 100000).padStart(5, "0");
+  $("ppN").textContent = found.length;
+  const dt = new Date(); $("ppDate").textContent = `${dt.getMonth() + 1}/${dt.getDate()}/${String(dt.getFullYear()).slice(2)}`;
+  const best = list[0];
+  $("ppBest").innerHTML = best
+    ? `<svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.5 7L12 17.6 5.7 21.1l1.5-7L2 9.3l7-.8Z" fill="#ffd23f" stroke="#16191c" stroke-width="1.4" stroke-linejoin="round"/></svg><div><small>RAREST FIND · ${POOL[best.tier].label}</small><b>${best.name}</b></div>`
+    : `<div><small>RAREST FIND</small><b>Nothing yet. Scroll the road!</b></div>`;
+  $("brag").textContent = "“" + bragLine() + "”";
+  const wrap = $("stamps"); wrap.replaceChildren();
+  if (!list.length) { const p = document.createElement("p"); p.className = "pp-empty"; p.textContent = "No stamps yet."; wrap.appendChild(p); }
+  const r = mkRng(visitorSeed + 7);
+  list.forEach(e => {
+    const d = document.createElement("div"); d.className = "stamp";
+    d.style.setProperty("--c", POOL[e.tier].color); d.style.setProperty("--rot", ((r() - .5) * 8).toFixed(1) + "deg");
+    d.innerHTML = `<b></b><small>${POOL[e.tier].label}</small>` + (e.n > 1 ? `<span class="x">×${e.n}</span>` : "");
+    d.querySelector("b").textContent = e.name;
+    wrap.appendChild(d);
+  });
+}
+
+// ---- bragging rights
+function tripStats(){
+  const found = parked.filter(c => c.seen && c.tier !== "common");
+  const best = found.reduce((b, c) => !b || RANK[c.tier] > RANK[b.tier] ? c : b, null);
+  const byName = new Map(); found.forEach(c => byName.set(c.name, c.tier));
+  const list = [...byName].map(([name, tier]) => ({ name, tier })).sort((a, b) => RANK[b.tier] - RANK[a.tier] || a.name.localeCompare(b.name));
+  return { found, best, list, top: Math.round(topSpeed) };
+}
+function bragLine(){
+  const { found, best, top } = tripStats();
+  const verb = top < 25 ? "Just moseyed" : top < 60 ? "Just cruised" : top < 100 ? "Just flew" : "Just went full afterburner";
+  if (!best) return `${verb} through traffic at ${top} mph and spotted nothing. Landed safe anyway.`;
+  const landing = { common: "Landed safe.", uncommon: "Smooth landing.", rare: "Requesting a flyby.", legendary: "Tower, we found a unicorn." }[best.tier];
+  const article = /^[AEIOU]/i.test(POOL[best.tier].label) ? "an" : "a";
+  return `${verb} through traffic at ${top} mph and spotted ${found.length} cars. Rarest: ${article} ${POOL[best.tier].label.toLowerCase()} ${best.name}. ${landing}`;
+}
+const TIER_HEX = { common: "#7c838a", uncommon: "#3f9a2f", rare: "#2f7fe0", legendary: "#d930c9" };
+async function passportImage(){
+  try { await document.fonts.ready; } catch(e){}
+  const { found, best, list } = tripStats();
+  const W = 1080, H = 1350, c = document.createElement("canvas"); c.width = W; c.height = H;
+  const g = c.getContext("2d");
+  const font = (w, s) => `${w} ${s}px Overpass, "Arial Narrow", sans-serif`;
+  const rr = (x, y, w, h, r) => { g.beginPath(); g.roundRect(x, y, w, h, r); };
+  g.fillStyle = "#fbf6e9"; g.fillRect(0, 0, W, H);
+  g.fillStyle = "#0b6b3c"; g.fillRect(0, 0, W, 250);
+  g.fillStyle = "#fff"; g.font = font(800, 30); g.fillText("CARSPOTTING PASSPORT", 70, 90);
+  g.font = font(900, 76); g.fillText("Hidden In Plain Traffic", 70, 170);
+  g.fillStyle = "#ffe57a"; g.font = font(800, 30); g.fillText("WHAT DID YOU FIND?", 70, 220);
+  g.fillStyle = "#16191c"; g.font = font(800, 26);
+  g.fillText("DRIVER NO.", 70, 320); g.fillText("SPOTTED", 430, 320); g.fillText("TOP SPEED", 730, 320);
+  g.font = font(900, 64);
+  g.fillText(String(visitorSeed % 100000).padStart(5, "0"), 70, 390); g.fillText(String(found.length), 430, 390); g.fillText(Math.round(topSpeed) + " mph", 730, 390);
+  rr(70, 430, W - 140, 130, 22); g.fillStyle = "#fff"; g.fill(); g.lineWidth = 5; g.strokeStyle = "#16191c"; g.stroke();
+  g.fillStyle = "#5b6268"; g.font = font(800, 26); g.fillText("RAREST FIND" + (best ? " · " + POOL[best.tier].label : ""), 105, 482);
+  g.fillStyle = best ? TIER_HEX[best.tier] : "#16191c"; g.font = font(900, 50); g.fillText(best ? best.name : "Nothing yet", 105, 535);
+  // brag line, wrapped
+  g.fillStyle = "#16191c"; g.font = `800 34px Nunito, system-ui, sans-serif`;
+  const words = ("“" + bragLine() + "”").split(" "); let line = "", y = 625;
+  for (const w of words) { const t = line ? line + " " + w : w; if (g.measureText(t).width > W - 140) { g.fillText(line, 70, y); y += 46; line = w; } else line = t; }
+  g.fillText(line, 70, y); y += 40;
+  // stamps
+  const cols = 3, sw = (W - 140 - 2 * 24) / cols, sh = 110; let i = 0;
+  for (const s of list.slice(0, 9)) {
+    const x = 70 + (i % cols) * (sw + 24), yy = y + 20 + Math.floor(i / cols) * (sh + 22);
+    g.save(); g.translate(x + sw / 2, yy + sh / 2); g.rotate(((i * 37) % 7 - 3) * Math.PI / 180);
+    rr(-sw / 2, -sh / 2, sw, sh, 16); g.fillStyle = "rgba(255,255,255,.7)"; g.fill(); g.lineWidth = 5; g.strokeStyle = TIER_HEX[s.tier]; g.stroke();
+    g.textAlign = "center"; g.fillStyle = "#16191c"; g.font = font(900, s.name.length > 16 ? 26 : 30); g.fillText(s.name, 0, 4);
+    g.fillStyle = TIER_HEX[s.tier]; g.font = font(900, 20); g.fillText(POOL[s.tier].label, 0, 36);
+    g.restore(); i++;
+  }
+  g.textAlign = "left";
+  g.fillStyle = "#d930c9"; g.fillRect(0, H - 110, W, 110);
+  g.fillStyle = "#fff"; g.font = font(900, 46); g.fillText("asaaab.com", 70, H - 42);
+  g.font = font(800, 28); g.textAlign = "right"; g.fillText("find yours →", W - 70, H - 46);
+  return await new Promise(r => c.toBlob(r, "image/png"));
+}
+async function sharePassport(){
+  const lbl = $("share-t"), text = bragLine() + " Find yours:";
+  const done = msg => { lbl.textContent = msg; setTimeout(() => lbl.textContent = "Share my passport", 2200); };
+  try {
+    const blob = await passportImage();
+    const file = blob && new File([blob], "asaaab-passport.png", { type: "image/png" });
+    if (file && navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], text: text + " " + SITE_URL, title: "My carspotting passport" }); return done("Shared!"); }
+    if (navigator.share) { await navigator.share({ title: "My carspotting passport", text, url: SITE_URL }); return done("Shared!"); }
+    await navigator.clipboard.writeText(text + " " + SITE_URL);
+    if (file) { const a = document.createElement("a"); a.href = URL.createObjectURL(file); a.download = "asaaab-passport.png"; document.body.appendChild(a); a.click(); a.remove(); }
+    done("Copied! Paste it anywhere");
+  } catch (e) {
+    if (e && e.name === "AbortError") return done("Share my passport");
+    try { await navigator.clipboard.writeText(text + " " + SITE_URL); done("Copied! Paste it anywhere"); }
+    catch (e2) { $("brag").focus?.(); done("Copy the quote above"); }
+  }
+}
+
+// ---- the drive loop: the car chases your scroll position, but the speedbrake caps how fast it can go
+const MAX_STEP = 0.0026;           // share of the route per frame at 60fps (~6.5s start to finish)
+// autopilot ("Start carspotting"): drives stop to stop on its own
+const AP_DUR = { "1": 7000, "2": 11000, "3": 7000 };   // ms parked at each stop before rolling on
+const AP_SPEED = 0.24;            // autopilot cruise vs. max speed; full ride ≈ length of the theme song
+let autopilot = false, apStart = 0, apStopKey = null;
+const fills = [...document.querySelectorAll("[data-continue] .fill")];
+const setFill = fr => fills.forEach(f => f.style.width = (fr * 100).toFixed(1) + "%");
+function startAutopilot(){ autopilot = true; screen.classList.add("autopilot"); dwellUntil = 0; apStopKey = null; setFill(0); goTo(STOPS[1].f); }
+function stopAutopilot(){ if (!autopilot) return; autopilot = false; screen.classList.remove("autopilot"); apStopKey = null; setFill(0); }
+function apAdvance(){
+  const i = STOPS.findIndex(s => s.key === apStopKey), nxt = STOPS[Math.max(1, i + 1)];
+  apStopKey = null; setFill(0); goTo(nxt.f);
+}
+document.querySelectorAll("[data-continue]").forEach(b => b.addEventListener("click", () => { if (!apStopKey) { const st = STOPS.slice(1, 4).find(s => Math.abs(vp - s.f) < 0.02); apStopKey = st ? st.key : "1"; } autopilot = true; screen.classList.add("autopilot"); apAdvance(); }));
+// any manual scrolling takes the wheel back
+addEventListener("wheel", stopAutopilot, { passive: true });
+addEventListener("touchmove", stopAutopilot, { passive: true });
+addEventListener("keydown", e => { if (["ArrowDown","ArrowUp","PageDown","PageUp"," ","Home","End"].includes(e.key)) stopAutopilot(); });
+const sbEl = $("sb");
+let lastFrame = performance.now(), lastVp = -1;
+function loop(now){
+  const dt = Math.min(64, now - lastFrame); lastFrame = now;
+  const k = dt / 16.7, target = prog(), diff = target - vp, prev = vp;
+  if (now >= dwellUntil) {
+    const max = MAX_STEP * k * (autopilot ? AP_SPEED : 1);   // autopilot cruises at one steady speed
+    vp += Math.max(-max, Math.min(max, diff));
+  }
+  // autopilot: parked at a stop → fill the Continue button, then roll on
+  if (autopilot && vp >= 0.9995) stopAutopilot();          // arrived at the passport
+  if (autopilot) {
+    const st = STOPS.slice(1, 4).find(s => Math.abs(vp - s.f) < 0.0005 && Math.abs(target - s.f) < 0.0005);
+    if (st) {
+      if (apStopKey !== st.key) { apStopKey = st.key; apStart = now; }
+      const fr = Math.min(1, (now - apStart) / AP_DUR[st.key]);
+      setFill(fr);
+      if (fr >= 1) apAdvance();
+    }
+  }
+  // flying past a stop? pull in for a second so the card gets seen
+  if (vp > prev) for (const st of STOPS.slice(1, 4))
+    if (prev < st.f && vp >= st.f && target - st.f > 0.03) { vp = st.f; dwellUntil = now + 1100; }
+  const inst = k > 0 ? Math.abs(vp - prev) / (MAX_STEP * k) : 0;   // 0..1 of max speed
+  speed += (inst * 120 - speed) * 0.15;
+  if (speed < 0.5) speed = 0;
+  if (speed > topSpeed) topSpeed = speed;
+  spdEl.innerHTML = `${Math.round(speed)}<sup>mph</sup>`;
+  const burn = Math.max(0, Math.min(1, (speed - 70) / 35));
+  flame.setAttribute("opacity", burn.toFixed(2)); flameCore.setAttribute("opacity", burn.toFixed(2));
+  flame.setAttribute("transform", `translate(0 13) scale(1 ${(1 + burn * (0.6 + Math.random() * 0.4)).toFixed(2)}) translate(0 -13)`);
+  abEl.classList.toggle("on", burn > 0.6);
+  sbEl.classList.toggle("on", Math.abs(target - vp) > 0.04);
+  if (vp !== lastVp || needsRender) { needsRender = false; lastVp = vp; render(vp); }
+  requestAnimationFrame(loop);
+}
+const rerender = () => { needsRender = true; };
+addEventListener("resize", rerender);
+new ResizeObserver(rerender).observe(screen);
+requestAnimationFrame(loop);
+
+// buttons
+document.querySelectorAll("[data-go]").forEach(b => b.addEventListener("click", () => goTo(STOPS.find(s => s.key === b.dataset.go).f)));
+const stopFs = [0, ...STOPS.slice(1).map(s => s.f)];
+$("nextBtn").addEventListener("click", () => { stopAutopilot(); dwellUntil = 0; goTo(stopFs.find(f => f > vp + 0.01) ?? 1); });
+$("prev").addEventListener("click", () => { stopAutopilot(); dwellUntil = 0; goTo([...stopFs].reverse().find(f => f < vp - 0.01) ?? 0); });
+function resetDrive(){
+  stopAutopilot();
+  scrollTo({ top: 0, behavior: "auto" });
+  vp = 0; dwellUntil = 0; topSpeed = 0; speed = 0; lastJetP = -1;
+  buildCars(visitorSeed); spottedCount = -1; passportBuilt = ""; toast.classList.remove("on"); needsRender = true;
+}
+$("again").addEventListener("click", () => {
+  visitorSeed = 1 + Math.floor(Math.random() * 2147483000); store.set("asaaab-seed", visitorSeed);
+  resetDrive();
+});
+$("restart").addEventListener("click", () => {
+  resetDrive();
+  const a = document.getElementById("theme"); a.pause(); a.currentTime = 0;
+  const m = document.getElementById("music"); m.classList.remove("on"); m.setAttribute("aria-pressed", "false"); m.setAttribute("aria-label", "Play theme song");
+});
+
+$("share").addEventListener("click", () => { track("share-passport"); sharePassport(); });
+
+
+const btn = $("copy"), lbl = $("copy-t");
+btn.addEventListener("click", async () => {
+  const text = $("ip").textContent.trim();
+  try { await navigator.clipboard.writeText(text); lbl.textContent = "Copied!"; }
+  catch (e) { const r = document.createRange(); r.selectNodeContents($("ip")); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); lbl.textContent = "Selected — copy it"; }
+  setTimeout(() => lbl.textContent = "Copy server IP", 1800);
+});
+
+// theme song: browsers only allow sound after a tap, so it starts on the first button tap and the ♪ key toggles it
+const audio = $("theme"), mBtn = $("music");
+let musicWanted = store.get("asaaab-music") !== "off";
+audio.volume = 0.55;
+audio.addEventListener("loadedmetadata", () => { mBtn.hidden = false; });
+audio.addEventListener("error", () => { mBtn.hidden = true; });
+const setMusicUI = on => { mBtn.classList.toggle("on", on); mBtn.setAttribute("aria-pressed", on); mBtn.setAttribute("aria-label", on ? "Pause theme song" : "Play theme song"); };
+const play = () => audio.play().then(() => setMusicUI(true)).catch(() => setMusicUI(false));
+mBtn.addEventListener("click", () => {
+  if (audio.paused) { musicWanted = true; store.set("asaaab-music", "on"); play(); }
+  else { musicWanted = false; store.set("asaaab-music", "off"); audio.pause(); setMusicUI(false); }
+});
+// sound starts on the first interaction: tap, click, key, or scroll.
+// (desktop browsers ignore scroll-wheel alone for sound, so the ♪ key pulses as a hint until any click)
+let musicTry = 0;
+const tryMusic = () => {
+  if (!musicWanted || !audio.paused || Date.now() - musicTry < 800) return;
+  musicTry = Date.now();
+  audio.play().then(() => { mBtn.hidden = false; setMusicUI(true); }).catch(() => { mBtn.hidden = false; mBtn.classList.remove("nudge"); void mBtn.offsetWidth; mBtn.classList.add("nudge"); });
+};
+["pointerdown", "touchend", "keydown", "wheel", "scroll"].forEach(ev => addEventListener(ev, tryMusic, { passive: true }));
+// Start carspotting: theme song on, autopilot engaged
+$("start").addEventListener("click", () => {
+  musicWanted = true; store.set("asaaab-music", "on");
+  audio.play().then(() => { mBtn.hidden = false; setMusicUI(true); }).catch(() => {});
+  startAutopilot(); track("start-carspotting");
+});
+
+// ---- fast travel menu
+const menu = $("menu");
+const openMenu = () => { stopAutopilot(); menu.classList.add("open"); $("ftClose").focus(); track("fasttravel-open"); };
+const closeMenu = () => { menu.classList.remove("open"); $("ftOpen").focus(); };
+$("ftOpen").addEventListener("click", openMenu);
+$("ftClose").addEventListener("click", closeMenu);
+addEventListener("keydown", e => { if (e.key === "Escape" && menu.classList.contains("open")) closeMenu(); });
+document.querySelectorAll(".dest[data-link]").forEach(a => a.addEventListener("click", () => track("fasttravel-" + a.dataset.link)));
+document.querySelectorAll("[data-ft]").forEach(b => b.addEventListener("click", () => {
+  menu.classList.remove("open"); track("fasttravel-beamng");
+  const f = STOPS.find(s => s.key === b.dataset.ft).f;
+  goTo(f); vp = f; needsRender = true;            // teleport, no drive
+}));
+function applyLinks(){
+  document.querySelectorAll(".dest[data-link]").forEach(a => {
+    const url = LINKS[a.dataset.link];
+    if (url) { a.href = url; a.classList.remove("soon"); a.querySelector(".go").textContent = "→"; a.removeAttribute("aria-disabled"); }
+    else { a.removeAttribute("href"); a.classList.add("soon"); a.querySelector(".go").textContent = "SOON"; a.setAttribute("aria-disabled", "true"); }
+  });
+  document.querySelectorAll('a.cta.yt').forEach(a => { if (LINKS.youtube) a.href = LINKS.youtube; });
+  const dc = $("dc");
+  if (LINKS.discord && dc && dc.tagName !== "A") {
+    const a = document.createElement("a");
+    a.id = "dc"; a.className = "cta"; a.style.background = "var(--dc)"; a.href = LINKS.discord; a.target = "_blank"; a.rel = "noopener"; a.textContent = "Join the Discord";
+    a.addEventListener("click", () => track("discord-join"));
+    dc.replaceWith(a);
+  }
+}
+applyLinks();
+
+// ---- analytics (only on the real site)
+function track(name){ try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: name, title: name, event: true }); } catch (e) {} }
+if (GOATCOUNTER && /(^|\.)asaaab\.com$/.test(location.hostname)) {
+  const s = document.createElement("script"); s.async = true; s.dataset.goatcounter = `https://${GOATCOUNTER}.goatcounter.com/count`; s.src = "https://gc.zgo.at/count.js";
+  document.head.appendChild(s);
+}
+
+// ---- live config from the owner portal
+(async () => {
+  try {
+    const r = await fetch("config.json", { cache: "no-store" });
+    if (!r.ok) return;
+    const c = await r.json();
+    if (c.pool) for (const k of Object.keys(POOL)) if (c.pool[k]) {
+      if (Number.isFinite(+c.pool[k].w)) POOL[k].w = +c.pool[k].w;
+      if (Array.isArray(c.pool[k].cars) && c.pool[k].cars.length) POOL[k].cars = c.pool[k].cars.map(String);
+    }
+    if (c.links) for (const k of Object.keys(LINKS)) if (typeof c.links[k] === "string") LINKS[k] = c.links[k];
+    if (Number.isFinite(+c.density)) DENSITY = +c.density;
+    buildSlots(DENSITY); buildCars(visitorSeed); applyLinks(); needsRender = true;
+  } catch (e) {}
+})();
+})();
+</script>
+</body></html>
