@@ -1,0 +1,37 @@
+/* Hamburger menu that lives in the red banner strip on every page. */
+.hero-strip .inner{display:flex; align-items:center; justify-content:space-between; gap:12px}
+.hero-strip .inner > a, .hero-strip .inner > img{height:100%}
+.hero-strip .inner > a img{height:100%; width:auto; display:block}
+.mnav{position:relative; flex:none; z-index:50}
+.mnav-btn{
+  width:44px; height:40px; border-radius:11px; cursor:pointer;
+  display:grid; place-items:center; padding:0;
+  background:#fff; border:2px solid #16191c; box-shadow:0 3px 0 #16191c; color:#16191c;
+}
+.mnav-btn:hover{transform:translateY(-1px)}
+.mnav-btn:active{transform:translateY(2px); box-shadow:0 1px 0 #16191c}
+.mnav-btn:focus-visible{outline:3px solid #fff; outline-offset:3px}
+.mnav-btn i{display:block; width:20px; height:3px; border-radius:2px; background:currentColor; position:relative; transition:transform .2s, background .2s}
+.mnav-btn i::before,.mnav-btn i::after{content:""; position:absolute; left:0; width:20px; height:3px; border-radius:2px; background:currentColor; transition:transform .2s}
+.mnav-btn i::before{top:-6px} .mnav-btn i::after{top:6px}
+.mnav.open .mnav-btn i{background:transparent}
+.mnav.open .mnav-btn i::before{transform:translateY(6px) rotate(45deg)}
+.mnav.open .mnav-btn i::after{transform:translateY(-6px) rotate(-45deg)}
+.mnav-panel{
+  position:absolute; right:0; top:calc(100% + 10px); width:min(300px, calc(100vw - 32px));
+  background:#fff; color:#16191c; border:2px solid #16191c; border-radius:16px; box-shadow:0 6px 0 #16191c, 0 18px 40px -12px rgba(0,0,0,.4);
+  padding:8px; font-family:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;
+  opacity:0; transform:translateY(-6px); pointer-events:none; transition:opacity .16s, transform .16s;
+}
+.mnav.open .mnav-panel{opacity:1; transform:none; pointer-events:auto}
+.mnav-panel .mnav-head{font-family:"Overpass","Arial Narrow",system-ui,sans-serif; font-weight:900; font-size:11px; letter-spacing:.16em; color:#5b6268; padding:6px 10px 8px}
+.mnav-panel a{display:flex; align-items:center; gap:12px; padding:10px; border-radius:11px; text-decoration:none; color:inherit}
+.mnav-panel a:hover,.mnav-panel a:focus-visible{background:#eef0e3; outline:none}
+.mnav-panel a[aria-current="page"]{background:#e3f1d8}
+.mnav-panel .ic{flex:none; width:34px; height:34px; border-radius:9px; display:grid; place-items:center; font-size:17px; border:2px solid #16191c}
+.mnav-panel b{display:block; font-weight:900; font-size:15px; line-height:1.2}
+.mnav-panel small{display:block; font-weight:700; font-size:12.5px; color:#5b6268; line-height:1.3; word-break:break-word}
+.mnav-panel hr{border:0; border-top:2px dashed #d9dacf; margin:6px 4px}
+.mnav-panel .foot{padding:6px 10px 4px; font-size:11.5px; font-weight:700; color:#5b6268}
+@media (max-width:480px){ .mnav-btn{width:40px; height:36px} }
+@media (prefers-reduced-motion: reduce){ .mnav-panel,.mnav-btn i,.mnav-btn i::before,.mnav-btn i::after{transition:none} }
