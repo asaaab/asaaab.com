@@ -266,6 +266,14 @@ body{
 .pp-note{margin-top:12px!important; font-size:13px; color:var(--muted)!important; text-align:center}
 .brag{margin-top:12px; background:#fff; border:2px dashed var(--route); border-radius:10px; padding:10px 12px; font-weight:800; font-size:15px; line-height:1.35}
 .brag:empty{display:none}
+.sharepanel{border:2px dashed var(--route); border-radius:12px; padding:12px; background:#fff; display:flex; flex-direction:column; gap:10px}
+.sharepanel p{margin:0!important; font-weight:800; font-size:14px; color:var(--ink)!important; line-height:1.5}
+.sharepanel .cta{margin:0}
+.targets{display:grid; grid-template-columns:repeat(auto-fill, minmax(118px, 1fr)); gap:8px}
+.tgt{display:flex; align-items:center; gap:8px; padding:8px 10px; border:2px solid var(--ink); border-radius:10px; text-decoration:none; color:var(--ink); font-family:var(--hwy); font-weight:900; font-size:14px; background:#fff; box-shadow:0 2px 0 var(--ink)}
+.tgt:hover{transform:translateY(-1px)}
+.tgt:focus-visible{outline:3px solid var(--route); outline-offset:2px}
+.tgt span{flex:none; width:26px; height:26px; border-radius:7px; display:grid; place-items:center; color:#fff; font-size:11px; letter-spacing:0}
 .legend{display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; justify-content:center}
 .legend span{font-family:var(--hwy); font-weight:900; font-size:10px; letter-spacing:.1em; color:#fff; border-radius:999px; padding:2px 8px 1px}
 
@@ -351,7 +359,7 @@ body{
             </a>
             <a class="dest" data-link="tiktok" target="_blank" rel="noopener">
               <span class="ico" style="background:#16191c"><svg viewBox="0 0 24 24"><path d="M10 17V5l9-2v11" fill="none" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/><circle cx="7.5" cy="17" r="2.6" fill="#fff"/><circle cx="16.5" cy="14.5" r="2.6" fill="#fff"/></svg></span>
-              <span class="t"><b>TikTok</b><small>@asaaab · daily carspotting</small></span><span class="go">→</span>
+              <span class="t"><b>TikTok</b><small>@asaaab93x · daily carspotting</small></span><span class="go">→</span>
             </a>
             <a class="dest" data-link="bluesky" target="_blank" rel="noopener">
               <span class="ico" style="background:#2f7fe0"><svg viewBox="0 0 24 24"><path d="M7 17h10a4 4 0 0 0 .4-8A5.5 5.5 0 0 0 6.8 9.5 3.8 3.8 0 0 0 7 17Z" fill="#fff"/></svg></span>
@@ -434,6 +442,19 @@ body{
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15V3m-5 5 5-5 5 5" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"/></svg>
                 <span id="share-t">Share my passport</span>
               </button>
+              <div class="sharepanel" id="sharePanel" hidden>
+                <p id="shareStatus"></p>
+                <button class="cta" type="button" id="shareNative" hidden>Post the image…</button>
+                <div class="targets">
+                  <a class="tgt" data-t="tiktok" href="https://www.tiktok.com/upload" target="_blank" rel="noopener"><span style="background:#16191c">T</span>TikTok</a>
+                  <a class="tgt" data-t="instagram" href="https://www.instagram.com/" target="_blank" rel="noopener"><span style="background:#d62976">IG</span>Instagram</a>
+                  <a class="tgt" data-t="snapchat" href="https://www.snapchat.com/" target="_blank" rel="noopener"><span style="background:#fffc00; color:#16191c">S</span>Snapchat</a>
+                  <a class="tgt" data-t="x" id="t-x" target="_blank" rel="noopener"><span style="background:#16191c">X</span>X / Twitter</a>
+                  <a class="tgt" data-t="messages" id="t-sms"><span style="background:#3fbf4f">💬</span>Messages</a>
+                  <a class="tgt" data-t="discord" href="https://discord.com/app" target="_blank" rel="noopener"><span style="background:#5865f2">D</span>Discord</a>
+                  <a class="tgt" data-t="bluesky" id="t-bsky" target="_blank" rel="noopener"><span style="background:#2f7fe0">B</span>Bluesky</a>
+                </div>
+              </div>
               <a class="cta yt" href="https://www.youtube.com/@asaaab93x" target="_blank" rel="noopener">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7Z" fill="#fff"/></svg>
                 Watch asaaab on YouTube
@@ -467,8 +488,8 @@ body{
 /* config.json (edited from the owner portal) overrides anything here when the site is live */
 const LINKS = {
   youtube: "https://www.youtube.com/@asaaab93x",
-  tiktok:  "https://www.tiktok.com/@asaaab",
-  bluesky: "",                    // paste profile link when ready
+  tiktok:  "https://www.tiktok.com/@asaaab93x",
+  bluesky: "https://bsky.app/profile/9-3x.bsky.social",
   discord: "",                    // paste the invite when the server exists
 };
 let DENSITY = 1;                  // parked cars along the road: 0.5 = sparse, 2 = packed
@@ -816,22 +837,36 @@ async function passportImage(){
   g.font = font(800, 28); g.textAlign = "right"; g.fillText("find yours →", W - 70, H - 46);
   return await new Promise(r => c.toBlob(r, "image/png"));
 }
+// one tap: copy the caption, save the passport image, then open the "post it" panel
+let shareFile = null;
 async function sharePassport(){
-  const lbl = $("share-t"), text = bragLine() + " Find yours:";
-  const done = msg => { lbl.textContent = msg; setTimeout(() => lbl.textContent = "Share my passport", 2200); };
+  const lbl = $("share-t"), caption = bragLine() + " Find yours: " + SITE_URL;
+  lbl.textContent = "Printing your passport…";
+  let copied = false, saved = false;
+  try { await navigator.clipboard.writeText(caption); copied = true; } catch (e) {}   // first, while the tap still counts
   try {
     const blob = await passportImage();
-    const file = blob && new File([blob], "asaaab-passport.png", { type: "image/png" });
-    if (file && navigator.canShare && navigator.canShare({ files: [file] })) { await navigator.share({ files: [file], text: text + " " + SITE_URL, title: "My carspotting passport" }); return done("Shared!"); }
-    if (navigator.share) { await navigator.share({ title: "My carspotting passport", text, url: SITE_URL }); return done("Shared!"); }
-    await navigator.clipboard.writeText(text + " " + SITE_URL);
-    if (file) { const a = document.createElement("a"); a.href = URL.createObjectURL(file); a.download = "asaaab-passport.png"; document.body.appendChild(a); a.click(); a.remove(); }
-    done("Copied! Paste it anywhere");
-  } catch (e) {
-    if (e && e.name === "AbortError") return done("Share my passport");
-    try { await navigator.clipboard.writeText(text + " " + SITE_URL); done("Copied! Paste it anywhere"); }
-    catch (e2) { $("brag").focus?.(); done("Copy the quote above"); }
-  }
+    if (blob) {
+      shareFile = new File([blob], "asaaab-passport.png", { type: "image/png" });
+      const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "asaaab-passport.png";
+      document.body.appendChild(a); a.click(); a.remove(); saved = true;
+    }
+  } catch (e) {}
+  lbl.textContent = "Share my passport";
+  const enc = encodeURIComponent, brag = bragLine();
+  $("t-x").href = `https://twitter.com/intent/tweet?text=${enc(brag)}&url=${enc(SITE_URL)}`;
+  $("t-bsky").href = `https://bsky.app/intent/compose?text=${enc(caption)}`;
+  $("t-sms").href = `sms:?&body=${enc(caption)}`;
+  $("shareStatus").innerHTML =
+    (saved ? "✓ Passport image saved" : "Passport image ready") + "<br>" +
+    (copied ? "✓ Caption copied. Paste it with your post." : "Copy the caption in quotes above.");
+  $("shareNative").hidden = !(shareFile && navigator.canShare && navigator.canShare({ files: [shareFile] }));
+  $("sharePanel").hidden = false;
+  $("sharePanel").scrollIntoView({ block: "nearest", behavior: reduce ? "auto" : "smooth" });
+}
+async function shareNative(){
+  try { await navigator.share({ files: [shareFile], text: bragLine() + " Find yours: " + SITE_URL, title: "My carspotting passport" }); track("share-native"); }
+  catch (e) {}
 }
 
 // ---- the drive loop: the car chases your scroll position, but the speedbrake caps how fast it can go
@@ -916,6 +951,8 @@ $("restart").addEventListener("click", () => {
 });
 
 $("share").addEventListener("click", () => { track("share-passport"); sharePassport(); });
+$("shareNative").addEventListener("click", shareNative);
+document.querySelectorAll(".tgt").forEach(a => a.addEventListener("click", () => track("share-" + a.dataset.t)));
 
 
 const btn = $("copy"), lbl = $("copy-t");
