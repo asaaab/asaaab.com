@@ -61,10 +61,18 @@ body{
 .stage{
   position:sticky; top:env(safe-area-inset-top, 0px);
   height:calc(100svh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
-  display:grid; place-items:center; padding-block:10px;
+  display:flex; flex-direction:column; align-items:center; padding-bottom:10px;
 }
+/* Banner: Theo's red 9-3X strip, full-bleed above the GPS. Image is the left piece; the CSS bands continue it to any width. */
+.hero-strip{
+  flex:none; align-self:stretch; height:clamp(54px, 11vw, 150px); margin:0 calc(-1 * max(16px, env(safe-area-inset-right, 0px))) 10px calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+  background:#dc0500 url(banner-fill.png) repeat-x left top / auto 100%;
+  display:flex; justify-content:center;
+}
+.hero-strip .inner{width:100%; max-width:1012px; height:100%; padding-inline:16px}
+.hero-strip img{height:100%; width:auto; display:block}
 .device{
-  position:relative; width:100%; max-width:980px; height:100%; max-height:700px;
+  position:relative; width:100%; max-width:980px; flex:1 1 auto; min-height:0; max-height:700px; margin-bottom:auto;
   background:var(--bezel); border-radius:22px; padding:8px;
   box-shadow:0 18px 40px -18px rgba(20,30,40,.45);
   display:flex; flex-direction:column;
@@ -286,6 +294,7 @@ body{
 
 <div class="drive" id="drive">
   <div class="stage">
+    <div class="hero-strip" role="banner"><div class="inner"><img src="banner.png" alt="asaaab" width="1600" height="400"></div></div>
     <div class="device">
       <div class="screen" id="screen">
         <svg id="map" aria-hidden="true"><g id="world"></g></svg>
