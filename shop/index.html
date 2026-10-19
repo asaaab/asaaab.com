@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Merch · asaaab</title>
+<meta name="description" content="asaaab.shop is under construction.">
+<meta name="theme-color" content="#dc0500">
+<link rel="icon" href="/banner.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@600;800;900&family=Nunito:wght@500;700;800;900&display=swap">
+<link rel="stylesheet" href="/assets/pages.css">
+<link rel="stylesheet" href="/assets/menu.css">
+<style>
+.zone{position:relative; text-align:center; padding-top:8px; overflow:hidden}
+.diamond{width:150px; height:150px; margin:26px auto 30px; transform:rotate(45deg); background:#ff8a1a; border:5px solid #16191c; border-radius:14px; display:grid; place-items:center; box-shadow:0 6px 0 #16191c}
+.diamond span{transform:rotate(-45deg); font-family:var(--hwy); font-weight:900; font-size:19px; line-height:1.05; color:#16191c; letter-spacing:.02em}
+.cones{display:flex; justify-content:center; gap:22px; margin:6px 0 4px}
+.cone{width:34px; height:44px; position:relative; animation:bob 1.6s ease-in-out infinite}
+.cone:nth-child(2){animation-delay:.2s} .cone:nth-child(3){animation-delay:.4s} .cone:nth-child(4){animation-delay:.6s}
+.cone::before{content:""; position:absolute; left:5px; right:5px; bottom:6px; top:0; background:linear-gradient(#ff7a1a 0 30%, #fff 30% 48%, #ff7a1a 48% 100%); clip-path:polygon(40% 0,60% 0,100% 100%,0 100%)}
+.cone::after{content:""; position:absolute; left:0; right:0; bottom:0; height:7px; background:#16191c; border-radius:3px}
+@keyframes bob{50%{transform:translateY(-4px)}}
+.tape{height:22px; margin:22px -40px -22px; background:repeating-linear-gradient(-45deg, #f7d117 0 18px, #16191c 18px 36px); border-block:2px solid #16191c}
+.shopurl{font-family:var(--hwy); font-weight:900; font-size:clamp(28px,7vw,44px); margin:14px 0 4px}
+.shopurl em{font-style:normal; color:var(--route)}
+@media (prefers-reduced-motion: reduce){ .cone{animation:none} }
+</style>
+</head>
+<body>
+<div class="hero-strip" role="banner"><div class="inner" data-menu-host><a href="/" aria-label="asaaab home"><img src="/banner.png" alt="asaaab" width="1600" height="400"></a></div></div>
+<main>
+<div class="sign"><div><small>EXIT 4 · AHEAD 25</small><h1>Merch</h1></div></div>
+<div class="card zone">
+<div class="diamond"><span>ROAD<br>WORK<br>AHEAD</span></div>
+<div class="cones" aria-hidden="true"><i class="cone"></i><i class="cone"></i><i class="cone"></i><i class="cone"></i></div>
+<p class="shopurl">asaaab<em>.shop</em></p>
+<p class="lede">is still in the body shop.</p>
+<p>No ETA yet. When it opens, the billboard at the end of the drive lights up and the hangar hears about it first.</p>
+<div class="ctas" style="justify-content:center">
+<a class="cta" href="https://discord.gg/e7FUMwjNah" rel="noopener">Wait in the hangar</a>
+<a class="cta alt" href="/">Back to the drive</a>
+</div>
+<div class="tape" aria-hidden="true"></div>
+</div>
+</main>
+<div class="road" aria-hidden="true"></div>
+<p class="foot">© 2026 asaaab · <a href="/privacy/">Privacy</a> · <a href="/copyright/">Copyright &amp; reuse</a> · <a href="mailto:asaaab93x@gmail.com">asaaab93x@gmail.com</a></p>
+<script src="/assets/menu.js" defer></script>
+<script>if (/(^|\.)asaaab\.com$/.test(location.hostname)) { const s=document.createElement("script"); s.async=true; s.dataset.goatcounter="https://asaaab.goatcounter.com/count"; s.src="https://gc.zgo.at/count.js"; document.head.appendChild(s); }</script>
+</body>
+</html>
