@@ -709,7 +709,11 @@ const goTo = f => scrollTo({ top: f * maxScroll(), behavior: "auto" });
 let movT = 0, movS = 0, apT = 0, topSpeed = 0, vp = prog(), dwellUntil = 0, needsRender = true, anchorY = null;
 let lastY = scrollY, lastT = performance.now(), speed = 0, spottedCount = -1, ticking = false, toastTimer = 0, lastJetP = -1, passportBuilt = "";
 
+let toastRank = -1, toastAt = 0;
 function showToast(c){
+  const now = performance.now();
+  if (c.tier === "common" && toastRank > 0 && now - toastAt < 1300) return;   // don't bump a real spot off the screen
+  toastRank = RANK[c.tier]; toastAt = now;
   toastR.textContent = POOL[c.tier].label; toastR.style.background = POOL[c.tier].color; toastT.textContent = c.name;
   toast.classList.add("on"); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove("on"), 1700);
 }
@@ -763,7 +767,7 @@ function render(p){
     const passed = c.f < p;
     const counts = c.tier !== "common";   // commons are just plain traffic
     c.ring.setAttribute("opacity", passed && counts ? (p - c.f < 0.02 ? 1 : .45) : 0);
-    if (passed && !c.seen) { c.seen = true; if (counts && (!newest || RANK[c.tier] >= RANK[newest.tier])) newest = c; }
+    if (passed && !c.seen) { c.seen = true; if (!newest || RANK[c.tier] >= RANK[newest.tier]) newest = c; }   // every car gets its name shown; only non-commons count
     if (!passed) c.seen = false;
   });
   if (newest) showToast(newest);
