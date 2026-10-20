@@ -59,12 +59,12 @@ const cv = document.createElement("canvas"); sc.appendChild(cv);
 const ctx = cv.getContext("2d");
 const TW = 28, TH = 14;                       // tile size in CSS px (fixed: never scales up)
 const C = {
-  grass: ["#bcd2b5", "#b6cdaf", "#c1d6ba", "#b3cbad"], edge: "rgba(60,80,60,.05)",
-  tree: ["#7ea487", "#6f9a7e", "#88ad8f", "#93b294"], trunk: "#8b7a66", autumn: "#c9a865",
-  wheat: "#e3d6ac", wheatLine: "#d4c491", plough: "#cdb894", ploughLine: "#bba47d",
-  water: "#97bccb", waterHi: "#bcd6df", road: "#dcd8ce", roadEdge: "#c6c1b5", roadLine: "#f2efe7",
-  ballast: "#c2b39c", rail: "#8d8172", sleeper: "#a69680",
-  wall: "#f1ece2", wallShade: "#ddd5c6", roofs: ["#c58d72", "#a9998a", "#b9876e", "#8f9ea6", "#9fae8f"],
+  grass: ["#a6d394", "#9ecc8b", "#aed89c", "#98c886"], edge: "rgba(40,70,40,.06)",
+  tree: ["#4c9a5f", "#3c8a51", "#5bab6b", "#69b676"], trunk: "#7d6450", autumn: "#e3a13c",
+  wheat: "#efd88a", wheatLine: "#dcc06a", plough: "#d9ad78", ploughLine: "#c39461",
+  water: "#62b6e0", waterHi: "#c2e8f8", road: "#d9d5c9", roadEdge: "#b9b3a3", roadLine: "#f4f1e8",
+  ballast: "#c8ad88", rail: "#6f5f4f", sleeper: "#957d60",
+  wall: "#fdf8ee", wallShade: "#e7dac4", roofs: ["#d6623f", "#c94a3a", "#e58a35", "#5b85c0", "#77a755", "#a65c9e"],
 };
 let S = 4242; const rnd = () => (S = (S * 16807) % 2147483647) / 2147483647;
 // smooth value noise for forests & fields
@@ -127,7 +127,70 @@ function drawWorld(){
   }
 }
 drawWorld();
-let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(drawWorld, 200); });
+/* ---------- traffic: things move on the still map ---------- */
+const vc = document.createElement("canvas"); sc.appendChild(vc); const vx = vc.getContext("2d");
+const iso = (i, j) => [(i - j) * TW / 2, (i + j) * TH / 2];
+const riverJf = i => 9 + Math.sin(i / 9) * 3 + Math.sin(i / 23) * 4;
+const CAR = ["#e1261c", "#2f7fe0", "#f7d117", "#ffffff", "#2d2d2d", "#3f9a2f", "#e58a35", "#8a4fb7", "#c0c4c8"];
+let VEH = [], PLANES = [], lastT = 0;
+const pick = a => a[Math.floor(Math.random() * a.length)];
+function spawn(){
+  const W = innerWidth, H = innerHeight, dpr = Math.min(2, devicePixelRatio || 1);
+  vc.width = W * dpr; vc.height = H * dpr; vc.style.width = W + "px"; vc.style.height = H + "px"; vx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  const iMin = -3, iMax = Math.ceil(W / TW + H / TH) + 3, jMin = -Math.ceil(W / TW) - 3, jMax = Math.ceil(H / TH) + 3;
+  const iL = [], jL = [], rL = [];
+  for (let i = Math.ceil(iMin / 23) * 23; i <= iMax; i += 23) iL.push(i);
+  for (let j = Math.ceil(jMin / 29) * 29; j <= jMax; j += 29) jL.push(j);
+  for (let j = jMin; j <= jMax; j++) if (((j % 41) + 41) % 41 === 17) rL.push(j);
+  VEH = [];
+  const n = Math.max(10, Math.round(W * H / 26000));
+  for (let k = 0; k < n; k++){
+    const kind = Math.random(); const type = kind < .72 ? "car" : kind < .88 ? "truck" : "bus";
+    const dir = Math.random() < .5 ? -1 : 1, sp = type === "car" ? .9 + Math.random() * .7 : .6 + Math.random() * .3;
+    if (Math.random() < .5 && iL.length) VEH.push({ type, axis: "j", c: pick(iL) + .2 * dir, t: jMin + Math.random() * (jMax - jMin), v: dir * sp, min: jMin, max: jMax, col: pick(CAR) });
+    else if (jL.length) VEH.push({ type, axis: "i", c: pick(jL) - .2 * dir, t: iMin + Math.random() * (iMax - iMin), v: dir * sp, min: iMin, max: iMax, col: pick(CAR) });
+  }
+  for (const j of rL) VEH.push({ type: "train", axis: "i", c: j, t: iMin + Math.random() * (iMax - iMin), v: (Math.random() < .5 ? -1 : 1) * 2.2, min: iMin - 6, max: iMax + 6 });
+  for (let k = 0; k < 3; k++) VEH.push({ type: "boat", axis: "river", t: iMin + Math.random() * (iMax - iMin), v: (Math.random() < .5 ? -1 : 1) * (.35 + Math.random() * .2), min: iMin, max: iMax, col: pick(["#ffffff", "#e1261c", "#f7d117"]) });
+  PLANES = [{ x: Math.random() * W, y: Math.random() * H * .6, s: 46 }];
+}
+function body(x, y, ang, len, wid, col, roof){
+  vx.save(); vx.translate(x, y); vx.rotate(ang); vx.scale(1, .5);
+  vx.fillStyle = "rgba(0,0,0,.18)"; vx.fillRect(-len / 2 + 1, -wid / 2 + 2, len, wid);
+  vx.fillStyle = col; vx.strokeStyle = "rgba(20,25,30,.55)"; vx.lineWidth = .8; vx.fillRect(-len / 2, -wid / 2, len, wid); vx.strokeRect(-len / 2, -wid / 2, len, wid);
+  if (roof){ vx.fillStyle = roof; vx.fillRect(-len / 2 + len * .25, -wid / 2 + 1, len * .4, wid - 2); }
+  vx.restore();
+}
+function frame(now){
+  const dt = Math.min(.05, (now - (lastT || now)) / 1000); lastT = now;
+  const W = innerWidth, H = innerHeight; vx.clearRect(0, 0, W, H);
+  for (const v of VEH){
+    v.t += v.v * dt; if (v.t > v.max) v.t = v.min; if (v.t < v.min) v.t = v.max;
+    let i, j, ang;
+    if (v.axis === "j"){ i = v.c; j = v.t; ang = v.v > 0 ? Math.PI - .4636 : -.4636; }
+    else if (v.axis === "i"){ i = v.t; j = v.c; ang = v.v > 0 ? .4636 : Math.PI + .4636; }
+    else { i = v.t; j = riverJf(i); const j2 = riverJf(i + .2); const [ax, ay] = iso(i, j), [bx, by] = iso(i + .2, j2); ang = Math.atan2(by - ay, bx - ax) + (v.v < 0 ? Math.PI : 0); }
+    const [x, y] = iso(i, j);
+    if (x < -40 || x > W + 40 || y < -40 || y > H + 40) continue;
+    if (v.type === "car") body(x, y, ang, 12, 7, v.col, "rgba(150,210,240,.9)");
+    else if (v.type === "truck"){ body(x, y, ang, 19, 8, "#f4f1ea"); body(x + Math.cos(ang) * 10, y + Math.sin(ang) * 5, ang, 6, 8, v.col); }
+    else if (v.type === "bus") body(x, y, ang, 21, 8, "#f7c52b", "rgba(150,210,240,.9)");
+    else if (v.type === "train"){ for (let k = 3; k >= 0; k--){ const [tx, ty] = iso(i - Math.sign(v.v) * k * .78, j); body(tx, ty, ang, 19, 8, k === 0 ? "#b71c1c" : "#e1261c", "#ffe9a8"); } }
+    else if (v.type === "boat"){ vx.save(); vx.translate(x, y); vx.rotate(ang); vx.scale(1.35, .75);
+      vx.strokeStyle = "rgba(255,255,255,.7)"; vx.lineWidth = 1; vx.beginPath(); vx.moveTo(-6, -3); vx.lineTo(-16, -6); vx.moveTo(-6, 3); vx.lineTo(-16, 6); vx.stroke();
+      vx.fillStyle = v.col; vx.beginPath(); vx.moveTo(-6, -3.5); vx.lineTo(5, -3.5); vx.lineTo(9, 0); vx.lineTo(5, 3.5); vx.lineTo(-6, 3.5); vx.closePath(); vx.fill(); vx.strokeStyle = "rgba(20,25,30,.5)"; vx.stroke(); vx.restore(); }
+  }
+  for (const p of PLANES){ p.x += p.s * dt; p.y -= p.s * .5 * dt; if (p.x > W + 80 || p.y < -60){ p.x = -60; p.y = H * (.3 + Math.random() * .6); }
+    vx.fillStyle = "rgba(0,0,0,.12)"; plane(p.x + 40, p.y + 60);
+    vx.fillStyle = "#ffffff"; plane(p.x, p.y); }
+  if (!REDUCED) requestAnimationFrame(frame);
+}
+function plane(x, y){ vx.save(); vx.translate(x, y); vx.rotate(-.4636); vx.beginPath();
+  vx.moveTo(12, 0); vx.lineTo(4, -1.6); vx.lineTo(-2, -9); vx.lineTo(-5, -9); vx.lineTo(-2, -1.6); vx.lineTo(-9, -1.6); vx.lineTo(-12, -4); vx.lineTo(-13, -4); vx.lineTo(-12, 0);
+  vx.lineTo(-13, 4); vx.lineTo(-12, 4); vx.lineTo(-9, 1.6); vx.lineTo(-2, 1.6); vx.lineTo(-5, 9); vx.lineTo(-2, 9); vx.lineTo(4, 1.6); vx.closePath(); vx.fill(); vx.restore(); }
+const REDUCED = matchMedia("(prefers-reduced-motion: reduce)").matches;
+spawn(); requestAnimationFrame(frame);
+let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => { drawWorld(); spawn(); }, 200); });
 
 requestAnimationFrame(tick);
 })();
