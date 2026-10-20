@@ -50,86 +50,84 @@ function tick(){
   car.style.left = x + "%"; document.getElementById("tramDone").style.width = x + "%";
   let here = 0; LINE.forEach((s, i) => { if (p >= s.f - 0.02) here = i; });
   if (here !== lastHere){ lastHere = here; stops.forEach((b, i) => b.classList.toggle("here", i === here)); document.getElementById("tramNow").textContent = LINE[here].name; }
-  // gentle parallax on the world
-  const t = scrollY;
-  for (const [el, k] of par) el.setAttribute("transform", `translate(${(-t * k).toFixed(1)} 0)`);
   requestAnimationFrame(tick);
 }
 
-/* ---------- the world: dense, layered, flat-illustrated ---------- */
-const NS = "http://www.w3.org/2000/svg";
+/* ---------- the world: a quiet isometric countryside, drawn once ---------- */
 const sc = document.getElementById("scene");
-const svg = document.createElementNS(NS, "svg");
-svg.setAttribute("viewBox", "0 0 1600 1000"); svg.setAttribute("preserveAspectRatio", "xMidYMax slice");
-sc.appendChild(svg);
-const el = (t, a, p = svg) => { const n = document.createElementNS(NS, t); for (const k in a) n.setAttribute(k, a[k]); p.appendChild(n); return n; };
-let seed = 93; const r = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
-const par = [];
-const layer = k => { const g = el("g", { class: "layer" }); par.push([g, k]); return g; };
-const ridge = (y, amp, step, g, fill) => { let d = `M-200 1000 L-200 ${y}`; for (let x = -200; x <= 1800; x += step) d += ` Q${x + step / 2} ${y - amp * (0.4 + r())} ${x + step} ${y + (r() - .5) * amp * .5}`; d += " L1800 1000 Z"; el("path", { d, fill }, g); };
+const cv = document.createElement("canvas"); sc.appendChild(cv);
+const ctx = cv.getContext("2d");
+const TW = 28, TH = 14;                       // tile size in CSS px (fixed: never scales up)
+const C = {
+  grass: ["#bcd2b5", "#b6cdaf", "#c1d6ba", "#b3cbad"], edge: "rgba(60,80,60,.05)",
+  tree: ["#7ea487", "#6f9a7e", "#88ad8f", "#93b294"], trunk: "#8b7a66", autumn: "#c9a865",
+  wheat: "#e3d6ac", wheatLine: "#d4c491", plough: "#cdb894", ploughLine: "#bba47d",
+  water: "#97bccb", waterHi: "#bcd6df", road: "#dcd8ce", roadEdge: "#c6c1b5", roadLine: "#f2efe7",
+  ballast: "#c2b39c", rail: "#8d8172", sleeper: "#a69680",
+  wall: "#f1ece2", wallShade: "#ddd5c6", roofs: ["#c58d72", "#a9998a", "#b9876e", "#8f9ea6", "#9fae8f"],
+};
+let S = 4242; const rnd = () => (S = (S * 16807) % 2147483647) / 2147483647;
+// smooth value noise for forests & fields
+const NG = {}; const hash = (x, y) => { const k = x + "," + y; if (!(k in NG)) { let h = (x * 374761393 + y * 668265263) ^ 0x5bd1e995; h = (h ^ (h >>> 13)) * 1274126177; NG[k] = ((h ^ (h >>> 16)) >>> 0) / 4294967295; } return NG[k]; };
+const noise = (x, y) => { const xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi, s = v => v * v * (3 - 2 * v);
+  const a = hash(xi, yi), b = hash(xi + 1, yi), c = hash(xi, yi + 1), d = hash(xi + 1, yi + 1);
+  return a + (b - a) * s(xf) + (c - a) * s(yf) + (a - b - c + d) * s(xf) * s(yf); };
+const diamond = (x, y, fill) => { ctx.beginPath(); ctx.moveTo(x, y - TH / 2); ctx.lineTo(x + TW / 2, y); ctx.lineTo(x, y + TH / 2); ctx.lineTo(x - TW / 2, y); ctx.closePath(); ctx.fillStyle = fill; ctx.fill(); };
+const tree = (x, y, s, col) => { ctx.fillStyle = "rgba(40,60,45,.12)"; ctx.beginPath(); ctx.ellipse(x + 2, y + 1, 4 * s, 2 * s, 0, 0, 7); ctx.fill();
+  ctx.fillStyle = C.trunk; ctx.fillRect(x - .6, y - 4 * s, 1.2, 4 * s);
+  ctx.fillStyle = col; if (rnd() < .5) { ctx.beginPath(); ctx.moveTo(x, y - 12 * s); ctx.lineTo(x + 4 * s, y - 3 * s); ctx.lineTo(x - 4 * s, y - 3 * s); ctx.closePath(); ctx.fill(); }
+  else { ctx.beginPath(); ctx.arc(x, y - 7 * s, 4 * s, 0, 7); ctx.fill(); ctx.fillStyle = "rgba(255,255,255,.12)"; ctx.beginPath(); ctx.arc(x - 1.3 * s, y - 8.3 * s, 1.6 * s, 0, 7); ctx.fill(); } };
+const house = (x, y, h, roof) => { const w = TW * .32, d = TH * .32;
+  ctx.fillStyle = C.wallShade; ctx.beginPath(); ctx.moveTo(x - w, y - d * 0); ctx.lineTo(x, y + d); ctx.lineTo(x, y + d - h); ctx.lineTo(x - w, y - h); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = C.wall; ctx.beginPath(); ctx.moveTo(x, y + d); ctx.lineTo(x + w, y); ctx.lineTo(x + w, y - h); ctx.lineTo(x, y + d - h); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = roof; ctx.beginPath(); ctx.moveTo(x - w - 1, y - h); ctx.lineTo(x, y - h - d - 4); ctx.lineTo(x + w + 1, y - h); ctx.lineTo(x, y + d - h + 1); ctx.closePath(); ctx.fill();
+  ctx.fillStyle = "rgba(60,50,40,.35)"; ctx.fillRect(x + w * .35, y - h * .55, 1.6, 1.6); };
 
-// sun + clouds
-el("circle", { cx: 1270, cy: 150, r: 70, fill: "#fff1b8" });
-el("circle", { cx: 1270, cy: 150, r: 48, fill: "#ffe27a" });
-for (let i = 0; i < 7; i++){ const g = el("g", { class: "cloud", style: `animation-duration:${90 + r() * 120}s; animation-delay:-${r() * 200}s` });
-  const x = 0, y = 60 + r() * 230, s = .6 + r() * .9;
-  el("path", { d: `M${x} ${y} a${22 * s} ${22 * s} 0 0 1 ${40 * s} -${16 * s} a${30 * s} ${30 * s} 0 0 1 ${54 * s} ${4 * s} a${20 * s} ${20 * s} 0 0 1 ${18 * s} ${34 * s} h-${112 * s}z`, fill: "#fff", opacity: .95 }, g); }
-
-// far mountains (San Gabriels, lavender) with snow
-const far = layer(.02); ridge(470, 170, 160, far, "#c9c3ea");
-for (let i = 0; i < 9; i++){ const x = -100 + i * 210 + r() * 60, y = 330 + r() * 70; el("path", { d: `M${x} ${y} l26 34 l-12 -4 l-14 10 l-14 -10 l-12 4z`, fill: "#fff", opacity: .85 }, far); }
-// mid hills
-const mid = layer(.05); ridge(560, 110, 120, mid, "#a6dcc0");
-// near hills
-const near = layer(.09); ridge(640, 80, 90, near, "#8fd19e");
-// valley floor
-el("rect", { x: -200, y: 700, width: 2000, height: 300, fill: "#cfe8a8" }, near);
-el("path", { d: "M-200 690 C200 660 500 720 800 690 S1400 660 1800 700 L1800 1000 L-200 1000Z", fill: "#cfe8a8" }, near);
-
-// river with bridges
-const river = "M-200 860 C100 820 260 900 520 850 S900 780 1120 840 S1500 900 1800 820";
-el("path", { d: river, fill: "none", stroke: "#7fd0ef", "stroke-width": 26, "stroke-linecap": "round" }, near);
-el("path", { d: river, fill: "none", stroke: "#b8ecff", "stroke-width": 6, "stroke-dasharray": "18 26", opacity: .8 }, near);
-for (const x of [330, 760, 1300]){ const g = el("g", { transform: `translate(${x} 0)` }, near);
-  el("path", { d: "M-40 0 Q0 -26 40 0", fill: "none", stroke: "#f2a1c4", "stroke-width": 5 }, g).setAttribute("transform", `translate(0 ${843 + (x === 760 ? -30 : 0)})`); }
-
-// freeway with cars
-const fwy = "M-200 760 C200 740 500 790 820 760 S1400 730 1800 770";
-el("path", { d: fwy, fill: "none", stroke: "#c9ccd0", "stroke-width": 18 }, near);
-el("path", { d: fwy, fill: "none", stroke: "#fff", "stroke-width": 1.5, "stroke-dasharray": "10 12" }, near);
-const fp = el("path", { d: fwy, fill: "none", stroke: "none", id: "fwy" }, near);
-const carCols = ["#e1261c", "#2f7fe0", "#f7d117", "#fff", "#3f9a2f", "#7a4bd1", "#16191c", "#f39c4a"];
-for (let i = 0; i < 14; i++){ const c = el("rect", { x: -7, y: -4, width: 14, height: 8, rx: 2.5, fill: carCols[i % carCols.length], stroke: "#16191c", "stroke-width": 1 }, near);
-  const m = el("animateMotion", { dur: `${22 + r() * 18}s`, repeatCount: "indefinite", rotate: "auto", begin: `-${r() * 40}s` }, c);
-  if (i % 2) { m.setAttribute("keyPoints", "1;0"); m.setAttribute("keyTimes", "0;1"); m.setAttribute("calcMode", "linear"); }
-  el("mpath", { href: "#fwy" }, m); }
-
-// the rail line + a little tram
-const rl = "M-200 905 C300 880 600 930 900 900 S1400 870 1800 910";
-el("path", { d: rl, fill: "none", stroke: "#8a6e5a", "stroke-width": 6 }, near);
-el("path", { d: rl, fill: "none", stroke: "#5a463a", "stroke-width": 10, "stroke-dasharray": "2 10", opacity: .6 }, near);
-el("path", { d: rl, fill: "none", stroke: "none", id: "rl" }, near);
-{ const t = el("g", {}, near);
-  for (let k = 0; k < 3; k++){ el("rect", { x: -60 + k * 40, y: -12, width: 36, height: 16, rx: 4, fill: "#e1261c", stroke: "#16191c", "stroke-width": 1.5 }, t);
-    el("rect", { x: -54 + k * 40, y: -8, width: 24, height: 6, rx: 1.5, fill: "#ffe9a8" }, t); }
-  const m = el("animateMotion", { dur: "48s", repeatCount: "indefinite", rotate: "auto" }, t); el("mpath", { href: "#rl" }, m); }
-
-// towns: little houses with colored roofs, clustered
-const roofs = ["#e1261c", "#f39c4a", "#7a4bd1", "#2f7fe0", "#d930c9", "#3f9a2f"];
-const town = (cx, cy, n, g) => { for (let i = 0; i < n; i++){ const x = cx + (r() - .5) * 160, y = cy + (r() - .5) * 50, w = 9 + r() * 8;
-  el("rect", { x, y, width: w, height: w * .8, fill: "#fff8ee", stroke: "#7a6a5e", "stroke-width": .8 }, g);
-  el("path", { d: `M${x - 2} ${y} L${x + w / 2} ${y - w * .55} L${x + w + 2} ${y}Z`, fill: roofs[(i + Math.floor(cx)) % roofs.length] }, g); } };
-town(160, 800, 26, near); town(620, 820, 34, near); town(1080, 800, 28, near); town(1450, 790, 22, near);
-// palm trees along the freeway, dense pine/oak scatter on the hills
-const palm = (x, y, g) => { el("path", { d: `M${x} ${y} q2 -18 0 -34`, stroke: "#8a6e5a", "stroke-width": 2.5, fill: "none" }, g);
-  for (let a = 0; a < 6; a++) el("path", { d: `M${x} ${y - 34} q${Math.cos(a) * 10} -6 ${Math.cos(a) * 16} ${4 + Math.sin(a) * 4}`, stroke: "#3f9a2f", "stroke-width": 3, fill: "none", "stroke-linecap": "round" }, g); };
-for (let x = -150; x < 1750; x += 70 + r() * 50) palm(x, 752 + (r() - .5) * 10, near);
-const tree = (x, y, s, g, col) => { if (r() > .45) el("path", { d: `M${x} ${y - 14 * s} l${6 * s} ${12 * s} h-${12 * s}z`, fill: col }, g); else el("circle", { cx: x, cy: y - 6 * s, r: 6 * s, fill: col }, g); };
-for (let i = 0; i < 380; i++) tree(-200 + r() * 2000, 560 + r() * 110, .7 + r() * .6, near, ["#5fb36e", "#4aa35d", "#79c27f", "#e3a34a"][Math.floor(r() * 4)]);
-for (let i = 0; i < 220; i++) tree(-200 + r() * 2000, 490 + r() * 90, .5 + r() * .4, mid, ["#7cc69a", "#6ab88c"][Math.floor(r() * 2)]);
-// a couple of tiny planes heading for LAX
-for (let i = 0; i < 2; i++){ const g = el("g", { class: "cloud", style: `animation-duration:${60 + r() * 40}s; animation-delay:-${r() * 60}s` });
-  el("path", { d: `M0 ${120 + i * 90} l26 0 l6 -6 l4 0 l-3 6 l10 0 l-2 4 l-41 0z`, fill: "#fff", stroke: "#9aa6b2", "stroke-width": 1 }, g); }
+function drawWorld(){
+  const dpr = Math.min(2, window.devicePixelRatio || 1), W = innerWidth, H = innerHeight;
+  cv.width = W * dpr; cv.height = H * dpr; cv.style.width = W + "px"; cv.style.height = H + "px";
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0); S = 4242;
+  const cols = Math.ceil(W / TW) + 4, rows = Math.ceil(H / (TH / 2)) + 4;
+  // screen → iso helpers (diamond grid: row r, column c; odd rows offset)
+  const cells = [];
+  for (let r = -2; r < rows; r++) for (let c = -2; c < cols; c++){
+    const x = c * TW + (r & 1 ? TW / 2 : 0), y = r * TH / 2;
+    const i = Math.round(x / TW + y / TH), j = Math.round(y / TH - x / TW);   // iso grid coords
+    cells.push({ x, y, i, j });
+  }
+  // features on iso lines
+  const isRoad = (i, j) => i % 23 === 0 || j % 29 === 0;
+  const isRail = (i, j) => j % 41 === 17;
+  const riverJ = i => 9 + Math.round(Math.sin(i / 9) * 3 + Math.sin(i / 23) * 4);
+  const isRiver = (i, j) => Math.abs(j - riverJ(i)) <= 1;
+  const town = (i, j) => { const ti = Math.round(i / 23) * 23, tj = Math.round(j / 29) * 29; const dd = Math.abs(i - ti) + Math.abs(j - tj); return dd < 6 && hash(ti, tj) > .35; };
+  // pass 1: ground
+  for (const k of cells){ const { x, y, i, j } = k; let f = C.grass[(i * 7 + j * 13 & 3)];
+    if (isRiver(i, j)) f = C.water;
+    else if (isRail(i, j)) f = C.ballast;
+    else if (isRoad(i, j)) f = C.road;
+    else { const n = noise(i / 7 + 40, j / 7 + 40); if (n > .62 && !town(i, j)) f = noise(i / 3, j / 3) > .5 ? C.wheat : C.plough; }
+    k.f = f; diamond(x, y, f);
+    ctx.strokeStyle = C.edge; ctx.lineWidth = .6; ctx.stroke();
+    if (f === C.water && rnd() < .25){ ctx.strokeStyle = C.waterHi; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(x - 4, y); ctx.lineTo(x + 3, y - 1.5); ctx.stroke(); }
+    if (f === C.wheat || f === C.plough){ ctx.strokeStyle = f === C.wheat ? C.wheatLine : C.ploughLine; ctx.lineWidth = .8;
+      for (let s = -2; s <= 2; s++){ ctx.beginPath(); ctx.moveTo(x - TW / 4 + s * 3, y - TH / 4 + s * 1.5 + 3.5); ctx.lineTo(x + TW / 4 + s * 3 - 7, y + TH / 4 + s * 1.5 - 3.5 + 0); ctx.stroke(); } }
+    if (f === C.road){ ctx.strokeStyle = C.roadEdge; ctx.lineWidth = .8; ctx.stroke(); }
+    if (f === C.ballast){ ctx.strokeStyle = C.sleeper; ctx.lineWidth = 1; for (let s = -1; s <= 1; s++){ ctx.beginPath(); ctx.moveTo(x - 5 + s * 5, y - 2.5 + s * 2.5 - 2); ctx.lineTo(x - 1 + s * 5, y - .5 + s * 2.5 + 2); ctx.stroke(); }
+      ctx.strokeStyle = C.rail; ctx.lineWidth = .9; ctx.beginPath(); ctx.moveTo(x - TW / 2 + 2, y - 2); ctx.lineTo(x + 1, y + TH / 2 - 1); ctx.moveTo(x - 1, y - TH / 2 + 1); ctx.lineTo(x + TW / 2 - 2, y + 2); ctx.stroke(); }
+  }
+  // pass 2: objects back-to-front (rows already in order)
+  for (const k of cells){ const { x, y, i, j, f } = k;
+    if (f !== C.grass[0] && f !== C.grass[1] && f !== C.grass[2] && f !== C.grass[3]) continue;
+    if (town(i, j) && rnd() < .7){ house(x, y + 1, 5 + rnd() * 5, C.roofs[Math.floor(rnd() * C.roofs.length)]); continue; }
+    const n = noise(i / 6, j / 6);
+    if (n > .55 && rnd() < (n - .45) * 1.6){ const m = 1 + Math.floor(rnd() * 3);
+      for (let t = 0; t < m; t++) tree(x + (rnd() - .5) * TW * .55, y + (rnd() - .5) * TH * .5, .75 + rnd() * .4, rnd() < .08 ? C.autumn : C.tree[Math.floor(rnd() * 4)]); }
+    else if (rnd() < .025) tree(x, y, .8, C.tree[Math.floor(rnd() * 4)]);
+  }
+}
+drawWorld();
+let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(drawWorld, 200); });
 
 requestAnimationFrame(tick);
 })();

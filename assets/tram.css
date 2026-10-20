@@ -1,11 +1,8 @@
-/* ===== the illustrated world behind everything ===== */
+/* ===== the world behind everything: a quiet isometric countryside (canvas, static) ===== */
 body{background:transparent!important}
-.scene{position:fixed; inset:0; z-index:-1; overflow:hidden; background:linear-gradient(#bfe6ff 0%, #e4f4ff 38%, #fff3dc 62%)}
-.scene svg{position:absolute; left:50%; bottom:0; height:100%; min-width:100%; transform:translateX(-50%)}
-.scene .layer{will-change:transform}
-.scene .cloud{animation:drift linear infinite}
-@keyframes drift{from{transform:translateX(-260px)} to{transform:translateX(1860px)}}
-@media (prefers-reduced-motion: reduce){ .scene .cloud{animation:none} .scene animateMotion{display:none} }
+.scene{position:fixed; inset:0; z-index:-1; overflow:hidden; background:#bcd2b5}
+.scene canvas{position:absolute; inset:0; display:block}
+.scene::after{content:""; position:absolute; inset:0; background:rgba(238,242,236,.28); pointer-events:none}
 
 /* ===== the tram line indicator (the site's real navigation) ===== */
 .tram{
