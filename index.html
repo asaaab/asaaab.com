@@ -226,6 +226,11 @@ body{
   .card[data-stop="2"] .eyebrow{margin-bottom:0}
   .card .cta{min-height:46px; font-size:17px}
 }
+.also{display:flex; gap:8px; margin-top:8px}
+.also .mini{flex:1; display:flex; align-items:center; justify-content:center; gap:6px; min-height:38px; border-radius:12px; border:2px solid var(--ink); background:var(--b); color:#fff; text-decoration:none; font-family:var(--hwy); font-weight:900; font-size:15px; box-shadow:0 3px 0 var(--ink)}
+.also .mini:hover{transform:translateY(-1px)}
+.pill.resume{cursor:pointer; background:#d930c9; color:#fff; border-color:var(--ink); box-shadow:0 2px 0 var(--ink); font:inherit; font-family:var(--hwy); font-weight:900; font-size:13px; letter-spacing:.06em}
+.pill.resume:hover{transform:translateY(-1px)}
 .cta.auto{display:none; position:relative; overflow:hidden}
 .autopilot .cta.auto{display:flex}
 .cta.auto .fill{position:absolute; left:0; top:0; bottom:0; width:0; background:rgba(255,255,255,.32); pointer-events:none}
@@ -333,6 +338,7 @@ body{
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12a8 8 0 1 0 2.4-5.7" fill="none" stroke="#16191c" stroke-width="2.6" stroke-linecap="round"/><path d="M4 3v5h5" fill="none" stroke="#16191c" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
             RESTART
           </button>
+          <button class="pill resume" type="button" id="resume" hidden>▶ RESUME AUTOPILOT</button>
           <div class="pill ap" aria-hidden="true">AUTOPILOT</div>
           <div class="pill ab" id="ab" aria-hidden="true">AFTERBURNER</div>
           <div class="pill sb" id="sb" aria-hidden="true">SPEEDBRAKE</div>
@@ -400,6 +406,10 @@ body{
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7Z" fill="#fff"/></svg>
             Watch asaaab on YouTube
           </a>
+          <div class="also">
+            <a class="mini" href="https://www.tiktok.com/@asaaab93x" target="_blank" rel="noopener" style="--b:#16191c">♪ TikTok</a>
+            <a class="mini" href="https://bsky.app/profile/9-3x.bsky.social" target="_blank" rel="noopener" style="--b:#1185fe">🦋 Bluesky</a>
+          </div>
           <button class="cta auto" type="button" data-continue><span class="fill"></span><span>Continue on route</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h12m-5-6 6 6-6 6" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
         </section>
 
@@ -900,6 +910,11 @@ function apAdvance(){
   apStopKey = null; setFill(0); goTo(nxt.f);
 }
 document.querySelectorAll("[data-continue]").forEach(b => b.addEventListener("click", () => { if (!apStopKey) { const st = STOPS.slice(1, 4).find(s => Math.abs(vp - s.f) < 0.02); apStopKey = st ? st.key : "1"; } autopilot = true; screen.classList.add("autopilot"); apAdvance(); }));
+// resume autopilot from wherever you are
+const resumeBtn = $("resume");
+resumeBtn.addEventListener("click", () => { const nxt = STOPS.find(s => s.f > vp + 0.01) || STOPS[STOPS.length - 1]; autopilot = true; screen.classList.add("autopilot"); dwellUntil = 0; apStopKey = null; setFill(0); goTo(nxt.f); track("autopilot-resume"); });
+["pointerdown","touchend"].forEach(ev => resumeBtn.addEventListener(ev, e => e.stopPropagation(), { passive: true }));
+setInterval(() => { resumeBtn.hidden = autopilot || vp < 0.02 || vp > 0.99; }, 250);
 // any manual scrolling takes the wheel back
 addEventListener("wheel", stopAutopilot, { passive: true });
 addEventListener("touchmove", stopAutopilot, { passive: true });
@@ -1062,6 +1077,6 @@ if (GOATCOUNTER && /(^|\.)asaaab\.com$/.test(location.hostname)) {
 })();
 })();
 </script>
-<link rel="stylesheet" href="/assets/tram.css?v=4">
-<script src="/assets/tram.js?v=4"></script>
+<link rel="stylesheet" href="/assets/tram.css?v=5">
+<script src="/assets/tram.js?v=5"></script>
 </body></html>
