@@ -31,7 +31,8 @@
         "Honda Clarity PHEV",
         "Toyota Venza",
         "Subaru Crosstrek",
-        "Nissan Sentra"
+        "Nissan Sentra",
+        "Chevy Bolt"
       ]
     },
     "uncommon": {
@@ -59,7 +60,8 @@
         "Toyota Auris Touring Sports",
         "Subaru XV Crosstrek Hybrid",
         "Toyota RAV4 EV",
-        "Pontiac Montana SV6"
+        "Pontiac Montana SV6",
+        "Chevy Volt"
       ]
     },
     "rare": {
@@ -86,7 +88,8 @@
         "Toyota Paseo",
         "Pontiac Vibe GT",
         "Mercedes Benz B250e",
-        "Lexus LS600hL"
+        "Lexus LS600hL",
+        "Chevy Spark EV"
       ]
     },
     "legendary": {
