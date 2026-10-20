@@ -14,7 +14,7 @@
 <meta name="description" content="asaaab — certified carcissist carspotter. Scroll to drive, spot cars hidden in plain traffic, and collect your carspotting passport.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@600;800;900&family=Nunito:wght@500;700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@600;800;900&family=Nunito:wght@500;700;800;900&family=Share+Tech+Mono&display=swap">
 <link rel="stylesheet" href="/assets/menu.css">
 <script src="/assets/menu.js" defer></script>
 <style>
@@ -123,6 +123,9 @@ body{
 .pill{background:#fff; border:2px solid var(--ink); border-radius:999px; padding:4px 10px 3px; font-family:var(--hwy); font-weight:900; font-size:13px; letter-spacing:.06em; display:flex; align-items:center; gap:6px}
 .pill svg{width:18px; height:18px}
 .pill.pop{animation:pop .35s ease}
+.pill.viewmap{color:var(--ink); text-decoration:none; background:#fffbe6; box-shadow:0 2px 0 var(--ink)}
+.pill.viewmap:hover{transform:translateY(-1px)}
+.pill.viewmap:focus-visible{outline:3px solid var(--route); outline-offset:2px}
 @keyframes pop{50%{transform:scale(1.15)}}
 .ab,.sb{color:#fff; border-color:var(--ink); opacity:0; transform:translateY(-4px); transition:opacity .2s, transform .2s}
 .ab{background:var(--flame)}
@@ -294,9 +297,11 @@ body{
 }
 </style>
 
+<div class="scene" id="scene" aria-hidden="true"></div>
 <div class="drive" id="drive">
   <div class="stage">
     <div class="hero-strip" role="banner"><div class="inner" data-menu-host><img src="banner.png" alt="asaaab" width="1600" height="400"></div></div>
+    <nav class="tram" id="tram" aria-label="Flight path: tap a stop to go there"></nav>
     <div class="device">
       <div class="screen" id="screen">
         <svg id="map" aria-hidden="true"><g id="world"></g></svg>
@@ -511,8 +516,8 @@ const GOATCOUNTER = "asaaab";     // analytics site code (asaaab.goatcounter.com
 const POOL = {
   common:    { w: 60, color: "var(--r-common)", label: "COMMON", cars: ["Toyota Camry","Honda Civic","Toyota Corolla","Honda Accord","Nissan Altima","Toyota Prius","Ford F-150","Honda CR-V","Toyota RAV4","Hyundai Elantra","Toyota Tacoma","Chevy Malibu"] },
   uncommon:  { w: 28, color: "var(--r-uncommon)", label: "UNCOMMON", cars: ["Volvo 240 Wagon","Volvo V70","Subaru Outback","Honda Element","Scion xB","Toyota Previa","Mazda Miata","Honda Passport","Mercury Grand Marquis","Buick LeSabre","Ford Ranger","Toyota Echo"] },
-  rare:      { w: 10, color: "var(--r-rare)", label: "RARE", cars: ["Saab 900","Saab 9-3 Aero","Saab 9-5 Wagon","Volvo V60","Pontiac Aztek","Subaru Baja","Mitsubishi Delica","Chevrolet SSR","Isuzu VehiCROSS"] },
-  legendary: { w: 2,  color: "var(--r-legend)", label: "LEGENDARY", cars: ["Saab 9-3X","Saab 900 SPG","GM EV1","Honda Fit EV","Toyota RAV4 EV","Ford Ranger EV","CODA Sedan","Th!nk City","BMW ActiveE","Toyota Highlander FCEV","Saab Sonett III"] }
+  rare:      { w: 10, color: "var(--r-rare)", label: "RARE", cars: ["Saab 900","Saab 9-3 Aero","Saab 9-5 Wagon","Volvo V60","Pontiac Aztek","Subaru Baja","Mitsubishi Delica","Chevrolet SSR","Isuzu VehiCROSS","VW e-Golf","VW Jetta Hybrid"] },
+  legendary: { w: 2,  color: "var(--r-legend)", label: "LEGENDARY", cars: ["Saab 9-3X","Saab 900 SPG","GM EV1","Honda Fit EV","Toyota RAV4 EV","Ford Ranger EV","CODA Sedan","Th!nk City","BMW ActiveE","Toyota Highlander FCEV","Saab Sonett III","Solectria Force","Lectric Leopard"] }
 };
 const RANK = { common: 0, uncommon: 1, rare: 2, legendary: 3 };
 /* ================================== */
@@ -1034,6 +1039,7 @@ applyLinks();
 
 // ---- analytics (only on the real site)
 function track(name){ try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: name, title: name, event: true }); } catch (e) {} }
+window.__drive = { goTo, prog, stopAutopilot, track };
 if (GOATCOUNTER && /(^|\.)asaaab\.com$/.test(location.hostname)) {
   const s = document.createElement("script"); s.async = true; s.dataset.goatcounter = `https://${GOATCOUNTER}.goatcounter.com/count`; s.src = "https://gc.zgo.at/count.js";
   document.head.appendChild(s);
@@ -1056,4 +1062,6 @@ if (GOATCOUNTER && /(^|\.)asaaab\.com$/.test(location.hostname)) {
 })();
 })();
 </script>
+<link rel="stylesheet" href="/assets/tram.css">
+<script src="/assets/tram.js"></script>
 </body></html>
