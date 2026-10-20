@@ -52,7 +52,9 @@
         "Subaru Baja",
         "Mitsubishi Delica",
         "Chevrolet SSR",
-        "Isuzu VehiCROSS"
+        "Isuzu VehiCROSS",
+        "VW e-Golf",
+        "VW Jetta Hybrid"
       ]
     },
     "legendary": {
@@ -68,7 +70,9 @@
         "Th!nk City",
         "BMW ActiveE",
         "Toyota Highlander FCEV",
-        "Saab Sonett III"
+        "Saab Sonett III",
+        "Solectria Force",
+        "Lectric Leopard"
       ]
     }
   }
