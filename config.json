@@ -38,7 +38,12 @@
         "Mercury Grand Marquis",
         "Buick LeSabre",
         "Ford Ranger",
-        "Toyota Echo"
+        "Toyota Echo",
+        "Fiat 500e",
+        "Pontiac Vibe GT",
+        "Honda Civic del Sol",
+        "Honda Accord Crosstour",
+        "Toyota Tercel"
       ]
     },
     "rare": {
@@ -54,7 +59,12 @@
         "Chevrolet SSR",
         "Isuzu VehiCROSS",
         "VW e-Golf",
-        "VW Jetta Hybrid"
+        "VW Jetta Hybrid",
+        "Mini Electric",
+        "Mazdaspeed6",
+        "VW Passat R36",
+        "Acura ZDX",
+        "Toyota Corolla XRS"
       ]
     },
     "legendary": {
@@ -72,7 +82,8 @@
         "Toyota Highlander FCEV",
         "Saab Sonett III",
         "Solectria Force",
-        "Lectric Leopard"
+        "Lectric Leopard",
+        "ZENN"
       ]
     }
   }

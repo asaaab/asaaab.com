@@ -525,9 +525,9 @@ const GOATCOUNTER = "asaaab";     // analytics site code (asaaab.goatcounter.com
 /* Spot pool: weight = how often it shows up. Common = plain traffic (not counted). */
 const POOL = {
   common:    { w: 60, color: "var(--r-common)", label: "COMMON", cars: ["Toyota Camry","Honda Civic","Toyota Corolla","Honda Accord","Nissan Altima","Toyota Prius","Ford F-150","Honda CR-V","Toyota RAV4","Hyundai Elantra","Toyota Tacoma","Chevy Malibu"] },
-  uncommon:  { w: 28, color: "var(--r-uncommon)", label: "UNCOMMON", cars: ["Volvo 240 Wagon","Volvo V70","Subaru Outback","Honda Element","Scion xB","Toyota Previa","Mazda Miata","Honda Passport","Mercury Grand Marquis","Buick LeSabre","Ford Ranger","Toyota Echo"] },
-  rare:      { w: 10, color: "var(--r-rare)", label: "RARE", cars: ["Saab 900","Saab 9-3 Aero","Saab 9-5 Wagon","Volvo V60","Pontiac Aztek","Subaru Baja","Mitsubishi Delica","Chevrolet SSR","Isuzu VehiCROSS","VW e-Golf","VW Jetta Hybrid"] },
-  legendary: { w: 2,  color: "var(--r-legend)", label: "LEGENDARY", cars: ["Saab 9-3X","Saab 900 SPG","GM EV1","Honda Fit EV","Toyota RAV4 EV","Ford Ranger EV","CODA Sedan","Th!nk City","BMW ActiveE","Toyota Highlander FCEV","Saab Sonett III","Solectria Force","Lectric Leopard"] }
+  uncommon:  { w: 28, color: "var(--r-uncommon)", label: "UNCOMMON", cars: ["Volvo 240 Wagon","Volvo V70","Subaru Outback","Honda Element","Scion xB","Toyota Previa","Mazda Miata","Honda Passport","Mercury Grand Marquis","Buick LeSabre","Ford Ranger","Toyota Echo","Fiat 500e","Pontiac Vibe GT","Honda Civic del Sol","Honda Accord Crosstour","Toyota Tercel"] },
+  rare:      { w: 10, color: "var(--r-rare)", label: "RARE", cars: ["Saab 900","Saab 9-3 Aero","Saab 9-5 Wagon","Volvo V60","Pontiac Aztek","Subaru Baja","Mitsubishi Delica","Chevrolet SSR","Isuzu VehiCROSS","VW e-Golf","VW Jetta Hybrid","Mini Electric","Mazdaspeed6","VW Passat R36","Acura ZDX","Toyota Corolla XRS"] },
+  legendary: { w: 2,  color: "var(--r-legend)", label: "LEGENDARY", cars: ["Saab 9-3X","Saab 900 SPG","GM EV1","Honda Fit EV","Toyota RAV4 EV","Ford Ranger EV","CODA Sedan","Th!nk City","BMW ActiveE","Toyota Highlander FCEV","Saab Sonett III","Solectria Force","Lectric Leopard","ZENN"] }
 };
 const RANK = { common: 0, uncommon: 1, rare: 2, legendary: 3 };
 /* ================================== */
@@ -706,7 +706,7 @@ const prog = () => Math.max(0, Math.min(1, scrollY / maxScroll()));
 // jumps move the page instantly; the car then drives there under the speed limit
 const goTo = f => scrollTo({ top: f * maxScroll(), behavior: "auto" });
 
-let topSpeed = 0, vp = prog(), dwellUntil = 0, needsRender = true, anchorY = null;
+let movT = 0, movS = 0, apT = 0, topSpeed = 0, vp = prog(), dwellUntil = 0, needsRender = true, anchorY = null;
 let lastY = scrollY, lastT = performance.now(), speed = 0, spottedCount = -1, ticking = false, toastTimer = 0, lastJetP = -1, passportBuilt = "";
 
 function showToast(c){
@@ -816,11 +816,19 @@ function tripStats(){
 }
 function bragLine(){
   const { found, best, top } = tripStats();
-  const verb = top < 25 ? "Just moseyed" : top < 60 ? "Just cruised" : top < 100 ? "Just flew" : "Just went full afterburner";
-  if (!best) return `${verb} through traffic at ${top} mph and spotted nothing. Landed safe anyway.`;
+  const avg = movT ? movS / movT : 0, apShare = movT ? apT / movT : 0;
+  const pickV = a => a[visitorSeed % a.length];
+  const verb = top >= 105 && avg >= 70 ? pickV(["Just went full afterburner", "Just broke the sound barrier", "Just lit both afterburners"])
+    : top >= 105 ? pickV(["Just punched the afterburner a few times", "Just took a couple of afterburner bursts", "Just flew mostly chill with some afterburner"])
+    : apShare > .7 ? pickV(["Just let autopilot take the wheel", "Just rode autopilot like a pro", "Just kicked back on autopilot"])
+    : avg >= 60 ? pickV(["Just flew", "Just ripped", "Just hauled"])
+    : avg >= 40 ? pickV(["Just cruised", "Just rolled", "Just glided"])
+    : avg >= 20 ? pickV(["Just took the scenic route", "Just did a Sunday drive", "Just sightsaw"])
+    : pickV(["Just moseyed", "Just crept", "Just idled"]);
+  if (!best) return `${verb} through traffic, topping out at ${top} mph, and spotted nothing. Landed safe anyway.`;
   const landing = { common: "Landed safe.", uncommon: "Smooth landing.", rare: "Requesting a flyby.", legendary: "Tower, we found a unicorn." }[best.tier];
   const article = /^[AEIOU]/i.test(POOL[best.tier].label) ? "an" : "a";
-  return `${verb} through traffic at ${top} mph and spotted ${found.length} cars. Rarest: ${article} ${POOL[best.tier].label.toLowerCase()} ${best.name}. ${landing}`;
+  return `${verb} through traffic, topping out at ${top} mph, and spotted ${found.length} cars. Rarest: ${article} ${POOL[best.tier].label.toLowerCase()} ${best.name}. ${landing}`;
 }
 const TIER_HEX = { common: "#7c838a", uncommon: "#3f9a2f", rare: "#2f7fe0", legendary: "#d930c9" };
 async function passportImage(){
@@ -946,6 +954,7 @@ function loop(now){
   speed += (inst * 120 - speed) * 0.15;
   if (speed < 0.5) speed = 0;
   if (speed > topSpeed) topSpeed = speed;
+  if (speed > 1){ movT += dt; movS += speed * dt; if (autopilot) apT += dt; }
   spdEl.innerHTML = `${Math.round(speed)}<sup>mph</sup>`;
   const burn = Math.max(0, Math.min(1, (speed - 70) / 35));
   flame.setAttribute("opacity", burn.toFixed(2)); flameCore.setAttribute("opacity", burn.toFixed(2));
@@ -968,7 +977,7 @@ $("prev").addEventListener("click", () => { stopAutopilot(); dwellUntil = 0; goT
 function resetDrive(){
   stopAutopilot();
   scrollTo({ top: 0, behavior: "auto" });
-  vp = 0; dwellUntil = 0; topSpeed = 0; speed = 0; lastJetP = -1;
+  vp = 0; dwellUntil = 0; topSpeed = 0; speed = 0; lastJetP = -1; movT = 0; movS = 0; apT = 0;
   buildCars(visitorSeed); spottedCount = -1; passportBuilt = ""; toast.classList.remove("on"); needsRender = true;
 }
 $("again").addEventListener("click", () => {
