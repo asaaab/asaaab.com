@@ -809,9 +809,9 @@ function buildPassport(){
 // ---- bragging rights
 function tripStats(){
   const found = parked.filter(c => c.seen && c.tier !== "common");
-  const best = found.reduce((b, c) => !b || RANK[c.tier] > RANK[b.tier] ? c : b, null);
   const byName = new Map(); found.forEach(c => byName.set(c.name, c.tier));
   const list = [...byName].map(([name, tier]) => ({ name, tier })).sort((a, b) => RANK[b.tier] - RANK[a.tier] || a.name.localeCompare(b.name));
+  const best = list[0] || null;   // one rarest pick, shared by the card, the brag line and the share image
   return { found, best, list, top: Math.round(topSpeed) };
 }
 function bragLine(){
