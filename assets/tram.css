@@ -1,8 +1,8 @@
 /* ===== the world behind everything: a quiet isometric countryside (canvas, static) ===== */
 body{background:transparent!important}
-.scene{position:fixed; inset:0; z-index:-1; overflow:hidden; background:#a6d394}
+.scene{position:fixed; inset:0; z-index:-1; overflow:hidden; background:#7fdc78}
 .scene canvas{position:absolute; inset:0; display:block}
-.scene::after{content:""; position:absolute; inset:0; background:rgba(238,242,236,.08); pointer-events:none}
+.scene::after{content:""; position:absolute; inset:0; pointer-events:none; background:radial-gradient(circle at 88% -5%, rgba(255,255,255,.55), rgba(255,255,255,0) 38%), radial-gradient(circle at 0% 100%, rgba(180,240,255,.25), rgba(255,255,255,0) 45%)}
 
 /* ===== the tram line indicator (the site's real navigation) ===== */
 .tram{
