@@ -21,7 +21,17 @@
         "Toyota RAV4",
         "Hyundai Elantra",
         "Toyota Tacoma",
-        "Chevy Malibu"
+        "Chevy Malibu",
+        "Tesla Model 3",
+        "Tesla Model Y",
+        "Tesla Cybertruck",
+        "Tesla Roadster",
+        "Ferrari F40",
+        "McLaren F1",
+        "Honda Clarity PHEV",
+        "Toyota Venza",
+        "Subaru Crosstrek",
+        "Nissan Sentra"
       ]
     },
     "uncommon": {
@@ -40,10 +50,15 @@
         "Ford Ranger",
         "Toyota Echo",
         "Fiat 500e",
-        "Pontiac Vibe GT",
         "Honda Civic del Sol",
         "Honda Accord Crosstour",
-        "Toyota Tercel"
+        "Toyota Tercel",
+        "Hyundai Santa Cruz XRT",
+        "Toyota Mirai",
+        "Hyundai Nexo",
+        "Toyota Auris Touring Sports",
+        "Subaru XV Crosstrek Hybrid",
+        "Toyota RAV4 EV"
       ]
     },
     "rare": {
@@ -64,7 +79,13 @@
         "Mazdaspeed6",
         "VW Passat R36",
         "Acura ZDX",
-        "Toyota Corolla XRS"
+        "Toyota Corolla XRS",
+        "Hyundai Veloster N",
+        "Subaru Crosstrek PHEV",
+        "Toyota Paseo",
+        "Pontiac Vibe GT",
+        "Mercedes Benz B250e",
+        "Pontiac Montana SV6"
       ]
     },
     "legendary": {
@@ -74,7 +95,6 @@
         "Saab 900 SPG",
         "GM EV1",
         "Honda Fit EV",
-        "Toyota RAV4 EV",
         "Ford Ranger EV",
         "CODA Sedan",
         "Th!nk City",
@@ -83,7 +103,16 @@
         "Saab Sonett III",
         "Solectria Force",
         "Lectric Leopard",
-        "ZENN"
+        "ZENN",
+        "Saab 9-5 NG Sportcombi",
+        "Honda Clarity BEV",
+        "Toyota RAV4 EV (gen1)",
+        "Bolloré Bluecar",
+        "Smart Fortwo Passion Cabriolet Electric Drive",
+        "Honda CRV e:FCEV",
+        "Nissan Murano Crosscabriolet",
+        "NEVS 9-3X",
+        "LaForza"
       ]
     }
   }
