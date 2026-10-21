@@ -15,8 +15,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@600;800;900&family=Nunito:wght@500;700;800;900&family=Share+Tech+Mono&display=swap">
-<link rel="stylesheet" href="/assets/menu.css">
-<script src="/assets/menu.js" defer></script>
+<link rel="stylesheet" href="/assets/bannerfold.css?v=1">
+<script src="/assets/bannerfold.js?v=1" defer></script>
 <style>
 /* Layout: a car GPS in day mode with a jet engine bolted on. Scrolling drives a little jet-car up a winding road; stops pop cards; every visitor gets their own random cars to spot and leaves with a passport. Single bright look by design. */
 :root{
@@ -68,7 +68,7 @@ body{
 /* Banner: Theo's red 9-3X strip, full-bleed above the GPS. Image is the left piece; the CSS bands continue it to any width. */
 .hero-strip{
   flex:none; align-self:stretch; height:clamp(54px, 11vw, 150px); margin:0 calc(-1 * max(16px, env(safe-area-inset-right, 0px))) 10px calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
-  background:#dc0500 url(banner-fill.png) repeat-x left top / auto 100%;
+  background:none; height:var(--h)!important; display:block!important; overflow:visible; width:auto!important;
   display:flex; justify-content:center;
 }
 .hero-strip .inner{width:100%; max-width:1012px; height:100%; padding-inline:16px}
@@ -305,7 +305,7 @@ body{
 <div class="scene" id="scene" aria-hidden="true"></div>
 <div class="drive" id="drive">
   <div class="stage">
-    <div class="hero-strip" role="banner"><div class="inner" data-menu-host><img src="banner.png" alt="asaaab" width="1600" height="400"></div></div>
+    <div class="hero-strip" role="banner" data-fban="red"></div>
     <nav class="tram" id="tram" aria-label="Flight path: tap a stop to go there"></nav>
     <div class="device">
       <div class="screen" id="screen">
@@ -1090,6 +1090,6 @@ if (GOATCOUNTER && /(^|\.)asaaab\.com$/.test(location.hostname)) {
 })();
 })();
 </script>
-<link rel="stylesheet" href="/assets/tram.css?v=5">
-<script src="/assets/tram.js?v=5"></script>
+<link rel="stylesheet" href="/assets/tram.css?v=6">
+<script src="/assets/tram.js?v=6"></script>
 </body></html>
