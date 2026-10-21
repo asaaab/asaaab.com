@@ -55,3 +55,14 @@
 @media (prefers-reduced-motion:reduce){
   .fban .half.b,.fband,.fdrop{transition:none!important} .fban.arrive .half.b{animation:none}
 }
+
+/* yellow = shop: construction tape */
+.fband[data-c=yellow]{background:repeating-linear-gradient(-45deg, var(--top) 0 22px, #16191c 22px 36px)}
+.fband[data-c=yellow] .lbl b,.fband[data-c=yellow] .lbl small{background:var(--top); padding:3px 8px 1px; border-radius:3px; opacity:1}
+/* blue = connections to: reads like a link you already clicked */
+.fband[data-c=blue] .lbl b{color:#d9c2ff; text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:4px}
+.fband[data-c=blue] .lbl small{color:#d9c2ff}
+/* menu open: hint that the banner itself goes home */
+.fban.open .hit::after{content:"⌂ HOME"; position:absolute; right:max(14px, calc((100% - 980px) / 2 + 14px)); top:calc(var(--h) * .52 * .5 - 8px);
+  font-family:"Overpass","Arial Narrow",system-ui,sans-serif; font-weight:900; font-size:clamp(10px,1.2vw,13px); letter-spacing:.2em; color:rgba(255,255,255,.85)}
+.fban[data-athome] .hit::after{display:none}

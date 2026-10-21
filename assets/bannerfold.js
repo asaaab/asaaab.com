@@ -8,21 +8,23 @@
     green:  { top:"#00dd44", bot:"#00641e", ink:"#00240b" },
     blue:   { top:"#0062dd", bot:"#002d64" },
     purple: { top:"#8600dd", bot:"#3c0064" },
-    magenta:{ top:"#d930c9", bot:"#6a1462", noArt:true }, // the Start carspotting button color; menu band only (no banner art yet)
+    magenta:{ top:"#d930c9", bot:"#6a1462", noArt:true },
+    charcoal:{ top:"#33383d", bot:"#16191c", noArt:true }, // no banner art yet // the Start carspotting button color; menu band only (no banner art yet)
   };
   // one band per page, top to bottom. Each page's banner is its band's color.
   const PAGES = [
-    { c:"red",    t:"Carspotting!!",   s:"the drive",                      href:"/" },
-    { c:"orange", t:"connections to",  s:"YouTube · TikTok · Bluesky",     href:"https://www.youtube.com/@asaaab93x" },
-    { c:"yellow", t:"Angelish Crest",  s:"the BeamNG server",              href:"/?stop=2" },
-    { c:"green",  t:"asaaab hangar",   s:"the Discord",                    href:"https://discord.gg/e7FUMwjNah" },
-    { c:"blue",   t:"asaaab.shop",     s:"merch · under construction",     href:"/shop/" },
-    { c:"purple", t:"asaaab, what the hell is that?!", s:"privacy · copyright · contact", href:"/copyright/" },
-    { c:"magenta", t:"master plan", s:"where this is all going · coming soon", href:"/plan/" },
+    { c:"red",     t:"Carspotting!!",  s:"the best of the TikToks",                    href:"/carspotting/" },
+    { c:"orange",  t:"Angelish Crest", s:"BeamNG IRL · the map, the mod, the server",  href:"/beamng/" },
+    { c:"yellow",  t:"asaaab.shop",    s:"under construction",                         href:"/shop/" },
+    { c:"green",   t:"content strategy", s:"consulting inquiries · the receipts",      href:"/consulting/" },
+    { c:"blue",    t:"connections to", s:"YouTube",                                    href:"https://www.youtube.com/@asaaab93x" },
+    { c:"purple",  t:"asaaab hangar",  s:"the Discord",                                href:"https://discord.gg/e7FUMwjNah" },
+    { c:"charcoal", t:"asaaab, what the hell is that?!", s:"privacy · copyright · resources", href:"/copyright/" },
+    { c:"magenta", t:"master plan",    s:"where this is all going · coming soon",      href:"/plan/" },
   ];
   const ASSET = (document.currentScript && document.currentScript.src.replace(/bannerfold\.js.*$/, "")) || "/assets/";
   const art = c => `${ASSET}strips/${c}.webp?v=${V}`;
-  const vars = c => `--top:${STRIPS[c].top};--bot:${STRIPS[c].bot}` + (STRIPS[c].ink ? `;--fink:${STRIPS[c].ink}` : "");
+  const vars = c => `--top:${STRIPS[c].top};--bot:${STRIPS[c].bot}` + `;--fink:${STRIPS[c].ink || "#fff"}`;
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (typeof window.FBAN_DEMO === "function") PAGES.forEach(p => p.href = window.FBAN_DEMO(p)); // mockup only
   const here = location.pathname.replace(/index\.html$/, "");
@@ -31,6 +33,7 @@
 
   function build(host){
     const color = STRIPS[host.dataset.fban] ? host.dataset.fban : "red";
+    if (here === "/") host.dataset.athome = "1";
     host.classList.add("fban"); host.style.cssText += ";" + vars(color);
     host.innerHTML =
       `<span class="half t" aria-hidden="true">${face(color)}</span>` +
@@ -63,7 +66,12 @@
       delays(-1); host.classList.remove("open"); hit.setAttribute("aria-expanded", "false");
       bands.forEach(b => b.tabIndex = -1);
     }
-    hit.addEventListener("click", e => { e.stopPropagation(); open ? hide() : show(); });
+    // tap the banner: open the menu. With the menu open, the banner's top half is the way home.
+    hit.addEventListener("click", e => { e.stopPropagation();
+      if (!open) return show();
+      if (here === "/") return hide();
+      if (window.goatcounter && goatcounter.count) goatcounter.count({ path:"menu-home", event:true });
+      host.classList.add("shade"); setTimeout(() => { store.set("fban-arrive", "1"); location.href = "/"; }, reduce ? 0 : 520); });
     drop.addEventListener("click", e => {
       const b = e.target.closest(".fband"); if (!b) return;
       e.preventDefault(); e.stopPropagation();

@@ -4,8 +4,8 @@ const { goTo, prog, stopAutopilot, track } = window.__drive || {};
 /* ---------- the line: same stops as the drive, in order ---------- */
 const LINE = [
   { name: "Carspotting!!",  f: 0.00, dots: [] },
-  { name: "connections to", f: 0.22, dots: ["#e1261c", "#16191c", "#1185fe"], xfer: true, board: true },
-  { name: "Angelish Crest", f: 0.52, dots: ["#0b8a3e"], xfer: true },
+  { name: "connections to", f: 0.22, dots: ["#e1261c"], xfer: true, href: "https://www.youtube.com/@asaaab93x", ext: true },
+  { name: "Angelish Crest", f: 0.52, dots: ["#0b8a3e"], xfer: true, href: "/beamng/" },
   { name: "asaaab hangar",  f: 0.74, dots: ["#5865f2"], xfer: true },
   { name: "asaaab.shop",    f: 0.885, dots: ["#f7d117"], soon: true },
   { name: "boarding pass",  f: 1.00, dots: [] },
@@ -42,7 +42,7 @@ const stops = LINE.map((s, i) => {
   b.style.left = xs[i] + "%";
   b.setAttribute("aria-label", `Go to ${s.name}${s.soon ? " (coming soon)" : ""}`);
   b.innerHTML = `<span class="dot"></span><span class="lbl">${s.name}${s.dots.length ? `<i>${s.dots.map(c => `<span style="background:${c}"></span>`).join("")}</i>` : ""}</span>`;
-  b.addEventListener("click", e => { if (s.board) { e.stopPropagation(); openBoard(b); } try { stopAutopilot(); } catch (e) {} goTo(s.f); try { track("tram-" + s.name.toLowerCase().replace(/\W+/g, "-")); } catch (e) {} });
+  b.addEventListener("click", e => { if (s.href) { e.stopPropagation(); try { track("tram-" + s.name.toLowerCase().replace(/\W+/g, "-")); } catch (e) {} if (s.ext) window.open(s.href, "_blank", "noopener"); else location.href = s.href; return; } if (s.board) { e.stopPropagation(); openBoard(b); } try { stopAutopilot(); } catch (e) {} goTo(s.f); try { track("tram-" + s.name.toLowerCase().replace(/\W+/g, "-")); } catch (e) {} });
   // taps here shouldn't count as the "first tap" that starts music
   ["pointerdown", "touchend"].forEach(ev => b.addEventListener(ev, e => e.stopPropagation(), { passive: true }));
   rail.appendChild(b); return b;
