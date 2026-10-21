@@ -11,6 +11,27 @@ const LINE = [
   { name: "boarding pass",  f: 1.00, dots: [] },
 ];
 const tram = document.getElementById("tram");
+/* Fantastic Contraption cloud behind the line: overlapping circles + a pill body, flat shade underneath */
+function drawCloud(){
+  const W = tram.offsetWidth + 28, H = tram.offsetHeight + 12;
+  if (W < 40) return;
+  const R = Math.min(H * 0.36, 72), top = [], bot = [];
+  const n = Math.max(4, Math.round(W / (R * 1.45)));
+  for (let i = 0; i < n; i++) {
+    const t = n === 1 ? .5 : i / (n - 1), wob = [0, .12, -.06, .09, -.1, .05][i % 6];
+    const r = R * (0.82 + 0.22 * Math.abs(Math.sin(i * 2.3))) * (i === 0 || i === n - 1 ? .78 : 1);
+    top.push([R * .7 + t * (W - R * 1.4), Math.max(r + 2, H * (0.42 + wob)), r]);
+  }
+  const m = Math.max(3, Math.round(W / (R * 2.2)));
+  for (let i = 0; i < m; i++) { const t = (i + .5) / m; const r = H * .2; bot.push([t * W, H - r - 8, r]); }
+  const body = `<rect x="${R * .3}" y="${H * .42}" width="${W - R * .6}" height="${H * .5}" rx="${H * .25}"/>`;
+  let k = 0; const circ = a => a.map(([x, y, r]) => `<circle style="animation-delay:-${((k++ * 0.73) % 4).toFixed(2)}s" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}"/>`).join("");
+  const shape = body + circ(top) + circ(bot); k = 0; const shape2 = body + circ(top) + circ(bot);
+  let svg = tram.querySelector(".fcloud");
+  if (!svg) { svg = document.createElementNS("http://www.w3.org/2000/svg", "svg"); svg.setAttribute("class", "fcloud"); svg.setAttribute("aria-hidden", "true"); tram.prepend(svg); }
+  svg.style.width = W + "px"; svg.style.height = (H + 8) + "px"; svg.setAttribute("viewBox", `0 0 ${W} ${H + 8}`);
+  svg.innerHTML = `<g class="sh" fill="#a9d0ff" transform="translate(0 7)">${shape2}</g><g fill="#eaf5ff">${shape}</g>`;
+}
 tram.innerHTML = `<div class="head"><span class="plate" aria-label="Flight path"><i></i>FLIGHT PATH<i></i></span><span class="now">NOW AT <b id="tramNow">Carspotting!!</b></span></div>
   <div class="rail" id="rail"><div class="bar"></div><div class="done" id="tramDone"></div></div>`;
 const rail = document.getElementById("rail");
@@ -38,7 +59,7 @@ function openBoard(btn){ const r = btn.getBoundingClientRect(), tr = tram.getBou
 document.addEventListener("click", e => { if (!board.contains(e.target)) board.classList.remove("on"); });
 ["pointerdown", "touchend"].forEach(ev => board.addEventListener(ev, e => e.stopPropagation(), { passive: true }));
 const car = document.createElement("div"); car.className = "car";
-car.innerHTML = '<svg viewBox="0 0 34 20" width="34" height="20"><rect x="1" y="3" width="30" height="14" rx="5" fill="#ff4d3d" stroke="#16191c" stroke-width="2"/><rect x="18" y="5" width="7" height="10" rx="2" fill="#7fc4ff" stroke="#16191c" stroke-width="1"/><rect x="6" y="5" width="9" height="10" rx="2" fill="#7fc4ff" stroke="#16191c" stroke-width="1"/><path d="M31 8 L34 10 L31 12Z" fill="#ffd23f"/></svg>';
+car.innerHTML = '<svg viewBox="0 0 26 26" width="26" height="26"><circle cx="13" cy="13" r="12" fill="#1fbf5a" stroke="#fff" stroke-width="2.5"/><path d="M8 8.5 L20 13 L8 17.5 L10.5 13Z" fill="#fff"/></svg>';
 rail.appendChild(car);
 
 const xAt = p => { for (let i = 0; i < LINE.length - 1; i++) { const a = LINE[i], b = LINE[i + 1];
@@ -204,4 +225,5 @@ build(); requestAnimationFrame(frame);
 let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => { build(); if (REDUCED) requestAnimationFrame(frame); }, 200); });
 
 requestAnimationFrame(tick);
+drawCloud(); try { new ResizeObserver(drawCloud).observe(tram); } catch (e) { addEventListener("resize", drawCloud); }
 })();
