@@ -126,7 +126,8 @@ function hill(c, x, y, rx){ const ry = rx * .55; c.fillStyle = "rgba(20,90,40,.1
   c.fillStyle = "rgba(255,255,255,.45)"; c.beginPath(); c.ellipse(x - rx * .38, y - ry * .62, rx * .28, ry * .14, -.35, 0, 7); c.fill(); }
 
 function build(){
-  const dpr = Math.min(2, devicePixelRatio || 1); W = innerWidth; H = innerHeight;
+  const WS = window.WORLD_SIZE; // /calm sets a big fixed world to roam around
+  const dpr = Math.min(WS ? 1.5 : 2, devicePixelRatio || 1); W = WS ? WS.w : innerWidth; H = WS ? WS.h : innerHeight;
   for (const cv of [bg, fg]){ cv.width = W * dpr; cv.height = H * dpr; cv.style.width = W + "px"; cv.style.height = H + "px"; }
   g.setTransform(dpr, 0, 0, dpr, 0, 0); f.setTransform(dpr, 0, 0, dpr, 0, 0); SEED = 93;
   ROADS = [ path(t => [-140 + t * (W + 280), H * .27 + Math.sin(t * 6.6 + .5) * H * .07]),
@@ -222,7 +223,7 @@ function frame(now){
   if (!REDUCED) requestAnimationFrame(frame);
 }
 build(); requestAnimationFrame(frame);
-let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => { build(); if (REDUCED) requestAnimationFrame(frame); }, 200); });
+let rz; if (!window.WORLD_SIZE) addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => { build(); if (REDUCED) requestAnimationFrame(frame); }, 200); });
 
 requestAnimationFrame(tick);
 drawCloud(); try { new ResizeObserver(drawCloud).observe(tram); } catch (e) { addEventListener("resize", drawCloud); }
