@@ -841,14 +841,14 @@ const TIER_HEX = { common: "#7c838a", uncommon: "#3f9a2f", rare: "#2f7fe0", lege
 async function passportImage(){
   try { await document.fonts.ready; } catch(e){}
   const { found, best, list } = tripStats();
-  const W = 1080, H = 1350, c = document.createElement("canvas"); c.width = W; c.height = H;
+  const W = 1080, H = 1920, c = document.createElement("canvas"); c.width = W; c.height = H;
   const g = c.getContext("2d");
   const font = (w, s) => `${w} ${s}px Overpass, "Arial Narrow", sans-serif`;
   const rr = (x, y, w, h, r) => { g.beginPath(); g.roundRect(x, y, w, h, r); };
   g.fillStyle = "#fbf6e9"; g.fillRect(0, 0, W, H);
   g.fillStyle = "#0b6b3c"; g.fillRect(0, 0, W, 250);
   g.fillStyle = "#fff"; g.font = font(800, 30); g.fillText("CARSPOTTING PASSPORT", 70, 90);
-  g.font = font(900, 76); g.fillText("Hidden In Plain Traffic", 70, 170);
+  g.font = font(900, 64); g.fillText("Hidden In Plain Traffic", 70, 166);
   g.fillStyle = "#ffe57a"; g.font = font(800, 30); g.fillText("WHAT DID YOU FIND?", 70, 220);
   g.fillStyle = "#16191c"; g.font = font(800, 26);
   g.fillText("DRIVER NO.", 70, 320); g.fillText("SPOTTED", 430, 320); g.fillText("TOP SPEED", 730, 320);
@@ -873,6 +873,51 @@ async function passportImage(){
     g.restore(); i++;
   }
   g.textAlign = "left";
+  // ---- the red ASAAAB stamp, slammed across the cover ----
+  const now = new Date(), MON = ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"][now.getMonth()];
+  const dateStr = `${MON} ${String(now.getDate()).padStart(2, "0")} ${now.getFullYear()}`;
+  { const st = document.createElement("canvas"); st.width = 420; st.height = 300; const s = st.getContext("2d");
+    s.translate(210, 150); s.strokeStyle = s.fillStyle = "#ff3b30";
+    s.lineWidth = 11; s.beginPath(); s.ellipse(0, 0, 196, 132, 0, 0, Math.PI * 2); s.stroke();
+    s.lineWidth = 4; s.beginPath(); s.ellipse(0, 0, 172, 108, 0, 0, Math.PI * 2); s.stroke();
+    s.textAlign = "center"; s.font = font(900, 84); s.fillText("ASAAAB", 0, 24);
+    s.font = `400 30px "Share Tech Mono", "Courier New", monospace`; s.fillText(dateStr, 0, 74);
+    s.beginPath(); for (let k = 0; k < 10; k++) { const r = k % 2 ? 7 : 17, a = -Math.PI / 2 + k * Math.PI / 5; s.lineTo(Math.cos(a) * r, -64 + Math.sin(a) * r); } s.closePath(); s.fill();
+    // worn ink: knock out random specks
+    s.setTransform(1, 0, 0, 1, 0, 0); s.globalCompositeOperation = "destination-out";
+    let rs = visitorSeed || 7; const rnd = () => (rs = (rs * 9301 + 49297) % 233280) / 233280;
+    for (let k = 0; k < 900; k++) { s.globalAlpha = .25 + rnd() * .75; s.beginPath(); s.arc(rnd() * 420, rnd() * 300, .6 + rnd() * 2.6, 0, Math.PI * 2); s.fill(); }
+    g.save(); g.globalAlpha = .95; g.translate(W - 182, 128); g.rotate(-12 * Math.PI / 180); g.scale(.72, .72); g.drawImage(st, -210, -150); g.restore(); }
+  // ---- the boarding pass to the hangar ----
+  { const px = 60, pw = W - 120, ph = 540, py = H - 110 - 50 - ph, sx = px + pw * .7, red = "#e1261c";
+    const no = String(visitorSeed % 100000).padStart(5, "0"), seat = Math.max(1, found.length) + "A";
+    g.save(); g.shadowColor = "rgba(0,0,0,.28)"; g.shadowBlur = 30; g.shadowOffsetY = 12;
+    rr(px, py, pw, ph, 26); g.fillStyle = "#fffaf4"; g.fill(); g.restore();
+    g.save(); rr(px, py, pw, ph, 26); g.clip(); g.fillStyle = red; g.fillRect(px, py, pw, 92); g.restore();
+    g.fillStyle = "#fff"; g.font = font(900, 46); g.fillText("✈  BOARDING PASS", px + 36, py + 63);
+    g.textAlign = "center"; g.font = font(900, 30); g.fillText("BOARDING PASS", sx + (px + pw - sx) / 2, py + 58); g.textAlign = "left";
+    // perforation + notches
+    g.strokeStyle = "#e7c9c3"; g.lineWidth = 4; g.setLineDash([12, 10]); g.beginPath(); g.moveTo(sx, py + 8); g.lineTo(sx, py + ph - 8); g.stroke(); g.setLineDash([]);
+    g.fillStyle = "#fbf6e9"; for (const yy of [py, py + ph]) { g.beginPath(); g.arc(sx, yy, 20, 0, Math.PI * 2); g.fill(); }
+    const lab = (t, x, y) => { g.fillStyle = red; g.font = font(800, 22); g.fillText(t, x, y); };
+    const val = (t, x, y, sz = 38) => { g.fillStyle = "#16191c"; g.font = font(900, sz); g.fillText(t, x, y); };
+    const L = px + 36, R = sx - 36;
+    lab("FROM", L, py + 140); g.fillStyle = red; g.font = font(900, 104); g.fillText("SPT", L, py + 232);
+    val("CARSPOTTING!!", L, py + 272, 28);
+    g.textAlign = "right"; lab("TO", R, py + 140); g.fillStyle = red; g.font = font(900, 104); g.fillText("HGR", R, py + 232); val("THE HANGAR", R, py + 272, 28); g.textAlign = "left";
+    g.strokeStyle = "#16191c"; g.lineWidth = 3; g.setLineDash([10, 10]); g.beginPath(); g.moveTo(L + 250, py + 215); g.quadraticCurveTo((L + R) / 2, py + 120, R - 250, py + 215); g.stroke(); g.setLineDash([]);
+    const cw = (R - L) / 4;
+    [["PASSENGER", "#" + no], ["FLIGHT", "A93X"], ["SEAT", seat], ["SPOTTED", String(found.length)]].forEach(([a, b], k) => { lab(a, L + k * cw, py + 330); val(b, L + k * cw, py + 372); });
+    lab("RAREST FIND", L, py + 420); val(best ? best.name : "—", L, py + 462, 36);
+    lab("GATE", L + 2 * cw, py + 420); val("#passport-control", L + 2 * cw, py + 462, 34);
+    g.fillStyle = red; g.font = font(800, 20); g.textAlign = "center"; g.fillText("GATE CLOSES WHEN THE HANGAR FILLS UP", (L + R) / 2, py + ph - 26); g.textAlign = "left";
+    const SL = sx + 34, SM = sx + (px + pw - sx) / 2 + 6;
+    lab("FROM", SL, py + 140); val("SPT", SL, py + 182); lab("TO", SM, py + 140); val("HGR", SM, py + 182);
+    lab("SEAT", SL, py + 240); val(seat, SL, py + 282); lab("DATE", SM, py + 240); val(dateStr.slice(0, 6), SM, py + 282, 34);
+    // barcode
+    let bs = (visitorSeed % 100000) * 9301 + 49297, bx = SL; const bw = px + pw - 34 - SL; g.fillStyle = "#16191c";
+    while (bx < SL + bw) { bs = (bs * 9301 + 49297) % 233280; const w = 2 + (bs % 3) * 2; if ((bs >> 3) % 3) g.fillRect(bx, py + 330, Math.min(w, SL + bw - bx), 150); bx += w + 3 + ((bs >> 5) % 2) * 2; }
+  }
   g.fillStyle = "#d930c9"; g.fillRect(0, H - 110, W, 110);
   g.fillStyle = "#fff"; g.font = font(900, 46); g.fillText("asaaab.com", 70, H - 42);
   g.font = font(800, 28); g.textAlign = "right"; g.fillText("find yours →", W - 70, H - 46);
