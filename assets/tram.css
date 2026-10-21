@@ -106,3 +106,6 @@ body{background:transparent!important}
   border-radius:4px; padding:3px 9px 2px; font-size:11px; letter-spacing:.3em; color:#5d636a; text-shadow:0 1px 0 rgba(255,255,255,.75), 0 -1px 0 rgba(0,0,0,.4)}
 .tram .head .plate i{display:inline-block; width:5px; height:5px}
 @media (max-width:640px){ .tram{padding-bottom:20px} .tram .head{right:14px; bottom:3px} .tram .head .plate{font-size:8.5px; letter-spacing:.2em; padding:2px 6px 1px; gap:5px} }
+
+/* short screens: tighter flight path */
+@media (max-height:860px) and (min-width:641px){ .tram .rail,.tram .stop{height:104px} }
