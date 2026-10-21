@@ -1,5 +1,5 @@
 /* Passport → red ASAAAB stamp → boarding pass prints out (share flow). */
-.card.passport{position:relative; overflow-x:hidden}
+.card.passport{overflow-x:hidden} /* stays position:absolute from the site; absolute already anchors the stamp */
 .bp-stamp{position:absolute; z-index:5; right:14px; top:58px; width:150px; height:104px; pointer-events:none;
   color:#d4202a; opacity:0; transform:rotate(-12deg); filter:url(#bpInk)}
 .bp-stamp svg{width:100%; height:100%; display:block; overflow:visible}
