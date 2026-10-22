@@ -6,7 +6,7 @@ html,body{margin:0;height:100%;background:#050606;overflow:hidden;color:#eaf6ff;
 .wrap{position:fixed;inset:0;display:grid;place-items:center}
 .frame{position:relative;width:min(100vw,177.78vh);aspect-ratio:16/9;overflow:hidden;container-type:inline-size}
 .frame > *{position:absolute}
-canvas,.full{inset:0;width:100%;height:100%}
+canvas,.full{inset:0;width:100%;height:100%;pointer-events:none}
 #cluster{left:43.59%;top:51.83%;width:14.01%}
 #cluster svg{position:relative;display:block;width:100%;height:auto}
 #cluster #cln{position:absolute;inset:0}
@@ -97,10 +97,9 @@ canvas,.full{inset:0;width:100%;height:100%}
 /* radio display, plotted over the dash's head unit (frame px 1198,645 → 1358,707); Night Panel blacks it out like the real car */
 #radio{left:62.4%;top:59.7%;width:8.35%;height:5.75%;border-radius:.35cqw;background:#030805;box-shadow:inset 0 0 .5cqw #000,0 0 0 .08cqw #2a2f2d;overflow:hidden}
 #radio .rd{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:.15cqw;background:radial-gradient(120% 140% at 50% 0%,#0d2a16,#04110a 70%);transition:opacity .125s}
-#radio b{white-space:nowrap;font:400 1.05cqw/1 "VT323",monospace;color:#8dff9a;letter-spacing:.08em;text-shadow:0 0 .35cqw #39ff6a}
-#radio .mq{width:88%;overflow:hidden;white-space:nowrap;font:400 .75cqw/1 "VT323",monospace;color:#6fe887;text-shadow:0 0 .25cqw #39ff6a}
-#radio .mq span{display:inline-block;animation:mq 9s linear infinite}
-@keyframes mq{to{transform:translateX(-100%)}}
+#radio{padding:0;border:0;cursor:pointer;color:#8dff9a}
+#radio svg{width:2cqw;height:2cqw;filter:drop-shadow(0 0 .35cqw #39ff6a)}
+#radio .ic-pause{display:none}#radio.on .ic-pause{display:block}#radio.on .ic-play{display:none}
 #radio.np .rd{opacity:0}
 .wip{right:1cqw;bottom:1cqw;font:600 .9cqw "Barlow Semi Condensed";letter-spacing:.2em;opacity:.45}
 </style></head><body>
@@ -109,7 +108,7 @@ canvas,.full{inset:0;width:100%;height:100%}
   <img class="full" id="dash" src="/assets/cabin/dash_day.png?v=2" alt="">
   <img class="full bl" id="blDash" src="/assets/cabin/backlight_dash.png?v=1" alt="">   <!-- interior backlight (flat + glow, like the boost art) -->
   <div id="cluster"><svg id="cl"></svg><svg id="cln"></svg></div>
-  <div id="radio" aria-hidden="true"><div class="rd"><b>ASAAAB 93.X</b><div class="mq"><span>HIDDEN IN PLAIN TRAFFIC · THEME ·&nbsp;</span><span>HIDDEN IN PLAIN TRAFFIC · THEME ·&nbsp;</span></div></div></div>
+  <button id="radio" type="button" aria-label="Play or pause the music" aria-pressed="false" title="Music"><span class="rd"><svg class="ic-play" viewBox="0 0 24 24"><path d="M8 5l11 7-11 7z" fill="currentColor"/></svg><svg class="ic-pause" viewBox="0 0 24 24"><path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor"/></svg></span></button>
   <img class="full" id="wheel" src="/assets/cabin/wheel_day.png?v=5" alt="">
   <img class="full bl" id="blWheel" src="/assets/cabin/backlight_wheel.png?v=1" alt="">
   <div class="pad" id="padL">
@@ -196,6 +195,9 @@ $('hl').onclick = () => { if (scene === 'cover' || $('hl').classList.contains('o
 $('np').onclick = () => { if (!$('hl').classList.contains('on') || $('np').classList.contains('on')) return; endCue(); $('np').classList.add('on'); $('radio').classList.add('np'); traffic = false; cl.setNight(true); go('runway'); };
 const cued = {};
 function go(s) { scene = s; sT = 0; }
+const theme = $('theme'), radioUI = () => { const on = !theme.paused; $('radio').classList.toggle('on', on); $('radio').setAttribute('aria-pressed', on); };
+theme.addEventListener('play', radioUI); theme.addEventListener('pause', radioUI);
+$('radio').onclick = () => { theme.loop = true; theme.volume = .7; theme.paused ? theme.play().catch(() => {}) : theme.pause(); };
 $('go').onclick = () => { $('cover').style.opacity = 0; setTimeout(() => $('cover').remove(), 800); const th = $('theme'); th.loop = true; th.volume = .7; th.play().catch(() => {}); go('day'); cl.setTell('cruise', true); };
 function story(dt) {
   sT += dt;
