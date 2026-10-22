@@ -116,7 +116,9 @@ function Cluster(svg, needleSvg) {
   const TH = { cx: C.cx + C.R * .02, cy: C.cy - C.R * .2 }, MH = { cx: C.cx - C.R * .33, cy: C.cy }, FH = { cx: C.cx + C.R * .35, cy: C.cy };
   const turboPhi = v => 132 - 83 * v;                     // Theo's turbo art spans 132° → 49° around the gauge center
   const tempPhi = v => 209 - 55 * v, fuelPhi = v => -26 + 52 * v;   // temp: L (209°) → H (154°); fuel: empty (-26°) → full (26°)
-  { const sc = C.R * .76 / 287, img = el("image", { href: "/assets/cluster/turbo_glow.png", x: C.cx - 871.2 * sc, y: C.cy - 584.4 * sc, width: 1600 * sc, height: 1600 * sc }, cg); offs.push(img); }
+  let turboDay, turboGlow;   // Theo's boost art: white (no glow) for day, green glow at night — crossfaded by setAmbient
+  { const sc = C.R * .76 / 287, at = { x: C.cx - 871.2 * sc, y: C.cy - 584.4 * sc, width: 1600 * sc, height: 1600 * sc };
+    turboGlow = el("image", { href: "/assets/cluster/turbo_glow.png", ...at, opacity: 0 }, cg); turboDay = el("image", { href: "/assets/cluster/turbo_day.png", ...at, opacity: 1 }, cg); offs.push(turboGlow, turboDay); }
   for (let i = 0; i <= 9; i++) {
     tick(cg, C, C.R * .82, C.R * .92, tempPhi(i / 9), 3, offs, i === 8 ? "#ff4a22" : null);   // red: 2nd from the H end
     tick(cg, C, C.R * .82, C.R * .92, fuelPhi(i / 9), 3, offs, i === 1 ? "#ff4a22" : null);   // red: 2nd from empty
@@ -199,7 +201,7 @@ function Cluster(svg, needleSvg) {
       }
       targets();
     },
-    setAmbient(a) { a = Math.max(0, Math.min(1, a)); const mix = (x, y) => Math.round(x + (y - x) * a);
+    setAmbient(a) { a = Math.max(0, Math.min(1, a)); turboDay.setAttribute("opacity", a.toFixed(3)); turboGlow.setAttribute("opacity", (1 - a).toFixed(3)); const mix = (x, y) => Math.round(x + (y - x) * a);
       svg.style.setProperty("--print", `rgb(${mix(43, 196)},${mix(47, 200)},${mix(44, 203)})`);
       svg.style.setProperty("--needle-off", `rgb(${mix(58, 205)},${mix(62, 210)},${mix(60, 212)})`);
       svg.style.setProperty("--lit", `rgb(${mix(134, 222)},${mix(255, 230)},${mix(92, 224)})`);
