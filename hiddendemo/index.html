@@ -101,6 +101,8 @@ canvas,.full{inset:0;width:100%;height:100%;pointer-events:none}
 #radio svg{width:2cqw;height:2cqw;filter:drop-shadow(0 0 .35cqw #39ff6a)}
 #radio .ic-pause{display:none}#radio.on .ic-pause{display:block}#radio.on .ic-play{display:none}
 #radio.np .rd{opacity:0}
+.cover .bk{font-weight:800;opacity:1;letter-spacing:.35em}
+.drives{display:flex;gap:1.2cqw}
 .wip{right:1cqw;bottom:1cqw;font:600 .9cqw "Barlow Semi Condensed";letter-spacing:.2em;opacity:.45}
 </style></head><body>
 <div class="wrap"><div class="frame" id="frame">
@@ -144,7 +146,8 @@ canvas,.full{inset:0;width:100%;height:100%;pointer-events:none}
   <div class="cover" id="cover">
     <i class="orb" style="left:12%;top:18%;width:7cqw;height:7cqw"></i><i class="orb" style="left:80%;top:22%;width:4cqw;height:4cqw;animation-delay:-3s"></i><i class="orb" style="left:70%;top:68%;width:9cqw;height:9cqw;animation-delay:-6s"></i>
     <p>ASAAAB PRESENTS</p><h1>HIDDEN IN PLAIN TRAFFIC</h1><p>HIGHLIGHTS · WORK IN PROGRESS</p>
-    <button class="bubble" id="go">BUCKLE UP</button>
+    <p class="bk">BUCKLE UP</p>
+    <div class="drives"><button class="bubble" data-drive="novice">NOVICE</button><button class="bubble" data-drive="cruising">CRUISING</button><button class="bubble amber" data-drive="expert">EXPERT</button></div>
   </div>
   <svg class="sig" id="sigL" viewBox="0 0 24 24"><path d="M2 12l9-8v5h11v6H11v5z" fill="#39ff6a"/></svg>
   <svg class="sig" id="sigR" viewBox="0 0 24 24"><path d="M22 12l-9-8v5H2v6h11v5z" fill="#39ff6a"/></svg>
@@ -198,7 +201,11 @@ function go(s) { scene = s; sT = 0; }
 const theme = $('theme'), radioUI = () => { const on = !theme.paused; $('radio').classList.toggle('on', on); $('radio').setAttribute('aria-pressed', on); };
 theme.addEventListener('play', radioUI); theme.addEventListener('pause', radioUI);
 $('radio').onclick = () => { theme.loop = true; theme.volume = .7; theme.paused ? theme.play().catch(() => {}) : theme.pause(); };
-$('go').onclick = () => { $('cover').style.opacity = 0; setTimeout(() => $('cover').remove(), 800); const th = $('theme'); th.loop = true; th.volume = .7; th.play().catch(() => {}); go('day'); cl.setTell('cruise', true); };
+// difficulty = how far autopilot tails the car ahead; Novice + Cruising keep the auto braking, Expert lets you rear-end
+const DRIVES = { novice: { gap: 26, aeb: true }, cruising: { gap: 16, aeb: true }, expert: { gap: 9, aeb: false } };
+let DRIVE = DRIVES[Q.get('drive')] || DRIVES.cruising;
+document.querySelectorAll('[data-drive]').forEach(b => b.onclick = () => { DRIVE = DRIVES[b.dataset.drive]; startDrive(); });
+const startDrive = () => { $('cover').style.opacity = 0; setTimeout(() => $('cover').remove(), 800); const th = $('theme'); th.loop = true; th.volume = .7; th.play().catch(() => {}); go('day'); cl.setTell('cruise', true); };
 function story(dt) {
   sT += dt;
   if (scene === 'day' && (safe >= GOAL || side > lastBoard + 2)) go('dusk');
@@ -366,8 +373,10 @@ function game(dt) {
   // autopilot: tail the car ahead; floor it while passing
   let target = 70; const ahead = leads.filter(L => L.z > 0).sort((a, b) => a.z - b.z)[0];
   if (ahead) ahead.brake = false;
-  if ((!pass || pass.st === 'sig') && ahead && ahead.z < 60) { target = Math.min(70, ahead.v / MPH + (ahead.z - 16) * .8); }
+  if ((!pass || pass.st === 'sig') && ahead && ahead.z < 60) { target = Math.min(70, ahead.v / MPH + (ahead.z - DRIVE.gap) * .8); }
   if (pass && pass.st !== 'sig' && pass.st !== 'abort') target = px < -2.1 || !ahead || ahead.z > 30 ? 104 : Math.min(104, ahead.v / MPH + (ahead.z - 9) * 1.2);   // clear the car ahead before flooring it
+  if (DRIVE.aeb) { const meX = px + 0.9;   // auto braking: never close faster than we could stop on a car still in front of our nose
+    for (const L of leads) if (L.z > 0 && Math.abs(LEAD_X - meX) < CAR_W + .2) target = Math.min(target, (L.v + Math.sqrt(2 * 10 * Math.max(0, L.z - 5))) / MPH); }
   if (braking > 0) { braking -= dt; target = Math.min(target, (ahead ? ahead.v / MPH : mph) - 12); }
   if (pass && pass.st === 'abort') target = Math.min(target, (ahead ? ahead.v / MPH : 60) - 10);
   mph += clamp(target - mph, -26 * dt, (pass ? 9 : 4) * dt); topMph = Math.max(topMph, mph);
