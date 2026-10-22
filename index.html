@@ -48,6 +48,7 @@
   --r-uncommon:#3f9a2f;
   --r-rare:#2f7fe0;
   --r-legend:#d930c9;
+  --r-viewer:#f08a24;
   --hwy:"Overpass","Arial Narrow",system-ui,sans-serif;
   --ui:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif;
 }
@@ -281,6 +282,17 @@ body{
 .stamp small{display:block; font-family:var(--hwy); font-weight:900; font-size:9px; letter-spacing:.14em; margin-top:3px}
 .stamp .x{position:absolute; top:-9px; right:-7px; background:var(--c); color:#fff; border-radius:999px; font-family:var(--hwy); font-weight:900; font-size:11px; padding:2px 6px 0}
 .pp-empty{color:var(--muted); font-weight:700}
+.hat{border:2px dashed var(--r-viewer); border-radius:12px; padding:12px; background:#fff; display:flex; flex-direction:column; gap:10px}
+.hat label{display:flex; gap:10px; align-items:flex-start; cursor:text}
+.hat .hat-ico{font-size:26px; line-height:1}
+.hat label b{display:block; font-family:var(--hwy); font-weight:900; font-size:15px; color:var(--ink)}
+.hat label small{display:block; font-size:12.5px; color:var(--muted); line-height:1.4; margin-top:2px}
+.hat-row{display:flex; gap:8px}
+.hat-row input{flex:1 1 auto; min-width:0; font:700 15px/1.2 inherit; padding:10px 12px; border:2px solid var(--route); border-radius:10px; color:var(--ink); background:#fff}
+.hat-row input:focus{outline:none; border-color:var(--r-viewer)}
+.hat-row .cta{flex:none; margin:0; width:auto; padding-inline:14px; background:var(--r-viewer)}
+.hat-msg{margin:0!important; font-weight:800; font-size:13px; color:var(--ink)!important; min-height:0}
+.hat-msg:empty{display:none}
 .pp-note{margin-top:12px!important; font-size:13px; color:var(--muted)!important; text-align:center}
 .brag{margin-top:12px; background:#fff; border:2px dashed var(--route); border-radius:10px; padding:10px 12px; font-weight:800; font-size:15px; line-height:1.35}
 .brag:empty{display:none}
@@ -459,7 +471,7 @@ body{
             <div class="pp-best" id="ppBest"></div>
             <div class="stamps" id="stamps"></div>
             <div class="legend">
-              <span style="background:var(--r-uncommon)">UNCOMMON</span><span style="background:var(--r-rare)">RARE</span><span style="background:var(--r-legend)">LEGENDARY</span>
+              <span style="background:var(--r-uncommon)">UNCOMMON</span><span style="background:var(--r-viewer)" id="lgViewer" hidden>VIEWER PICK</span><span style="background:var(--r-rare)">RARE</span><span style="background:var(--r-legend)">LEGENDARY</span>
             </div>
             <div class="brag" id="brag"></div>
             <p class="pp-note">Every driver gets different cars. Send it to a friend and see who finds the rarest one.</p>
@@ -481,6 +493,12 @@ body{
                   <a class="tgt" data-t="bluesky" id="t-bsky" target="_blank" rel="noopener"><span style="background:#2f7fe0">B</span>Bluesky</a>
                 </div>
               </div>
+              <form class="hat" id="hat" autocomplete="off" hidden>
+                <label for="hatCar"><span class="hat-ico" aria-hidden="true">🎩</span><span><b>Put a car in the hat</b><small>Know one hiding in plain traffic? The hangar votes in Discord: traffic, hidden in plain traffic, or spam.</small></span></label>
+                <div class="hat-row"><input id="hatCar" name="car" maxlength="60" placeholder="e.g. Subaru Vivio RX-R" required><button class="cta" type="submit" id="hatGo">Drop it in</button></div>
+                <div id="hatTs"></div>
+                <p class="hat-msg" id="hatMsg" role="status"></p>
+              </form>
               <a class="cta yt" href="https://www.youtube.com/@asaaab93x" target="_blank" rel="noopener">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7Z" fill="#fff"/></svg>
                 Watch asaaab on YouTube
@@ -527,9 +545,10 @@ const POOL = {
   common:    { w: 60, color: "var(--r-common)", label: "COMMON", cars: ["Toyota Camry","Honda Civic","Toyota Corolla","Honda Accord","Nissan Altima","Toyota Prius","Ford F-150","Honda CR-V","Toyota RAV4","Hyundai Elantra","Toyota Tacoma","Chevy Malibu"] },
   uncommon:  { w: 28, color: "var(--r-uncommon)", label: "UNCOMMON", cars: ["Volvo 240 Wagon","Volvo V70","Subaru Outback","Honda Element","Scion xB","Toyota Previa","Mazda Miata","Honda Passport","Mercury Grand Marquis","Buick LeSabre","Ford Ranger","Toyota Echo","Fiat 500e","Pontiac Vibe GT","Honda Civic del Sol","Honda Accord Crosstour","Toyota Tercel"] },
   rare:      { w: 10, color: "var(--r-rare)", label: "RARE", cars: ["Saab 900","Saab 9-3 Aero","Saab 9-5 Wagon","Volvo V60","Pontiac Aztek","Subaru Baja","Mitsubishi Delica","Chevrolet SSR","Isuzu VehiCROSS","VW e-Golf","VW Jetta Hybrid","Mini Electric","Mazdaspeed6","VW Passat R36","Acura ZDX","Toyota Corolla XRS"] },
+  viewer:    { w: 0,  color: "var(--r-viewer)", label: "VIEWER PICK", cars: [] },   /* sorted in by the hangar (the hat); weight set in Pit Crew */
   legendary: { w: 2,  color: "var(--r-legend)", label: "LEGENDARY", cars: ["Saab 9-3X","Saab 900 SPG","GM EV1","Honda Fit EV","Toyota RAV4 EV","Ford Ranger EV","CODA Sedan","Th!nk City","BMW ActiveE","Toyota Highlander FCEV","Saab Sonett III","Solectria Force","Lectric Leopard","ZENN"] }
 };
-const RANK = { common: 0, uncommon: 1, rare: 2, legendary: 3 };
+const RANK = { common: 0, uncommon: 1, viewer: 1.5, rare: 2, legendary: 3 };
 /* ================================== */
 
 const NS = "http://www.w3.org/2000/svg";
@@ -653,7 +672,7 @@ function buildSlots(density){
 buildSlots(DENSITY);
 const carLayer = el("g", {});
 let parked = [];
-function pickTier(r){ let x = r() * 100; for (const k of ["legendary","rare","uncommon","common"]) { x -= POOL[k].w; if (x < 0) return k; } return "common"; }
+function pickTier(r){ let x = r() * 100; for (const k of ["legendary","rare","viewer","uncommon","common"]) { if (!POOL[k].cars.length) continue; x -= POOL[k].w; if (x < 0) return k; } return "common"; }
 function buildCars(seed){
   carLayer.replaceChildren();
   const r = mkRng(seed);
@@ -837,7 +856,7 @@ function bragLine(){
   const article = /^[AEIOU]/i.test(POOL[best.tier].label) ? "an" : "a";
   return `${verb} through traffic, topping out at ${top} mph, and spotted ${found.length} cars. Rarest: ${article} ${POOL[best.tier].label.toLowerCase()} ${best.name}. ${landing}`;
 }
-const TIER_HEX = { common: "#7c838a", uncommon: "#3f9a2f", rare: "#2f7fe0", legendary: "#d930c9" };
+const TIER_HEX = { common: "#7c838a", uncommon: "#3f9a2f", viewer: "#f08a24", rare: "#2f7fe0", legendary: "#d930c9" };
 async function passportImage(){
   try { await document.fonts.ready; } catch(e){}
   const { found, best, list } = tripStats();
@@ -1113,6 +1132,32 @@ function applyLinks(){
 }
 applyLinks();
 
+// ---- the hat: suggest a car, the hangar sorts it in Discord (worker at hat.asaaab.com)
+const HAT_URL = "https://hat.asaaab.com/suggest", TURNSTILE_SITEKEY = "REPLACE_WITH_TURNSTILE_SITE_KEY";
+(() => {
+  const form = $("hat"), msg = $("hatMsg"), go = $("hatGo"); let tsId = null, tsReady = null;
+  if (TURNSTILE_SITEKEY.startsWith("REPLACE")) return;          // the hat stays hidden until it's wired up
+  form.hidden = false;
+  const loadTs = () => tsReady || (tsReady = new Promise(res => {          // bot check loads only when someone starts typing
+    window.onHatTs = () => { tsId = turnstile.render("#hatTs", { sitekey: TURNSTILE_SITEKEY, size: "flexible", appearance: "interaction-only" }); res(); };
+    const s = document.createElement("script"); s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onHatTs&render=explicit"; s.async = true; document.head.appendChild(s);
+  }));
+  $("hatCar").addEventListener("focus", loadTs, { once: true });
+  form.addEventListener("submit", async e => {
+    e.preventDefault(); const car = $("hatCar").value.trim(); if (!car) return;
+    go.disabled = true; msg.textContent = "Into the hat…";
+    try {
+      await loadTs(); const token = turnstile.getResponse(tsId) || "";
+      const r = await fetch(HAT_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ car, token }) });
+      const j = await r.json().catch(() => ({}));
+      msg.textContent = j.msg || j.error || "The hat is napping. Try again later.";
+      if (j.ok) { $("hatCar").value = ""; track(j.dup ? "hat-dup" : "hat-suggest"); }
+    } catch (err) { msg.textContent = "The hat is napping. Try again later."; }
+    try { turnstile.reset(tsId); } catch (err) {}
+    go.disabled = false;
+  });
+})();
+
 // ---- analytics (only on the real site)
 function track(name){ try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({ path: name, title: name, event: true }); } catch (e) {} }
 window.__drive = { goTo, prog, stopAutopilot, track };
@@ -1133,6 +1178,7 @@ if (GOATCOUNTER && /(^|\.)asaaab\.com$/.test(location.hostname)) {
     }
     if (c.links) for (const k of Object.keys(LINKS)) if (typeof c.links[k] === "string") LINKS[k] = c.links[k];
     if (Number.isFinite(+c.density)) DENSITY = +c.density;
+    $("lgViewer").hidden = !POOL.viewer.cars.length;
     buildSlots(DENSITY); buildCars(visitorSeed); applyLinks(); needsRender = true;
   } catch (e) {}
 })();
