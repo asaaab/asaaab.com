@@ -97,8 +97,8 @@ function Cluster(svg, needleSvg) {
   svg.style.setProperty("--lcd", "#2fa548"); svg.style.setProperty("--lcdtxt", "#e6ffe9");
   grad("lcdShade", [["0", "rgba(0,0,0,.6)"], [".22", "rgba(0,0,0,0)"], ["1", "rgba(0,0,0,.18)"]], { x1: 0, y1: 0, x2: 0, y2: 1 });
   grad("lcdGloss", [["0", "rgba(255,255,255,.10)"], [".5", "rgba(255,255,255,.02)"], [".51", "rgba(255,255,255,0)"]], { x1: 0, y1: 0, x2: 0, y2: 1 });
-  [["P", lx0 + 12, ly0 + 22, 15, "start"], ["Temp", lx0 + 40, ly0 + 24, 24, "start"], ["66 °F", lx0 + 175, ly0 + 24, 24, "start"],
-   ["129724", lx0 + 40, ly0 + 50, 24, "start"], ["3725.6", lx1 - 10, ly0 + 50, 24, "end"]].forEach(([s, x, y, fs, an]) => {
+  [["D", lx0 + 10, ly0 + 40, 30, "start"], ["Temp", lx0 + 40, ly0 + 24, 24, "start"], ["60 °F", lx0 + 175, ly0 + 24, 24, "start"],
+   ["129725", lx0 + 40, ly0 + 50, 24, "start"], ["3727.1", lx1 - 10, ly0 + 50, 24, "end"]].forEach(([s, x, y, fs, an]) => {
     const t = el("text", { x, y, "font-size": fs, "text-anchor": an, fill: "var(--lcdtxt)", filter: "url(#cg)", style: "transition:opacity .04s" }, lcd); t.textContent = s; lcdTxt.push(t); });
   el("path", { d: LCD, fill: "url(#lcdShade)" }, lcd); el("path", { d: LCD, fill: "url(#lcdGloss)" }, lcd);
   speedoRing();
@@ -173,8 +173,17 @@ function Cluster(svg, needleSvg) {
   }
   requestAnimationFrame(frame);
   lcdState("lit");
+  // tell-tales, placed like the real 9-3X (photos 10/22): cruise on the tach, low beams on the combo gauge
+  const tell = {};
+  { const g1 = el("g", { transform: `translate(${T.cx + T.R * .3} ${T.cy + T.R * .6}) scale(1.15)`, opacity: .07, style: "transition:opacity .15s" });
+    el("path", { d: "M -9 5 A 10 10 0 1 1 9 5", fill: "none", stroke: "#39ff6a", "stroke-width": 2.6, "stroke-linecap": "round" }, g1);
+    el("path", { d: "M 0 3 L 5 -5", stroke: "#39ff6a", "stroke-width": 2.6, "stroke-linecap": "round" }, g1); tell.cruise = g1;
+    const g2 = el("g", { transform: `translate(${C.cx + C.R * .32} ${C.cy + C.R * .62}) scale(1.15)`, opacity: .07, style: "transition:opacity .15s" });
+    el("path", { d: "M 1 -7 C 9 -7 9 7 1 7 Z", fill: "none", stroke: "#39ff6a", "stroke-width": 2.4, "stroke-linejoin": "round" }, g2);
+    el("path", { d: "M -3 -5 L -10 -3 M -3 0 L -10 2 M -3 5 L -10 7", stroke: "#39ff6a", "stroke-width": 2.2, "stroke-linecap": "round" }, g2); tell.lights = g2; }
 
   return {
+    setTell(name, on) { if (tell[name]) tell[name].setAttribute("opacity", on ? 1 : .07); if (on) tell[name] && tell[name].setAttribute("filter", "url(#ng)"); },
     setSpeed(v) { speed = Math.max(0, Math.min(160, v)); rpm = Math.min(6.8, .7 + speed / 50); targets(); },
     setRpm(v) { rpm = v; targets(); },
     setNight(on) {
@@ -196,7 +205,7 @@ function Cluster(svg, needleSvg) {
       svg.style.setProperty("--lit", `rgb(${mix(134, 222)},${mix(255, 230)},${mix(92, 224)})`);
       svg.style.setProperty("--lcd", `rgb(${mix(47, 16)},${mix(165, 44)},${mix(72, 24)})`);      // glowing green at night, dark green glass by day
       svg.style.setProperty("--lcdtxt", `rgb(${mix(230, 125)},${mix(255, 255)},${mix(233, 106)})`); },
-    setLcd(top, bottom) { const d = ["Temp", "66 °F", "129724", "3725.6"]; if (top == null) { [1, 2, 3, 4].forEach((i, k) => lcdTxt[i].textContent = d[k]); return; }
+    setLcd(top, bottom) { const d = ["Temp", "60 °F", "129725", "3727.1"]; if (top == null) { [1, 2, 3, 4].forEach((i, k) => lcdTxt[i].textContent = d[k]); return; }
       lcdTxt[1].textContent = top; lcdTxt[2].textContent = ""; lcdTxt[3].textContent = bottom || ""; lcdTxt[4].textContent = ""; },
     get state() { return { speed, rpm, night, upperOn }; },
   };
