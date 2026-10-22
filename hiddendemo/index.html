@@ -201,8 +201,9 @@ function go(s) { scene = s; sT = 0; }
 const theme = $('theme'), radioUI = () => { const on = !theme.paused; $('radio').classList.toggle('on', on); $('radio').setAttribute('aria-pressed', on); };
 theme.addEventListener('play', radioUI); theme.addEventListener('pause', radioUI);
 $('radio').onclick = () => { theme.loop = true; theme.volume = .7; theme.paused ? theme.play().catch(() => {}) : theme.pause(); };
-// difficulty = how far autopilot tails the car ahead; Novice + Cruising keep the auto braking, Expert lets you rear-end
-const DRIVES = { novice: { gap: 26, aeb: true }, cruising: { gap: 16, aeb: true }, expert: { gap: 9, aeb: false } };
+// difficulty = how far autopilot tails the car ahead + how the brakes behave
+// Novice: auto braking. Cruising: normal, you can rear-end, but BRAKE always saves you. Expert: brakes can lock up, so you can crash even on the brakes.
+const DRIVES = { novice: { gap: 26, aeb: true, brakeDecel: 50 }, cruising: { gap: 16, brakeSafe: true, brakeDecel: 40 }, expert: { gap: 9, lockup: true, brakeDecel: 11 } };
 let DRIVE = DRIVES[Q.get('drive')] || DRIVES.cruising;
 document.querySelectorAll('[data-drive]').forEach(b => b.onclick = () => { DRIVE = DRIVES[b.dataset.drive]; startDrive(); });
 const startDrive = () => { $('cover').style.opacity = 0; setTimeout(() => $('cover').remove(), 800); const th = $('theme'); th.loop = true; th.volume = .7; th.play().catch(() => {}); go('day'); cl.setTell('cruise', true); };
@@ -346,7 +347,7 @@ function passClick() {
 $('pass').onclick = passClick;
 // BRAKE: abandon. While passing → brake hard and duck back in behind the car; in your lane → back off.
 let braking = 0;
-function brakeClick() { if (!gameOn() || crash) return; braking = 1.2; $('brake').classList.add('on'); setTimeout(() => $('brake').classList.remove('on'), 400);
+function brakeClick() { if (!gameOn() || crash) return; braking = 1.6; $('brake').classList.add('on'); setTimeout(() => $('brake').classList.remove('on'), 400);
   if (pass && pass.st !== 'back') { pass.st = 'abort'; pass.t = 0; setBlink(1); showPlan(); } else if (pass && pass.st === 'sig') { pass = null; setBlink(0); showPlan(); } }
 $('brake').onclick = brakeClick;
 addEventListener('keydown', e => { const k = e.code; if (k === 'ArrowLeft' || k === 'KeyA') { e.preventDefault(); passClick(); } else if (k === 'ArrowDown' || k === 'KeyS' || k === 'Space') { e.preventDefault(); brakeClick(); } else if (k === 'KeyL') $('hl').click(); else if (k === 'KeyN') $('np').click(); });
@@ -355,7 +356,7 @@ function tick() { try { const a = audio(), o = a.createOscillator(), gn = a.crea
 function boom() { try { const a = audio(), n = a.sampleRate * .6, buf = a.createBuffer(1, n, a.sampleRate), ch = buf.getChannelData(0); for (let i = 0; i < n; i++) ch[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / n, 3);
   const src = a.createBufferSource(), gn = a.createGain(); gn.gain.value = .5; src.buffer = buf; src.connect(gn).connect(a.destination); src.start(); } catch (e) {} }
 function doCrash(hit, how) { window.lastCrash = `${how} ${pass ? pass.st + (pass.luck ? '+luck' : '') : 'nopass'} px${px.toFixed(2)} z${hit.z.toFixed(1)} v${mph.toFixed(0)}`; const passing = leads.filter(L => L.z > -12).sort((a, b) => a.z - b.z)[0];
-  const by = how === 'rear' ? `rear-ending a <b>${hit.name || 'CAMRY'}</b>` : (passing && pass ? `passing a <b>${passing.name}</b>, hitting a <b>${hit.name || nameOf(hit.img)}</b>` : `hitting a <b>${hit.name || nameOf(hit.img)}</b>`);
+  const by = how === 'rear' ? `${braking > 0 && DRIVE.lockup ? 'brakes locked up, ' : ''}rear-ending a <b>${hit.name || 'CAMRY'}</b>` : (passing && pass ? `passing a <b>${passing.name}</b>, hitting a <b>${hit.name || nameOf(hit.img)}</b>` : `hitting a <b>${hit.name || nameOf(hit.img)}</b>`);
   $('wmsg').innerHTML = `YOU WRECKED ASAAAB<br>${by}`; setTimeout(() => $('wreck').classList.add('on'), 1100);
   crash = 1e9; crashes++; pass = null; setBlink(0); showPlan(); const fr = $('frame'); fr.classList.remove('shake'); void fr.offsetWidth; fr.classList.add('shake');
   $('flash').classList.add('on'); setTimeout(() => $('flash').classList.remove('on'), 90); cl.setLcd('CRASH', '#' + crashes); boom(); }
@@ -375,11 +376,11 @@ function game(dt) {
   if (ahead) ahead.brake = false;
   if ((!pass || pass.st === 'sig') && ahead && ahead.z < 60) { target = Math.min(70, ahead.v / MPH + (ahead.z - DRIVE.gap) * .8); }
   if (pass && pass.st !== 'sig' && pass.st !== 'abort') target = px < -2.1 || !ahead || ahead.z > 30 ? 104 : Math.min(104, ahead.v / MPH + (ahead.z - 9) * 1.2);   // clear the car ahead before flooring it
-  if (DRIVE.aeb) { const meX = px + 0.9;   // auto braking: never close faster than we could stop on a car still in front of our nose
+  if (DRIVE.aeb || (DRIVE.brakeSafe && braking > 0)) { const meX = px + 0.9;   // auto braking: never close faster than we could stop on a car still in front of our nose
     for (const L of leads) if (L.z > 0 && Math.abs(LEAD_X - meX) < CAR_W + .2) target = Math.min(target, (L.v + Math.sqrt(2 * 10 * Math.max(0, L.z - 5))) / MPH); }
   if (braking > 0) { braking -= dt; target = Math.min(target, (ahead ? ahead.v / MPH : mph) - 12); }
   if (pass && pass.st === 'abort') target = Math.min(target, (ahead ? ahead.v / MPH : 60) - 10);
-  mph += clamp(target - mph, -26 * dt, (pass ? 9 : 4) * dt); topMph = Math.max(topMph, mph);
+  mph += clamp(target - mph, -((braking > 0 || DRIVE.aeb) && DRIVE.brakeDecel ? DRIVE.brakeDecel : 26) * dt, (pass ? 9 : 4) * dt); topMph = Math.max(topMph, mph);
   let pxT = 0;
   if (pass) { pass.t += dt; rigOncoming();
     if (pass.st === 'sig' && pass.t > .7) { pass.st = 'out'; pass.t = 0; }
