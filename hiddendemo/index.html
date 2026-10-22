@@ -12,7 +12,8 @@ canvas,.full{inset:0;width:100%;height:100%}
 #cluster #cln{position:absolute;inset:0}
 #cluster::before{content:"";position:absolute;left:4%;right:4%;top:1%;bottom:8%;background:#000;border-radius:50% 50% 38% 38%/62% 62% 38% 38%;box-shadow:0 0 .5cqw .35cqw #000}
 #dash,#wheel{transition:filter 2.5s}
-#wheel{transform-origin:50.86% 68.56%}
+#wheel,#blWheel{transform-origin:50.86% 68.56%}
+.bl{opacity:0;pointer-events:none}
 /* Frutiger Aero bubbles */
 .bubble{font:800 1.25cqw "Barlow Semi Condensed",sans-serif;letter-spacing:.16em;color:#fff;border:0;border-radius:999px;padding:1.1cqw 2.4cqw;cursor:pointer;position:relative;
   background:radial-gradient(120% 140% at 50% 120%,#7dffb0 0,#1fb86a 45%,#0a6b52 100%);
@@ -93,13 +94,24 @@ canvas,.full{inset:0;width:100%;height:100%}
 .wreck::after{content:"";position:absolute;left:-10%;right:-10%;top:-45%;height:70%;border-radius:50%;background:linear-gradient(#ffffffaa,#fff0);pointer-events:none}
 .wreck p{margin:0 0 1.2cqw;font:400 2.1cqw/1.15 "VT323",monospace;letter-spacing:.03em}
 .wreck b{color:#b3141a}
+/* radio display, plotted over the dash's head unit (frame px 1198,645 → 1358,707); Night Panel blacks it out like the real car */
+#radio{left:62.4%;top:59.7%;width:8.35%;height:5.75%;border-radius:.35cqw;background:#030805;box-shadow:inset 0 0 .5cqw #000,0 0 0 .08cqw #2a2f2d;overflow:hidden}
+#radio .rd{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:.15cqw;background:radial-gradient(120% 140% at 50% 0%,#0d2a16,#04110a 70%);transition:opacity .125s}
+#radio b{white-space:nowrap;font:400 1.05cqw/1 "VT323",monospace;color:#8dff9a;letter-spacing:.08em;text-shadow:0 0 .35cqw #39ff6a}
+#radio .mq{width:88%;overflow:hidden;white-space:nowrap;font:400 .75cqw/1 "VT323",monospace;color:#6fe887;text-shadow:0 0 .25cqw #39ff6a}
+#radio .mq span{display:inline-block;animation:mq 9s linear infinite}
+@keyframes mq{to{transform:translateX(-100%)}}
+#radio.np .rd{opacity:0}
 .wip{right:1cqw;bottom:1cqw;font:600 .9cqw "Barlow Semi Condensed";letter-spacing:.2em;opacity:.45}
 </style></head><body>
 <div class="wrap"><div class="frame" id="frame">
   <canvas id="c" width="1920" height="1080"></canvas>
   <img class="full" id="dash" src="/assets/cabin/dash_day.png?v=2" alt="">
+  <img class="full bl" id="blDash" src="/assets/cabin/backlight_dash.png?v=1" alt="">   <!-- interior backlight (flat + glow, like the boost art) -->
   <div id="cluster"><svg id="cl"></svg><svg id="cln"></svg></div>
+  <div id="radio" aria-hidden="true"><div class="rd"><b>ASAAAB 93.X</b><div class="mq"><span>HIDDEN IN PLAIN TRAFFIC · THEME ·&nbsp;</span><span>HIDDEN IN PLAIN TRAFFIC · THEME ·&nbsp;</span></div></div></div>
   <img class="full" id="wheel" src="/assets/cabin/wheel_day.png?v=5" alt="">
+  <img class="full bl" id="blWheel" src="/assets/cabin/backlight_wheel.png?v=1" alt="">
   <div class="pad" id="padL">
     <button class="knob" id="brake" type="button" aria-label="Brake: abandon pass" title="Brake: abandon (↓ or S)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="12" cy="12" r="6.5"/><path d="M5 5.5a9.5 9.5 0 0 0 0 13M19 5.5a9.5 9.5 0 0 1 0 13" stroke-linecap="round"/><path d="M12 8.6v4.2" stroke-linecap="round"/><circle cx="12" cy="15.4" r=".6" fill="currentColor"/></svg><b>BRAKE</b></button>
     <button class="knob" id="pass" type="button" aria-label="Gas: blinker, cross over, floor it" title="Gas: blinker, cross over, floor it (← or A)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 12l8-7v4.2h10v5.6H11V19z"/></svg><b>GAS</b><span class="pips" id="pips"></span></button>
@@ -143,7 +155,7 @@ canvas,.full{inset:0;width:100%;height:100%}
 </div></div>
 <audio id="theme" src="/theme.mp3" preload="auto"></audio>
 <audio id="chime" src="/assets/audio/saab-chime.mp3" preload="auto"></audio>
-<script src="/assets/cluster.js?v=12"></script>
+<script src="/assets/cluster.js?v=13"></script>
 <script>
 const Q = new URLSearchParams(location.search), FAST = Q.has('fast') ? 8 : 1;
 const $ = id => document.getElementById(id);
@@ -181,7 +193,7 @@ function startCue(text, btn, lcd) { cue = { text, btn, lcd }; signIn = 0; btn.cl
 function endCue() { if (cue) cue.btn.classList.remove('ready'); cue = null; cl.setLcd(null); }
 // the two controls are the nav: headlights = go to night, Night Panel = go to the runway (pressing early skips ahead)
 $('hl').onclick = () => { if (scene === 'cover' || $('hl').classList.contains('on')) return; endCue(); $('hl').classList.add('on'); cl.setTell('lights', true); side = Math.max(side, lastBoard + 3); phase = Math.max(phase, 1); go('night'); };
-$('np').onclick = () => { if (!$('hl').classList.contains('on') || $('np').classList.contains('on')) return; endCue(); $('np').classList.add('on'); traffic = false; cl.setNight(true); go('runway'); };
+$('np').onclick = () => { if (!$('hl').classList.contains('on') || $('np').classList.contains('on')) return; endCue(); $('np').classList.add('on'); $('radio').classList.add('np'); traffic = false; cl.setNight(true); go('runway'); };
 const cued = {};
 function go(s) { scene = s; sT = 0; }
 $('go').onclick = () => { $('cover').style.opacity = 0; setTimeout(() => $('cover').remove(), 800); const th = $('theme'); th.loop = true; th.volume = .7; th.play().catch(() => {}); go('day'); cl.setTell('cruise', true); };
@@ -291,7 +303,8 @@ function frame(now) {
     }
   }
   g.globalCompositeOperation = 'source-over';
-  const t = now / 1000; $('wheel').style.transform = `rotate(${(Math.sin(t * .45) * 2.2 + Math.sin(t * 1.3 + 1) * .8 + pxv * 9).toFixed(3)}deg)`;
+  const t = now / 1000; const wr = `rotate(${(Math.sin(t * .45) * 2.2 + Math.sin(t * 1.3 + 1) * .8 + pxv * 9).toFixed(3)}deg)`; $('wheel').style.transform = wr; $('blWheel').style.transform = wr;
+  const blo = (lamps * clamp(phase - 1)).toFixed(3); $('blDash').style.opacity = blo; $('blWheel').style.opacity = blo;
   const on = blink && (t * 1.6 % 1) < .5; if (on !== blinkOn) { blinkOn = on; if (on) tick(); } $('sigL').classList.toggle('on', on && blink < 0); $('sigR').classList.toggle('on', on && blink > 0);
   $('pass').classList.toggle('dim', !gameOn() || !!crash); $('brake').classList.toggle('dim', !gameOn() || !!crash);
   $('hl').classList.toggle('dim', scene === 'cover' || $('hl').classList.contains('on')); $('np').classList.toggle('dim', !$('hl').classList.contains('on') || $('np').classList.contains('on'));
@@ -376,7 +389,7 @@ if (Q.has('dev')) { const d2 = document.createElement('label'); d2.className = '
   ip.oninput = () => { rig = +ip.value; try { localStorage.setItem('hipt-rig', rig); } catch (e) {} }; $('frame').appendChild(d2); }
 // test jumps: ?scene=dusk|night|np|runway|pass
 const J = Q.get('scene'); if (J) { $('cover').remove(); side = J === 'dusk' ? lastBoard + 3 : side; if (J !== 'dusk' && J !== 'pass') { side = lastBoard + 3; phase = 2; lamps = 1; }
-  cl.setTell('cruise', true); if (J !== 'dusk' && J !== 'pass') { $('hl').classList.add('on'); cl.setTell('lights', true); } if (J === 'runway') $('np').classList.add('on');
+  cl.setTell('cruise', true); if (J !== 'dusk' && J !== 'pass') { $('hl').classList.add('on'); cl.setTell('lights', true); } if (J === 'runway') { $('np').classList.add('on'); $('radio').classList.add('np'); }
   if (J === 'dusk') go('day'); if (J === 'night') go('night'); if (J === 'np') { traffic = false; go('np-wait'); sT = 4; } if (J === 'runway') { traffic = false; cl.setNight(true); go('runway'); } if (J === 'pass') { go('day'); leads.push({ z: 30, v: 48 * MPH, hue: .2, name: 'COROLLA' }); mph = 55; } }
 // traffic sprites: /assets/traffic/list.json (filenames) for the shipped set; or drag PNGs from your computer onto the page to try them
 const sprites = [], rears = [];   // filenames with 'rear' = cars we follow; everything else = oncoming (front view)
