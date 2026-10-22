@@ -103,6 +103,8 @@ canvas,.full{inset:0;width:100%;height:100%;pointer-events:none}
 #radio.np .rd{opacity:0}
 .cover .bk{font-weight:800;opacity:1;letter-spacing:.35em}
 .drives{display:flex;gap:1.2cqw}
+.nov{display:grid;justify-items:center;gap:1cqw}.nov p{margin:0;font:600 1.4cqw "Barlow Semi Condensed";letter-spacing:.06em;color:#eaf6ff;text-shadow:0 .2cqw .6cqw #000}
+.drives .bubble.ready{animation:glowp 1.1s ease-in-out infinite}
 .wip{right:1cqw;bottom:1cqw;font:600 .9cqw "Barlow Semi Condensed";letter-spacing:.2em;opacity:.45}
 </style></head><body>
 <div class="wrap"><div class="frame" id="frame">
@@ -139,7 +141,8 @@ canvas,.full{inset:0;width:100%;height:100%;pointer-events:none}
       <span class="key">S<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 3l-2 14M6 20h12M12 9v2"/></svg></span>
     </div>
   </div>
-  <div class="end" id="end"><h2>YOU'RE FLYING ASAAAB 9-3X</h2>
+  <div class="end" id="end"><h2 id="endT">YOU'RE FLYING ASAAAB 9-3X</h2>
+    <div class="nov" id="nov" hidden><p>Tutorial done. Pilot licenses are earned on CRUISING and up.</p><button class="bubble" type="button" id="nextLvl">TRY CRUISING →</button></div>
     <div class="lic" id="lic"><div class="wings"><i></i><i></i><i></i></div><b>ASAAAB PILOT LICENSE</b>
       <dl><dt>AIRCRAFT</dt><dd>9-3X</dd><dt>CARS PASSED</dt><dd id="lp">0</dd><dt>CRASHES</dt><dd id="lc">0</dd><dt>TOP SPEED</dt><dd id="ls">0 MPH</dd><dt>ISSUED</dt><dd id="ld"></dd></dl></div>
     <button class="bubble" type="button" disabled title="coming soon">WHY ASAAAB →</button></div>
@@ -205,19 +208,22 @@ $('radio').onclick = () => { theme.loop = true; theme.volume = .7; theme.paused 
 // Novice: auto braking. Cruising: normal, you can rear-end, but BRAKE always saves you. Expert: brakes can lock up, so you can crash even on the brakes.
 const DRIVES = { novice: { gap: 26, aeb: true, brakeDecel: 50 }, cruising: { gap: 16, brakeSafe: true, brakeDecel: 40 }, expert: { gap: 9, lockup: true, brakeDecel: 11 } };
 let DRIVE = DRIVES[Q.get('drive')] || DRIVES.cruising;
+$('nextLvl').onclick = () => { location.href = location.pathname + '?next=cruising'; };
+if (Q.get('next')) document.querySelector(`[data-drive=${Q.get('next')}]`)?.classList.add('ready');   // the level they should try next glows on the cover
 document.querySelectorAll('[data-drive]').forEach(b => b.onclick = () => { DRIVE = DRIVES[b.dataset.drive]; startDrive(); });
 const startDrive = () => { $('cover').style.opacity = 0; setTimeout(() => $('cover').remove(), 800); const th = $('theme'); th.loop = true; th.volume = .7; th.play().catch(() => {}); go('day'); cl.setTell('cruise', true); };
 function story(dt) {
   sT += dt;
   if (scene === 'day' && (safe >= GOAL || side > lastBoard + 2)) go('dusk');
   if (scene === 'day' && !crash) cl.setLcd('PASSED', `${safe} / ${GOAL}`);
+  if (tcasT > 0) { tcasT -= dt; cl.setLcd('TCAS', 'TRAFFIC TRAFFIC'); if (tcasT <= 0 && scene !== 'day') cue ? cl.setLcd(...cue.lcd) : cl.setLcd(null); }   // Novice auto braking talks like a plane's TCAS
   if (scene === 'dusk' && sT < dt * 1.5 && !cue) cl.setLcd(null);
   if (scene === 'dusk') { phase = clamp(sT / 5); if (sT > 5.5 && !cued.l) { cued.l = 1; startCue(['TURN ON', 'YOUR LIGHTS'], $('hl'), ['LIGHTS', 'ON?']); } }
   if (scene === 'night') { phase = clamp(1 + sT / 1.5, 1, 2); lamps = clamp(sT / .4);
     if (sT > 51 / FAST && traffic) { traffic = false; go('np-wait'); } }
   if (scene === 'np-wait' && sT > 4 && !cars.length && !cued.n) { cued.n = 1; startCue(['NIGHT', 'PANEL'], $('np'), ['NIGHT', 'PANEL']); }
   if (scene === 'runway') { poleA = clamp(1 - sT / 3); runway = clamp((sT - 1) / 3); if (sT > 4) mph = Math.min(128, mph + dt * 5 * (sT > 6 ? 1.6 : 1)); if (mph > 120) go('lift'); }
-  if (scene === 'lift') { mph = Math.min(140, mph + dt * 4); lift = clamp(sT / 6); CAM = 0.87 + (lift * lift) * 60; if (sT > 4 && !$('end').classList.contains('on')) { $('lp').textContent = safe; $('lc').textContent = crashes; $('ls').textContent = Math.round(Math.max(topMph, mph)) + ' MPH'; $('ld').textContent = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase(); $('end').classList.add('on'); } }
+  if (scene === 'lift') { mph = Math.min(140, mph + dt * 4); lift = clamp(sT / 6); CAM = 0.87 + (lift * lift) * 60; if (sT > 4 && !$('end').classList.contains('on')) { $('lp').textContent = safe; $('lc').textContent = crashes; $('ls').textContent = Math.round(Math.max(topMph, mph)) + ' MPH'; $('ld').textContent = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toUpperCase(); if (DRIVE === DRIVES.novice) { $('endT').textContent = 'TUTORIAL COMPLETE'; $('lic').hidden = true; $('nov').hidden = false; } $('end').classList.add('on'); } }
   cl.setSpeed(mph); cl.setAmbient(clamp(1 - phase / 1.6));
   const b = lerp(1, .32, clamp(phase / 2)) + lamps * .04;
   $('dash').style.filter = `brightness(${b.toFixed(3)}) saturate(${lerp(1, .6, clamp(phase / 2)).toFixed(2)})`;
@@ -327,7 +333,7 @@ function frame(now) {
 const LEAD_X = OUR_L + LANE / 2, CAR_W = 1.85, CAR_L = 4.5, NOSE = 2.2, TAIL = -2.5;
 const NAMES = ['CAMRY', 'COROLLA', 'CIVIC', 'PRIUS', 'F-150', 'ODYSSEY', 'RAV4', 'ALTIMA', 'MODEL 3', 'CR-V', 'OUTBACK', 'SIENNA', 'SILVERADO', 'ACCORD'];
 const nameOf = img => img && img.carName ? img.carName : NAMES[Math.random() * NAMES.length | 0];
-const GOAL = 5; let safe = 0, topMph = 70;
+const GOAL = 5; let safe = 0, topMph = 70, tcasT = 0;
 let leads = [], leadIn = 5, pass = null, crash = 0, crashes = 0, blink = 0, blinkOn = false;
 let rig = 0.75; try { const r = localStorage.getItem('hipt-rig'); if (r != null) rig = +r; } catch (e) {}
 if (Q.has('rig')) rig = +Q.get('rig');
@@ -377,7 +383,7 @@ function game(dt) {
   if ((!pass || pass.st === 'sig') && ahead && ahead.z < 60) { target = Math.min(70, ahead.v / MPH + (ahead.z - DRIVE.gap) * .8); }
   if (pass && pass.st !== 'sig' && pass.st !== 'abort') target = px < -2.1 || !ahead || ahead.z > 30 ? 104 : Math.min(104, ahead.v / MPH + (ahead.z - 9) * 1.2);   // clear the car ahead before flooring it
   if (DRIVE.aeb || (DRIVE.brakeSafe && braking > 0)) { const meX = px + 0.9;   // auto braking: never close faster than we could stop on a car still in front of our nose
-    for (const L of leads) if (L.z > 0 && Math.abs(LEAD_X - meX) < CAR_W + .2) target = Math.min(target, (L.v + Math.sqrt(2 * 10 * Math.max(0, L.z - 5))) / MPH); }
+    for (const L of leads) if (L.z > 0 && Math.abs(LEAD_X - meX) < CAR_W + .2) { const cap = (L.v + Math.sqrt(2 * 10 * Math.max(0, L.z - 5))) / MPH; if (DRIVE.aeb && cap < mph - 1.5) tcasT = 1.2; target = Math.min(target, cap); } }
   if (braking > 0) { braking -= dt; target = Math.min(target, (ahead ? ahead.v / MPH : mph) - 12); }
   if (pass && pass.st === 'abort') target = Math.min(target, (ahead ? ahead.v / MPH : 60) - 10);
   mph += clamp(target - mph, -((braking > 0 || DRIVE.aeb) && DRIVE.brakeDecel ? DRIVE.brakeDecel : 26) * dt, (pass ? 9 : 4) * dt); topMph = Math.max(topMph, mph);
