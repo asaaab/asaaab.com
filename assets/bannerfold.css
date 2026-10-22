@@ -69,3 +69,29 @@
 
 /* short screens (laptops): slimmer banner so the GPS and passport get the room */
 @media (max-height:860px){ .fban{--h:clamp(84px, 10vh, 108px)} }
+
+/* ===== the menu is a window shade (2026-10-21): it unrolls to the bottom of the screen, and behind it is a window onto calm ===== */
+.fdrop{display:block; overflow:hidden; clip-path:none!important; height:70vh}
+.fshade{position:relative; z-index:2; transform:translateY(-101%); transition:transform .3s cubic-bezier(.5,0,.75,0)}
+.fban.open .fshade{animation:fshade-down .78s cubic-bezier(.25,.9,.3,1) both}
+.fban.shade .fshade{animation:none; transform:translateY(-101%); transition:transform .5s cubic-bezier(.55,0,.75,.2)}
+@keyframes fshade-down{0%{transform:translateY(-101%)} 62%{transform:translateY(3%)} 78%{transform:translateY(-1.2%)} 90%{transform:translateY(.4%)} 100%{transform:none}}
+.fband{transform:none!important; transition:none!important}
+/* bottom rail of the shade + pull cord */
+.frail{display:block; position:relative; height:12px; background:linear-gradient(#f4f1ea, #cfc8ba 55%, #a99f8e); box-shadow:0 3px 6px rgba(0,0,0,.35)}
+.frail i{position:absolute; right:max(24px, calc((100% - 980px) / 2 + 24px)); top:12px; width:2px; height:34px; background:#d8d2c6; transform-origin:50% 0; animation:fcord 2.6s ease-in-out infinite alternate}
+.frail i::after{content:""; position:absolute; left:-7px; bottom:-14px; width:12px; height:12px; border:3px solid #d8d2c6; border-radius:50%}
+@keyframes fcord{from{transform:rotate(-6deg)} to{transform:rotate(6deg)}}
+/* the window behind the shade: a snapshot of calm, crisp pre-2012 air */
+.fwin{position:absolute; inset:0; z-index:1; display:block; opacity:0; transition:opacity .25s; cursor:pointer;
+  box-shadow:inset 0 0 0 10px #f3f6f8, inset 0 0 0 12px #c9d3da}
+.fban.open .fwin,.fban.shade .fwin{opacity:1}
+.fsky{position:absolute; inset:0; background:#9fd3ff url(/assets/calm-window.webp?v=1) center 40% / cover no-repeat; animation:fdrift 40s ease-in-out infinite alternate; filter:saturate(1.08) brightness(1.04)}
+@keyframes fdrift{from{transform:scale(1.06) translate(-1.5%, 0)} to{transform:scale(1.06) translate(1.5%, -1%)}}
+.fwin::before,.fwin::after{content:""; position:absolute; z-index:2; background:#f3f6f8; box-shadow:0 0 0 1px #c9d3da}
+.fwin::before{left:50%; top:0; bottom:0; width:10px; margin-left:-5px}
+.fwin::after{left:0; right:0; top:58%; height:10px}
+.fglare{position:absolute; inset:0; z-index:1; background:linear-gradient(115deg, rgba(255,255,255,.34) 0 14%, rgba(255,255,255,0) 26% 60%, rgba(255,255,255,.18) 66%, rgba(255,255,255,0) 74%), linear-gradient(rgba(214,240,255,.18), rgba(214,240,255,0) 60%)}
+.fsill{position:absolute; left:0; right:0; bottom:0; height:16px; z-index:3; background:linear-gradient(#ffffff, #dfe6eb); box-shadow:0 -2px 0 #c9d3da}
+.fwin:focus-visible{outline:3px solid #fff; outline-offset:-6px}
+@media (prefers-reduced-motion:reduce){ .fban.open .fshade{animation:none; transform:none} .fsky,.frail i{animation:none} }

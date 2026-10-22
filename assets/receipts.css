@@ -1,0 +1,31 @@
+/* Fantastic Contraption flavor: flat, round, chunky, sky + grass, no corporate gridlines */
+#receipts{margin:18px 0 8px; font-family:"Nunito",system-ui,sans-serif; color:#16191c}
+.rc-x{display:flex; flex-wrap:wrap; gap:8px; margin-bottom:12px}
+.rc-x button{font:900 14px/1 "Overpass","Arial Narrow",system-ui,sans-serif; border:0; border-radius:14px; padding:10px 16px 8px; cursor:pointer;
+  background:#eaf5ff; color:#2a5d8f; box-shadow:0 4px 0 #a9d0ff; transition:transform .1s}
+.rc-x button:active{transform:translateY(3px); box-shadow:0 1px 0 #a9d0ff}
+.rc-x button[aria-checked="true"]{background:#ffd23f; color:#5a3a00; box-shadow:0 4px 0 #d39b00}
+.rc-plot{position:relative; border-radius:26px; overflow:hidden; box-shadow:0 6px 0 #a9d0ff}
+.rc-svg{display:block; width:100%}
+.rc-cloud circle,.rc-cloud rect{fill:#f4faff}
+.rc-cloud .rc-cloud-sh{fill:#b7dcff}
+.rc-clouds{animation:rcDrift 18s ease-in-out infinite alternate}
+@keyframes rcDrift{from{transform:translateX(-10px)} to{transform:translateX(14px)}}
+.rc-line{stroke:#ffffff; stroke-opacity:.55; stroke-width:2; stroke-dasharray:2 8; stroke-linecap:round}
+.rc-ax{font:900 12px "Overpass",system-ui,sans-serif; fill:#3b6f9e}
+.rc-ax-g{fill:#1f6b2e}
+.rc-axl{font:900 12px "Overpass",system-ui,sans-serif; fill:#2a5d8f; letter-spacing:.04em}
+.rc-grass{fill:#7ed957}
+.rc-dirt{fill:#5cbf3c}
+.rc-b{cursor:pointer; outline:none}
+.rc-b .rc-orb{stroke:#ffffff; stroke-width:1.5; fill-opacity:.92; transform-box:fill-box; transform-origin:center; animation:rcPuff 3.6s ease-in-out var(--d) infinite alternate}
+@keyframes rcPuff{from{transform:scale(.94)} to{transform:scale(1.05)}}
+.rc-b .rc-shine{fill:#fff; fill-opacity:.55; pointer-events:none}
+.rc-b:hover .rc-orb,.rc-b:focus .rc-orb,.rc-b.on .rc-orb{stroke:#16191c; stroke-width:2.5; fill-opacity:1; animation:none; transform:scale(1.25)}
+.rc-tip{position:absolute; z-index:3; width:min(260px, calc(100% - 8px)); background:#fff; border-radius:18px; padding:12px 14px 10px; box-shadow:0 5px 0 #a9d0ff}
+.rc-tip p{margin:0 0 8px; font:800 14px/1.35 "Nunito",system-ui,sans-serif; color:#16191c}
+.rc-tip a{display:inline-block; font:900 13px "Overpass",system-ui,sans-serif; color:#fff; background:#d930c9; border-radius:10px; padding:6px 12px 4px; text-decoration:none; box-shadow:0 3px 0 #8a1d80}
+.rc-key{display:flex; align-items:center; flex-wrap:wrap; gap:8px; margin:12px 4px 0; font:800 12px "Nunito",system-ui,sans-serif; color:#3b6f9e}
+.rc-key i{width:120px; height:12px; border-radius:6px; background:linear-gradient(90deg, rgb(64,160,255), rgb(72,210,160), rgb(255,214,74), rgb(255,132,74), rgb(240,70,150))}
+.rc-key b{margin-left:auto; font-weight:800}
+@media (prefers-reduced-motion:reduce){ .rc-clouds,.rc-b .rc-orb{animation:none} }

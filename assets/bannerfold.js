@@ -9,7 +9,8 @@
     blue:   { top:"#0062dd", bot:"#002d64" },
     purple: { top:"#8600dd", bot:"#3c0064" },
     magenta:{ top:"#d930c9", bot:"#6a1462", noArt:true },
-    charcoal:{ top:"#33383d", bot:"#16191c", noArt:true }, // no banner art yet // the Start carspotting button color; menu band only (no banner art yet)
+    charcoal:{ top:"#33383d", bot:"#16191c", noArt:true }, // no banner art yet
+    glacier:{ top:"#647579", bot:"#2a373a" }, // the Start carspotting button color; menu band only (no banner art yet)
   };
   // one band per page, top to bottom. Each page's banner is its band's color.
   const PAGES = [
@@ -21,6 +22,7 @@
     { c:"purple",  t:"asaaab hangar",  s:"the Discord",                                href:"https://discord.gg/e7FUMwjNah" },
     { c:"charcoal", t:"asaaab, what the hell is that?!", s:"privacy · copyright · resources", href:"/copyright/" },
     { c:"magenta", t:"master plan",    s:"where this is all going · coming soon",      href:"/plan/" },
+    { c:"glacier", t:"calm",           s:"a breath of fresh air",                      href:"/calm/" },
   ];
   const ASSET = (document.currentScript && document.currentScript.src.replace(/bannerfold\.js.*$/, "")) || "/assets/";
   const art = c => `${ASSET}strips/${c}.webp?v=${V}`;
@@ -40,12 +42,12 @@
       `<span class="half b" aria-hidden="true">${face(color)}</span>` +
       `<span class="hint" aria-hidden="true">MENU <i><b></b><b></b><b></b></i></span>` +
       `<button class="hit" type="button" aria-expanded="false" aria-controls="fdrop" aria-label="asaaab menu"></button>` +
-      `<nav class="fdrop" id="fdrop" aria-label="Site menu">` + PAGES.map(p => {
+      `<nav class="fdrop" id="fdrop" aria-label="Site menu"><a class="fwin" href="/calm/" tabindex="-1" aria-label="calm"><span class="fsky"></span><span class="fglare"></span><span class="fsill"></span></a><div class="fshade">` + PAGES.map(p => {
         const cur = p.href === here;
         const ext = /^https?:/.test(p.href);
         return `<a class="fband${cur ? " here" : ""}" href="${p.href}" data-c="${p.c}" style="${vars(p.c)}" tabindex="-1"${cur ? ' aria-current="page"' : ""}${ext ? ' target="_blank" rel="noopener"' : ""}>`
           + `<span class="lbl"><b>${p.t}</b><small>${p.s}</small></span></a>`;
-      }).join("") + `</nav>`;
+      }).join("") + `<span class="frail" aria-hidden="true"><i></i></span></div></nav>`;
 
     const hit = host.querySelector(".hit"), drop = host.querySelector(".fdrop"), bands = [...drop.querySelectorAll(".fband")];
     // taps on the banner/menu never count as the "first tap" that starts the theme music
@@ -56,6 +58,7 @@
     let open = false;
     function show(){
       if (open) return; open = true;
+      drop.style.height = Math.max(240, innerHeight - host.getBoundingClientRect().top - host.offsetHeight * 0.522) + "px";
       delays(1); host.classList.remove("shade"); host.classList.add("open"); hit.setAttribute("aria-expanded", "true");
       bands.forEach(b => b.tabIndex = 0);
       setTimeout(() => (drop.querySelector(".here") || bands[0]).focus({ preventScroll:true }), reduce ? 0 : 300);
@@ -73,7 +76,7 @@
       if (window.goatcounter && goatcounter.count) goatcounter.count({ path:"menu-home", event:true });
       host.classList.add("shade"); setTimeout(() => { store.set("fban-arrive", "1"); location.href = "/"; }, reduce ? 0 : 520); });
     drop.addEventListener("click", e => {
-      const b = e.target.closest(".fband"); if (!b) return;
+      const b = e.target.closest(".fband, .fwin"); if (!b) return;
       e.preventDefault(); e.stopPropagation();
       if (window.goatcounter && goatcounter.count) goatcounter.count({ path:"menu-" + b.dataset.c, event:true });
       if (b.classList.contains("here")) { hide(); return; }
