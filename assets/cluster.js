@@ -1,5 +1,5 @@
 /* Saab 9-3 (2003-2011) instrument cluster, rebuilt as SVG — v3.
-   Proportions measured from Theo's straight-on photos (10/21 night set); behavior from:
+   Proportions measured from straight-on photos of the real car (10/21 night set); behavior from:
      IMG_1376 f66-70 + IMG_5869 f150-173  Night Panel ON: tach, combo and speedo past 90 cut in one frame;
                                           display holds ~2 frames, dims 1, off (~125 ms); unlit needles sweep to rest (~0.3 s)
      IMG_5869 f25-48                      Night Panel OFF: display backlight first, gauges 2 frames later, needles sweep up, text last
@@ -114,9 +114,9 @@ function Cluster(svg, needleSvg) {
   // combo gauge: every scale is concentric with the gauge; each needle comes from its own hub inside the scale and points out at it
   const cg = el("g");
   const TH = { cx: C.cx + C.R * .02, cy: C.cy - C.R * .2 }, MH = { cx: C.cx - C.R * .33, cy: C.cy }, FH = { cx: C.cx + C.R * .35, cy: C.cy };
-  const turboPhi = v => 132 - 83 * v;                     // Theo's turbo art spans 132° → 49° around the gauge center
+  const turboPhi = v => 132 - 83 * v;                     // the turbo art spans 132° → 49° around the gauge center
   const tempPhi = v => 209 - 55 * v, fuelPhi = v => -26 + 52 * v;   // temp: L (209°) → H (154°); fuel: empty (-26°) → full (26°)
-  let turboDay, turboGlow;   // Theo's boost art: white (no glow) for day, green glow at night — crossfaded by setAmbient
+  let turboDay, turboGlow;   // the boost art: white (no glow) for day, green glow at night — crossfaded by setAmbient
   { const sc = C.R * .76 / 287, at = { x: C.cx - 871.2 * sc, y: C.cy - 584.4 * sc, width: 1600 * sc, height: 1600 * sc };
     turboGlow = el("image", { href: "/assets/cluster/turbo_glow.png", ...at, opacity: 0 }, cg); turboDay = el("image", { href: "/assets/cluster/turbo_day.png", ...at, opacity: 1 }, cg); offs.push(turboGlow, turboDay); }
   for (let i = 0; i <= 9; i++) {
