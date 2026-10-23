@@ -24,3 +24,4 @@
 - the answer is why
 - move your mind
 - time is money. hot take i think both are made up. real and fake? made up
+- asaaab is the antidote for reality. reality is an enthymeme
