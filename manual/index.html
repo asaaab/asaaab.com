@@ -1,1 +1,177 @@
-x
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Owner's Manual · asaaab</title>
+<meta name="description" content="The asaaab Owner's Manual. For co-owners.">
+<meta name="theme-color" content="#dc0500">
+<link rel="icon" href="/banner.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@600;800;900&family=Nunito:wght@500;700;800;900&display=swap">
+<link rel="stylesheet" href="/assets/bannerfold.css?v=4">
+<style>
+:root{--ink:#16191c; --paper:#fbfaf6; --line:#d9d5cc; --red:#dc0500; --amber:#ffb21a; --green:#38d36b; --blue:#3aa8ff}
+*{box-sizing:border-box}
+body{margin:0; background:radial-gradient(1200px 600px at 50% -10%, #cfe9ff, transparent 60%), linear-gradient(#e8f4ff, #f3efe6 40%); color:var(--ink); font:500 17px/1.6 Nunito, system-ui, sans-serif}
+.hero-strip{background:none!important; height:var(--h)!important; overflow:visible!important; padding:0!important; display:block!important; width:auto!important}
+.book{max-width:820px; margin:0 auto; padding:24px 16px 80px}
+/* cover: glossy booklet */
+.cover{position:relative; border-radius:28px; padding:48px 28px 36px; color:#fff; overflow:hidden;
+  background:radial-gradient(circle at 25% 15%, rgba(255,255,255,.55), transparent 35%), linear-gradient(160deg, #3aa8ff, #1d5fb8 55%, #0d2f66);
+  box-shadow:0 20px 40px rgba(13,47,102,.35), inset 0 2px 0 rgba(255,255,255,.6), inset 0 -10px 30px rgba(0,0,0,.25)}
+.cover::after{content:""; position:absolute; left:-10%; right:-10%; top:-40%; height:70%; border-radius:50%; background:linear-gradient(rgba(255,255,255,.35), rgba(255,255,255,0))}
+.cover small{display:block; font:900 13px/1 Overpass, sans-serif; letter-spacing:.3em; opacity:.85}
+.cover h1{margin:10px 0 6px; font:900 clamp(40px, 9vw, 76px)/.95 Overpass, sans-serif; letter-spacing:-.02em}
+.cover p{margin:0; font-weight:800; font-size:20px}
+.artwrap{position:relative; z-index:1; margin:26px 0 0}
+.cover .art{display:block; width:100%; height:auto; border-radius:18px; border:6px solid rgba(255,255,255,.85); box-shadow:0 14px 26px rgba(0,0,0,.35)}
+.stamp{position:absolute; left:11%; top:67%; transform:rotate(-12deg); display:grid; justify-items:center; gap:2px; padding:10px 22px; border:4px double #c4161c; border-radius:10px; color:#c4161c;
+  background:#fbfaf6; font:900 clamp(9px, 1.6vw, 13px)/1.05 Overpass, sans-serif; letter-spacing:.14em; box-shadow:0 0 0 2px rgba(196,22,28,.15)}
+.stamp b{font-size:1.5em; letter-spacing:.2em} .stamp em{font-style:normal; font-size:1.1em}
+.vehicle{text-align:center; font:900 12px Overpass, sans-serif; letter-spacing:.3em; color:#9a958c; margin:-4px 0 14px}
+/* contents tabs */
+.toc{display:flex; flex-wrap:wrap; gap:10px; margin:22px 0 8px}
+.toc a{flex:1 1 140px; text-align:center; text-decoration:none; color:var(--ink); font:900 13px/1 Overpass, sans-serif; letter-spacing:.06em; padding:14px 10px; border-radius:999px;
+  background:linear-gradient(#fff, #e9eef2); box-shadow:0 3px 0 #c9d0d4, 0 6px 12px rgba(0,0,0,.08)}
+.toc a span{display:inline-block; width:22px; height:22px; line-height:22px; border-radius:50%; background:var(--blue); color:#fff; margin-right:8px; font-size:11px}
+/* chapters as pages */
+.page{position:relative; margin:26px 0; padding:30px 26px 34px; background:var(--paper); border-radius:22px; box-shadow:0 1px 0 #fff inset, 0 12px 30px rgba(0,0,0,.08)}
+.page h2{margin:0 0 14px; font:900 26px/1.1 Overpass, sans-serif}
+.page h2 i{font-style:normal; display:inline-block; min-width:38px; height:38px; line-height:40px; text-align:center; border-radius:50%; margin-right:10px; color:#fff; font-size:16px;
+  background:radial-gradient(circle at 35% 30%, #fff 0 8%, var(--blue) 35%, #1d5fb8)}
+.page .pg{position:absolute; right:22px; bottom:12px; font:800 12px Overpass, sans-serif; color:#9a958c}
+.page h3{font:900 18px Overpass, sans-serif; margin:22px 0 6px}
+.page ul{padding-left:20px} .page li{margin:4px 0}
+.page ul.spec{list-style:none; padding:0; border-top:2px solid var(--ink)}
+.page ul.spec li{display:flex; gap:12px; justify-content:space-between; padding:10px 2px; border-bottom:1px dashed var(--line); margin:0}
+.page ul.spec b{font:900 13px Overpass, sans-serif; letter-spacing:.08em; text-transform:uppercase}
+/* body structure diagram */
+.diagram{position:relative; margin:8px 0 14px}
+.diagram svg{width:100%; display:block}
+.pill{cursor:pointer}
+.pill circle{fill:url(#orb); stroke:#fff; stroke-width:3; transition:transform .2s; transform-box:fill-box; transform-origin:center}
+.pill text{font:900 15px Overpass, sans-serif; fill:#fff; pointer-events:none}
+.pill:focus:not(:focus-visible){outline:none}
+.pill:hover circle,.pill.on circle{transform:scale(1.18)}
+.pill.on circle{fill:url(#orbOn)}
+.pillar-line{stroke:#1d5fb8; stroke-width:7; stroke-linecap:round; opacity:.18; transition:opacity .2s}
+.pillar-line.on{opacity:.9}
+.card{border-radius:18px; padding:16px 18px; background:linear-gradient(#fff, #f1f5f8); box-shadow:inset 0 0 0 2px #e3e8ea}
+.card h4{margin:0 0 8px; font:900 14px Overpass, sans-serif; letter-spacing:.1em; color:#1d5fb8}
+.card .pair{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+.card .pair div{padding:10px 12px; border-radius:12px; background:#fff; box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.card .pair div::before{content:"L"; display:block; font:900 11px Overpass; color:#9a958c; letter-spacing:.2em}
+.card .pair div+div::before{content:"R"}
+@media (max-width:560px){ .card .pair{grid-template-columns:1fr} }
+.roof{margin-top:14px; text-align:center; font:900 18px Overpass, sans-serif}
+.roof::before{content:"ROOF"; display:block; font-size:11px; letter-spacing:.3em; color:#9a958c}
+/* warning light */
+.tell{display:flex; gap:16px; align-items:center; padding:16px 18px; border-radius:18px; background:#16191c; color:#f7d117; margin:4px 0 14px; font:900 18px Overpass, sans-serif}
+.tell .lamp{flex:none; width:46px; height:46px; border-radius:50%; background:radial-gradient(circle at 40% 35%, #fff6c8, var(--amber) 45%, #a85d00); box-shadow:0 0 18px var(--amber), 0 0 40px rgba(255,178,26,.5); animation:blink 2.4s ease-in-out infinite;
+  display:grid; place-items:center; color:#16191c; font-size:26px}
+@keyframes blink{50%{box-shadow:0 0 6px var(--amber); filter:brightness(.8)}}
+.why .md p:first-child{font-size:20px; font-weight:800}
+.foot{text-align:center; font-size:13px; color:#6d6a63; padding-bottom:30px} .foot a{color:inherit}
+</style>
+</head>
+<body>
+<div class="hero-strip" role="banner" data-fban="blue"></div>
+<div class="book">
+
+<header class="cover">
+  <small>ASAAAB</small>
+  <h1 id="title">Owner's Manual</h1>
+  <p id="sub">For co-owners.</p>
+  <div class="artwrap"><img class="art" src="/assets/manual/cover.jpg" alt="Red Saab 9-3X, drawing by Theo (@illdrawyoursaab)" width="1400" height="1081">
+    <div class="stamp" aria-label="Last updated"><b>ASAAAB</b><span>OWNER'S MANUAL</span><em id="rev">REV. —</em></div></div>
+</header>
+
+<nav class="toc" aria-label="Contents"></nav>
+<main id="pages"></main>
+
+</div>
+<p class="foot">© 2026 asaaab · <a href="/privacy/">Privacy</a> · <a href="/copyright/">Copyright &amp; reuse</a></p>
+<script src="/assets/bannerfold.js?v=4" defer></script>
+<script>
+// The Owner's Manual reads plain text files:
+//   /docs/why.md          → chapter "Why this vehicle"
+//   /docs/manual.md       → cover, Body structure (A:/B:/C:/D:/ROOF: lines), Warning lights ("! " lines), Specifications ("- Key: value"), Maintenance
+//   /docs/constitution.md → appendix "Service manual"
+// Edit the .md files; the page redraws itself.
+(() => {
+  const esc = s => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  const inline = s => esc(s).replace(/\*\*(.+?)\*\*/g, "<b>$1</b>").replace(/\*(.+?)\*/g, "<i>$1</i>").replace(/\[(.+?)\]\((https?:[^)\s]+|\/[^)\s]*)\)/g, '<a href="$2">$1</a>');
+  function md(t) {
+    const out = []; let list = null;
+    const close = () => { if (list) { out.push(`</${list}>`); list = null; } };
+    for (const raw of t.split(/\n/)) {
+      const l = raw.trimEnd(); let m;
+      if (!l.trim()) { close(); continue; }
+      if ((m = l.match(/^(#{1,3})\s+(.*)/))) { close(); const n = Math.min(m[1].length + 2, 4); out.push(`<h${n}>${inline(m[2])}</h${n}>`); continue; }
+      if ((m = l.match(/^\s*[-*]\s+(.*)/))) { if (list !== "ul") { close(); out.push("<ul>"); list = "ul"; } out.push(`<li>${inline(m[1])}</li>`); continue; }
+      if ((m = l.match(/^\s*\d+\.\s+(.*)/))) { if (list !== "ol") { close(); out.push("<ol>"); list = "ol"; } out.push(`<li>${inline(m[1])}</li>`); continue; }
+      close(); out.push(`<p>${inline(l)}</p>`);
+    }
+    close(); return out.join("\n");
+  }
+  // split a markdown file into chapters on "## "
+  const chapters = t => { const parts = t.split(/\n(?=## )/); const head = parts.shift(); return { head, list: parts.map(p => { const [h, ...b] = p.split("\n"); return { title: h.replace(/^##\s+/, ""), body: b.join("\n").trim() }; }) }; };
+
+  function bodyStructure(body) {
+    const P = {}; const rest = [];
+    for (const l of body.split("\n")) { const m = l.match(/^(A|B|C|D|ROOF):\s*(.*)/); if (m) P[m[1]] = m[2].split("|").map(s => s.trim()); else rest.push(l); }
+    // pillar x positions on the diagram (classic five-door: A windshield, B, C behind rear door, D quarter glass)
+    const X = { A: [150, 128], B: [254, 252], C: [380, 360], D: [420, 400] };
+    const svg = `<svg viewBox="0 0 520 190" role="img" aria-label="Side view with A, B, C and D pillars">
+      <defs><radialGradient id="orb" cx=".35" cy=".3"><stop offset="0" stop-color="#fff"/><stop offset=".35" stop-color="#3aa8ff"/><stop offset="1" stop-color="#1d5fb8"/></radialGradient>
+      <radialGradient id="orbOn" cx=".35" cy=".3"><stop offset="0" stop-color="#fff"/><stop offset=".35" stop-color="#ffb21a"/><stop offset="1" stop-color="#c46a00"/></radialGradient></defs>
+      <path d="M20 148 Q18 126 40 122 L92 116 Q120 90 160 76 L330 70 Q372 72 404 96 L470 108 Q500 114 502 134 L504 152 Q504 160 494 160 L24 160 Q18 160 20 148 Z" fill="#e9eef2" stroke="#c9d0d4" stroke-width="2"/>
+      <path d="M168 82 L250 78 L250 116 L130 118 Z M258 78 L326 76 Q352 78 372 96 L380 114 L258 116 Z M384 100 L404 102 L416 112 L388 114 Z" fill="#9fd2ff" opacity=".7"/>
+      ${Object.keys(X).map(k => `<line class="pillar-line" data-p="${k}" x1="${X[k][0]}" y1="${k === "A" ? 78 : k === "D" ? 100 : 76}" x2="${X[k][1]}" y2="118"/>`).join("")}
+      <circle cx="112" cy="160" r="25" fill="#16191c"/><circle cx="112" cy="160" r="12" fill="#c9d0d4"/><circle cx="420" cy="160" r="25" fill="#16191c"/><circle cx="420" cy="160" r="12" fill="#c9d0d4"/>
+      ${Object.keys(X).map((k, i) => `<g class="pill" data-p="${k}" tabindex="0" role="button" aria-label="${k}-pillars"><circle cx="${[140, 254, 372, 430][i]}" cy="34" r="20"/><text x="${[140, 254, 372, 430][i]}" y="40" text-anchor="middle">${k}</text></g>`).join("")}
+      <text x="296" y="66" text-anchor="middle" style="font:900 11px Overpass;letter-spacing:.3em;fill:#9a958c">ROOF</text>
+    </svg>`;
+    const card = `<div class="card" id="pcard"></div>`;
+    const roof = P.ROOF ? `<div class="roof">${inline(P.ROOF[0])}</div>` : "";
+    setTimeout(() => {
+      const show = k => {
+        document.querySelectorAll(".pill,.pillar-line").forEach(e => e.classList.toggle("on", e.dataset.p === k));
+        const v = P[k] || []; document.getElementById("pcard").innerHTML = `<h4>${k}-PILLARS</h4><div class="pair"><div>${inline(v[0] || "")}</div><div>${inline(v[1] || v[0] || "")}</div></div>`;
+      };
+      document.querySelectorAll(".pill").forEach(g => { g.onclick = () => show(g.dataset.p); g.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); show(g.dataset.p); } }; });
+      show("A");
+    });
+    return md(rest.join("\n")) + `<div class="diagram">${svg}</div><p class="vehicle">THE ASAAAB LABOR VEHICLE</p>` + card + roof;
+  }
+  function warning(body) {
+    return body.split("\n").map(l => l.startsWith("! ") ? `<div class="tell"><span class="lamp">!</span>${inline(l.slice(2))}</div>` : md(l)).join("");
+  }
+  function specs(body) {
+    if (!/^- [^:]+:/m.test(body)) return md(body);
+    return `<ul class="spec">` + body.split("\n").filter(l => l.startsWith("- ")).map(l => { const [k, ...v] = l.slice(2).split(":"); return `<li><b>${esc(k)}</b><span>${inline(v.join(":").trim())}</span></li>`; }).join("") + `</ul>`;
+  }
+  const fmt = d => d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" }).toUpperCase();
+  const get = u => fetch(u, { cache: "no-store" }).then(r => { if (r.ok && u.endsWith("manual.md")) { const lm = r.headers.get("last-modified"); if (lm) document.getElementById("rev").textContent = "REV. " + fmt(new Date(lm)); } return r.ok ? r.text() : ""; }).catch(() => "");
+  Promise.all([get("/docs/manual.md"), get("/docs/why.md"), get("/docs/constitution.md")]).then(([man, why, con]) => {
+    const M = chapters(man);
+    const h = M.head.split("\n").filter(Boolean);
+    if (h[0]) document.getElementById("title").textContent = h[0].replace(/^#\s+/, "");
+    if (h[1]) document.getElementById("sub").textContent = h[1];
+    const pages = [];
+    if (why) pages.push({ title: "Why this vehicle", html: md(why.replace(/^#\s+.*\n/, "")), cls: "why" });
+    for (const c of M.list) {
+      const t = c.title.toLowerCase();
+      pages.push({ title: c.title, html: t.startsWith("body") ? bodyStructure(c.body) : t.startsWith("warning") ? warning(c.body) : t.startsWith("spec") ? specs(c.body) : md(c.body) });
+    }
+    if (con) pages.push({ title: "Service manual", html: md(con.replace(/^#\s+.*\n/, "")) });
+    document.querySelector(".toc").innerHTML = pages.map((p, i) => `<a href="#ch${i + 1}"><span>${i + 1}</span>${esc(p.title)}</a>`).join("");
+    document.getElementById("pages").innerHTML = pages.map((p, i) => `<section class="page ${p.cls || ""}" id="ch${i + 1}"><h2><i>${i + 1}</i>${esc(p.title)}</h2><div class="md">${p.html}</div><span class="pg">${i + 1}</span></section>`).join("");
+  });
+})();
+</script>
+</body>
+</html>
