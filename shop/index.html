@@ -3,52 +3,62 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Merch · asaaab</title>
-<meta name="description" content="asaaab.shop is under construction.">
+<title>Shop · asaaab</title>
+<meta name="description" content="The asaaab shop. The vending machine works. The door doesn't.">
 <meta name="theme-color" content="#dc0500">
 <link rel="icon" href="/banner.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@600;800;900&family=Nunito:wght@500;700;800;900&display=swap">
-<link rel="stylesheet" href="/assets/pages.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@600;800;900&family=Nunito:wght@500;700;800;900&family=VT323&display=swap">
+<link rel="stylesheet" href="/assets/pages.css?v=2">
 <link rel="stylesheet" href="/assets/bannerfold.css?v=4">
-<style>.hero-strip{background:none!important; height:var(--h)!important; overflow:visible!important; padding:0!important; display:block!important; width:auto!important}</style>
-<style>
-.zone{position:relative; text-align:center; padding-top:8px; overflow:hidden}
-.diamond{width:150px; height:150px; margin:26px auto 30px; transform:rotate(45deg); background:#ff8a1a; border:5px solid #16191c; border-radius:14px; display:grid; place-items:center; box-shadow:0 6px 0 #16191c}
-.diamond span{transform:rotate(-45deg); font-family:var(--hwy); font-weight:900; font-size:19px; line-height:1.05; color:#16191c; letter-spacing:.02em}
-.cones{display:flex; justify-content:center; gap:22px; margin:6px 0 4px}
-.cone{width:34px; height:44px; position:relative; animation:bob 1.6s ease-in-out infinite}
-.cone:nth-child(2){animation-delay:.2s} .cone:nth-child(3){animation-delay:.4s} .cone:nth-child(4){animation-delay:.6s}
-.cone::before{content:""; position:absolute; left:5px; right:5px; bottom:6px; top:0; background:linear-gradient(#ff7a1a 0 30%, #fff 30% 48%, #ff7a1a 48% 100%); clip-path:polygon(40% 0,60% 0,100% 100%,0 100%)}
-.cone::after{content:""; position:absolute; left:0; right:0; bottom:0; height:7px; background:#16191c; border-radius:3px}
-@keyframes bob{50%{transform:translateY(-4px)}}
-.tape{height:22px; margin:22px -40px -22px; background:repeating-linear-gradient(-45deg, #f7d117 0 18px, #16191c 18px 36px); border-block:2px solid #16191c}
-.shopurl{font-family:var(--hwy); font-weight:900; font-size:clamp(28px,7vw,44px); margin:14px 0 4px}
-.shopurl em{font-style:normal; color:var(--route)}
-@media (prefers-reduced-motion: reduce){ .cone{animation:none} }
-</style>
+<link rel="stylesheet" href="/assets/vend.css?v=4">
+<style>.hero-strip{background:none!important; height:var(--h)!important; overflow:visible!important; padding:0!important; display:block!important; width:auto!important}
+body{margin:0}</style>
 </head>
 <body>
 <div class="hero-strip" role="banner" data-fban="yellow"></div>
-<main>
-<div class="sign"><div><small>EXIT 4 · AHEAD 25</small><h1>Merch</h1></div></div>
-<div class="card zone">
-<div class="diamond"><span>ROAD<br>WORK<br>AHEAD</span></div>
-<div class="cones" aria-hidden="true"><i class="cone"></i><i class="cone"></i><i class="cone"></i><i class="cone"></i></div>
-<p class="shopurl">asaaab<em>.shop</em></p>
-<p class="lede">is still in the body shop.</p>
-<p>No ETA yet. When it opens, the billboard at the end of the drive lights up and the hangar hears about it first.</p>
-<div class="ctas" style="justify-content:center">
-<a class="cta" href="https://discord.gg/e7FUMwjNah" rel="noopener">Wait in the hangar</a>
-<a class="cta alt" href="/">Back to the drive</a>
+<section class="room" aria-label="The asaaab shop">
+  <div class="sky" aria-hidden="true"><i style="left:10%;top:40px;width:90px;height:34px"></i><i style="left:45%;top:62px;width:120px;height:40px;animation-delay:-25s"></i><i style="left:70%;top:24px;width:70px;height:26px;animation-delay:-45s"></i></div>
+  <div class="rays" aria-hidden="true"></div>
+  <div class="win l" aria-hidden="true"></div><div class="win r" aria-hidden="true"></div>
+  <div class="floor" aria-hidden="true"></div>
+
+  <div class="vm" id="vm">
+    <div class="top">ASAAAB · SHOP</div>
+    <div class="glass" id="glass"><canvas id="vcv" aria-label="Vending machine, punch a code like C2"></canvas><div class="shine"></div></div>
+    <div class="side">
+      <div class="screen" id="screen" aria-live="polite">SELECT</div>
+      <div class="pad" role="group" aria-label="Keypad">
+        <button data-k="A">A</button><button data-k="B">B</button><button data-k="C">C</button>
+        <button data-k="D">D</button><button data-k="E">E</button><button data-k="1">1</button>
+        <button data-k="2">2</button><button data-k="3">3</button><button data-k="4">4</button>
+        <button data-k="CLR" class="clr" style="grid-column:1/4; aspect-ratio:auto; border-radius:999px; padding:6px 0">CLEAR</button>
+      </div>
+      <button class="coin" id="coin" type="button" aria-label="Coin slot"></button>
+    </div>
+    <div class="trough" id="trough" title="Checkout">
+      <div class="flap">PUSH · CHECKOUT</div>
+      <button class="req" id="req" type="button" hidden>REQUEST CHECKOUT</button>
+    </div>
+    <div class="wipsign" id="wipsign" style="right:2%; top:20%"><b>🚧 WORK IN PROGRESS</b><small>The keypad works. The door's jammed. Drag me out of the way.</small></div>
+  </div>
+</section>
+
+<div class="ask" id="ask" role="dialog" aria-modal="true" aria-labelledby="askT">
+  <div class="card2" id="askBody">
+    <h2 id="askT">Checkout's jammed</h2>
+    <p>You cleaned the machine out. The door won't open yet, but you can request checkout and get counted.</p>
+    <label><input type="checkbox" id="keep"> Keep me posted about future flights</label>
+    <div id="emailRow"><input type="email" id="email" placeholder="you@example.com" autocomplete="email"></div>
+    <button class="go" id="askGo" type="button">REQUEST CHECKOUT</button><br>
+    <button class="x" id="askX" type="button">close</button>
+  </div>
 </div>
-<div class="tape" aria-hidden="true"></div>
-</div>
-</main>
-<div class="road" aria-hidden="true"></div>
+
 <p class="foot">© 2026 asaaab · <a href="/privacy/">Privacy</a> · <a href="/copyright/">Copyright &amp; reuse</a> · <a href="mailto:asaaab93x@gmail.com">asaaab93x@gmail.com</a></p>
 <script src="/assets/bannerfold.js?v=4" defer></script>
+<script src="/assets/vend.js?v=2" defer></script>
 <script>if (/(^|\.)asaaab\.com$/.test(location.hostname)) { const s=document.createElement("script"); s.async=true; s.dataset.goatcounter="https://asaaab.goatcounter.com/count"; s.src="https://gc.zgo.at/count.js"; document.head.appendChild(s); }</script>
 </body>
 </html>
