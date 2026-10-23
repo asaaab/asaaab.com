@@ -37,15 +37,15 @@
   const show = (t, ms = 0) => { screen.textContent = t; msgT = ms ? performance.now() + ms : 0; };
   function press(k) {
     seq = (seq + k).slice(-6);
-    if (seq === "ASAAAB") { fresh(); seq = ""; typed = ""; show("RESTOCKED", 1500); $("req").hidden = true; track("shop-reset-code"); return; }
+    if (seq === "ASAAAB") { fresh(); seq = ""; typed = ""; show("FULL!", 1500); $("req").hidden = true; track("shop-reset-code"); return; }
     if (k === "S") return;
     if (k === "CLR") { typed = ""; show("SELECT"); return; }
     if (vending) return;
     if (ROWS.includes(k)) { typed = k; show(k + "_"); return; }
     if (/[1-4]/.test(k) && typed.length === 1) {
       const code = typed + k, i = ROWS.indexOf(typed) * COLS + (+k - 1); typed = "";
-      if (stock[i] <= 0) { show(code + " SOLD OUT", 1400); return; }
-      show("VEND " + code); vending = { i, t: 0 }; track("shop-vend");
+      if (stock[i] <= 0) { show("SOLD OUT", 1400); return; }
+      show(code + " ⟳"); vending = { i, t: 0 }; track("shop-vend");
     }
   }
   document.querySelectorAll(".pad button").forEach(b => b.addEventListener("click", () => press(b.dataset.k)));
@@ -53,7 +53,7 @@
   addEventListener("keydown", e => { if (e.target.closest && e.target.closest("input")) return; const k = e.key.toUpperCase();
     if ("ABCDES1234".includes(k) && k.length === 1) { press(k); const btn = document.querySelector(`.pad button[data-k="${k}"]`); if (btn) { btn.classList.add("hit"); setTimeout(() => btn.classList.remove("hit"), 120); } }
     else if (k === "BACKSPACE" || k === "ESCAPE") press("CLR"); });
-  $("trough").addEventListener("click", e => { if (e.target.id === "req") return; const t = $("trough"); t.classList.remove("shake"); void t.offsetWidth; t.classList.add("shake"); show("DOOR JAMMED", 1300); });
+  $("trough").addEventListener("click", e => { if (e.target.id === "req") return; const t = $("trough"); t.classList.remove("shake"); void t.offsetWidth; t.classList.add("shake"); show("JAMMED", 1300); });
 
   // ---- checkout request (counted; email only when the shop worker is live)
   $("req").addEventListener("click", () => { $("ask").classList.add("on"); track("shop-checkout-open"); });
@@ -126,13 +126,13 @@
     const dt = Math.min(.033, (now - last) / 1000); last = now;
     if (vending) { vending.t += dt;
       if (vending.t > 1) { const i = vending.i, [x, y] = slotXY(i), b = body(ITEMS[i], x, y + R * .3); b.vx = (Math.random() - .5) * 120; b.vy = 40; b.va = (Math.random() - .5) * 8; b.born = now; bodies.push(b);
-        stock[i]--; vending = null; show("THANK YOU", 900); save();
+        stock[i]--; vending = null; show("THANKS", 900); save();
         if (stock.every(s => s <= 0)) { $("req").hidden = false; show("ALL GONE", 2500); track("shop-emptied"); } } }
     for (let s = 0; s < 3; s++) step(dt / 3);
     if (msgT && now > msgT) { msgT = 0; show(typed ? typed + "_" : "SELECT"); }
     draw(now); requestAnimationFrame(frame);
   }
-  const room = document.querySelector('.room'); const fit = () => { room.style.height = Math.max(560, innerHeight - room.getBoundingClientRect().top - scrollY) + 'px'; }; fit(); addEventListener('resize', fit); setTimeout(() => { fit(); layout(); }, 400);
+  const room = document.querySelector('.room'); const fit = () => { room.style.height = Math.max(480, innerHeight - room.getBoundingClientRect().top - scrollY) + 'px'; }; fit(); addEventListener('resize', fit); setTimeout(() => { fit(); layout(); }, 400);
   layout(); load(); bodies.forEach(b => { b.born = 0; b.r = R; });
   $("req").hidden = !stock.every(s => s <= 0);
   show("SELECT"); addEventListener("resize", layout); requestAnimationFrame(frame);
