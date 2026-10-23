@@ -34,3 +34,5 @@
 - we do not sell perfect cars. nobody does. we just dont lie about it.
 - want to spend $2000 on a car instead of $1000 a month?
 - i stock up on whimsy at asaaab shoppe
+- if the ev market has said anything its that the people set the residual.
+- oh that ones too expensive, heres one with a mismatched bumper. who cares.
