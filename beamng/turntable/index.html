@@ -1,1 +1,93 @@
-x
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>9-3X turntable · asaaab</title>
+<meta name="theme-color" content="#dc0500">
+<link rel="icon" href="/banner.png">
+<link rel="stylesheet" href="/assets/bannerfold.css?v=4">
+<style>
+*{box-sizing:border-box}
+body{margin:0; color:#16191c; font:700 16px/1.4 system-ui, sans-serif; background:radial-gradient(1200px 520px at 50% 0%, #fff, #e6edf2 60%, #cfd8de)}
+.hero-strip{background:none!important; height:var(--h)!important; overflow:visible!important; padding:0!important; display:block!important; width:auto!important}
+.stage{position:relative; max-width:1100px; margin:10px auto 0; padding:0 16px}
+.tt{position:relative; width:100%; aspect-ratio:920/400; border-radius:28px; overflow:hidden; cursor:grab; touch-action:pan-y; user-select:none;
+  background:radial-gradient(ellipse at 50% 88%, rgba(0,0,0,.18), transparent 40%), linear-gradient(#f7f9fa, #dfe6ea); box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.tt.drag{cursor:grabbing}
+.tt canvas,.tt img{position:absolute; inset:0; width:100%; height:100%; object-fit:contain; pointer-events:none}
+.drive{position:absolute; transform:translate(-50%,-100%); padding:12px 18px; border-radius:999px; border:0; cursor:pointer; color:#fff; font:900 14px system-ui; letter-spacing:.08em;
+  background:radial-gradient(circle at 30% 20%, rgba(255,255,255,.55), transparent 40%), linear-gradient(160deg, #3aa8ff, #1d5fb8); box-shadow:0 8px 18px rgba(13,47,102,.35); opacity:0; pointer-events:none; transition:opacity .25s, transform .25s}
+.drive.show{opacity:1; pointer-events:auto; transform:translate(-50%,-110%)}
+.bar{display:flex; flex-wrap:wrap; gap:10px; justify-content:center; margin:16px 0}
+.bar button{padding:12px 18px; border-radius:999px; border:0; cursor:pointer; font:900 14px system-ui; letter-spacing:.06em; background:linear-gradient(#fff, #e3e9ed); box-shadow:0 3px 0 #b9c3ca, 0 6px 12px rgba(0,0,0,.08)}
+.bar button.on{background:linear-gradient(#ffcf3a, #f29a1f)}
+.hint{text-align:center; color:#5b6167; font-weight:800; margin:0}
+.ask{position:fixed; inset:0; display:none; place-items:center; background:rgba(10,20,30,.45); z-index:20; padding:16px}
+.ask.on{display:grid}
+.card{max-width:520px; width:100%; border-radius:26px; padding:24px; background:#fbfaf6; box-shadow:0 20px 40px rgba(0,0,0,.3); text-align:center}
+.card h2{margin:0 0 6px; font:900 26px system-ui}
+.card p{margin:0 0 16px; color:#5b6167}
+.card a{display:block; margin:10px 0; padding:16px; border-radius:18px; text-decoration:none; color:#fff; font:900 17px system-ui}
+.card a.beam{background:linear-gradient(160deg, #ff6b5e, #dc0500)} .card a.web{background:linear-gradient(160deg, #3aa8ff, #1d5fb8)}
+.card a small{display:block; font-weight:700; font-size:13px; opacity:.85}
+.card button{margin-top:6px; border:0; background:none; color:#5b6167; font:800 14px system-ui; cursor:pointer}
+</style>
+</head>
+<body>
+<div class="hero-strip" role="banner" data-fban="orange"></div>
+<div class="stage">
+  <div class="tt" id="tt" aria-label="Saab 9-3X, drag or scroll to spin"><canvas id="cv"></canvas><img id="shot" alt="" hidden>
+    <button class="drive" id="drive" type="button">DRIVE ASAAAB</button></div>
+  <div class="bar"><button id="wings" type="button" hidden>FLAP THE WINGS</button></div>
+  <p class="hint">Drag or scroll to walk around it.</p>
+</div>
+<div class="ask" id="ask" role="dialog" aria-modal="true"><div class="card">
+  <h2>Drive asaaab</h2><p>Pick your seat. Nobody gets left out for not having a PC.</p>
+  <a class="beam" href="/beamng/#multiplayer">In BeamNG<small>multiplayer on the Angelish Crest server · PC</small></a>
+  <a class="web" href="/hiddendemo/">In your browser<small>go carspotting · any phone, any laptop</small></a>
+  <button id="askX" type="button">not yet</button></div></div>
+<script src="/assets/bannerfold.js?v=4" defer></script>
+<script>
+// 9-3X turntable. Frames: /assets/turntable/c00.jpg … c23.jpg (every 15°, closed; c00 = driver side square-on, c06 = nose, c12 = passenger side, c18 = tail), o00…o23 (doors + hood + trunk open), d23 d00 d01 (driver door only).
+// Until the real BeamNG shots exist it draws a sketch frame that says which shot goes there.
+(() => {
+  const N = 24, DOOR = [23, 0, 1], BASE = "/assets/turntable/";
+  const tt = document.getElementById("tt"), cv = document.getElementById("cv"), g = cv.getContext("2d"), img = document.getElementById("shot"), drive = document.getElementById("drive");
+  let shown = "", pos = 3, v = 0, wings = false, door = false, drag = null;
+  const have = {}; const pre = k => { if (have[k] !== undefined) return; have[k] = null; const i = new Image(); i.onload = () => { have[k] = i; shown = ""; }; i.onerror = () => { have[k] = false; }; i.src = BASE + k + ".jpg"; };
+  for (let i = 0; i < N; i++) { pre("c" + String(i).padStart(2, "0")); pre("o" + String(i).padStart(2, "0")); } DOOR.forEach(i => pre("d" + String(i).padStart(2, "0")));
+  setTimeout(() => { if (have.o00) document.getElementById("wings").hidden = false; }, 2500);
+  const key = () => { const i = ((Math.round(pos) % N) + N) % N, s = String(i).padStart(2, "0"); return door && DOOR.includes(i) && have["d" + s] ? "d" + s : (wings && have["o" + s] ? "o" : "c") + s; };
+  function sketch(k) {   // placeholder: a side-profile car squashed by the viewing angle, labeled with the shot it needs
+    const W = cv.width = tt.clientWidth * 2, H = cv.height = tt.clientHeight * 2, a = (+k.slice(1)) * 15 * Math.PI / 180, cx = W / 2, cy = H * .62;
+    g.clearRect(0, 0, W, H); const sx = Math.cos(a), sz = Math.abs(Math.sin(a)), L = W * .32, Wd = W * .1;
+    g.fillStyle = "rgba(0,0,0,.15)"; g.beginPath(); g.ellipse(cx, cy + H * .14, Math.abs(L * sx) + Wd * sz + 20, H * .04, 0, 0, 7); g.fill();
+    g.save(); g.translate(cx, cy); g.scale(Math.abs(sx) * .85 + .15, 1); if (sx < 0) g.scale(-1, 1);
+    g.fillStyle = "#dc0500"; g.beginPath(); g.moveTo(-L, H * .1); g.lineTo(-L, -H * .02); g.lineTo(-L * .55, -H * .05); g.lineTo(-L * .3, -H * .17); g.lineTo(L * .5, -H * .17); g.lineTo(L * .62, -H * .05); g.lineTo(L, -H * .02); g.lineTo(L, H * .1); g.closePath(); g.fill();
+    g.fillStyle = "#26323c"; g.fillRect(-L * .25, -H * .14, L * .7, H * .08);
+    if (k[0] !== "c") { g.fillStyle = "#ffcf3a"; g.fillRect(-L * .1, -H * .12, L * .08, H * .2); }
+    g.fillStyle = "#16191c"; [-L * .62, L * .62].forEach(x => { g.beginPath(); g.arc(x, H * .1, H * .07, 0, 7); g.fill(); }); g.restore();
+    g.fillStyle = "#5b6167"; g.font = `900 ${H * .045}px system-ui`; g.textAlign = "center";
+    g.fillText(`SHOT ${k}.jpg · ${(+k.slice(1)) * 15}° · ${k[0] === "c" ? "all closed" : k[0] === "o" ? "doors, hood, trunk open" : "driver door open"}`, cx, H * .12);
+  }
+  function render() { const k = key(); if (k === shown) return; shown = k; const im = have[k];
+    if (im) { img.src = im.src; img.hidden = false; g.clearRect(0, 0, cv.width, cv.height); } else { img.hidden = true; sketch(k); }
+    const i = ((Math.round(pos) % N) + N) % N, near = DOOR.includes(i); drive.classList.toggle("show", near);
+    drive.style.left = "46%"; drive.style.top = "34%"; }
+  tt.addEventListener("pointerdown", e => { if (e.target === drive) return; drag = { x: e.clientX, p: pos, t: performance.now() }; tt.setPointerCapture(e.pointerId); tt.classList.add("drag"); });
+  tt.addEventListener("pointermove", e => { if (!drag) return; const np = drag.p - (e.clientX - drag.x) / (tt.clientWidth / 30), t = performance.now(); v = (np - pos) / Math.max(.008, (t - drag.t) / 1000) * .4 + v * .6; drag.t = t; pos = np; });
+  const up = () => { drag = null; tt.classList.remove("drag"); }; tt.addEventListener("pointerup", up); tt.addEventListener("pointercancel", up);
+  tt.addEventListener("wheel", e => { e.preventDefault(); pos += (e.deltaY + e.deltaX) / 120; }, { passive: false });
+  addEventListener("keydown", e => { if (e.key === "ArrowLeft") pos -= 1; if (e.key === "ArrowRight") pos += 1; });
+  document.getElementById("wings").onclick = e => { wings = !wings; e.target.classList.toggle("on", wings); shown = ""; };
+  drive.addEventListener("mouseenter", () => { door = true; shown = ""; }); drive.addEventListener("mouseleave", () => { door = false; shown = ""; });
+  drive.addEventListener("click", () => document.getElementById("ask").classList.add("on"));
+  document.getElementById("askX").onclick = () => document.getElementById("ask").classList.remove("on");
+  let last = performance.now(); (function tick(t) { const dt = Math.min(.05, (t - last) / 1000); last = t; if (!drag && Math.abs(v) > .05) { pos += v * dt; v *= Math.pow(.08, dt); } render(); requestAnimationFrame(tick); })(last);
+  addEventListener("resize", () => { shown = ""; });
+})();
+</script>
+</body>
+</html>
