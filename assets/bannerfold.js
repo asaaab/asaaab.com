@@ -21,9 +21,10 @@
     { c:"blue",    t:"connections to", s:"YouTube",                                    href:"https://www.youtube.com/@asaaab93x" },
     { c:"purple",  t:"asaaab hangar",  s:"the Discord",                                href:"https://discord.gg/e7FUMwjNah" },
     { c:"charcoal", t:"asaaab, what the hell is that?!", s:"privacy · copyright · resources", href:"/copyright/" },
-    { c:"magenta", t:"owner's manual", s:"for co-owners",                              href:"/manual/" },
+    { c:"magenta", t:"asaaab co-owner's manual", s:"interested in joining asaaab?",   href:"/manual/", sticker:true },
     { c:"glacier", t:"calm",           s:"a breath of fresh air",                      href:"/calm/", tab:true },
   ];
+  const STICKER = `<span aria-hidden="true" style="position:absolute;right:clamp(14px,4vw,48px);top:50%;width:clamp(26px,3.4vw,38px);aspect-ratio:3/4;transform:translateY(-50%) rotate(8deg);border-radius:3px 3px 3px 3px;background:linear-gradient(225deg,transparent 0 28%,rgba(0,0,0,.25) 28% 30%,#e9eef2 30% 44%,#fff 44%),repeating-linear-gradient(#fff 0 6px,#cfd6db 6px 7px);background-blend-mode:normal;box-shadow:0 0 0 2px #fff,0 4px 8px rgba(0,0,0,.3);pointer-events:none"></span>`;
   const ASSET = (document.currentScript && document.currentScript.src.replace(/bannerfold\.js.*$/, "")) || "/assets/";
   const art = c => `${ASSET}strips/${c}.webp?v=${V}`;
   const vars = c => `--top:${STRIPS[c].top};--bot:${STRIPS[c].bot}` + `;--fink:${STRIPS[c].ink || "#fff"}`;
@@ -46,7 +47,7 @@
         const cur = p.href === here;
         const ext = p.tab || /^https?:/.test(p.href);
         return `<a class="fband${cur ? " here" : ""}" href="${p.href}" data-c="${p.c}" style="${vars(p.c)}" tabindex="-1"${cur ? ' aria-current="page"' : ""}${ext ? ' target="_blank" rel="noopener"' : ""}>`
-          + `<span class="lbl"><b>${p.t}</b><small>${p.s}</small></span></a>`;
+          + `<span class="lbl"><b>${p.t}</b><small>${p.s}</small></span>${p.sticker ? STICKER : ""}</a>`;
       }).join("") + `<span class="frail" aria-hidden="true"><i></i></span></div></nav>`;
 
     const hit = host.querySelector(".hit"), drop = host.querySelector(".fdrop"), bands = [...drop.querySelectorAll(".fband")];
