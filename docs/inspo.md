@@ -29,3 +29,5 @@
 - the saab 9-3 is whimsymaxxed. whimsy can be functional.
 - follow me to asaaab shoppe
 - if you need a car in la and have 4k what are you driving? asaaab.
+- were not trying to start the saab factory.
+- a whimsical buy here pay once here break even car dealership collectively owned that feels like a hangout spot and rc sim lounge.
