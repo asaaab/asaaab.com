@@ -25,3 +25,5 @@ Instead of complaining, making a plan to fix it will be praised. Actually.
 ## Maintenance schedule
 - Every day: oxygen mask first.
 - When something breaks: make a plan to fix it.
+
+DEALER: Interested in becoming a coworker? Co-owner? Visit your asaaab dealer. |
