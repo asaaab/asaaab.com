@@ -26,6 +26,11 @@ Instead of complaining, making a plan to fix it will be praised. Actually.
 - Every day: oxygen mask first.
 - When something breaks: make a plan to fix it.
 
+## Master plan
+Heard "that'll never work"? Why? Look at the plan.
+
+[Open the master plan](/manual/master-plan/)
+
 ## Computer use policy
 The organization may use computers and automated systems to perform work, operate workflows, develop products, and generate revenue, including through substantially or fully automated operations.
 
