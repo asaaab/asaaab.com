@@ -1,1 +1,146 @@
-x
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>BeamNG Playbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@600;800;900&family=Nunito:wght@500;700;800;900&display=swap">
+<style>
+/* Pit Crew garage clipboard: the BeamNG operating manual the production desk writes for itself. */
+:root{color-scheme:light;--bg:#eef1f3;--panel:#fff;--ink:#16191c;--muted:#5b6268;--line:#d7dbdf;--guide:#3f9a2f;--guide-dk:#2f7a22;--warn:#f7d117;--bad:#c62f26;
+  --hwy:"Overpass","Arial Narrow",system-ui,sans-serif;--ui:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 var(--ui);padding:0 16px 80px}
+header{margin:0 -16px;background:var(--guide);color:#fff;padding:16px}
+header div{max-width:860px;margin:0 auto}
+h1{margin:0;font:900 26px/1 var(--hwy)} h1 small{display:block;font-size:11px;letter-spacing:.2em;opacity:.85;margin-bottom:4px}
+header p{margin:8px 0 0;opacity:.9}
+main{max-width:860px;margin:0 auto}
+section{background:var(--panel);border:2px solid var(--ink);border-radius:14px;padding:16px;margin-top:16px}
+h2{margin:0 0 8px;font:900 21px/1.1 var(--hwy)}
+h3{margin:14px 0 4px;font:800 14px var(--hwy);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+p,li{margin:4px 0} ul,ol{padding-left:20px;margin:6px 0}
+code{font:13px ui-monospace,Menlo,Consolas,monospace;background:#f1f3f5;border:1px solid var(--line);border-radius:5px;padding:0 4px;overflow-wrap:anywhere}
+pre{font:12.5px/1.45 ui-monospace,Menlo,Consolas,monospace;background:#16191c;color:#e9f5e6;border-radius:10px;padding:12px;overflow-x:auto;margin:8px 0;white-space:pre}
+.rule{border-left:6px solid var(--bad);padding:6px 10px;background:#fff6f5;margin:6px 0;border-radius:6px}
+.tip{border-left:6px solid var(--warn);padding:6px 10px;background:#fffbe6;margin:6px 0;border-radius:6px}
+table{border-collapse:collapse;width:100%;font-size:14px} td,th{border-bottom:1px solid var(--line);padding:5px 6px;text-align:left;vertical-align:top} th{font-family:var(--hwy);font-size:12px;letter-spacing:.08em;color:var(--muted)}
+a{color:var(--guide-dk);font-weight:800}
+</style>
+</head>
+<body>
+<header><div>
+  <h1><small>ASAAAB.COM · PIT CREW</small>BeamNG Playbook</h1>
+  <p>How the production desk drives BeamNG.drive by itself: the rules, the console tricks, the capture pipeline, and every way it broke. Written after the night the 9-3X doors finally opened.</p>
+</div></header>
+<main>
+
+<section>
+  <h2>Golden rules</h2>
+  <div class="rule"><b>Never "open application" on Beam while it's running.</b> It launches a second copy and crashes the first (0xC0000409). It cost us a staged scene once. Bring Beam forward by clicking its taskbar icon.</div>
+  <div class="rule"><b>Don't touch Beam's files while the game is running.</b> No mods, no user folder, no reads either.</div>
+  <div class="rule"><b>Never press J unless asked.</b> If you need a pause, do it from Lua (below) so you know exactly when it happened.</div>
+  <div class="tip"><b>Look before you ask.</b> Take a screenshot instead of asking what's on screen.</div>
+  <div class="tip"><b>Leave the UI visible.</b> Alt+U hides the console and the pause menu too, so you lose track of state. Crop the UI out of the frame instead.</div>
+</section>
+
+<section>
+  <h2>The console is the steering wheel</h2>
+  <p>Everything reliable happens in the GE Lua console (key <code>`</code>, grave). It is sandboxed but has <code>be</code>, <code>core_camera</code>, <code>commands</code>, <code>core_jobsystem</code>, <code>simTimeAuthority</code> and <code>queueLuaCommand</code> into the car.</p>
+  <h3>Typing into it</h3>
+  <ul>
+    <li>Type <b>key by key</b>. Clipboard paste gets eaten by focus thieves (the Claude window, Textinputhost, Discord).</li>
+    <li>After opening the console, <b>click the input twice</b> (~0.4 s apart). The first click often doesn't take focus.</li>
+    <li>Keep each command under <b>~250 characters</b>. Split long ones, or store a string in a global and use it in the next command.</li>
+    <li>Before you hit Return, <b>zoom on the input line</b> (y≈605–625) to confirm the text actually landed.</li>
+    <li>The log does not auto-scroll. Don't treat a missing line as proof that a command didn't run. Check the game view instead.</li>
+  </ul>
+  <table>
+    <tr><th>Character</th><th>Key name</th><th>Character</th><th>Key name</th></tr>
+    <tr><td><code>(</code> <code>)</code></td><td>shift+9 / shift+0</td><td><code>_</code></td><td>shift+minus</td></tr>
+    <tr><td><code>:</code></td><td>shift+semicolon</td><td><code>-</code></td><td>minus</td></tr>
+    <tr><td><code>+</code></td><td>shift+= (never "equal")</td><td><code>&gt;</code></td><td>shift+period</td></tr>
+    <tr><td><code>*</code></td><td>shift+8</td><td><code>"</code></td><td>shift+'</td></tr>
+    <tr><td>capitals</td><td>shift+letter</td><td><code>= . , / '</code></td><td>literal</td></tr>
+  </table>
+  <h3>Frame recipe (one console command)</h3>
+  <p>Click sky (700,100) → <code>`</code> → wait 1 → click input ×2 → BackSpace×10 → type → Return → wait 0.5 → <code>`</code> → wait 1.5 → capture.</p>
+</section>
+
+<section>
+  <h2>Helpers to type once per session</h2>
+<pre>-- car anchor + rotate-in-place (NOTE: this teleport RESETS the car: doors close, damage clears)
+TT=be:getPlayerVehicle(0):getPosition() function R(d) local a=math.rad(d)/2 be:getPlayerVehicle(0):setPositionRotation(TT.x,TT.y,TT.z,0,0,math.sin(a),math.cos(a)) end
+
+-- free camera at an offset from TT, heading h (degrees). h=-90 looks along -x.
+commands.setFreeCamera()
+function C(dx,dy,dz,h) local a=math.rad(h)/2 core_camera.setPosition(0,vec3(TT.x+dx,TT.y+dy,TT.z+dz)) core_camera.setRotation(0,quat(0,0,math.sin(a),math.cos(a))) end
+
+-- orbit shot k of 24 (15 deg steps) around the car centre; k=0 driver side, 6 nose, 12 passenger, 18 tail
+function O(k,r) r=r or (k==17 and 4.55 or 5.2) local p=math.rad(-15*k) C(0.5+r*math.cos(p),0.24+r*math.sin(p),1.1,-90+15*k) end
+K=0 function N2() O(K) K=K+1 end     -- then each frame is just: N2()</pre>
+  <h3>Doors, hood, trunk (no clicking needed)</h3>
+<pre>-- open EVERYTHING (doors + hood + tailgate): toggles every coupler group
+be:getPlayerVehicle(0):queueLuaCommand("for k,v in pairs(controller.getAllControllers()) do if k:find('oupler') then v.toggleGroup() end end")
+-- driver door only: add  k:find('FL') and  to the if</pre>
+  <h3>Freeze the moment</h3>
+<pre>-- reset, open, wait for the doors to swing, then pause physics (doors swing shut on their own otherwise)
+R(0) K=0 O(0) core_jobsystem.wrap(function(j) j.sleep(3) be:getPlayerVehicle(0):queueLuaCommand(Q) j.sleep(1.2) simTimeAuthority.pause(true) end)()
+simTimeAuthority.pause(false)   -- unpause</pre>
+  <h3>Timers without the console</h3>
+  <p><code>core_jobsystem.wrap(function(j) … j.sleep(6) … end)()</code> runs a background script. That means one console command can drive a whole sequence.</p>
+  <h3>Reading values out</h3>
+  <p><code>guihooks.message(text, seconds, id)</code> shows a toast (it's clipped at the right edge on this monitor). Vehicle-side <code>log('I','ZZ',x)</code> lands in the console log.</p>
+</section>
+
+<section>
+  <h2>Turntable capture pipeline</h2>
+  <ol>
+    <li><b>Orbit the camera, not the car.</b> <code>setPositionRotation</code> resets the vehicle, which re-latches the doors. Moving the camera leaves the physics alone, so open doors stay open.</li>
+    <li>Shoot the closed set: <code>R(0) K=0</code>, then <code>N2()</code> ×24.</li>
+    <li>Run the reset → open → pause job, then <code>N2()</code> ×24 for the open set. Then the driver-door job, then <code>O(23) O(0) O(1)</code>.</li>
+    <li><b>Capture with zoom, not screenshot:</b> region <code>[385,200,1225,565]</code> at scale 0.6 → 941×409. Full screenshots of the busy Utah scenery fail as "too large".</li>
+    <li>No more than <b>~8 images per batch</b>; 4 frames per batch is the sweet spot.</li>
+    <li>Check every frame. If the console shows in a capture, the toggle lost sync. Stop before stray keys hit the game.</li>
+    <li>Resize to 920×400 and save as JPEG quality 84. Files: <code>cNN</code> closed, <code>oNN</code> open, <code>d23 d00 d01</code> driver door.</li>
+  </ol>
+  <div class="tip">The scene is deterministic. <code>R(0)</code> puts the car back in exactly the same spot, so any single frame can be re-shot later and it still matches.</div>
+</section>
+
+<section>
+  <h2>Things that broke (and the fix)</h2>
+  <table>
+    <tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr>
+    <tr><td>Beam crashed, staged scene lost</td><td>open_application launched a 2nd instance</td><td>Taskbar click only</td></tr>
+    <tr><td>Command never ran, keys went into the game</td><td>Console focus: first click ignored, or a grave press got eaten</td><td>Double-click the input; verify by zoom before Return</td></tr>
+    <tr><td>Camera jumped to the hood/driver view</td><td>Digits typed into the game, not the console</td><td><code>commands.setFreeCamera()</code> then <code>O(k)</code></td></tr>
+    <tr><td>Doors closed between frames</td><td>Rotating the car resets it; unpaused doors also swing shut</td><td>Orbit the camera + pause physics</td></tr>
+    <tr><td>"Screenshot too large"</td><td>Too many images per batch / busy frame</td><td>Use zoom on the crop region, ≤8 per batch</td></tr>
+    <tr><td>Camera inside a picnic shelter at k=17</td><td>Scenery in the orbit path</td><td>Shorter radius for that angle (4.55)</td></tr>
+    <tr><td>Claude window over the right side</td><td>Desktop app pops up while computer use runs</td><td>Crop stops at x=1225</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>Default bindings worth knowing</h2>
+  <table>
+    <tr><td><code>`</code></td><td>Lua console</td><td><code>Shift+C</code></td><td>free camera</td></tr>
+    <tr><td><code>Alt+U</code></td><td>hide UI (hides console too)</td><td><code>C</code></td><td>cycle vehicle cameras</td></tr>
+    <tr><td><code>J</code></td><td>pause physics</td><td><code>Ctrl+Alt+P</code></td><td>photo mode</td></tr>
+    <tr><td><code>L / Alt+L / Shift+L</code></td><td>couplers toggle / unlock / lock</td><td><code>Alt+↑/↓</code></td><td>slow motion</td></tr>
+    <tr><td><code>E</code></td><td>radial menu</td><td><code>F</code></td><td>walk in/out</td></tr>
+    <tr><td><code>Ctrl+W</code></td><td>parts selector</td><td><code>Ctrl+P</code></td><td>screenshot</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>Shipping it</h2>
+  <p>Frames go to <code>assets/turntable/</code>. Upload through the GitHub upload page, <b>wait until all files finish processing</b> before you press Commit (a premature commit silently drops the files), then pull and diff the pixels to verify.</p>
+</section>
+
+</main>
+</body>
+</html>
