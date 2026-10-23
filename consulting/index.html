@@ -20,15 +20,28 @@
 <div class="hero-strip" role="banner" data-fban="green"></div>
 <main>
 <h1>content strategy</h1>
-<p class="lede">Every car video I've posted, floating by how far it went. 715 of them since August 2025, 11.5 million views. Hover a bubble, be nosy.</p>
+<p class="lede">Every car video I've posted, floating by how far it went. <span data-s="videos">715</span> of them since <span data-s="since">August 2025</span>, <span data-s="views_words">11.5 million</span> views. Hover a bubble, be nosy.</p>
 <div class="rc-stats">
-  <div><b>11.5M</b><small>views</small></div>
-  <div><b>2.7M</b><small>on one 11-second video</small></div>
-  <div><b>16×</b><small>the views when 60% are still watching at 3 seconds</small></div>
-  <div><b>48,414</b><small>hours watched</small></div>
-  <div><b>856,983</b><small>likes</small></div>
-  <div><b>21,474</b><small>comments</small></div>
+  <div><b data-s="views_short">11.5M</b><small>views</small></div>
+  <div><b data-s="top_views_short">2.7M</b><small>on one <span data-s="top_len_s">11</span>-second video</small></div>
+  <div><b data-s="hold_multiple">16×</b><small>the views when 60% are still watching at 3 seconds</small></div>
+  <div><b data-s="hours">48,414</b><small>hours watched</small></div>
+  <div><b data-s="likes">856,983</b><small>likes</small></div>
+  <div><b data-s="comments">21,474</b><small>comments</small></div>
 </div>
+<script>
+// Numbers come from /assets/stats.json (rebuilt weekly from the TikTok pull). The text above is the fallback.
+fetch("/assets/stats.json", { cache: "no-store" }).then(r => r.ok ? r.json() : null).then(S => {
+  if (!S) return;
+  const n = x => Number(x).toLocaleString("en-US");
+  const M = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  const f = { videos: n(S.videos), views_short: S.views_short, top_views_short: S.top_views_short, top_len_s: S.top_len_s,
+    hold_multiple: S.hold_multiple + "×", hours: n(S.hours), likes: n(S.likes), comments: n(S.comments),
+    views_words: S.views_short.replace("M", " million").replace("K", " thousand"),
+    since: S.since ? M[+S.since.slice(5, 7) - 1] + " " + S.since.slice(0, 4) : null };
+  document.querySelectorAll("[data-s]").forEach(el => { const v = f[el.dataset.s]; if (v != null && v !== "") el.textContent = v; });
+}).catch(() => {});
+</script>
 <div id="receipts"></div>
 <h2>Knowing what to film</h2>
 <p>The biggest one wasn't planned. It's a license plate in traffic, filmed in the eleven seconds it was in front of me. Part of content is the edit. Most of it is noticing, and having the phone out when it happens.</p>
