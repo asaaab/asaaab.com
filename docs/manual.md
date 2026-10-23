@@ -26,6 +26,12 @@ Instead of complaining, making a plan to fix it will be praised. Actually.
 - Every day: oxygen mask first.
 - When something breaks: make a plan to fix it.
 
+## Crew
+- **asaaab captain:** the founder. Moreso like a conductor to the orchestra.
+- **Copilots:** the co-owners.
+- **Flight crew:** people on the ground helping out. Camera people, on screen talent.
+- **Pit crew:** people and agents digitally that help out. Mods on Discord. Bots. Agents.
+
 ## Master plan
 Heard "that'll never work"? Why? Look at the plan.
 
