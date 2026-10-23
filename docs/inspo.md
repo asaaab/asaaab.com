@@ -18,3 +18,9 @@
 - WHEREVER DUDE BUILD A WALL build the building around the wall
 - If it is a loss leader so be it it’s whimsy.
 - That is where humans are for. We should be fingerpainting.
+- things with momentum are not bricks but mortar. mortar dries
+- every task is step 2, and if its not step 2, its step 3. the idea was step 1.
+- complaining is just hoping a little too loudly for others
+- the answer is why
+- move your mind
+- time is money. hot take i think both are made up. real and fake? made up

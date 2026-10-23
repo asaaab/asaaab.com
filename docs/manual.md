@@ -14,6 +14,11 @@ ROOF: There is always a why.
 ! Something almost always broken.
 You still need to show up and put in work. Not everyone will love this workplace. Something almost always broken.
 Instead of complaining, making a plan to fix it will be praised. Actually.
+! Letting off the clutch.
+Anything new here starts in the clutch phase: jerky, loud, full of stalls. That's expected. Don't learn stick in bumper to bumper traffic. We build the empty parking lot first, so you can stall without wrecking anything.
+The safety net: every change has a backup, nothing gets deleted, every step can be undone. A stall is information, not damage.
+Before you say "ok, I'm ready for more," step back and look at what you made. Check that it's reasonable from the other person's side. Mortar dries, so catch it while it's wet.
+Making room for people to stall is whimsymaxxing.
 
 ## Specifications
 - Model: break even
