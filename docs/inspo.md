@@ -15,3 +15,6 @@
 - something almost always broken.
 - there is always a why.
 - they have to feel like they found socialism on their own. its the only way.
+- WHEREVER DUDE BUILD A WALL build the building around the wall
+- If it is a loss leader so be it it’s whimsy.
+- That is where humans are for. We should be fingerpainting.
