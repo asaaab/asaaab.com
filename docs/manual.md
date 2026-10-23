@@ -1,4 +1,4 @@
-# Owner's Manual
+# Co-Owner's Manual
 For co-owners.
 
 ## Body structure
