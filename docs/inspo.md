@@ -25,3 +25,7 @@
 - move your mind
 - time is money. hot take i think both are made up. real and fake? made up
 - asaaab is the antidote for reality. reality is an enthymeme
+- why wouldnt you trust one with a higher odometer? its a longer proven history of taking care of you.
+- the saab 9-3 is whimsymaxxed. whimsy can be functional.
+- follow me to asaaab shoppe
+- if you need a car in la and have 4k what are you driving? asaaab.
