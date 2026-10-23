@@ -21,8 +21,8 @@
     { c:"blue",    t:"connections to", s:"YouTube",                                    href:"https://www.youtube.com/@asaaab93x" },
     { c:"purple",  t:"asaaab hangar",  s:"the Discord",                                href:"https://discord.gg/e7FUMwjNah" },
     { c:"charcoal", t:"asaaab, what the hell is that?!", s:"privacy · copyright · resources", href:"/copyright/" },
-    { c:"magenta", t:"master plan",    s:"where this is all going · coming soon",      href:"/plan/" },
-    { c:"glacier", t:"calm",           s:"a breath of fresh air",                      href:"/calm/" },
+    { c:"magenta", t:"owner's manual", s:"for co-owners",                              href:"/manual/" },
+    { c:"glacier", t:"calm",           s:"a breath of fresh air",                      href:"/calm/", tab:true },
   ];
   const ASSET = (document.currentScript && document.currentScript.src.replace(/bannerfold\.js.*$/, "")) || "/assets/";
   const art = c => `${ASSET}strips/${c}.webp?v=${V}`;
@@ -44,7 +44,7 @@
       `<button class="hit" type="button" aria-expanded="false" aria-controls="fdrop" aria-label="asaaab menu"></button>` +
       `<nav class="fdrop" id="fdrop" aria-label="Site menu"><a class="fwin" href="/calm/" tabindex="-1" aria-label="calm"><span class="fsky"></span><span class="fglare"></span><span class="fsill"></span></a><div class="fshade">` + PAGES.map(p => {
         const cur = p.href === here;
-        const ext = /^https?:/.test(p.href);
+        const ext = p.tab || /^https?:/.test(p.href);
         return `<a class="fband${cur ? " here" : ""}" href="${p.href}" data-c="${p.c}" style="${vars(p.c)}" tabindex="-1"${cur ? ' aria-current="page"' : ""}${ext ? ' target="_blank" rel="noopener"' : ""}>`
           + `<span class="lbl"><b>${p.t}</b><small>${p.s}</small></span></a>`;
       }).join("") + `<span class="frail" aria-hidden="true"><i></i></span></div></nav>`;
