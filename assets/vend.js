@@ -15,14 +15,14 @@
 
   const glass = $("glass"), cv = $("vcv"), g = cv.getContext("2d"), screen = $("screen");
   let W = 0, H = 0, dpr = 1, slotW = 0, rowH = 0, top0 = 0, R = 14, S = 40;
-  let stock, bodies = [], vending = null, typed = "", seq = "", idleT = 0, msgT = 0;
+  let jig = 0, stock, bodies = [], vending = null, typed = "", seq = "", idleT = 0, msgT = 0;
 
   function fresh() { stock = ITEMS.map(() => DEPTH); bodies = []; save(); }
-  function save() { store.set({ day: today(), stock, pile: bodies.filter(b => b.sleep).map(b => ({ e: b.e, x: b.x / W, y: b.y / H, a: b.a })) }); }
+  function save() { store.set({ day: today(), stock, pile: bodies.filter(b => b.sleep).map(b => ({ e: b.e, x: b.x / W, y: b.y / H, a: b.a, f: b.free ? 1 : 0 })) }); }
   function load() {
     const s = store.get();
     if (!s || s.day !== today()) { fresh(); return; }
-    stock = s.stock; bodies = (s.pile || []).map(p => body(p.e, p.x * W, p.y * H, p.a));
+    stock = s.stock; bodies = (s.pile || []).map(p => { const b = body(p.e, p.x * W, p.y * H, p.a); b.free = !!p.f; return b; });
   }
   const body = (e, x, y, a = 0) => ({ e, x, y, vx: 0, vy: 0, a, va: 0, r: R, sleep: false });
 
@@ -122,10 +122,10 @@
       for (let c = 0; c < COLS; c++) { g.fillStyle = "#f4f6f7"; const lw = Math.min(slotW * .62, S * .62), lx = c * slotW + slotW / 2; g.fillRect(lx - lw / 2, y + sh * .16, lw, sh * .68); label(lx, y + sh * .5, row, c + 1); }
     }
     for (let i = 0; i < ITEMS.length; i++) {
-      const [x, y] = slotXY(i); let ph = 0, fwd = 0;
+      let [x, y] = slotXY(i), ph = 0, fwd = 0;
       if (vending && vending.i === i) { ph = vending.t * Math.PI * 2; fwd = Math.min(1, vending.t / .9); }
       ringsBack(x, y, ph);
-      if (stock[i] > 0) { const sc = 1 + fwd * .22, yy = y + fwd * S * .06; bag(x, yy, S * sc); emoji(ITEMS[i], x, yy, R * 1.45 * sc); }
+      if (stock[i] > 0) { const sc = 1 + fwd * .22, yy = y + fwd * S * .06 + jig * Math.cos(now / 37 + i * 1.7) * .5; x += jig * Math.sin(now / 45 + i * 2.3); bag(x, yy, S * sc); emoji(ITEMS[i], x, yy, R * 1.45 * sc); }
       ringFront(x, y, ph);
     }
     for (const b of bodies) emoji(b.e, b.x, b.y, b.r * 1.7, b.a);
@@ -140,13 +140,27 @@
         if (stock.every(s => s <= 0)) { $("req").hidden = false; show("ALL GONE", 2500); track("shop-emptied"); } } }
     for (let s = 0; s < 3; s++) step(dt / 3);
     if (msgT && now > msgT) { msgT = 0; typed ? show(codeHTML(typed, 0), 0, true) : show("SELECT"); }
-    draw(now); requestAnimationFrame(frame);
+    jig *= Math.pow(.02, dt); draw(now); requestAnimationFrame(frame);
   }
   const room = document.querySelector('.room'); const fit = () => { room.style.height = Math.max(480, innerHeight - room.getBoundingClientRect().top - scrollY) + 'px'; }; fit(); addEventListener('resize', fit); setTimeout(() => { fit(); layout(); }, 400);
   layout(); load(); bodies.forEach(b => { b.born = 0; b.r = R; });
   $("req").hidden = !stock.every(s => s <= 0);
   show("SELECT"); addEventListener("resize", layout); requestAnimationFrame(frame);
   // ---- the machine has legs + wheels: drag it and it rolls; the pile inside sloshes
+  const belt = (() => { const claim = document.querySelector(".claim"), car = claim && claim.querySelector(".carousel"), els = car ? [...car.querySelectorAll(".bag")] : [];
+    const api = { speed: 46, lift: 5, update: () => false }; if (!car) return api;
+    const bags = els.map((el, i) => ({ el, x: i * 130, y: 0 }));
+    function place() { const wheel = document.querySelector(".wheel"); if (!wheel || getComputedStyle(claim).display === "none") return null;
+      const wr = wheel.getBoundingClientRect(), cr = car.getBoundingClientRect(), want = wr.bottom - api.lift - cr.height * .55 - (api.lifted || 0);
+      if (Math.abs(cr.top - want) > .5) claim.style.top = (claim.offsetTop + want - cr.top) + "px"; return car.getBoundingClientRect(); }
+    api.update = (dt, vm, mx) => { const cr = place(); if (!cr) return false; const W = cr.width, bw = els[0] ? els[0].offsetWidth : 30;
+      const ws = [...document.querySelectorAll(".wheel")].map(w => w.getBoundingClientRect()), ml = Math.min(...ws.map(w => w.left)) - cr.left, mr = Math.max(...ws.map(w => w.right)) - cr.left;
+      const on = mr > 12 && ml < W - 12; let wall = on ? Math.max(0, ml - 6) : Infinity;   // luggage piles up against the machine's front wheel
+      const order = bags.slice().sort((a, b) => b.x - a.x); let stackY = 0;
+      for (const b of order) { let nx = b.x + api.speed * dt; if (nx + bw > wall && b.x < mr) { nx = Math.max(-bw, wall - bw); if (nx <= 0 && wall < W) { b.y = Math.min(b.y + 1, ++stackY); } wall = nx; } else { b.y = 0; }
+        if (nx > W) nx = -bw - Math.random() * 60; b.x = nx; b.el.style.transform = `translate(${b.x.toFixed(1)}px, ${(-b.y * bw * .55).toFixed(1)}px) rotate(${b.y ? (b.y % 2 ? -12 : 9) : 0}deg)`; }
+      api.lifted = on ? api.lift : 0; return on; };
+    return api; })();
   (() => { const vm = document.querySelector(".vm"), wheels = [...document.querySelectorAll(".wheel")]; let x = 0, v = 0, prevV = 0, drag = null, lastT = performance.now();
     const lim = () => Math.max(0, (room.clientWidth - vm.offsetWidth) / 2 - 8);
     vm.addEventListener("pointerdown", e => { if (e.target.closest("button, .wipsign, #trough, input")) return; drag = { px: e.clientX, x0: x, t: performance.now() }; vm.setPointerCapture(e.pointerId); vm.classList.add("rolling"); });
@@ -154,10 +168,17 @@
     const up = () => { drag = null; vm.classList.remove("rolling"); }; vm.addEventListener("pointerup", up); vm.addEventListener("pointercancel", up);
     (function roll(t) { const dt = Math.min(.033, (t - lastT) / 1000); lastT = t;
       if (!drag) { v *= Math.pow(.12, dt); x += v * dt; if (Math.abs(x) > lim()) { x = Math.sign(x) * lim(); v = -v * .35; } if (Math.abs(v) < 2) v = 0; }
+      const onBelt = belt.update(dt, vm, x);
+      if (onBelt && !drag) { const want = belt.speed; v += (want - v) * Math.min(1, dt * 3); }
       const dv = v - prevV; prevV = v;
-      if (Math.abs(dv) > 15) for (const b of bodies) { b.vx -= dv * .6; b.vy -= Math.abs(dv) * .08; if (b.sleep) { b.sleep = false; b.born = t - 600; } }
-      vm.style.transform = `translateX(${x.toFixed(1)}px) rotate(${Math.max(-4, Math.min(4, -v * .006)).toFixed(2)}deg)`;
+      if (Math.abs(dv) > 15) jolt(dv, t);
+      vm.style.transform = `translateX(${x.toFixed(1)}px) translateY(${onBelt ? -belt.lift : 0}px) rotate(${Math.max(-4, Math.min(4, -v * .006)).toFixed(2)}deg)`;
       wheels.forEach(w => w.style.transform = `rotate(${(x / (w.offsetWidth / 2 || 10)) * 57.3}deg)`);
       requestAnimationFrame(roll); })(performance.now()); })();
-  window.__vend = { press, get stock() { return stock; }, get bodies() { return bodies; } };   // for testing
+  function shakeLoose(i, now) { if (stock[i] <= 0) return; const [x, y] = slotXY(i), b = body(ITEMS[i], x, y + R * .3); b.free = true; b.vx = (Math.random() - .5) * 260; b.vy = -60; b.va = (Math.random() - .5) * 14; b.born = now; bodies.push(b); stock[i]--;
+    if (stock.every(s => s <= 0)) { $("req").hidden = false; show("ALL GONE", 2500); } save(); }
+  function jolt(dv, t) { const k = Math.abs(dv); jig = Math.min(S * .12, jig + k * .01);
+    for (const b of bodies) { b.vx -= dv * 1.1 + (Math.random() - .5) * k * .4; b.vy -= k * (.25 + Math.random() * .25); b.va += (Math.random() - .5) * k * .03; if (b.sleep) { b.sleep = false; b.born = t - 600; } }
+    if (k > 300) { const p = Math.min(.2, (k - 300) / 2200); stock.forEach((n, i) => { if (n > 0 && Math.random() < p) shakeLoose(i, t); }); } }
+  window.__vend = { press, shakeLoose, jolt, get stock() { return stock; }, get bodies() { return bodies; } };   // for testing
 })();

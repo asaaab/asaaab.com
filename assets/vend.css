@@ -20,11 +20,11 @@
 .sign.black{background:#16191c; color:#f7d117} .sign.black b{color:#fff}
 .rest{position:absolute; left:3%; bottom:22%; display:grid; justify-items:center; gap:10px}
 .rest .door{width:clamp(70px, 9vw, 120px); aspect-ratio:1/2; border-radius:10px 10px 0 0; background:linear-gradient(#8a9097, #6f757c); box-shadow:inset 0 0 0 4px #5b6167}
-.claim{position:absolute; right:3%; bottom:12%; z-index:1; display:grid; justify-items:center; gap:14px}
-.carousel{position:relative; width:clamp(160px, 26vw, 420px); height:clamp(46px, 6vw, 80px); border-radius:999px; background:#3a3f44; box-shadow:0 8px 12px rgba(0,0,0,.3), inset 0 -6px 8px rgba(0,0,0,.4); overflow:hidden}
+.claim{position:absolute; right:0; top:60%; z-index:2; display:grid; justify-items:start; gap:14px}
+.carousel{position:relative; overflow:visible; width:clamp(300px, 44vw, 860px); height:clamp(46px, 6vw, 80px); border-radius:999px 0 0 999px; background:#3a3f44; box-shadow:0 8px 12px rgba(0,0,0,.3), inset 0 -6px 8px rgba(0,0,0,.4)}
 .belt{position:absolute; inset:18% 6%; border-radius:999px; background:repeating-linear-gradient(90deg, #9aa1a7 0 14px, #6d747a 14px 16px); animation:belt 3s linear infinite}
 @keyframes belt{to{background-position:64px 0}}
-.bag{position:absolute; top:4%; font-size:clamp(20px, 3vw, 40px); animation:ride 18s linear infinite; animation-delay:var(--d)}
+.bag{position:absolute; left:0; bottom:22%; font-size:clamp(22px, 3vw, 40px); line-height:1; will-change:transform}
 @keyframes ride{from{left:-15%} to{left:105%}}
 @media (max-width:760px){ .rest{display:none} .claim{display:none} .bigwin{left:3%; right:3%; height:36%} }
 /* terrazzo floor */
@@ -33,7 +33,7 @@
 .floor::after{content:""; position:absolute; inset:0; background:radial-gradient(60% 80% at 50% 0%, rgba(255,255,255,.45), transparent 70%)}
 
 /* the machine */
-.vm{container-type:inline-size; position:relative; z-index:2; box-sizing:border-box; margin:0 0 calc(3cqh + min(10cqw, 46px, calc((100cqh - 190px) * .0605))); width:min(94cqw, 460px, calc((100cqh - 190px) * .605)); min-width:260px; aspect-ratio:460/760; display:grid; grid-template-columns:1fr 27%; grid-template-rows:auto 1fr auto; column-gap:min(2.8cqw, 13px, calc((100cqh - 190px) * .017)); row-gap:min(1.9cqw, 9px, calc((100cqh - 190px) * .0115)); padding:min(3.76cqw, 18px, calc((100cqh - 190px) * .0242));
+.vm{container-type:inline-size; position:relative; z-index:3; box-sizing:border-box; margin:0 0 calc(3cqh + min(10cqw, 46px, calc((100cqh - 190px) * .0605))); width:min(94cqw, 460px, calc((100cqh - 190px) * .605)); min-width:260px; aspect-ratio:460/760; display:grid; grid-template-columns:1fr 27%; grid-template-rows:auto 1fr auto; column-gap:min(2.8cqw, 13px, calc((100cqh - 190px) * .017)); row-gap:min(1.9cqw, 9px, calc((100cqh - 190px) * .0115)); padding:min(3.76cqw, 18px, calc((100cqh - 190px) * .0242));
   border-radius:26px; background:linear-gradient(160deg, #ff4b3e, #dc0500 45%, #a50300); box-shadow:inset 0 3px 2px rgba(255,255,255,.5), inset 0 -10px 18px rgba(0,0,0,.3), 0 26px 36px -18px rgba(0,0,0,.55);
   cursor:grab; touch-action:pan-y; font-family:var(--hwy, system-ui)}
 .vm .top{grid-column:1/3; text-align:center; font-weight:900; letter-spacing:.32em; white-space:nowrap; color:#fff; font-size:3.8cqw; text-shadow:0 2px 0 rgba(0,0,0,.25); margin-bottom:2%}
@@ -93,3 +93,5 @@
 .pad button.dots{font:900 3cqw/1 system-ui; letter-spacing:-.05em; background:radial-gradient(circle at 50% 30%, #f4f6f7, #c9d0d4 60%, #8f989e); color:#16191c}
 .screen .o{display:inline-block; width:.62em; height:.62em; border-radius:50%; background:radial-gradient(circle at 35% 30%, #fff 0 10%, var(--c) 40%, #000 130%); vertical-align:-.05em; margin-right:.2em; box-shadow:0 0 6px var(--c)}
 .screen .d{letter-spacing:-.08em} .screen .d.dim{opacity:.5}
+
+.claim .sign{margin-left:10%}
