@@ -63,6 +63,17 @@ body{margin:0; background:radial-gradient(1200px 600px at 50% -10%, #cfe9ff, tra
 .pill.on circle{fill:url(#orbOn)}
 .pillar-line{stroke:#1d5fb8; stroke-width:7; stroke-linecap:round; opacity:.18; transition:opacity .2s}
 .pillar-line.on{opacity:.9}
+/* photo version: asaaab with the doors blown off, glass orbs sitting on each pillar */
+.photo{position:relative; margin:8px 0 6px; border-radius:22px; overflow:hidden; background:#eef2f5}
+.photo img{width:100%; height:auto; display:block}
+.ppill{position:absolute; transform:translate(-50%,-50%); width:clamp(30px,6.5vw,46px); height:clamp(30px,6.5vw,46px); border-radius:50%; border:3px solid #fff; cursor:pointer; padding:0;
+  background:radial-gradient(circle at 35% 30%, #fff 0, #3aa8ff 35%, #1d5fb8 100%); color:#fff; font:900 clamp(13px,2.4vw,17px) Overpass, sans-serif;
+  box-shadow:0 4px 14px rgba(0,0,0,.28); transition:transform .2s}
+.ppill:hover,.ppill.on{transform:translate(-50%,-50%) scale(1.18)}
+.ppill.on{background:radial-gradient(circle at 35% 30%, #fff 0, #ffb21a 35%, #c46a00 100%); box-shadow:0 0 0 6px rgba(255,178,26,.35), 0 4px 14px rgba(0,0,0,.28)}
+.ppill:focus:not(:focus-visible){outline:none}
+@media (max-width:520px){ .photo .cap{display:none} }
+.photo .cap{position:absolute; right:12px; bottom:10px; font:800 11px Nunito, sans-serif; letter-spacing:.08em; color:#16191c; background:rgba(255,255,255,.75); padding:4px 10px; border-radius:999px}
 .card{border-radius:18px; padding:16px 18px; background:linear-gradient(#fff, #f1f5f8); box-shadow:inset 0 0 0 2px #e3e8ea}
 .card h4{margin:0 0 8px; font:900 14px Overpass, sans-serif; letter-spacing:.1em; color:#1d5fb8}
 .card .pair{display:grid; grid-template-columns:1fr 1fr; gap:12px}
@@ -143,13 +154,19 @@ body{margin:0; background:radial-gradient(1200px 600px at 50% -10%, #cfe9ff, tra
     const roof = P.ROOF ? `<div class="roof">${inline(P.ROOF[0])}</div>` : "";
     setTimeout(() => {
       const show = k => {
-        document.querySelectorAll(".pill,.pillar-line").forEach(e => e.classList.toggle("on", e.dataset.p === k));
+        document.querySelectorAll(".pill,.pillar-line,.ppill").forEach(e => e.classList.toggle("on", e.dataset.p === k));
         const v = P[k] || []; document.getElementById("pcard").innerHTML = `<h4>${k}-PILLARS</h4><div class="pair"><div>${inline(v[0] || "")}</div><div>${inline(v[1] || v[0] || "")}</div></div>`;
       };
+      document.querySelectorAll(".ppill").forEach(b => { b.onclick = () => show(b.dataset.p); });
       document.querySelectorAll(".pill").forEach(g => { g.onclick = () => show(g.dataset.p); g.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); show(g.dataset.p); } }; });
       show("A");
     });
-    return md(rest.join("\n")) + `<div class="diagram">${svg}</div><p class="vehicle">THE ASAAAB LABOR VEHICLE</p>` + card + roof;
+    // photo: asaaab with the doors blown off (BeamNG, Grid Small Pure). Orbs sit on the real pillars; the drawn diagram is the fallback.
+    const PP = { D: [21.6, 33], C: [33, 35], B: [46.3, 40], A: [61, 32] };
+    const photo = `<div class="photo" id="pphoto"><img src="/assets/manual/pillars-doors-off.jpg?v=1" width="1420" height="540" alt="The asaaab Saab 9-3 with its doors blown off, showing the A, B, C and D pillars" onerror="document.getElementById('pphoto').hidden=true;document.getElementById('pdiag').hidden=false">
+      ${["A","B","C","D"].map(k => `<button type="button" class="ppill" data-p="${k}" style="left:${PP[k][0]}%;top:${PP[k][1]}%" aria-label="${k}-pillars">${k}</button>`).join("")}
+      <span class="cap">DOORS OFF. PILLARS HOLD.</span></div>`;
+    return md(rest.join("\n")) + photo + `<div class="diagram" id="pdiag" hidden>${svg}</div><p class="vehicle">THE ASAAAB LABOR VEHICLE</p>` + card + roof;
   }
   const dealer = l => { const [t, u] = l.replace(/^DEALER:\s*/, "").split("|").map(x => x.trim()); return `<div class="dealer"><p>${inline(t)}</p>${u ? `<a href="${esc(u)}">VISIT YOUR ASAAAB DEALER</a>` : `<span>DEALER OPENING SOON</span>`}</div>`; };
   function warning(body) {
