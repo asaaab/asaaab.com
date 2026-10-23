@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="robots" content="noindex">
 <title>Owner's Manual · asaaab</title>
 <meta name="description" content="The asaaab Owner's Manual. For co-owners.">
 <meta name="theme-color" content="#dc0500">
@@ -32,6 +31,11 @@ body{margin:0; background:radial-gradient(1200px 600px at 50% -10%, #cfe9ff, tra
   background:#fbfaf6; font:900 clamp(9px, 1.6vw, 13px)/1.05 Overpass, sans-serif; letter-spacing:.14em; box-shadow:0 0 0 2px rgba(196,22,28,.15)}
 .stamp b{font-size:1.5em; letter-spacing:.2em} .stamp em{font-style:normal; font-size:1.1em}
 .vehicle{text-align:center; font:900 12px Overpass, sans-serif; letter-spacing:.3em; color:#9a958c; margin:-4px 0 14px}
+.dealer{display:flex; flex-wrap:wrap; gap:14px; align-items:center; justify-content:space-between; margin:26px 0; padding:22px 24px; border-radius:22px; color:#fff;
+  background:radial-gradient(circle at 20% 0%, rgba(255,255,255,.4), transparent 45%), linear-gradient(160deg, #3aa8ff, #1d5fb8); box-shadow:0 12px 26px rgba(13,47,102,.3), inset 0 2px 0 rgba(255,255,255,.5)}
+.dealer p{margin:0; font:900 19px/1.3 Overpass, sans-serif}
+.dealer a,.dealer span{flex:none; padding:12px 20px; border-radius:999px; font:900 13px Overpass, sans-serif; letter-spacing:.08em; text-decoration:none; color:#16191c; background:linear-gradient(#fff, #dfe6ea); box-shadow:0 3px 0 #9fb2c0}
+.dealer span{opacity:.6; cursor:default}
 /* contents tabs */
 .toc{display:flex; flex-wrap:wrap; gap:10px; margin:22px 0 8px}
 .toc a{flex:1 1 140px; text-align:center; text-decoration:none; color:var(--ink); font:900 13px/1 Overpass, sans-serif; letter-spacing:.06em; padding:14px 10px; border-radius:999px;
@@ -78,7 +82,7 @@ body{margin:0; background:radial-gradient(1200px 600px at 50% -10%, #cfe9ff, tra
 </style>
 </head>
 <body>
-<div class="hero-strip" role="banner" data-fban="blue"></div>
+<div class="hero-strip" role="banner" data-fban="magenta"></div>
 <div class="book">
 
 <header class="cover">
@@ -147,6 +151,7 @@ body{margin:0; background:radial-gradient(1200px 600px at 50% -10%, #cfe9ff, tra
     });
     return md(rest.join("\n")) + `<div class="diagram">${svg}</div><p class="vehicle">THE ASAAAB LABOR VEHICLE</p>` + card + roof;
   }
+  const dealer = l => { const [t, u] = l.replace(/^DEALER:\s*/, "").split("|").map(x => x.trim()); return `<div class="dealer"><p>${inline(t)}</p>${u ? `<a href="${esc(u)}">VISIT YOUR ASAAAB DEALER</a>` : `<span>DEALER OPENING SOON</span>`}</div>`; };
   function warning(body) {
     return body.split("\n").map(l => l.startsWith("! ") ? `<div class="tell"><span class="lamp">!</span>${inline(l.slice(2))}</div>` : md(l)).join("");
   }
@@ -157,6 +162,7 @@ body{margin:0; background:radial-gradient(1200px 600px at 50% -10%, #cfe9ff, tra
   const fmt = d => d.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" }).toUpperCase();
   const get = u => fetch(u, { cache: "no-store" }).then(r => { if (r.ok && u.endsWith("manual.md")) { const lm = r.headers.get("last-modified"); if (lm) document.getElementById("rev").textContent = "REV. " + fmt(new Date(lm)); } return r.ok ? r.text() : ""; }).catch(() => "");
   Promise.all([get("/docs/manual.md"), get("/docs/why.md"), get("/docs/constitution.md")]).then(([man, why, con]) => {
+    const dl = (man.match(/^DEALER:.*$/m) || [])[0]; man = man.replace(/^DEALER:.*$/m, "");
     const M = chapters(man);
     const h = M.head.split("\n").filter(Boolean);
     if (h[0]) document.getElementById("title").textContent = h[0].replace(/^#\s+/, "");
@@ -169,7 +175,7 @@ body{margin:0; background:radial-gradient(1200px 600px at 50% -10%, #cfe9ff, tra
     }
     if (con) pages.push({ title: "Service manual", html: md(con.replace(/^#\s+.*\n/, "")) });
     document.querySelector(".toc").innerHTML = pages.map((p, i) => `<a href="#ch${i + 1}"><span>${i + 1}</span>${esc(p.title)}</a>`).join("");
-    document.getElementById("pages").innerHTML = pages.map((p, i) => `<section class="page ${p.cls || ""}" id="ch${i + 1}"><h2><i>${i + 1}</i>${esc(p.title)}</h2><div class="md">${p.html}</div><span class="pg">${i + 1}</span></section>`).join("");
+    document.getElementById("pages").innerHTML = pages.map((p, i) => `<section class="page ${p.cls || ""}" id="ch${i + 1}"><h2><i>${i + 1}</i>${esc(p.title)}</h2><div class="md">${p.html}</div><span class="pg">${i + 1}</span></section>`).join("") + (dl ? dealer(dl) : "");
   });
 })();
 </script>
