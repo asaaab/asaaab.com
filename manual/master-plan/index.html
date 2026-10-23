@@ -1,1 +1,198 @@
-x
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Master Plan · asaaab</title>
+<meta name="description" content="How asaaab works: ideas become processes, processes become automated labor, and the capacity is owned together. Look at the plan.">
+<link rel="icon" href="/banner.png">
+<link rel="stylesheet" href="/assets/bannerfold.css?v=4">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;800&family=Nunito:wght@500;700;800;900&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: sky header, one big glossy loop of bubbles around the collective-ownership hub, then a bubble card per stage with who / trigger / process / output / status, then the guardrail ring. */
+:root{
+  --sky:#e6f5fd; --sky2:#bfe6f8; --card:#ffffffd9; --ink:#0f2a3a; --muted:#4b6a7a; --line:#9fd2ea;
+  --aqua:#1fa0dc; --grass:#5bb63c; --magenta:#d930c9; --gold:#f2b705; --off:#8aa3b0;
+  --human:#d930c9; --computer:#1fa0dc; --both:#5bb63c;
+  --display:"Baloo 2","Nunito",system-ui,sans-serif; --body:"Nunito",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--sky:#071a26;--sky2:#0c2c40;--card:#0f2a3ad9;--ink:#e6f5fd;--muted:#9cc2d4;--line:#1f5878;--off:#5f7d8c;color-scheme:dark}}
+:root[data-theme="dark"]{--sky:#071a26;--sky2:#0c2c40;--card:#0f2a3ad9;--ink:#e6f5fd;--muted:#9cc2d4;--line:#1f5878;--off:#5f7d8c;color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(120% 70% at 50% -10%,var(--sky2),var(--sky) 60%) fixed,var(--sky);background-color:var(--sky);color:var(--ink);font:16px/1.55 var(--body);
+  padding-block:0 64px}
+.wrap{max-width:1060px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{padding-block:36px 8px;text-align:center}
+.eyebrow{font:800 12px var(--body);letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+h1{font:800 clamp(34px,6vw,58px)/1 var(--display);margin:6px 0 10px;text-wrap:balance}
+h1 b{color:var(--aqua)}
+.lede{max-width:62ch;margin:0 auto;color:var(--muted)}
+.legend{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin:18px 0 6px}
+.chip{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:4px 12px 4px 6px;background:var(--card);border:1.5px solid var(--line);font:800 13px var(--body)}
+.dot{width:16px;height:16px;border-radius:50%;box-shadow:inset 0 -3px 5px #0003,inset 0 3px 4px #fff8}
+.loop{overflow-x:auto;margin:6px auto 0}
+.loop svg{display:block;width:100%;min-width:620px;max-width:980px;margin:0 auto;height:auto}
+.loop text{font-family:var(--body)}
+h2{font:800 30px/1.1 var(--display);margin:40px 0 6px;text-align:center}
+.sub{text-align:center;color:var(--muted);margin:0 auto 18px;max-width:60ch}
+.stages{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,310px),1fr));gap:18px}
+.stage{position:relative;background:var(--card);border:1.5px solid var(--line);border-radius:30px;padding:18px 20px 18px 20px;backdrop-filter:blur(6px);min-width:0;
+  box-shadow:0 10px 24px -14px #0b4f7a66, inset 0 1px 0 #ffffffaa}
+.stage .num{position:absolute;top:-14px;left:18px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:#fff;font:800 18px var(--display);
+  box-shadow:0 6px 12px -6px #0006,inset 0 -6px 10px #0003,inset 0 6px 8px #fff7}
+.stage h3{font:800 23px/1.1 var(--display);margin:16px 0 2px}
+.who{font:800 12px var(--body);letter-spacing:.14em;text-transform:uppercase}
+.stage dl{margin:10px 0 0;display:grid;gap:8px}
+.stage dt{font:800 11px var(--body);letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.stage dd{margin:0}
+.stage ol{margin:2px 0 0;padding-left:20px} .stage li{margin:2px 0}
+.status{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:2px 10px;font:800 12px var(--body);border:1.5px solid}
+.live{color:var(--grass);border-color:var(--grass)} .part{color:var(--gold);border-color:var(--gold)} .none{color:var(--off);border-color:var(--off)}
+.ring{margin-top:40px;border-radius:44px;padding:24px;background:linear-gradient(180deg,var(--card),transparent);border:2px dashed var(--line)}
+.ring ul{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0;margin:12px 0 0;justify-content:center}
+.ring li{border-radius:999px;background:var(--card);border:1.5px solid var(--line);padding:8px 14px;font-weight:700}
+.next{margin-top:28px;text-align:center}
+.next ol{display:inline-block;text-align:left;margin:8px 0 0}
+code{font:13px var(--mono)}
+footer{margin-top:30px;text-align:center;color:var(--muted);font-size:13px}
+@media (prefers-reduced-motion:no-preference){.spin{animation:spin 60s linear infinite;transform-origin:500px 355px}@keyframes spin{to{transform:rotate(360deg)}}}
+</style>
+
+</head>
+<body>
+<div class="hero-strip" role="banner" data-fban="magenta"></div>
+<div class="wrap">
+<header>
+  <div class="eyebrow">asaaab · Owner's Manual · Master plan</div>
+  <h1>Notice it. Process it. <b>Own it together.</b></h1>
+  <p class="lede">How human ideas turn into processes, processes turn into automated labor, and that labor turns into productive capacity that is owned together and pays for the next dream. Every stage is a repeatable process. Every process that isn't art gets automated.</p>
+  <div class="legend">
+    <span class="chip"><span class="dot" style="background:var(--human)"></span>Human: notice, make, decide</span>
+    <span class="chip"><span class="dot" style="background:var(--computer)"></span>Computer: capture, build, run</span>
+    <span class="chip"><span class="dot" style="background:var(--both)"></span>Both: computer drafts, human signs off</span>
+  </div>
+</header>
+
+<div class="loop" role="img" aria-label="A loop of nine stages around a central hub: Notice, Capture, Distill, Codify, Plan, Build and make, Earn, Own and share, Sponsor, then back to Notice.">
+  <svg id="map" viewBox="0 0 1000 730" xmlns="http://www.w3.org/2000/svg"></svg>
+</div>
+
+<h2>The nine processes</h2>
+<p class="sub">Status is honest as of Oct 23, 2026. "Live" means it runs today. "Partial" means some of it runs. "Not built" means it's written down but nothing runs it yet.</p>
+<div class="stages" id="stages"></div>
+
+<section class="ring">
+  <h2 style="margin-top:0">The guardrail ring</h2>
+  <p class="sub">Every process above runs inside these. They come from the Computer Use Policy and the standing rules.</p>
+  <ul>
+    <li>Build it once, good enough. Improve when needed.</li>
+    <li>Low resource use. A simpler method wins.</li>
+    <li>No AI-generated photos or art. Humans fingerpaint.</li>
+    <li>Computers never post, publish or pay without a human yes.</li>
+    <li>No one's home, neighborhood or personal data in public.</li>
+    <li>Words stay verbatim. Distill, don't rewrite.</li>
+    <li>Don't measure success by output or growth.</li>
+    <li>Nothing gets deleted. Old versions get archived.</li>
+  </ul>
+</section>
+
+<section class="next">
+  <h2>Next bricks</h2>
+  <ol>
+    <li><b>Plan</b> learns to see finished work, so the daily list stops guessing.</li>
+    <li><b>Notice</b> opens to everyone. The hangar Discord is the first way in.</li>
+    <li><b>Own &amp; share</b> gets its first brick: an hours log for coworkers.</li>
+  </ol>
+</section>
+<footer>Build the wall. Build the building around it. · <a href="/manual/" style="color:inherit;font-weight:800">Back to the Owner's Manual</a></footer>
+</div>
+
+<script>
+const S = [
+  {n:"Notice", who:"human", short:"see the weird thing",
+   trig:"Life. A car, a plate, a rant, a dream, a comment.",
+   steps:["A coworker spots it, says it, films it or draws it","Drops it here raw: voice, text, screenshot, link","Nothing gets filtered or polished at this step"],
+   out:"Raw human intelligence: lines, footage, ideas, pitches", st:"part", note:"Runs daily. Community input (the hangar Discord, a spotting app) isn't built yet."},
+  {n:"Capture", who:"computer", short:"save it verbatim",
+   trig:"Anything a coworker sends that isn't a one-off task.",
+   steps:["Save it word for word with the date","File it: source notes, memory, core thoughts, MORNING list","Tag where it came from (voice, chat, ChatGPT, comment)"],
+   out:"A source library nobody can lose", st:"live", note:"Runs today. Gap: it only catches what gets sent in."},
+  {n:"Distill", who:"both", short:"find the signal",
+   trig:"A new batch of source notes.",
+   steps:["Computer pulls the tweet-sized lines, rules, ideas and to-dos","Checks them against existing notes so nothing repeats","Human confirms: is it a human thought? is it public?"],
+   out:"Core core thoughts, new rules, new to-dos", st:"live", note:"Ran today on the ChatGPT convo: 3 core thoughts, the no-AI-art rule, the app idea."},
+  {n:"Codify", who:"both", short:"make it a process",
+   trig:"A rule or method that will come up again.",
+   steps:["Write it as steps a stranger or a computer can follow","Put it where it lives: Owner's Manual, constitution, a playbook","Human approves anything that goes public"],
+   out:"Pillars, Computer Use Policy, playbooks, SOPs", st:"part", note:"Manual + policy + BeamNG playbook are live. Constitution (hours pie, board) is drafted, not published."},
+  {n:"Plan", who:"computer", short:"point the bricks",
+   trig:"Every morning, plus whenever something ships.",
+   steps:["Read what shipped and what's open","Pick today's 3: one scaffold, one visual, one content","Send the crew the list, each one under 30 minutes"],
+   out:"Today's 3 actions and the next bricks", st:"part", note:"A daily planner runs, but it can't see finished work yet, so it guesses."},
+  {n:"Build & make", who:"both", short:"lay the bricks",
+   trig:"An item on today's list.",
+   steps:["Computer: site, shop, deploys, capture pipelines, analytics, reclips","Human: art, filming, driving, the actual cars","Every new method becomes a playbook (back to Codify)"],
+   out:"Pages, tools, footage, frames, products", st:"part", note:"Site, shop, manual, turntable and deploys are live. Analytics collector and reclip pipeline aren't built."},
+  {n:"Earn", who:"both", short:"turn it into lifebux",
+   trig:"Something people want exists.",
+   steps:["Sell the rare, specific thing (1 of 498 prints, keychains, decals)","Content cannon: TikTok, cross-post, then YouTube","Consulting; the $10 spotcha app (loss leader is fine)"],
+   out:"Seed funding that comes from whimsy, not from investors", st:"none", note:"The shop and consulting pages exist. No sales flow I can see yet."},
+  {n:"Own & share", who:"human", short:"split the pie",
+   trig:"Revenue comes in, or someone puts in hours.",
+   steps:["Log hours in 'work in' mode (screen, edit, lead, market, shop)","Pay the same rate per hour, then business needs, then the future fund","Split the rest by hours; working coworkers vote; computer keeps the books"],
+   out:"Collective ownership of the productive capacity", st:"none", note:"One owner today. The rules for hours, pay and voting are written down."},
+  {n:"Sponsor", who:"human", short:"lift the next dream",
+   trig:"There's spare capacity and a person with an idea.",
+   steps:["Someone brings their own small whimsy dream","They get shared infrastructure: site, shop, pipelines, playbooks","Their ideas feed back into Notice"],
+   out:"More dreams under the asaaab wing", st:"none", note:"The core business model. asaaab is the first sponsor ('im making my sponsor first')."}
+];
+const C = {human:"var(--human)", computer:"var(--computer)", both:"var(--both)"};
+const W = {human:"HUMAN", computer:"COMPUTER", both:"BOTH"};
+const ST = {live:["live","Live"], part:["part","Partial"], none:["none","Not built"]};
+const NS = "http://www.w3.org/2000/svg", svg = document.getElementById("map");
+const el = (t,a,p=svg)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p.appendChild(e);return e};
+const defs = el("defs",{});
+const g1 = el("radialGradient",{id:"gloss",cx:"35%",cy:"25%",r:"75%"},defs);
+el("stop",{offset:"0%","stop-color":"#fff","stop-opacity":".95"},g1); el("stop",{offset:"45%","stop-color":"#fff","stop-opacity":".15"},g1); el("stop",{offset:"100%","stop-color":"#fff","stop-opacity":"0"},g1);
+const g2 = el("radialGradient",{id:"hub",cx:"50%",cy:"40%",r:"60%"},defs);
+el("stop",{offset:"0%","stop-color":"#7fd6ff"},g2); el("stop",{offset:"100%","stop-color":"#1278b5"},g2);
+const mk = el("marker",{id:"arr",viewBox:"0 0 10 10",refX:"6",refY:"5",markerWidth:"7",markerHeight:"7",orient:"auto-start-reverse"},defs);
+el("path",{d:"M0,0 L10,5 L0,10 z",fill:"var(--muted)"},mk);
+const cx=500, cy=355, R=245, r=62;
+el("circle",{cx,cy,r:R,fill:"none",stroke:"var(--line)","stroke-width":"3","stroke-dasharray":"2 10","stroke-linecap":"round",class:"spin"});
+const pos = S.map((s,i)=>{const a=-Math.PI/2+i*2*Math.PI/S.length;return [cx+R*Math.cos(a), cy+R*Math.sin(a)]});
+pos.forEach((p,i)=>{const q=pos[(i+1)%pos.length];const a1=Math.atan2(q[1]-p[1],q[0]-p[0]);
+  const x1=p[0]+(r+6)*Math.cos(a1), y1=p[1]+(r+6)*Math.sin(a1), x2=q[0]-(r+10)*Math.cos(a1), y2=q[1]-(r+10)*Math.sin(a1);
+  const mx=(x1+x2)/2, my=(y1+y2)/2, ox=(mx-cx)*.12, oy=(my-cy)*.12;
+  el("path",{d:`M${x1},${y1} Q${mx+ox},${my+oy} ${x2},${y2}`,fill:"none",stroke:"var(--muted)","stroke-width":"2.5","marker-end":"url(#arr)",opacity:".7"});});
+el("circle",{cx,cy,r:112,fill:"url(#hub)"}); el("circle",{cx,cy,r:112,fill:"url(#gloss)"});
+[["COLLECTIVELY",-26,13,800],["OWNED",0,24,800],["productive capacity",28,14,700]].forEach(([t,dy,fs,fw])=>{const e=el("text",{x:cx,y:cy+dy,"text-anchor":"middle","font-size":fs,"font-weight":fw,fill:"#fff"});e.textContent=t});
+S.forEach((s,i)=>{const [x,y]=pos[i];const g=el("g",{});
+  el("circle",{cx:x,cy:y+4,r,fill:"#0b4f7a",opacity:".18"},g);
+  el("circle",{cx:x,cy:y,r,fill:C[s.who]},g); el("circle",{cx:x,cy:y,r,fill:"url(#gloss)"},g);
+  if(s.st!=="live") el("circle",{cx:x,cy:y,r:r+5,fill:"none",stroke:s.st==="part"?"var(--gold)":"var(--off)","stroke-width":"3","stroke-dasharray":s.st==="part"?"10 6":"3 6"},g);
+  const t1=el("text",{x,y:y-6,"text-anchor":"middle","font-size":"11","font-weight":"800",fill:"#fff","letter-spacing":"1.5"},g); t1.textContent=(i+1)+" · "+W[s.who];
+  const t2=el("text",{x,y:y+15,"text-anchor":"middle","font-size":s.n.length>9?"17":"20","font-weight":"800",fill:"#fff"},g); t2.textContent=s.n;
+  const lx=x+(x-cx)*.42, ly=y+(y-cy)*.36+5;
+  const t3=el("text",{x:lx,y:ly,"text-anchor":x>cx+20?"start":x<cx-20?"end":"middle","font-size":"13.5","font-weight":"700",fill:"var(--muted)"},g); t3.textContent=s.short;
+});
+const lg=el("text",{x:cx,y:716,"text-anchor":"middle","font-size":"12.5","font-weight":"700",fill:"var(--muted)"}); lg.textContent="no ring = live · gold dashes = partial · grey dots = not built";
+document.getElementById("stages").innerHTML = S.map((s,i)=>`
+  <article class="stage">
+    <span class="num" style="background:${C[s.who]}">${i+1}</span>
+    <h3>${s.n}</h3>
+    <div class="who" style="color:${C[s.who]}">${W[s.who]}</div>
+    <dl>
+      <div><dt>Trigger</dt><dd>${s.trig}</dd></div>
+      <div><dt>Process</dt><dd><ol>${s.steps.map(x=>`<li>${x}</li>`).join("")}</ol></dd></div>
+      <div><dt>Output</dt><dd>${s.out}</dd></div>
+      <div><dt>Status</dt><dd><span class="status ${ST[s.st][0]}">${ST[s.st][1]}</span> ${s.note}</dd></div>
+    </dl>
+  </article>`).join("");
+</script>
+
+<script src="/assets/bannerfold.js?v=4" defer></script>
+</body>
+</html>
