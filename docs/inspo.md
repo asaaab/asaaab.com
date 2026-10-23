@@ -31,3 +31,6 @@
 - if you need a car in la and have 4k what are you driving? asaaab.
 - were not trying to start the saab factory.
 - a whimsical buy here pay once here break even car dealership collectively owned that feels like a hangout spot and rc sim lounge.
+- we do not sell perfect cars. nobody does. we just dont lie about it.
+- want to spend $2000 on a car instead of $1000 a month?
+- i stock up on whimsy at asaaab shoppe
