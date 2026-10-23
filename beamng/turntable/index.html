@@ -58,7 +58,7 @@ html.embed .hero-strip, html.embed .hint{display:none!important} html.embed body
   const N = 24, DOOR = [23, 0, 1], BASE = "/assets/turntable/";
   const tt = document.getElementById("tt"), cv = document.getElementById("cv"), g = cv.getContext("2d"), img = document.getElementById("shot"), drive = document.getElementById("drive");
   let shown = "", pos = 3, v = 0, wings = false, door = false, drag = null;
-  const have = {}; const pre = k => { if (have[k] !== undefined) return; have[k] = null; const i = new Image(); i.onload = () => { have[k] = i; shown = ""; }; i.onerror = () => { have[k] = false; }; i.src = BASE + k + ".jpg"; };
+  const have = {}; const pre = k => { if (have[k] !== undefined) return; have[k] = null; const i = new Image(); i.onload = () => { have[k] = i; shown = ""; }; i.onerror = () => { have[k] = false; }; i.src = BASE + k + ".jpg?v=utah"; };
   for (let i = 0; i < N; i++) { pre("c" + String(i).padStart(2, "0")); pre("o" + String(i).padStart(2, "0")); } DOOR.forEach(i => pre("d" + String(i).padStart(2, "0")));
   setTimeout(() => { if (have.o00) document.getElementById("wings").hidden = false; }, 2500);
   const key = () => { const i = ((Math.round(pos) % N) + N) % N, s = String(i).padStart(2, "0"); return door && DOOR.includes(i) && have["d" + s] ? "d" + s : (wings && have["o" + s] ? "o" : "c") + s; };
