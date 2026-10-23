@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Shop · asaaab</title>
-<meta name="description" content="The asaaab shop, between the restroom and baggage claim. The vending machine works. The door doesn't.">
+<meta name="description" content="The asaaab shop, half in, half out, by the moving walkway. The vending machine works. The door doesn't.">
 <meta name="theme-color" content="#dc0500">
 <link rel="icon" href="/banner.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,35 +12,40 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@600;800;900&family=Nunito:wght@500;700;800;900&family=VT323&display=swap">
 <link rel="stylesheet" href="/assets/pages.css?v=2">
 <link rel="stylesheet" href="/assets/bannerfold.css?v=4">
-<link rel="stylesheet" href="/assets/vend.css?v=8">
+<link rel="stylesheet" href="/assets/vend.css?v=9">
 <style>.hero-strip{background:none!important; height:var(--h)!important; overflow:visible!important; padding:0!important; display:block!important; width:auto!important}
 body{margin:0}</style>
 </head>
 <body>
 <div class="hero-strip" role="banner" data-fban="yellow"></div>
 <section class="room" aria-label="The asaaab shop">
+  <div class="outside" aria-hidden="true">
+    <div class="curb"></div>
+    <div class="road"><span class="car" style="--d:0s">🚕</span><span class="car" style="--d:-4s">🚙</span><span class="car" style="--d:-9s">🚗</span><span class="car" style="--d:-13s">🚐</span></div>
+    <div class="sign green hwy">HWY <b>↗</b></div>
+    <div class="sign black pickup">ARRIVALS · PICKUP</div>
+  </div>
   <div class="bigwin" aria-hidden="true">
     <div class="runway"></div>
     <div class="plane up"><i class="trail"></i><svg viewBox="0 0 64 24"><path d="M2 13 L18 11 L30 2 L35 2 L28 11 L50 10 C58 10 62 11.5 62 12 C62 12.5 58 14 50 14 L28 13 L35 22 L30 22 L18 13 Z" fill="#fff"/></svg></div>
     <div class="plane down"><i class="trail"></i><svg viewBox="0 0 64 24"><path d="M2 13 L18 11 L30 2 L35 2 L28 11 L50 10 C58 10 62 11.5 62 12 C62 12.5 58 14 50 14 L28 13 L35 22 L30 22 L18 13 Z" fill="#fff"/></svg></div>
     <div class="plane far"><i class="trail"></i><svg viewBox="0 0 64 24"><path d="M2 13 L18 11 L30 2 L35 2 L28 11 L50 10 C58 10 62 11.5 62 12 C62 12.5 58 14 50 14 L28 13 L35 22 L30 22 L18 13 Z" fill="#fff"/></svg></div>
   </div>
-  <div class="rest" aria-hidden="true"><div class="sign blue"><svg viewBox="0 0 40 40"><circle cx="20" cy="9" r="5" fill="#fff"/><path d="M12 38 L14 18 Q20 14 26 18 L28 38 Z" fill="#fff"/></svg><span>ALL-GENDER<br>RESTROOM</span></div><div class="door"></div></div>
-  <div class="claim" aria-hidden="true"><div class="sign black"><span>BAGGAGE CLAIM <b>3</b></span></div>
-    <div class="carousel"><div class="belt"></div><span class="bag">🧳</span><span class="bag">🎒</span><span class="bag">🧳</span><span class="bag">💼</span><span class="bag">🧳</span><span class="bag">🎒</span></div></div>
+  <div class="fids" aria-hidden="true"><b>DEPARTURES</b><span>WHIMSYFEST '27</span><em id="fidsSt">ON TIME</em></div>
+  <a class="sign blue gate" href="/inspo/" aria-label="Inspo board"><span>GATE I · INSPO</span><b>→</b></a>
+  <div class="queue" id="queue" aria-hidden="true"></div>
+  <div class="claim" aria-hidden="true"><div class="sign black"><span>MOVING WALKWAY</span></div>
+    <div class="carousel"><div class="belt"></div><span class="bag">🧳</span><span class="bag">🎒</span><span class="bag">🧳</span><span class="bag">💼</span><span class="bag">🧳</span></div></div>
   <div class="floor" aria-hidden="true"></div>
 
   <div class="vm" id="vm">
     <div class="top">ASAAAB · SHOP</div>
-    <div class="glass" id="glass"><canvas id="vcv" aria-label="Vending machine: pick a color, then dots"></canvas><div class="shine"></div></div>
+    <div class="glass" id="glass"><canvas id="vcv" aria-label="Vending machine: tap a product, or pick a color then dots"></canvas><div class="shine"></div></div>
     <div class="side">
       <div class="screen" id="screen" aria-live="polite">SELECT</div>
       <div class="pad" role="group" aria-label="Keypad">
-        <button data-k="A" class="orb" style="--c:#ff4b3e" aria-label="Red"></button><button data-k="B" class="orb" style="--c:#ff9f1a" aria-label="Orange"></button><button data-k="C" class="orb" style="--c:#ffd21a" aria-label="Yellow"></button>
-        <button data-k="D" class="orb" style="--c:#38d36b" aria-label="Green"></button><button data-k="E" class="orb" style="--c:#3aa8ff" aria-label="Blue"></button><span></span>
-        <button data-k="1" class="dots" aria-label="1">•</button><button data-k="2" class="dots" aria-label="2">••</button><button data-k="3" class="dots" aria-label="3">•••</button>
-        <button data-k="4" class="dots" aria-label="4">••••</button>
-        <button data-k="CLR" class="clr" style="grid-column:2/4; aspect-ratio:auto; border-radius:999px">CLEAR</button>
+        <button data-k="A" class="orb" style="--c:#ff4b3e" aria-label="Red"></button><button data-k="B" class="orb" style="--c:#ffd21a" aria-label="Yellow"></button><button data-k="C" class="orb" style="--c:#3aa8ff" aria-label="Blue"></button>
+        <button data-k="1" class="dots" aria-label="1">•</button><button data-k="2" class="dots" aria-label="2">••</button><button data-k="CLR" class="clr" aria-label="Clear">✕</button>
       </div>
       <button class="coin" id="coin" type="button" aria-label="Coin slot"></button>
     </div>
@@ -49,7 +54,7 @@ body{margin:0}</style>
       <button class="req" id="req" type="button" hidden>REQUEST CHECKOUT</button>
     </div>
     <div class="legs" aria-hidden="true"><div class="leg"><i class="wheel"></i></div><div class="leg"><i class="wheel"></i></div></div>
-    <div class="wipsign" id="wipsign" style="right:2%; top:20%"><b>🚧 WORK IN PROGRESS</b><small>The keypad works. The door's jammed. Drag me out of the way.</small></div>
+    <div class="wipsign" id="wipsign" style="right:2%; top:20%"><b>🚧 WORK IN PROGRESS</b><small>Tap a product. The door's jammed. Drag me out of the way.</small></div>
   </div>
 </section>
 
@@ -66,7 +71,7 @@ body{margin:0}</style>
 
 <p class="foot">© 2026 asaaab · <a href="/privacy/">Privacy</a> · <a href="/copyright/">Copyright &amp; reuse</a> · <a href="mailto:asaaab93x@gmail.com">asaaab93x@gmail.com</a></p>
 <script src="/assets/bannerfold.js?v=4" defer></script>
-<script src="/assets/vend.js?v=6" defer></script>
+<script src="/assets/vend.js?v=7" defer></script>
 <script>if (/(^|\.)asaaab\.com$/.test(location.hostname)) { const s=document.createElement("script"); s.async=true; s.dataset.goatcounter="https://asaaab.goatcounter.com/count"; s.src="https://gc.zgo.at/count.js"; document.head.appendChild(s); }</script>
 </body>
 </html>
