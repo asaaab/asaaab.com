@@ -33,7 +33,7 @@
 .floor::after{content:""; position:absolute; inset:0; background:radial-gradient(60% 80% at 50% 0%, rgba(255,255,255,.45), transparent 70%)}
 
 /* the machine */
-.vm{container-type:inline-size; position:relative; z-index:3; box-sizing:border-box; margin:0 0 calc(3cqh + min(10cqw, 46px, calc((100cqh - 190px) * .0605))); width:min(94cqw, 460px, calc((100cqh - 190px) * .605)); min-width:260px; aspect-ratio:460/760; display:grid; grid-template-columns:1fr 27%; grid-template-rows:auto 1fr auto; column-gap:min(2.8cqw, 13px, calc((100cqh - 190px) * .017)); row-gap:min(1.9cqw, 9px, calc((100cqh - 190px) * .0115)); padding:min(3.76cqw, 18px, calc((100cqh - 190px) * .0242));
+.vm{container-type:inline-size; position:relative; z-index:3; box-sizing:border-box; margin:0 0 calc(3cqh + min(10cqw, 46px, calc((100cqh - 190px) * .0605))); width:min(94cqw, 600px, calc((100cqh - 150px) * .74)); min-width:280px; aspect-ratio:500/660; display:grid; grid-template-columns:1fr 31%; grid-template-rows:auto 1fr auto; column-gap:min(2.8cqw, 13px, calc((100cqh - 190px) * .017)); row-gap:min(1.9cqw, 9px, calc((100cqh - 190px) * .0115)); padding:min(3.76cqw, 18px, calc((100cqh - 190px) * .0242));
   border-radius:26px; background:linear-gradient(160deg, #ff4b3e, #dc0500 45%, #a50300); box-shadow:inset 0 3px 2px rgba(255,255,255,.5), inset 0 -10px 18px rgba(0,0,0,.3), 0 26px 36px -18px rgba(0,0,0,.55);
   cursor:grab; touch-action:pan-y; font-family:var(--hwy, system-ui)}
 .vm .top{grid-column:1/3; text-align:center; font-weight:900; letter-spacing:.32em; white-space:nowrap; color:#fff; font-size:3.8cqw; text-shadow:0 2px 0 rgba(0,0,0,.25); margin-bottom:2%}
@@ -95,3 +95,40 @@
 .screen .d{letter-spacing:-.08em} .screen .d.dim{opacity:.5}
 
 .claim .sign{margin-left:10%}
+
+/* ===== v4: half in, half out (old Burbank), moving walkway, gate to inspo, the line behind you ===== */
+.outside{position:absolute; top:0; right:0; bottom:22%; width:38%; z-index:0;
+  background:linear-gradient(#7cc4ff, #cfeaff 62%, #d9d4c7 62.2%, #b9b3a6); border-left:14px solid #c9c6bf; box-shadow:inset 18px 0 24px -16px rgba(0,0,0,.35)}
+.outside::before{content:""; position:absolute; left:0; right:0; top:0; height:9%; background:repeating-linear-gradient(90deg, #e9e5dc 0 46px, #d8d3c7 46px 50px); box-shadow:0 6px 10px rgba(0,0,0,.15)}  /* the canopy */
+.outside .road{position:absolute; left:0; right:0; top:70%; height:18%; background:#55595d; overflow:hidden}
+.outside .road::after{content:""; position:absolute; left:0; right:0; top:48%; height:5%; background:repeating-linear-gradient(90deg, #f2d33b 0 26px, transparent 26px 52px)}
+.outside .curb{position:absolute; left:0; right:0; top:66%; height:4%; background:linear-gradient(#e7e3da, #a9a397)}
+.outside .car{position:absolute; bottom:8%; font-size:clamp(26px, 3.6vw, 52px); line-height:1; animation:drive 16s linear infinite; animation-delay:var(--d); transform:scaleX(-1)}
+@keyframes drive{0%{left:-20%} 18%{left:30%} 34%{left:30%} 100%{left:120%}}   /* pull up, pick someone up, head for the highway */
+.outside .hwy{position:absolute; right:6%; top:16%} .outside .pickup{position:absolute; left:8%; top:13%}
+.sign.green{background:#1f7a3a; color:#fff; border:2px solid #fff}
+.bigwin{left:3%; right:40%}
+.fids{position:absolute; left:4%; top:52%; z-index:1; display:grid; gap:2px; padding:8px 12px; border-radius:8px; background:#101418; color:#f7d117; font:400 clamp(13px, 1.6vw, 20px)/1 "VT323", monospace; letter-spacing:.06em; box-shadow:0 4px 10px rgba(0,0,0,.3)}
+.fids b{font-weight:400; color:#fff; font-size:.8em} .fids em{font-style:normal; color:#8dff9a}
+.fids.boarding em{color:#ff6b5e; animation:blinkb 1s steps(2) infinite} @keyframes blinkb{50%{opacity:.25}}
+.gate{position:absolute; left:4%; top:68%; z-index:4; text-decoration:none; gap:12px; padding:12px 16px; font-size:clamp(12px, 1.4vw, 17px); transition:transform .15s}
+.gate b{font-size:1.5em; line-height:1} .gate:hover{transform:translateX(4px) scale(1.04)}
+.rest{display:none}
+/* moving walkway: long, flat, the machine can ride it */
+.claim{left:63%; right:0} .claim .sign{margin-left:2%}
+.carousel{width:100%; overflow:visible; height:clamp(34px, 4.6vw, 60px); border-radius:999px 0 0 999px; background:#2f3337}
+.belt{inset:22% 2% 30% 3%; background:repeating-linear-gradient(90deg, #b9c0c6 0 10px, #8a9298 10px 12px); animation:belt 2.2s linear infinite}
+.bag{pointer-events:auto; cursor:pointer; bottom:30%; transition:none}
+.bag.fly{filter:drop-shadow(0 6px 4px rgba(0,0,0,.35))}
+/* the line behind you (only when you've bought something and gone quiet) */
+.queue{position:absolute; bottom:calc(22% - 6px); right:3%; z-index:2; display:flex; flex-direction:row-reverse; gap:2px; pointer-events:none}
+.queue span{font-size:clamp(34px, 4.6vw, 64px); line-height:1; opacity:0; transform:translateY(10px); transition:opacity .6s, transform .6s}
+.queue span.in{opacity:1; transform:none}
+.queue span.tap{animation:tap .5s ease-in-out infinite alternate} @keyframes tap{to{transform:translateY(-4px) rotate(-3deg)}}
+/* big greasy-finger keypad */
+.pad{grid-template-columns:repeat(3, 1fr); gap:2.2cqw}
+.pad button.clr{font-size:5cqw}
+.pad button.dots{font-size:5.6cqw}
+.screen{font-size:7cqw; min-height:1.8em}
+.glass canvas{cursor:pointer}
+@media (max-width:760px){ .outside{width:46%; opacity:.9} .bigwin{right:48%} .fids{display:none} .gate{top:2%; bottom:auto; left:3%; padding:8px 12px} .outside .hwy{display:none} .outside .pickup{left:auto; right:4%; top:12%} .queue{display:none} }

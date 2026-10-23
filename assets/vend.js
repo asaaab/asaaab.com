@@ -3,10 +3,11 @@
 // Resets daily, or with the hidden code A·S·A·A·A·B (S = the coin slot, or the S key on a keyboard).
 (() => {
   const SHOP_ENDPOINT = "";   // set when the shop worker is live (POST {keep, email}); until then only the tally is counted
-  const ROWS = "ABCDE", COLS = 4, DEPTH = 3;
-  const COLORS = ["#ff4b3e", "#ff9f1a", "#ffd21a", "#38d36b", "#3aa8ff"];   // rows are orbs (keyboard still takes A–E)
+  const ROWS = "ABC", COLS = 2, DEPTH = 3;
+  const COLORS = ["#ff4b3e", "#ffd21a", "#3aa8ff"];   // rows are orbs (keyboard still takes A–E)
   const codeHTML = (row, col) => `<span class="o" style="--c:${COLORS[ROWS.indexOf(row)]}"></span>${col ? "<span class=\"d\">" + "•".repeat(col) + "</span>" : "<span class=\"d dim\">_</span>"}`;
-  const ITEMS = ["🚗","🛻","🚙","🏎️", "🚐","🚕","🚓","🚌", "🧸","🪀","🎈","🪁", "🍬","🍫","🍪","🧃", "🔧","🔩","🎟️","⭐"];
+  const ITEMS = ["🏷️","🎁", "🔑","🎟️", "👕","✨"];
+  const NAMES = ["DECAL", "MYSTERY HW", "1 OF 498", "WHIMSYFEST", "TEE", "WILDCARD"];
   const $ = id => document.getElementById(id);
   const track = n => { try { window.goatcounter && window.goatcounter.count && window.goatcounter.count({ path: n, title: n, event: true }); } catch (e) {} };
   const today = () => new Date().toLocaleDateString("en-CA");
@@ -21,7 +22,7 @@
   function save() { store.set({ day: today(), stock, pile: bodies.filter(b => b.sleep).map(b => ({ e: b.e, x: b.x / W, y: b.y / H, a: b.a, f: b.free ? 1 : 0 })) }); }
   function load() {
     const s = store.get();
-    if (!s || s.day !== today()) { fresh(); return; }
+    if (!s || s.day !== today() || !s.stock || s.stock.length !== ITEMS.length) { fresh(); return; }
     stock = s.stock; bodies = (s.pile || []).map(p => { const b = body(p.e, p.x * W, p.y * H, p.a); b.free = !!p.f; return b; });
   }
   const body = (e, x, y, a = 0) => ({ e, x, y, vx: 0, vy: 0, a, va: 0, r: R, sleep: false });
@@ -30,7 +31,7 @@
     const r = glass.getBoundingClientRect(); dpr = Math.min(2, devicePixelRatio || 1);
     const oldW = W, oldH = H;
     W = r.width; H = r.height; cv.width = W * dpr; cv.height = H * dpr; g.setTransform(dpr, 0, 0, dpr, 0, 0);
-    slotW = W / COLS; top0 = H * .03; rowH = (H * .8) / ROWS.length; S = Math.min(slotW, rowH * .86) * .94; R = S * .26;
+    slotW = W / COLS; top0 = H * .03; rowH = (H * .8) / ROWS.length; S = Math.min(slotW * .9, rowH * .8); R = S * .2;
     if (oldW) for (const b of bodies) { b.x *= W / oldW; b.y *= H / oldH; b.r = R; }
   }
   const slotXY = i => { const row = Math.floor(i / COLS), col = i % COLS; return [col * slotW + slotW / 2, top0 + row * rowH + rowH * .44]; };
@@ -44,7 +45,7 @@
     if (k === "CLR") { typed = ""; show("SELECT"); return; }
     if (vending) return;
     if (ROWS.includes(k)) { typed = k; show(codeHTML(k, 0), 0, true); return; }
-    if (/[1-4]/.test(k) && typed.length === 1) {
+    if (/[1-2]/.test(k) && typed.length === 1) {
       const code = typed + k, i = ROWS.indexOf(typed) * COLS + (+k - 1); typed = "";
       if (stock[i] <= 0) { show("SOLD OUT", 1400); return; }
       show(codeHTML(code[0], +k) + " ⟳", 0, true); vending = { i, t: 0 }; track("shop-vend");
@@ -52,8 +53,11 @@
   }
   document.querySelectorAll(".pad button").forEach(b => b.addEventListener("click", () => press(b.dataset.k)));
   $("coin").addEventListener("click", () => press("S"));
+  const flash = k => { const btn = document.querySelector(`.pad button[data-k="${k}"]`); if (btn) { btn.classList.add("hit"); setTimeout(() => btn.classList.remove("hit"), 160); } };
+  const tapCanvas = e => { const r = cv.getBoundingClientRect(), x = e.clientX - r.left, y = e.clientY - r.top;   // tap the product itself
+    for (let i = 0; i < ITEMS.length; i++) { const [sx, sy] = slotXY(i); if (Math.abs(x - sx) < slotW / 2 && Math.abs(y - sy) < rowH / 2) { const row = ROWS[Math.floor(i / COLS)], col = String(i % COLS + 1); flash(row); press(row); setTimeout(() => { flash(col); press(col); }, 180); return; } } };
   addEventListener("keydown", e => { if (e.target.closest && e.target.closest("input")) return; const k = e.key.toUpperCase();
-    if ("ABCDES1234".includes(k) && k.length === 1) { press(k); const btn = document.querySelector(`.pad button[data-k="${k}"]`); if (btn) { btn.classList.add("hit"); setTimeout(() => btn.classList.remove("hit"), 120); } }
+    if ("ABCS12".includes(k) && k.length === 1) { press(k); const btn = document.querySelector(`.pad button[data-k="${k}"]`); if (btn) { btn.classList.add("hit"); setTimeout(() => btn.classList.remove("hit"), 120); } }
     else if (k === "BACKSPACE" || k === "ESCAPE") press("CLR"); });
   $("trough").addEventListener("click", e => { if (e.target.id === "req") return; const t = $("trough"); t.classList.remove("shake"); void t.offsetWidth; t.classList.add("shake"); show("JAMMED", 1300); });
 
@@ -107,28 +111,30 @@
     const gr = g.createLinearGradient(x - r, y - r, x + r, y + r); gr.addColorStop(0, "#f4f7f8"); gr.addColorStop(.5, "#aeb8be"); gr.addColorStop(1, "#e3e8ea");
     g.strokeStyle = gr; g.beginPath(); g.arc(x, y, r, a0, a0 + Math.PI * 1.86); g.stroke(); }
   function bag(x, y, s) { const w = s * .5, h = s * .64, l = x - w / 2, t = y - h * .55;
-    g.fillStyle = "rgba(235,245,255,.16)"; g.strokeStyle = "rgba(235,245,255,.45)"; g.lineWidth = 1; g.beginPath(); g.roundRect(l, t, w, h, 3); g.fill(); g.stroke();
+    g.fillStyle = "rgba(235,245,255,.07)"; g.strokeStyle = "rgba(235,245,255,.35)"; g.lineWidth = 1; g.beginPath(); g.roundRect(l, t, w, h, 3); g.fill(); g.stroke();
     g.fillStyle = "rgba(0,0,0,.45)"; g.beginPath(); g.arc(x, t + h * .1, Math.max(1.2, s * .03), 0, 7); g.fill(); }
-  function label(x, y, row, col) { const r = Math.max(5, S * .1);
+  function label(x, y, row, col) { const r = Math.max(5, rowH * .14 * .3);
     const gr = g.createRadialGradient(x - r * .35, y - r * .4, r * .1, x, y, r); gr.addColorStop(0, "#fff"); gr.addColorStop(.35, COLORS[row]); gr.addColorStop(1, "#0006");
     g.fillStyle = gr; g.beginPath(); g.arc(x - r * .9, y, r, 0, 7); g.fill();
-    g.fillStyle = "#16191c"; for (let d = 0; d < col; d++) { g.beginPath(); g.arc(x + r * .6 + d * r * .75, y, r * .26, 0, 7); g.fill(); } }
+    g.fillStyle = "#16191c"; for (let d = 0; d < col; d++) { g.beginPath(); g.arc(x + r * .7 + d * r * .8, y, r * .3, 0, 7); g.fill(); } }
   const emoji = (e, x, y, s, a = 0) => { g.save(); g.translate(x, y); g.rotate(a); g.font = `${s}px "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif`; g.textAlign = "center"; g.textBaseline = "middle"; g.fillText(e, 0, 0); g.restore(); };
   function draw(now) {
     g.clearRect(0, 0, W, H);
     for (let row = 0; row < ROWS.length; row++) {   // shelf lips with orb labels
       const y = top0 + row * rowH + rowH * .86, sh = rowH * .14;
       const gr = g.createLinearGradient(0, y, 0, y + sh); gr.addColorStop(0, "#c6ccd0"); gr.addColorStop(1, "#7d868b"); g.fillStyle = gr; g.fillRect(2, y, W - 4, sh);
-      for (let c = 0; c < COLS; c++) { g.fillStyle = "#f4f6f7"; const lw = Math.min(slotW * .62, S * .62), lx = c * slotW + slotW / 2; g.fillRect(lx - lw / 2, y + sh * .16, lw, sh * .68); label(lx, y + sh * .5, row, c + 1); }
+      for (let c = 0; c < COLS; c++) { const lw = slotW * .86, lx = c * slotW + slotW / 2; g.fillStyle = "#f4f6f7"; g.beginPath(); g.roundRect(lx - lw / 2, y + sh * .12, lw, sh * .76, sh * .38); g.fill();
+        const rr = Math.max(5, sh * .3); label(lx - lw / 2 + rr * 1.6, y + sh * .5, row, c + 1);
+        g.fillStyle = "#16191c"; g.font = `900 ${Math.max(8, Math.min(sh * .42, lw * .1))}px system-ui, sans-serif`; g.textAlign = "right"; g.textBaseline = "middle"; g.fillText(NAMES[row * COLS + c], lx + lw / 2 - sh * .35, y + sh * .52); }
     }
     for (let i = 0; i < ITEMS.length; i++) {
       let [x, y] = slotXY(i), ph = 0, fwd = 0;
       if (vending && vending.i === i) { ph = vending.t * Math.PI * 2; fwd = Math.min(1, vending.t / .9); }
       ringsBack(x, y, ph);
-      if (stock[i] > 0) { const sc = 1 + fwd * .22, yy = y + fwd * S * .06 + jig * Math.cos(now / 37 + i * 1.7) * .5; x += jig * Math.sin(now / 45 + i * 2.3); bag(x, yy, S * sc); emoji(ITEMS[i], x, yy, R * 1.45 * sc); }
       ringFront(x, y, ph);
+      if (stock[i] > 0) { const sc = 1 + fwd * .22, yy = y + fwd * S * .06 + jig * Math.cos(now / 37 + i * 1.7) * .5; x += jig * Math.sin(now / 45 + i * 2.3); bag(x, yy, S * sc); emoji(ITEMS[i], x, yy, S * .6 * sc); }
     }
-    for (const b of bodies) emoji(b.e, b.x, b.y, b.r * 1.7, b.a);
+    for (const b of bodies) emoji(b.e, b.x, b.y, b.r * 1.9, b.a);
   }
 
   let last = performance.now();
@@ -149,7 +155,8 @@
   // ---- the machine has legs + wheels: drag it and it rolls; the pile inside sloshes
   const belt = (() => { const claim = document.querySelector(".claim"), car = claim && claim.querySelector(".carousel"), els = car ? [...car.querySelectorAll(".bag")] : [];
     const api = { speed: 46, lift: 5, update: () => false }; if (!car) return api;
-    const bags = els.map((el, i) => ({ el, x: i * 130, y: 0 }));
+    const bags = els.map((el, i) => ({ el, x: i * 160, y: 0 }));
+    bags.forEach(b => b.el.addEventListener("pointerdown", e => { e.stopPropagation(); if (b.fly && !b.fly.rest) { show("NICE CATCH", 1300); track("shop-catch"); } b.fly = null; b.el.classList.remove("fly"); b.x = -60; }));
     function place() { const wheel = document.querySelector(".wheel"); if (!wheel || getComputedStyle(claim).display === "none") return null;
       const wr = wheel.getBoundingClientRect(), cr = car.getBoundingClientRect(), want = wr.bottom - api.lift - cr.height * .55 - (api.lifted || 0);
       if (Math.abs(cr.top - want) > .5) claim.style.top = (claim.offsetTop + want - cr.top) + "px"; return car.getBoundingClientRect(); }
@@ -158,14 +165,18 @@
       const on = mr > 12 && ml < W - 12; let wall = on ? Math.max(0, ml - 6) : Infinity;   // luggage piles up against the machine's front wheel
       const order = bags.slice().sort((a, b) => b.x - a.x); let stackY = 0;
       for (const b of order) { let nx = b.x + api.speed * dt; if (nx + bw > wall && b.x < mr) { nx = Math.max(-bw, wall - bw); if (nx <= 0 && wall < W) { b.y = Math.min(b.y + 1, ++stackY); } wall = nx; } else { b.y = 0; }
-        if (nx > W) nx = -bw - Math.random() * 60; b.x = nx; b.el.style.transform = `translate(${b.x.toFixed(1)}px, ${(-b.y * bw * .55).toFixed(1)}px) rotate(${b.y ? (b.y % 2 ? -12 : 9) : 0}deg)`; }
+        if (b.fly) { const f = b.fly; f.vy += 1100 * dt; f.x += f.vx * dt; f.y += f.vy * dt; f.a += f.va * dt;
+          if (f.y > f.floor) { f.y = f.floor; f.vy *= -.35; f.vx *= .6; f.va *= .5; f.rest = (f.rest || 0) + dt; }
+          if (f.rest > 2.5) { b.fly = null; b.el.classList.remove("fly"); nx = -bw - 40; } else { b.el.style.transform = `translate(${f.x.toFixed(1)}px, ${f.y.toFixed(1)}px) rotate(${f.a.toFixed(0)}deg)`; continue; } }
+        if (nx > W) { if (Math.random() < .4 && !b.fly) { b.fly = { x: W - bw, y: 0, vx: 160 + Math.random() * 120, vy: -380 - Math.random() * 160, a: 0, va: 300 + Math.random() * 300, floor: cr.height * .2 }; b.el.classList.add("fly"); continue; } nx = -bw - Math.random() * 60; }
+        b.x = nx; b.el.style.transform = `translate(${b.x.toFixed(1)}px, ${(-b.y * bw * .55).toFixed(1)}px) rotate(${b.y ? (b.y % 2 ? -12 : 9) : 0}deg)`; }
       api.lifted = on ? api.lift : 0; return on; };
     return api; })();
   (() => { const vm = document.querySelector(".vm"), wheels = [...document.querySelectorAll(".wheel")]; let x = 0, v = 0, prevV = 0, drag = null, lastT = performance.now();
     const lim = () => Math.max(0, (room.clientWidth - vm.offsetWidth) / 2 - 8);
-    vm.addEventListener("pointerdown", e => { if (e.target.closest("button, .wipsign, #trough, input")) return; drag = { px: e.clientX, x0: x, t: performance.now() }; vm.setPointerCapture(e.pointerId); vm.classList.add("rolling"); });
+    vm.addEventListener("pointerdown", e => { if (e.target.closest("button, .wipsign, #trough, input")) return; drag = { px: e.clientX, py: e.clientY, x0: x, t: performance.now(), tgt: e.target }; vm.setPointerCapture(e.pointerId); vm.classList.add("rolling"); });
     vm.addEventListener("pointermove", e => { if (!drag) return; const nx = Math.max(-lim(), Math.min(lim(), drag.x0 + e.clientX - drag.px)), t = performance.now(); v = (nx - x) / Math.max(.008, (t - (drag.t)) / 1000) * .5 + v * .5; drag.t = t; x = nx; });
-    const up = () => { drag = null; vm.classList.remove("rolling"); }; vm.addEventListener("pointerup", up); vm.addEventListener("pointercancel", up);
+    const up = e => { if (drag && drag.tgt === cv && Math.hypot(e.clientX - drag.px, e.clientY - drag.py) < 8) tapCanvas(e); drag = null; vm.classList.remove("rolling"); }; vm.addEventListener("pointerup", up); vm.addEventListener("pointercancel", up);
     (function roll(t) { const dt = Math.min(.033, (t - lastT) / 1000); lastT = t;
       if (!drag) { v *= Math.pow(.12, dt); x += v * dt; if (Math.abs(x) > lim()) { x = Math.sign(x) * lim(); v = -v * .35; } if (Math.abs(v) < 2) v = 0; }
       const onBelt = belt.update(dt, vm, x);
@@ -180,5 +191,11 @@
   function jolt(dv, t) { const k = Math.abs(dv); jig = Math.min(S * .12, jig + k * .01);
     for (const b of bodies) { b.vx -= dv * 1.1 + (Math.random() - .5) * k * .4; b.vy -= k * (.25 + Math.random() * .25); b.va += (Math.random() - .5) * k * .03; if (b.sleep) { b.sleep = false; b.born = t - 600; } }
     if (k > 300) { const p = Math.min(.2, (k - 300) / 2200); stock.forEach((n, i) => { if (n > 0 && Math.random() < p) shakeLoose(i, t); }); } }
+  (() => { const q = $("queue"), fids = document.querySelector(".fids"), st = $("fidsSt"), FOLK = ["🧍", "🧍‍♀️", "🧍‍♂️", "🧑‍🦯", "🧍"]; let quiet = performance.now();
+    const calm = () => { quiet = performance.now(); if (q.children.length) { q.innerHTML = ""; fids.classList.remove("boarding"); st.textContent = "ON TIME"; } };
+    ["pointerdown", "keydown", "wheel"].forEach(ev => addEventListener(ev, calm, { passive: true }));
+    setInterval(() => { const bought = bodies.some(b => !b.free) || vending; if (!bought) return; const idle = (performance.now() - quiet) / 1000;
+      if (idle > 20 && q.children.length < 4) { const p = document.createElement("span"); p.textContent = FOLK[q.children.length] + (q.children.length % 2 ? "" : "🧳"); q.appendChild(p); requestAnimationFrame(() => p.classList.add("in")); if (q.children.length > 1) q.firstChild.classList.add("tap"); }
+      if (idle > 35) { fids.classList.add("boarding"); st.textContent = "NOW BOARDING"; } }, 4000); })();
   window.__vend = { press, shakeLoose, jolt, get stock() { return stock; }, get bodies() { return bodies; } };   // for testing
 })();
