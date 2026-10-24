@@ -107,7 +107,7 @@
 <script>
 const $ = id => document.getElementById(id);
 const fmt = t => { try { return new Date(t).toLocaleString("en-US",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}); } catch(e) { return t; } };
-const ST = {sent:["waiting for tower","#8aa3b0"], decoded:["decoded","#1f9ff0"], routed:["routed","#48b827"], parked:["parked","#ffb02e"]};
+const ST = {sent:["waiting for tower","#8aa3b0"], decoded:["decoded","#1f9ff0"], routed:["routed","#48b827"], done:["done","#48b827"], needs_ok:["needs your ok","#d930c9"], parked:["parked","#ffb02e"]};
 let flights = [];
 // Layout means something: the tower (the Board) is in the middle. Closer = more automatic.
 // Inner ring cruising (runs itself), middle ring holding (waiting on something), outer ring plan filed (idea).
@@ -166,6 +166,8 @@ function drawLog(docs){
     const said = document.createElement("p"); said.className = "said"; said.textContent = c.text; li.append(said);
     if (c.decoded) { const p = document.createElement("p"); p.className = "dec"; p.textContent = c.decoded; li.append(p); }
     if (c.route) { const p = document.createElement("p"); p.className = "route"; p.textContent = "→ " + c.route; li.append(p); }
+    if (c.proposal) { const p = document.createElement("p"); p.className = "dec"; p.style.borderColor = "#d930c9"; p.textContent = "Proposal: " + c.proposal; li.append(p); }
+    if (c.answer) { const p = document.createElement("p"); p.style.fontWeight = "800"; p.textContent = c.answer; li.append(p); }
     log.append(li);
   }
 }
