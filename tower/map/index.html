@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>autopilot map</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+  :root{--ink:#0b2b40;--soft:#3f6a84;--glass:rgba(255,255,255,.82);--edge:rgba(255,255,255,.95);--pink:#ff6bd6;--purple:#9b5cff;--deep:#5b2bd6;
+    --display:"Baloo 2",Nunito,system-ui,sans-serif;--body:Nunito,system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace}
+  *{box-sizing:border-box}
+  body{margin:0;color:var(--ink);font:700 16px/1.45 var(--body);background:#bfe6fb}
+  .sky{position:fixed;inset:0;z-index:-1;background:radial-gradient(700px 400px at 15% 0%,rgba(255,255,255,.9),transparent 70%),radial-gradient(600px 500px at 100% 100%,rgba(155,92,255,.25),transparent 70%),linear-gradient(180deg,#7fd0ff 0%,#bfe6fb 45%,#eef9ff 100%)}
+  a{color:inherit}
+  header{max-width:1400px;margin:0 auto;padding:16px 16px 6px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}
+  .back{text-decoration:none;font:900 14px var(--body);padding:8px 14px;border-radius:999px;background:linear-gradient(180deg,#fff,#dfe8ef);border:2px solid #fff;box-shadow:0 4px 12px rgba(6,81,138,.2)}
+  h1{margin:0;font:800 clamp(30px,5vw,52px)/1 var(--display);color:#fff;text-shadow:0 3px 0 #0b7cc7,0 10px 26px rgba(0,60,120,.3)}
+  .sub{flex-basis:100%;margin:0;font-weight:800;color:#0b4f80;max-width:900px}
+  .bar{max-width:1400px;margin:8px auto 0;padding:0 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .key{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;background:var(--glass);font:800 13px var(--body);box-shadow:0 3px 10px rgba(6,81,138,.12)}
+  .key i{width:14px;height:14px;border-radius:50%;border:2px solid #fff}
+  .birth{margin-left:auto;font:900 15px var(--body);color:#fff;border:3px solid #fff;border-radius:999px;padding:10px 18px;cursor:pointer;
+    background:linear-gradient(135deg,var(--pink),var(--purple));box-shadow:0 8px 20px rgba(155,92,255,.45)}
+  .birth[aria-pressed="true"]{background:linear-gradient(135deg,#ffb3ec,#c58bff);box-shadow:0 0 0 6px rgba(255,107,214,.3),0 8px 20px rgba(155,92,255,.45)}
+  .wrap{max-width:1400px;margin:10px auto 0;padding:0 16px}
+  .poster{border-radius:34px;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.3));border:2px solid #fff;box-shadow:0 18px 40px rgba(6,60,100,.18);overflow-x:auto;overflow-y:hidden}
+  svg{display:block;width:100%;min-width:980px;height:auto}
+  .edge{fill:none;stroke-width:2.6;opacity:.55;transition:opacity .2s}
+  .edge.prop{stroke-dasharray:10 8;stroke-width:3.2;opacity:.9;animation:dash 1.2s linear infinite}
+  @keyframes dash{to{stroke-dashoffset:-18}}
+  .elab{font:800 11.5px var(--body);fill:#24506b;paint-order:stroke;stroke:#fff;stroke-width:4px;stroke-linejoin:round;pointer-events:none;transition:opacity .2s}
+  .node{cursor:pointer}
+  .node text{font:800 15px var(--body);fill:var(--ink);paint-order:stroke;stroke:rgba(255,255,255,.95);stroke-width:5px;stroke-linejoin:round;text-anchor:middle;pointer-events:none}
+  .node text.cs{font:900 13px var(--mono);letter-spacing:.06em}
+  .node circle.ring{fill:none;stroke:#fff;stroke-width:4}
+  .node.pick circle.ring{stroke:var(--pink);stroke-width:7}
+  svg.focus .edge{opacity:.07}svg.focus .elab{opacity:0}svg.focus .node{opacity:.28}
+  svg.focus .edge.on{opacity:.95;stroke-width:3.4}svg.focus .elab.on{opacity:1}svg.focus .node.on{opacity:1}
+  .dot{pointer-events:none}
+  .center-count{font:900 34px var(--display);fill:#fff;text-anchor:middle;paint-order:stroke;stroke:#0b4f80;stroke-width:3px}
+  .panes{max-width:1400px;margin:14px auto 40px;padding:0 16px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+  .glass{background:var(--glass);border:2px solid var(--edge);border-radius:28px;padding:16px 18px;box-shadow:0 10px 26px rgba(6,60,100,.14)}
+  h2{margin:0 0 8px;font:800 22px/1.1 var(--display)}
+  .info p{margin:0 0 8px}
+  .info ul{margin:6px 0 0;padding-left:18px}
+  .info li{margin:3px 0;font-weight:700}
+  .muted{color:var(--soft);font-weight:700}
+  .form[hidden],[hidden]{display:none!important}
+  .pair{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:6px 0 10px;font:900 15px var(--mono)}
+  .chip{display:inline-block;padding:3px 11px;border-radius:999px;color:#fff;font:900 12px var(--mono);letter-spacing:.04em}
+  textarea{width:100%;min-height:96px;resize:vertical;font:700 15px/1.4 var(--body);padding:12px 14px;border-radius:18px;border:2px solid #cfe3f0;background:#fff;color:var(--ink)}
+  .tx{margin-top:10px;font:900 15px var(--body);color:#fff;border:3px solid #fff;border-radius:999px;padding:10px 18px;cursor:pointer;background:linear-gradient(135deg,var(--pink),var(--purple));box-shadow:0 6px 16px rgba(155,92,255,.4)}
+  .tx:disabled{opacity:.6}
+  .steps{margin:10px 0 0;padding:10px 14px;border-radius:18px;background:#f3ecff;font:700 14px/1.45 var(--body);color:#3b2f73}
+  .props{list-style:none;margin:0;padding:0}
+  .props li{padding:10px 0;border-top:2px dashed #d7e8f3}
+  .props li:first-child{border-top:0}
+  .props .t{font:900 14px var(--mono)}
+  .props p{margin:4px 0 0;font-weight:700}
+  .gate{max-width:520px;margin:60px auto;padding:0 16px;text-align:center}
+  @media (max-width:820px){.panes{grid-template-columns:1fr}.birth{margin-left:0}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style></head>
+<body>
+<div class="sky" aria-hidden="true"></div>
+<div id="gate" class="gate" hidden><div class="glass"><h2>Cleared crew only</h2><p class="muted">Clear in on the tower first, then come back to the map.</p><p><a class="back" href="/tower/">to the tower</a></p></div></div>
+<div id="app" hidden>
+<header>
+  <a class="back" href="/tower/">&larr; radar</a>
+  <h1>the autopilot map</h1>
+  <p class="sub">Every bot, every place, and how they talk to each other. The Board is the middle. Tap anything to light up its lines. To birth a new automation, connect two things and explain how they'd talk.</p>
+</header>
+<div class="bar" id="keys"></div>
+<div class="wrap"><div class="poster"><svg id="map" viewBox="0 0 1600 1040" role="img" aria-label="Map of the asaaab autopilot: bots, places and their connections"></svg></div></div>
+<div class="panes">
+  <section class="glass info" id="info" aria-live="polite">
+    <h2>Tap something</h2>
+    <p class="muted">The lines move in the direction the information flows. Dashed pink lines are proposed automations waiting on the two-way street check.</p>
+  </section>
+  <section class="glass">
+    <h2>Birth an automation</h2>
+    <p class="muted" id="howto">Press <b>Connect two</b>, then tap two things on the map.</p>
+    <div class="form" id="form" hidden>
+      <div class="pair" id="pair"></div>
+      <label class="muted" for="how">How would they talk to each other? What would it do, and how often?</label>
+      <textarea id="how" maxlength="900" placeholder="e.g. when MKTG pulls new TikTok numbers, ENGINE says so in that hour's sentence"></textarea>
+      <button class="tx" id="send" type="button">Run the two-way street check</button>
+      <p class="muted" id="state"></p>
+      <div class="steps"><b>Step 1</b> is the idea: if the check says it's plausible, step 1 is already done. <b>Step 2</b> is what you'd do to make it real. That one's for later, for real, and it goes on the Board.</div>
+    </div>
+  </section>
+  <section class="glass" style="grid-column:1/-1">
+    <h2>Proposed automations</h2>
+    <ol class="props" id="props"><li class="muted">None yet. Connect two things to make the first one.</li></ol>
+  </section>
+</div>
+</div>
+<script>
+const $ = id => document.getElementById(id);
+const KIND = {
+  person: {c1: "#fff2b3", c2: "#ffb02e", label: "people"},
+  bot:    {c1: "#d8b8ff", c2: "#7b3ff0", label: "autopilot bots"},
+  place:  {c1: "#bfe9ff", c2: "#1f9ff0", label: "places + pages"},
+  data:   {c1: "#c8ffd9", c2: "#22b45f", label: "data + logs"},
+  outside:{c1: "#ffd0ec", c2: "#e0409f", label: "outside services"},
+  center: {c1: "#ffffff", c2: "#0b7cc7", label: "the Board"}
+};
+// Every node: id, label, callsign (bots), kind, x, y, r, what it is. PARK is private and never on the map.
+const N = [
+  {id:"BOARD", label:"the Board", kind:"center", x:800, y:520, r:78, what:"The middle of everything. Every item has a stage, a path of steps and a finish line. The radar is the Board drawn as a scope."},
+  {id:"CAP", label:"Captain", kind:"person", x:800, y:70, r:46, what:"Thinks big. Radios ideas in, makes the human-only clicks, does the art."},
+  {id:"CREW", label:"Flight Crew", kind:"person", x:1530, y:760, r:38, what:"People on the ground helping. They sign in to the pit portal."},
+  {id:"VIS", label:"visitors", kind:"person", x:1480, y:110, r:36, what:"Anyone who finds asaaab.com."},
+  {id:"TOWER", label:"TOWER", cs:true, kind:"bot", x:800, y:255, r:50, what:"Air traffic control, every hour at :21. Decodes radio calls and slots them: tweak, dream, task or question. Runs the two-way street check on proposed automations."},
+  {id:"FO", label:"FIRST OFFICER", cs:true, kind:"bot", x:1080, y:330, r:50, what:"Bricks and mortar. Builds pages, wires systems, writes every bot's instruction sheet. Works whenever the Captain is around."},
+  {id:"ENGINE", label:"ENGINE", cs:true, kind:"bot", x:1110, y:640, r:46, what:"The idle gauge, every hour at :51. One plain sentence about what moved."},
+  {id:"BRIEF", label:"BRIEF", cs:true, kind:"bot", x:880, y:820, r:46, what:"The morning walk-around. Board snapshot, yesterday, and today's three moves."},
+  {id:"RECAP", label:"RECAP", cs:true, kind:"bot", x:500, y:720, r:48, what:"The night shift. Inbox triage, the captain's log, the dictionary, whimsy training, abandoned scaffolding, other businesses."},
+  {id:"MKTG", label:"MKTG", cs:true, kind:"bot", x:470, y:380, r:44, what:"The numbers runner, Mondays. Refreshes the consulting page numbers if the sanity checks pass."},
+  {id:"ASAAABOT", label:"asaaabot", cs:true, kind:"bot", x:1300, y:200, r:44, what:"The free encouragement on asaaab.com/asaaabot. Asks what your day would look like and says move your mind."},
+  {id:"TP", label:"tower page", kind:"place", x:520, y:120, r:40, what:"asaaab.com/tower: the radio and the radar. Code-gated."},
+  {id:"PORTAL", label:"pit portal", kind:"place", x:1420, y:910, r:40, what:"pit.asaaab.com: the Board, crew list and logbook behind sign-in."},
+  {id:"SITE", label:"asaaab.com", kind:"place", x:1460, y:430, r:50, what:"The public site. A push to main deploys it."},
+  {id:"PURPLE", label:"purple buddy", kind:"place", x:1080, y:110, r:40, what:"Pinned on the one button that's a human's click. The bot sets it up and points."},
+  {id:"PC", label:"Captain's PC", kind:"place", x:150, y:430, r:40, what:"asaaab.exe (the footage engine), the ghost, the SSD intake."},
+  {id:"WIKI", label:"wiki + bot sheets", kind:"data", x:230, y:240, r:42, what:"Where everything lives, plus each bot's own instruction sheet. Every bot reads it first."},
+  {id:"DICT", label:"dictionary", kind:"data", x:290, y:600, r:36, what:"The Captain's lingo, so every bot reads him right."},
+  {id:"DREAMS", label:"dreams", kind:"data", x:610, y:330, r:34, what:"Private first steps for each new dream: plans, drafts, research."},
+  {id:"REPOS", label:"the repos", kind:"data", x:1240, y:830, r:40, what:"Both git repos. Every commit is a brick with a trail."},
+  {id:"DASH", label:"engine log", kind:"data", x:1440, y:640, r:34, what:"One sentence an hour, forever. Shown on /dashboard and the asaaabot page."},
+  {id:"REPORTS", label:"morning report", kind:"data", x:1090, y:950, r:36, what:"The brief's daily file."},
+  {id:"NIGHT", label:"nightly log", kind:"data", x:520, y:950, r:38, what:"The captain's log, whimsy counter, training notes and the free expression."},
+  {id:"INBOX", label:"inbox", kind:"outside", x:150, y:800, r:36, what:"The asaaab inbox. Read only."},
+  {id:"SOCIAL", label:"TikTok · Bluesky · YouTube", kind:"outside", x:230, y:960, r:40, what:"What got posted, and the TikTok Studio numbers."},
+];
+const E = [
+  ["CAP","TP","radios cryptic texts"],["TP","TOWER","calls land on the radio"],["TOWER","TP","answers + needs-your-ok"],
+  ["TOWER","BOARD","dreams get a finish line + path"],["TOWER","DREAMS","takes the first safe step"],["DICT","TOWER","decodes his lingo"],
+  ["TOWER","WIKI","approved tweaks to bot sheets"],["BOARD","TP","the radar"],
+  ["CAP","FO","chats"],["FO","SITE","builds pages"],["FO","BOARD","adds + ticks steps"],["FO","WIKI","writes it all down"],
+  ["FO","PURPLE","hits a human-only step"],["PURPLE","CAP","1-2-3, one click"],["FO","REPOS","commits"],["PC","FO","footage engine, ghost"],
+  ["WIKI","TOWER","read first"],["WIKI","RECAP","read first"],["WIKI","MKTG","read first"],
+  ["REPOS","ENGINE","last hour's commits"],["BOARD","ENGINE","steps ticked"],["ENGINE","DASH","one sentence an hour"],["DASH","SITE","/dashboard + asaaabot"],
+  ["BOARD","BRIEF","snapshot"],["REPOS","BRIEF","yesterday"],["BRIEF","REPORTS","morning report"],["REPORTS","CAP","today's 3"],
+  ["INBOX","RECAP","triage, read only"],["SOCIAL","RECAP","what got posted"],["RECAP","NIGHT","log + whimsy counter"],["RECAP","DICT","new lingo"],["NIGHT","CAP","morning message"],
+  ["SOCIAL","MKTG","TikTok Studio numbers"],["MKTG","SITE","consulting numbers"],
+  ["CREW","PORTAL","signs in"],["PORTAL","BOARD","edits the Board"],["CAP","PORTAL","runs the crew"],
+  ["VIS","ASAAABOT","what would your day look like?"],["ASAAABOT","SITE","poke around"],["VIS","SITE","finds it"],
+];
+const BYID = Object.fromEntries(N.map(n => [n.id, n]));
+const COL = {person:"#e39400", bot:"#7b3ff0", place:"#1f9ff0", data:"#22a356", outside:"#e0409f", center:"#0b7cc7"};
+const NS = "http://www.w3.org/2000/svg", svg = $("map");
+const mk = (t, a = {}) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); return e; };
+let props = [], sel = null, connect = false, picks = [];
+
+function curve(a, b, bend){ const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2, dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy) || 1;
+  // stop at the circle edges so arrowheads stay visible
+  const ax = a.x + dx / len * (a.r + 6), ay = a.y + dy / len * (a.r + 6), bx = b.x - dx / len * (b.r + 12), by = b.y - dy / len * (b.r + 12);
+  const cx = mx - dy * bend, cy = my + dx * bend; return {d: `M${ax} ${ay} Q${cx} ${cy} ${bx} ${by}`, lx: (ax + 2 * cx + bx) / 4, ly: (ay + 2 * cy + by) / 4}; }
+
+function draw(){
+  svg.textContent = "";
+  const defs = mk("defs");
+  for (const k in KIND) { const g = mk("radialGradient", {id: "g-" + k, cx: "35%", cy: "28%", r: "75%"}); g.append(mk("stop", {offset: "0%", "stop-color": "#fff"}), mk("stop", {offset: "22%", "stop-color": KIND[k].c1}), mk("stop", {offset: "100%", "stop-color": KIND[k].c2})); defs.append(g); }
+  for (const k in COL) { const m = mk("marker", {id: "a-" + k, viewBox: "0 0 10 10", refX: "6", refY: "5", markerWidth: "7", markerHeight: "7", orient: "auto-start-reverse"}); m.append(mk("path", {d: "M0 0 L10 5 L0 10 z", fill: COL[k]})); defs.append(m); }
+  const pm = mk("marker", {id: "a-prop", viewBox: "0 0 10 10", refX: "6", refY: "5", markerWidth: "7", markerHeight: "7", orient: "auto-start-reverse"}); pm.append(mk("path", {d: "M0 0 L10 5 L0 10 z", fill: "#ff3fbf"})); defs.append(pm);
+  svg.append(defs);
+  // radar rings behind the Board
+  const B = BYID.BOARD; for (const r of [130, 190, 250]) svg.append(mk("circle", {cx: B.x, cy: B.y, r, fill: "none", stroke: "rgba(11,124,199,.18)", "stroke-width": 2, "stroke-dasharray": "4 8"}));
+  const gE = mk("g"), gL = mk("g"), gN = mk("g");
+  const all = E.map(([f, t, l]) => ({f, t, l, prop: false})).concat(props.filter(p => BYID[p.a] && BYID[p.b]).map(p => ({f: p.a, t: p.b, l: p.verdict || p.statusLabel, prop: true, p})));
+  const seen = {};
+  for (const e of all) {
+    const a = BYID[e.f], b = BYID[e.t], key = [e.f, e.t].sort().join("|"); seen[key] = (seen[key] || 0) + 1;
+    const bend = (e.prop ? .28 : .12) * (seen[key] % 2 ? 1 : -1);
+    const c = curve(a, b, bend), col = e.prop ? "#ff3fbf" : COL[a.kind];
+    const on = sel && (e.f === sel || e.t === sel);
+    const p = mk("path", {d: c.d, class: "edge" + (e.prop ? " prop" : "") + (on ? " on" : ""), stroke: col, "marker-end": `url(#a-${e.prop ? "prop" : a.kind})`});
+    const ti = mk("title"); ti.textContent = `${a.label} → ${b.label}: ${e.l}`; p.append(ti); gE.append(p);
+    if (!e.prop) { const dot = mk("circle", {r: 3.6, fill: col, class: "dot"}); const am = mk("animateMotion", {dur: (3.4 + (e.l.length % 5) * .5) + "s", repeatCount: "indefinite", path: c.d}); dot.append(am); gE.append(dot); }
+    const lab = mk("text", {x: c.lx, y: c.ly, class: "elab" + (on ? " on" : ""), "text-anchor": "middle"}); lab.textContent = e.l; gL.append(lab);
+  }
+  for (const n of N) {
+    const linked = sel && (n.id === sel || all.some(e => (e.f === sel && e.t === n.id) || (e.t === sel && e.f === n.id)));
+    const g = mk("g", {class: "node" + (linked ? " on" : "") + (picks.includes(n.id) ? " pick" : ""), tabindex: 0, role: "button", "aria-label": n.label});
+    g.append(mk("circle", {cx: n.x, cy: n.y + 6, r: n.r, fill: "rgba(6,50,90,.18)"}));
+    g.append(mk("circle", {cx: n.x, cy: n.y, r: n.r, fill: `url(#g-${n.kind})`}), mk("circle", {cx: n.x, cy: n.y, r: n.r, class: "ring"}));
+    g.append(mk("ellipse", {cx: n.x - n.r * .15, cy: n.y - n.r * .45, rx: n.r * .55, ry: n.r * .28, fill: "rgba(255,255,255,.55)"}));
+    if (n.kind === "bot") for (const dx of [-.28, .28]) g.append(mk("ellipse", {cx: n.x + n.r * dx, cy: n.y + n.r * .02, rx: n.r * .09, ry: n.r * .13, fill: "#1d1640"}));
+    if (n.id === "BOARD") { const t = mk("text", {x: n.x, y: n.y + 12, class: "center-count"}); t.textContent = boardCount; g.append(t); }
+    const t = mk("text", {x: n.x, y: n.y + n.r + 22, class: n.cs ? "cs" : ""}); t.textContent = n.label; g.append(t);
+    const act = () => tap(n.id);
+    g.addEventListener("click", act); g.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); act(); } });
+    gN.append(g);
+  }
+  svg.append(gE, gL, gN);
+  svg.classList.toggle("focus", !!sel);
+}
+let boardCount = "";
+function tap(id){
+  if (connect) {
+    if (picks.includes(id)) picks = picks.filter(x => x !== id); else { picks.push(id); if (picks.length > 2) picks.shift(); }
+    sel = null; draw(); showForm(); return;
+  }
+  sel = sel === id ? null : id; draw(); info(sel);
+}
+function info(id){
+  const box = $("info"); box.textContent = "";
+  const h = document.createElement("h2"); h.textContent = id ? BYID[id].label : "Tap something"; box.append(h);
+  if (!id) { const p = document.createElement("p"); p.className = "muted"; p.textContent = "The lines move in the direction the information flows. Dashed pink lines are proposed automations waiting on the two-way street check."; box.append(p); return; }
+  const p = document.createElement("p"); p.textContent = BYID[id].what; box.append(p);
+  const out = E.filter(e => e[0] === id), inn = E.filter(e => e[1] === id);
+  for (const [title, list, side] of [["Talks to", out, 1], ["Hears from", inn, 0]]) {
+    if (!list.length) continue;
+    const s = document.createElement("p"); s.className = "muted"; s.style.margin = "10px 0 0"; s.textContent = title; box.append(s);
+    const ul = document.createElement("ul"); for (const e of list) { const li = document.createElement("li"); li.textContent = BYID[e[side]].label + ": " + e[2]; ul.append(li); } box.append(ul);
+  }
+}
+function showForm(){
+  $("form").hidden = picks.length < 2; $("howto").hidden = picks.length >= 2;
+  if (picks.length === 1) $("howto").innerHTML = "Now tap the second one. <b>" + BYID[picks[0]].label + "</b> picked.";
+  if (picks.length === 0) $("howto").innerHTML = connect ? "Tap the first thing on the map." : "Press <b>Connect two</b>, then tap two things on the map.";
+  if (picks.length === 2) { const pr = $("pair"); pr.textContent = ""; pr.append(chip(BYID[picks[0]]), " ↔ ", chip(BYID[picks[1]])); }
+}
+function chip(n){ const c = document.createElement("span"); c.className = "chip"; c.style.background = COL[n.kind]; c.textContent = n.label; return c; }
+function keys(){
+  const k = $("keys");
+  for (const id of ["person", "bot", "place", "data", "outside"]) { const s = document.createElement("span"); s.className = "key"; const i = document.createElement("i"); i.style.background = `radial-gradient(circle at 35% 30%,#fff,${KIND[id].c2})`; s.append(i, KIND[id].label); k.append(s); }
+  const p = document.createElement("span"); p.className = "key"; const i = document.createElement("i"); i.style.cssText = "background:#fff;border:2px dashed #ff3fbf"; p.append(i, "proposed automation"); k.append(p);
+  const b = document.createElement("button"); b.className = "birth"; b.type = "button"; b.setAttribute("aria-pressed", "false"); b.textContent = "Connect two";
+  b.onclick = () => { connect = !connect; b.setAttribute("aria-pressed", String(connect)); b.textContent = connect ? "Connecting… tap two" : "Connect two"; picks = []; sel = null; draw(); showForm(); info(null); };
+  k.append(b);
+}
+// Proposed automations travel as radio calls: "CONNECT: A + B | how: ...". TOWER runs the two-way street check on its round.
+const RX = /^CONNECT:\s*([A-Z]+)\s*\+\s*([A-Z]+)\s*\|\s*how:\s*([\s\S]*)$/;
+function readProps(calls){
+  props = [];
+  for (const c of calls) { const m = (c.text || "").match(RX); if (!m) continue;
+    const plaus = c.plausible === true ? "plausible" : c.plausible === false ? "not plausible yet" : null;
+    props.push({a: m[1], b: m[2], how: m[3].trim(), status: c.status, verdict: plaus, statusLabel: c.status === "sent" ? "waiting on the check" : (c.status || ""), answer: c.answer || "", at: c.at}); }
+  const ol = $("props"); ol.textContent = "";
+  if (!props.length) { const li = document.createElement("li"); li.className = "muted"; li.textContent = "None yet. Connect two things to make the first one."; ol.append(li); return; }
+  for (const p of props) {
+    const li = document.createElement("li"), t = document.createElement("div"); t.className = "t";
+    const st = document.createElement("span"); st.className = "chip"; st.style.background = p.verdict === "plausible" ? "#22a356" : p.verdict ? "#e09a00" : "#8aa3b0"; st.textContent = p.verdict || p.statusLabel;
+    t.append((BYID[p.a] ? BYID[p.a].label : p.a) + " ↔ " + (BYID[p.b] ? BYID[p.b].label : p.b) + "  ", st);
+    const how = document.createElement("p"); how.textContent = p.how; li.append(t, how);
+    if (p.answer) { const an = document.createElement("p"); an.className = "muted"; an.textContent = "TOWER: " + p.answer; li.append(an); }
+    ol.append(li);
+  }
+}
+const API = "https://pit.asaaab.com/tower/";
+let code = ""; try { code = sessionStorage.getItem("tower-code") || ""; } catch (e) {}
+const post = (p, b) => fetch(API + p, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({code, ...b})}).then(async r => ({ok: r.ok, status: r.status, j: await r.json().catch(() => ({}))}));
+async function refresh(){
+  const r = await post("radar", {});
+  if (!r.ok) return false;
+  const open = (r.j.flights || []).filter(f => f.status !== "done").length;
+  boardCount = String(open); readProps(r.j.calls || []); draw(); return true;
+}
+$("send").onclick = async () => {
+  const how = $("how").value.trim(); if (picks.length < 2 || !how) { $("state").textContent = "Pick two things and say how they'd talk."; return; }
+  $("send").disabled = true; $("state").textContent = "Transmitting…";
+  try {
+    const r = await post("radio", {text: `CONNECT: ${picks[0]} + ${picks[1]} | how: ${how}`});
+    if (r.ok) { $("how").value = ""; $("state").textContent = "Copy. On the radio now. TOWER runs the two-way street check at :21 and answers here."; picks = []; await refresh(); showForm(); }
+    else $("state").textContent = r.status === 401 ? "Code expired. Clear in on the tower again." : (r.j.error || "Didn't go through.");
+  } catch (e) { $("state").textContent = "Can't reach the tower right now."; }
+  $("send").disabled = false;
+};
+keys(); draw();
+(async () => {
+  if (!code) { $("gate").hidden = false; return; }
+  try { if (await refresh()) { $("app").hidden = false; } else { $("gate").hidden = false; } }
+  catch (e) { $("app").hidden = false; }
+})();
+</script>
+</body></html>
