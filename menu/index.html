@@ -11,37 +11,53 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap">
 <style>
+  @property --zing{syntax:"<angle>";inherits:false;initial-value:0deg}
   :root{--accent:#34beed;--ink:#2c3a46;--soft:#8a949d}
   *{box-sizing:border-box}
   html,body{margin:0;height:100%}
   body{font-family:Nunito,system-ui,sans-serif;color:var(--ink);overflow-x:hidden;
-    background:repeating-linear-gradient(180deg,#f4f6f8 0,#f4f6f8 3px,#eceff2 3px,#eceff2 4px)}
-  .wrap{min-height:100svh;display:flex;flex-direction:column}
-  .stage{flex:1;position:relative;display:flex;align-items:center;justify-content:center;padding:32px 72px 24px}
-  .grid{width:min(1180px,100%);display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:34px}
-  .ch{position:relative;display:block;aspect-ratio:16/10.5;border-radius:64px;padding:12px;text-decoration:none;
-    background:linear-gradient(180deg,#fff,#dde3e8);box-shadow:inset 0 0 0 2px #cdd4da,0 10px 24px rgba(70,90,110,.18);
-    transition:transform .18s ease,box-shadow .18s ease}
-  .ch{animation:bob var(--bd,6s) ease-in-out var(--dl,0s) infinite}
-  @keyframes bob{0%,100%{translate:0 0}25%{translate:3px -9px}50%{translate:0 -14px}75%{translate:-3px -6px}}
-  @media (prefers-reduced-motion:reduce){.ch{animation:none}}
-  .ch:hover,.ch:focus-visible{transform:scale(1.04);box-shadow:inset 0 0 0 3px var(--accent),0 14px 30px rgba(52,190,237,.3);outline:none}
-  .win{position:relative;width:100%;height:100%;border-radius:52px;overflow:hidden;background:#dfe6ec}
-  .win img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
-  .win::after{content:"";position:absolute;left:0;right:0;top:0;height:48%;pointer-events:none;
-    background:linear-gradient(180deg,rgba(255,255,255,.6),rgba(255,255,255,0));border-radius:52px 52px 50% 50%/52px 52px 40px 40px}
-  .ch.empty .win{background:repeating-linear-gradient(135deg,#eef2f5 0 12px,#e3e8ec 12px 24px)}
-  .tag{position:absolute;left:50%;top:-14px;transform:translate(-50%,6px) scale(.9);opacity:0;pointer-events:none;z-index:2;white-space:nowrap;
-    padding:9px 20px;border-radius:999px;background:#fff;border:2px solid var(--accent);font-weight:900;font-size:19px;color:var(--ink);
+    background:linear-gradient(180deg,rgba(150,215,255,.35),rgba(255,255,255,0) 45%),repeating-linear-gradient(180deg,#f4f6f8 0,#f4f6f8 3px,#eceff2 3px,#eceff2 4px)}
+  .wrap{position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden}
+  /* four clouds drifting across the sky */
+  .cloud{position:absolute;z-index:0;width:var(--w);height:calc(var(--w)*.34);top:var(--t);left:-30%;border-radius:999px;background:#fff;opacity:.9;
+    filter:drop-shadow(0 8px 14px rgba(70,140,200,.18));animation:drift var(--d) linear var(--dl) infinite}
+  .cloud::before,.cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
+  .cloud::before{width:46%;height:120%;left:14%;top:-58%}
+  .cloud::after{width:36%;height:100%;left:48%;top:-42%}
+  @keyframes drift{to{left:115%}}
+  .stage{flex:1;position:relative;z-index:1;display:flex;align-items:center;justify-content:center;padding:30px 72px 18px}
+  .grid{width:min(1180px,100%);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:26px}
+  .ch{position:relative;display:block;aspect-ratio:16/10;border-radius:30px;padding:9px;text-decoration:none;isolation:isolate;
+    background:linear-gradient(180deg,#fdfdfd 0%,#cfd6dc 45%,#f3f5f7 55%,#b9c2ca 100%);
+    box-shadow:0 8px 18px rgba(70,90,110,.22),inset 0 1px 0 #fff;
+    animation:bob var(--bd,7s) ease-in-out var(--dl,0s) infinite;transition:transform .18s ease}
+  /* border zing: a glossy rainbow streak runs around the silver frame */
+  .ch::before{content:"";position:absolute;inset:-3px;border-radius:33px;z-index:-1;
+    background:conic-gradient(from var(--zing),transparent 0 70%,#7fe3ff 78%,#ffffff 82%,#ff8ad8 86%,#ffe56b 90%,transparent 96%);
+    animation:zing 4.5s linear var(--dl,0s) infinite}
+  @keyframes zing{to{--zing:360deg}}
+  @keyframes bob{0%,100%{translate:0 0}50%{translate:0 -5px}}
+  .ch:hover,.ch:focus-visible{transform:scale(1.06);outline:none}
+  .ch:hover::before,.ch:focus-visible::before{animation-duration:1.2s}
+  /* inside: like the old rotating-aquarium lamps, the scene slowly slides */
+  .win{position:relative;width:100%;height:100%;border-radius:22px;overflow:hidden;background:#cfe8f7 center/cover;
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.12),inset 0 0 18px rgba(0,60,120,.25);
+    background-size:135% auto;animation:pan var(--pd,16s) ease-in-out var(--dl,0s) infinite alternate}
+  @keyframes pan{from{background-position:0% 50%}to{background-position:100% 50%}}
+  .win::after{content:"";position:absolute;left:0;right:0;top:0;height:45%;pointer-events:none;
+    background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,0));border-radius:22px 22px 50% 50%/22px 22px 20px 20px}
+  .ch.empty .win{background:repeating-linear-gradient(135deg,#eef2f5 0 10px,#e3e8ec 10px 20px);animation:none}
+  .tag{position:absolute;left:50%;top:-16px;transform:translate(-50%,6px) scale(.9);opacity:0;pointer-events:none;z-index:2;white-space:nowrap;
+    padding:8px 18px;border-radius:999px;background:#fff;border:2px solid var(--accent);font-weight:900;font-size:17px;color:var(--ink);
     box-shadow:0 8px 18px rgba(52,190,237,.3);transition:opacity .15s ease,transform .15s ease}
   .ch:hover .tag,.ch:focus-visible .tag{opacity:1;transform:translate(-50%,0) scale(1)}
   @media (hover:none){.tag{opacity:1;transform:translate(-50%,0) scale(.85)}}
-  .arrow{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:2px solid #cdd4da;
+  .arrow{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;border:2px solid #cdd4da;z-index:2;
     background:radial-gradient(circle at 50% 30%,#fff,#dfe6ec);color:var(--accent);display:grid;place-items:center;cursor:pointer;padding:0}
   .arrow:disabled{opacity:.35;cursor:default}
   .arrow.l{left:14px}.arrow.r{right:14px}
   .arrow svg{width:22px;height:22px}
-  .bar{position:relative;height:170px;flex:none}
+  .bar{position:relative;z-index:1;height:170px;flex:none}
   .bar::before{content:"";position:absolute;left:-60px;right:-60px;top:22px;bottom:0;border-radius:50% 50% 0 0/80px 80px 0 0;
     background:linear-gradient(180deg,#fff,#e6eaee);box-shadow:0 -2px 0 var(--accent),0 -12px 34px rgba(52,190,237,.18)}
   .orb{position:absolute;top:44px;width:108px;height:108px;border-radius:50%;display:grid;place-items:center;text-decoration:none;
@@ -52,16 +68,20 @@
   .clock{position:absolute;left:0;right:0;top:52px;text-align:center;pointer-events:none}
   .clock b{display:block;font-size:56px;font-weight:800;letter-spacing:2px;color:#9aa4ad;line-height:1}
   .clock span{font-size:22px;font-weight:800;color:var(--soft)}
+  @media (prefers-reduced-motion:reduce){.ch,.ch::before,.win,.cloud{animation:none}}
   @media (max-width:760px){
-    .stage{padding:26px 16px 16px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
-    .ch{border-radius:40px;padding:8px}.win{border-radius:32px}.win::after{border-radius:32px 32px 50% 50%/32px 32px 24px 24px}
-    .arrow{display:none}.tag{font-size:15px;padding:6px 14px}
+    .stage{padding:26px 16px 16px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .arrow{display:none}.tag{font-size:14px;padding:5px 12px}
     .orb{width:80px;height:80px;top:52px;font-size:16px}.orb svg{width:34px;height:34px}.clock b{font-size:40px}.clock span{font-size:17px}
   }
 </style>
 </head>
 <body>
 <div class="wrap">
+  <div class="cloud" aria-hidden="true" style="--w:220px;--t:6%;--d:95s;--dl:-20s"></div>
+  <div class="cloud" aria-hidden="true" style="--w:150px;--t:22%;--d:120s;--dl:-70s"></div>
+  <div class="cloud" aria-hidden="true" style="--w:260px;--t:48%;--d:140s;--dl:-35s"></div>
+  <div class="cloud" aria-hidden="true" style="--w:180px;--t:66%;--d:105s;--dl:-90s"></div>
   <main class="stage">
     <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">asaaab channels</h1>
     <button class="arrow l" id="prev" type="button" aria-label="Previous channels"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
@@ -90,7 +110,7 @@ const CH = [
   ["", "", ""]
 ];
 const grid = document.getElementById("grid"), prev = document.getElementById("prev"), next = document.getElementById("next");
-const per = () => matchMedia("(max-width:760px)").matches ? CH.length : 6;   // phone: every channel, scroll down
+const per = () => 12;   // tight 4x3 like the mockup; phones scroll   // phone: every channel, scroll down
 let page = 0;
 function draw() {
   const n = per(), pages = Math.ceil(CH.length / n); page = Math.min(page, pages - 1);
@@ -98,17 +118,18 @@ function draw() {
   for (const [name, href, img] of CH.slice(page * n, page * n + n)) {
     const a = document.createElement(name ? "a" : "div");
     a.className = "ch" + (name ? "" : " empty");
-    a.style.setProperty("--bd", (5.2 + Math.random() * 2.4).toFixed(2) + "s");   // each bubble floats on its own clock
+    a.style.setProperty("--bd", (6 + Math.random() * 3).toFixed(2) + "s");   // each bubble floats on its own clock
     a.style.setProperty("--dl", (-Math.random() * 6).toFixed(2) + "s");
     if (name) { a.href = href; a.setAttribute("aria-label", name); }
     else a.setAttribute("aria-hidden", "true");
     const w = document.createElement("div"); w.className = "win";
-    if (img) { const i = document.createElement("img"); i.src = "/assets/menu-tiles/" + img + ".jpg"; i.alt = ""; i.loading = "lazy"; w.append(i); }
+    if (img) w.style.backgroundImage = "url(/assets/menu-tiles/" + img + ".jpg?v=2)";
+    w.style.setProperty("--pd", (13 + Math.random() * 8).toFixed(1) + "s");
     a.append(w);
     if (name) { const t = document.createElement("span"); t.className = "tag"; t.textContent = name; a.append(t); }
     grid.append(a);
   }
-  prev.disabled = page === 0; next.disabled = page >= pages - 1;
+  prev.disabled = page === 0; next.disabled = page >= pages - 1; prev.hidden = next.hidden = pages < 2;
 }
 prev.onclick = () => { page--; draw(); }; next.onclick = () => { page++; draw(); };
 addEventListener("resize", draw); draw();
