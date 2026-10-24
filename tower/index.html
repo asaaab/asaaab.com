@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>asaaab tower</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Nunito:wght@600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+  /* layout: a glassy radar scope on the left, the radio log (transmit + decoded calls) on the right; stacks on phones */
+  :root{
+    --sky:#dff2fc; --sky2:#b6e2f8; --glass:rgba(255,255,255,.78); --edge:rgba(255,255,255,.95); --ink:#0b2b40; --soft:#3f6a84;
+    --scope:#062a1e; --scope2:#0b4a33; --phos:#3cf08a; --amber:#ffb02e; --red:#ff5a4d; --blue:#1f9ff0; --grass:#48b827;
+    --display:"Baloo 2",Nunito,system-ui,sans-serif; --body:Nunito,system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sky:#061826;--sky2:#0b2c42;--glass:rgba(12,40,60,.8);--edge:rgba(120,200,255,.25);--ink:#e3f3fc;--soft:#93bdd6;color-scheme:dark}}
+  :root[data-theme="dark"]{--sky:#061826;--sky2:#0b2c42;--glass:rgba(12,40,60,.8);--edge:rgba(120,200,255,.25);--ink:#e3f3fc;--soft:#93bdd6;color-scheme:dark}
+  *{box-sizing:border-box}
+  body{background:radial-gradient(120% 80% at 50% -10%,var(--sky2),var(--sky) 60%) fixed,var(--sky);color:var(--ink);font:16px/1.45 var(--body)}
+  main{max-width:1180px;margin:0 auto;padding-block:18px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:20px}
+  header{grid-column:1/-1;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  h1{margin:0;font:800 clamp(30px,5vw,44px)/1 var(--display);letter-spacing:-.5px;text-wrap:balance}
+  .sub{margin:0;color:var(--soft);font-weight:800}
+  .glass{background:var(--glass);border:1.5px solid var(--edge);border-radius:28px;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),0 12px 28px rgba(6,60,100,.16);padding:16px;min-width:0}
+  h2{margin:0 0 10px;font:800 20px/1.1 var(--display)}
+  /* radar */
+  .scope{position:relative;width:100%;max-width:520px;aspect-ratio:1;margin:0 auto;border-radius:50%;overflow:hidden;
+    background:radial-gradient(circle,var(--scope2) 0,var(--scope) 70%);box-shadow:inset 0 0 0 6px #c9d2d9,inset 0 0 0 9px #8d99a3,inset 0 0 40px rgba(0,0,0,.6),0 10px 26px rgba(0,40,30,.35)}
+  .rings{position:absolute;inset:0;background:
+    radial-gradient(circle,transparent 24.5%,rgba(60,240,138,.25) 25%,transparent 25.5%),
+    radial-gradient(circle,transparent 49.5%,rgba(60,240,138,.25) 50%,transparent 50.5%),
+    radial-gradient(circle,transparent 74.5%,rgba(60,240,138,.25) 75%,transparent 75.5%),
+    linear-gradient(90deg,transparent 49.8%,rgba(60,240,138,.18) 50%,transparent 50.2%),
+    linear-gradient(0deg,transparent 49.8%,rgba(60,240,138,.18) 50%,transparent 50.2%)}
+  .sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(60,240,138,.45),rgba(60,240,138,0) 22%);animation:sweep 5s linear infinite}
+  @keyframes sweep{to{transform:rotate(360deg)}}
+  .routes{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:1}
+  .routes path{fill:none;stroke-width:.55;stroke-dasharray:1.6 1.2;opacity:.8;animation:flow 1.6s linear infinite}
+  .routes path.hot{stroke-width:1.1;opacity:1}
+  @keyframes flow{to{stroke-dashoffset:-2.8}}
+  .ringlab{position:absolute;left:50%;transform:translateX(-50%);font:700 9px var(--mono);color:rgba(60,240,138,.55);letter-spacing:.08em;pointer-events:none;white-space:nowrap}
+  .tower{position:absolute;left:50%;top:50%;width:14%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;display:grid;place-items:center;
+    background:radial-gradient(circle at 50% 30%,#fff,#bfe8ff 60%,#4aa8ff);box-shadow:0 0 22px rgba(60,240,138,.7);font:800 10px var(--mono);color:#06518a;z-index:2;border:0;cursor:pointer}
+  .glare{position:absolute;inset:0;border-radius:50%;background:linear-gradient(160deg,rgba(255,255,255,.22),transparent 40%);pointer-events:none}
+  .blip{position:absolute;z-index:3;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:0;padding:4px;cursor:pointer;font:700 11px var(--mono);color:var(--phos)}
+  .blip i{width:14px;height:14px;border-radius:50%;background:currentColor;box-shadow:0 0 10px currentColor;position:relative}
+  .blip i::after{content:"";position:absolute;left:50%;top:50%;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:9px solid currentColor;transform:translate(-50%,-50%) rotate(var(--hd,0deg)) translateY(-13px)}
+  .blip.dim{opacity:.3}
+  .blip[data-s="holding"]{color:var(--amber)} .blip[data-s="grounded"]{color:var(--red)} .blip[data-s="filed"]{color:#9fe6ff}
+  .blip[data-s="filed"] i{background:none;border:2px dashed currentColor;box-shadow:none}
+  .blip:focus-visible{outline:2px solid #fff;border-radius:8px}
+  .strip{margin-top:14px;border-radius:18px;background:rgba(255,255,255,.6);border:1.5px solid var(--edge);padding:12px 14px;font-size:15px;min-height:82px}
+  :root[data-theme="dark"] .strip{background:rgba(0,0,0,.25)}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .strip{background:rgba(0,0,0,.25)}}
+  .strip b{font-family:var(--mono)}
+  .legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px;font:800 12px var(--body);color:var(--soft)}
+  .legend span::before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px;background:var(--c)}
+  /* radio */
+  textarea{width:100%;min-height:90px;resize:vertical;border-radius:18px;border:1.5px solid var(--edge);background:rgba(255,255,255,.85);color:#0b2b40;padding:12px 14px;font:600 16px var(--body)}
+  .row{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}
+  button.tx{font:900 16px var(--body);border:0;border-radius:999px;padding:12px 22px;cursor:pointer;color:#fff;background:radial-gradient(circle at 50% 20%,#7fdcff,var(--blue) 70%);box-shadow:inset 0 -3px 6px rgba(0,40,90,.35),0 6px 14px rgba(31,159,240,.35)}
+  button.tx:disabled{opacity:.5;cursor:default}
+  button:focus-visible,textarea:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+  .note{color:var(--soft);font-weight:700;font-size:14px}
+  .log{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+  .call{border-radius:20px;background:rgba(255,255,255,.7);border:1.5px solid var(--edge);padding:12px 14px;min-width:0}
+  :root[data-theme="dark"] .call{background:rgba(0,0,0,.22)}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .call{background:rgba(0,0,0,.22)}}
+  .call .t{font:700 12px var(--mono);color:var(--soft);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .chip{font:800 11px var(--body);letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:2px 9px;color:#fff;background:var(--c,#8aa3b0)}
+  .call p{margin:6px 0 0;overflow-wrap:anywhere}
+  .call .said{font-weight:800}
+  .call .dec{border-left:3px solid var(--phos);padding-left:10px;color:var(--ink)}
+  .call .route{font:700 13px var(--mono);color:var(--soft)}
+  .empty{color:var(--soft);font-weight:700;padding:10px 2px}
+  .gate{min-height:100svh;display:grid;place-items:center;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+  .pin{width:min(420px,100%);display:flex;flex-direction:column;gap:8px}
+  .pin input{font:700 22px var(--mono);letter-spacing:.2em;text-transform:uppercase;border-radius:16px;border:1.5px solid var(--edge);padding:12px 14px;background:rgba(255,255,255,.9);color:#0b2b40}
+  html,body{margin:0}
+  [hidden]{display:none!important}
+  @media (max-width:820px){main{grid-template-columns:1fr}}
+  @media (prefers-reduced-motion:reduce){.sweep{animation:none}}
+</style>
+<div id="gate" class="gate"><form id="pinform" class="glass pin">
+  <h1>asaaab tower</h1><p class="sub">Code, please.</p>
+  <label class="note" for="pin">Code</label><input id="pin" autocomplete="off" autocapitalize="characters" spellcheck="false">
+  <div class="row"><button class="tx" type="submit">Clear me in</button><span class="note" id="pinstate"></span></div>
+</form></div>
+<main id="app" hidden>
+  <header><h1>asaaab tower</h1><p class="sub">Radio in the cryptic text. The tower decodes it: big stuff to the Board, small stuff to the bots.</p></header>
+
+  <section class="glass" aria-labelledby="radarH">
+    <h2 id="radarH">Radar</h2>
+    <div class="scope" id="scope"><div class="rings"></div><div class="sweep"></div><div class="glare"></div></div>
+    <div class="strip" id="strip" aria-live="polite">Tap a blip: its routes light up and the strip shows what it feeds and what feeds it. Closer to the tower means more automatic. Each blip points where it is headed.</div>
+    <div class="legend"><span style="--c:var(--phos)">cruising</span><span style="--c:var(--amber)">holding</span><span style="--c:var(--red)">grounded</span><span style="--c:#9fe6ff">plan filed</span></div>
+  </section>
+
+  <section class="glass" aria-labelledby="radioH">
+    <h2 id="radioH">Radio</h2>
+    <label class="note" for="msg">Transmit (say it however it comes out)</label>
+    <textarea id="msg" placeholder="e.g. jolvo 7-11 rain shot, menu tile weird on phone, beam crash dummy??"></textarea>
+    <div class="row"><button class="tx" id="send" type="button">Transmit</button><span class="note" id="state"></span></div>
+    <ol class="log" id="log"></ol>
+  </section>
+</main>
+<script>
+const $ = id => document.getElementById(id);
+const fmt = t => { try { return new Date(t).toLocaleString("en-US",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}); } catch(e) { return t; } };
+const ST = {sent:["waiting for tower","#8aa3b0"], decoded:["decoded","#1f9ff0"], routed:["routed","#48b827"], parked:["parked","#ffb02e"]};
+let flights = [];
+// Layout means something: the tower (the Board) is in the middle. Closer = more automatic.
+// Inner ring cruising (runs itself), middle ring holding (waiting on something), outer ring plan filed (idea).
+// Angle = lane: reports up top, the site to the right, life bottom right, content bottom left.
+const RING = {cruising: 22, holding: 32, grounded: 32, filed: 41};
+function pos(f){ const r = RING[f.status] ?? 41, a = (f.lane ?? 0) * Math.PI / 180; return {x: 50 + r * Math.sin(a), y: 50 - r * Math.cos(a)}; }
+let sel = null;
+function drawRadar(list){
+  const scope = $("scope"); scope.querySelectorAll(".blip,.routes,.ringlab,.tower").forEach(b => b.remove());
+  const P = {BOARD: {x: 50, y: 50}}; list.forEach(f => P[f.cs] = pos(f));
+  for (const [t, r] of [["RUNS ITSELF", 22], ["HOLDING", 32], ["PLAN FILED", 41]]) { const l = document.createElement("span"); l.className = "ringlab"; l.style.top = (50 - r - 2.6) + "%"; l.textContent = t; scope.append(l); }
+  const NS = "http://www.w3.org/2000/svg", svg = document.createElementNS(NS, "svg"); svg.setAttribute("viewBox", "0 0 100 100"); svg.setAttribute("class", "routes");
+  const col = s => ({cruising: "#3cf08a", holding: "#ffb02e", grounded: "#ff5a4d"})[s] || "#9fe6ff";
+  for (const f of list) for (const to of (f.to || [])) {
+    const A = P[f.cs], B = P[to]; if (!A || !B) continue;
+    const mx = (A.x + B.x) / 2, my = (A.y + B.y) / 2, dx = B.x - A.x, dy = B.y - A.y, k = .18;   // gentle curve so routes don't stack
+    const d = `M${A.x} ${A.y} Q${mx - dy * k} ${my + dx * k} ${B.x} ${B.y}`;
+    const p = document.createElementNS(NS, "path"); p.setAttribute("d", d); p.setAttribute("stroke", col(f.status));
+    if (sel && (sel === f.cs || sel === to)) p.classList.add("hot");
+    const dot = document.createElementNS(NS, "circle"); dot.setAttribute("r", ".9"); dot.setAttribute("fill", col(f.status));
+    const am = document.createElementNS(NS, "animateMotion"); am.setAttribute("dur", (3 + Math.random() * 2).toFixed(1) + "s"); am.setAttribute("repeatCount", "indefinite"); am.setAttribute("path", d);
+    dot.append(am); svg.append(p, dot);
+  }
+  scope.append(svg);
+  const tw = document.createElement("button"); tw.type = "button"; tw.className = "tower"; tw.textContent = "BOARD"; tw.setAttribute("aria-label", "The Board, the tower");
+  tw.onclick = () => strip({cs: "BOARD", name: "The Board", status: "cruising", plan: "The tower. Big stuff lands here as Board items."}, list); scope.append(tw);
+  const selF = list.find(x => x.cs === sel) || {};
+  for (const f of list) {
+    const A = P[f.cs], tgt = P[(f.to || [])[0]] || P.BOARD, hd = Math.atan2(tgt.x - A.x, -(tgt.y - A.y)) * 180 / Math.PI;
+    const b = document.createElement("button"); b.type = "button"; b.className = "blip"; b.dataset.s = f.status || "filed";
+    if (sel && sel !== f.cs && !(f.to || []).includes(sel) && !(selF.to || []).includes(f.cs)) b.classList.add("dim");
+    b.style.left = A.x + "%"; b.style.top = A.y + "%"; b.style.setProperty("--hd", hd + "deg");
+    b.setAttribute("aria-label", f.cs + ", " + (f.status || "filed"));
+    const dot = document.createElement("i"), lab = document.createElement("span"); lab.textContent = f.cs; b.append(dot, lab);
+    b.onclick = () => { sel = sel === f.cs ? null : f.cs; drawRadar(list); strip(f, list); };
+    scope.append(b);
+  }
+}
+function strip(f, list){
+  const s = $("strip"); s.textContent = "";
+  const h = document.createElement("div"); const cs = document.createElement("b"); cs.textContent = f.cs; h.append(cs, " · " + (f.name || "") + " · " + (f.status || "filed"));
+  const p = document.createElement("div"); p.textContent = f.plan || "";
+  const feeds = (f.to || []).join(", "), from = list.filter(x => (x.to || []).includes(f.cs)).map(x => x.cs).join(", ");
+  const r = document.createElement("div"); r.style.cssText = "margin-top:6px;font:700 13px var(--mono);color:var(--soft)";
+  r.textContent = (from ? "from " + from + "   " : "") + (feeds ? "feeds " + feeds : "");
+  s.append(h, p, r);
+}
+function drawLog(docs){
+  const log = $("log"); log.textContent = "";
+  if (!docs.length) { const e = document.createElement("li"); e.className = "empty"; e.textContent = "No transmissions yet. Type anything above, the tower decodes it on its next round."; log.append(e); return; }
+  for (const d of docs) {
+    const c = d.data(); const li = document.createElement("li"); li.className = "call";
+    const t = document.createElement("div"); t.className = "t"; const [lab, col] = ST[c.status] || ST.sent;
+    const chip = document.createElement("span"); chip.className = "chip"; chip.style.setProperty("--c", col); chip.textContent = lab;
+    t.append(fmt(c.at), chip); li.append(t);
+    const said = document.createElement("p"); said.className = "said"; said.textContent = c.text; li.append(said);
+    if (c.decoded) { const p = document.createElement("p"); p.className = "dec"; p.textContent = c.decoded; li.append(p); }
+    if (c.route) { const p = document.createElement("p"); p.className = "route"; p.textContent = "→ " + c.route; li.append(p); }
+    log.append(li);
+  }
+}
+drawRadar([]); drawLog([]);
+const API = "https://pit.asaaab.com/tower/";
+let code = ""; try { code = sessionStorage.getItem("tower-code") || ""; } catch (e) {}
+const post = (p, b) => fetch(API + p, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({code, ...b})}).then(async r => ({ok: r.ok, status: r.status, j: await r.json().catch(() => ({}))}));
+const wrap = c => ({data: () => c});
+async function refresh(){
+  const r = await post("radar", {});
+  if (!r.ok) { if (r.status === 401) lock("That code didn't clear."); else $("state").textContent = r.j.error || "The tower didn't answer."; return false; }
+  flights = r.j.flights || []; drawRadar(flights); drawLog((r.j.calls || []).map(wrap)); $("state").textContent = "Tower online. Cleared as " + r.j.label + "."; return true;
+}
+function lock(msg){ try { sessionStorage.removeItem("tower-code"); } catch (e) {} code = ""; $("app").hidden = true; $("gate").hidden = false; $("pinstate").textContent = msg || ""; }
+$("pinform").onsubmit = async e => { e.preventDefault(); code = $("pin").value.trim(); if (!code) return; $("pinstate").textContent = "Checking…";
+  try { if (await refresh()) { try { sessionStorage.setItem("tower-code", code); } catch (e) {} $("gate").hidden = true; $("app").hidden = false; $("pin").value = ""; } }
+  catch (err) { $("pinstate").textContent = "Can't reach the tower right now."; } };
+let busy = false;
+$("send").onclick = async () => {
+  const text = $("msg").value.trim(); if (!text || busy) return;
+  busy = true; $("send").disabled = true; $("state").textContent = "Transmitting…";
+  try { const r = await post("radio", {text}); if (r.ok) { $("msg").value = ""; $("state").textContent = "Copy. Logged. The tower decodes it on its next round."; await refresh(); } else { $("state").textContent = r.j.error || "Didn't go through."; if (r.status === 401) lock("Code expired. Clear in again."); } }
+  catch (e) { $("state").textContent = "Can't reach the tower right now. Try again."; }
+  busy = false; $("send").disabled = false;
+};
+if (code) refresh().then(ok => { if (ok) { $("gate").hidden = true; $("app").hidden = false; } }).catch(() => lock(""));
+</script>
+
+</body></html>
