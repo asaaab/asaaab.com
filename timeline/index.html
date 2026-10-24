@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>asaaab flight path</title>
+<meta name="description" content="From one dream car to a structure anyone can use. The asaaab timeline: a path, then a road, then a runway, then the launch.">
+<link rel="icon" href="/banner.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@700;800;900&family=Nunito:wght@600;700;800;900&display=swap">
+<style>
+  :root{--ink:#10314a;--soft:#4f6d84;--glass:rgba(255,255,255,.78);--dirt:#b07a43;--asphalt:#3b4148;--line:#ffd23f;--concrete:#c9d0d6}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;color:var(--ink);font:700 16px/1.45 Nunito,system-ui,sans-serif;background:#7fd0ff;overflow-x:hidden}
+  .sky{position:fixed;inset:0;z-index:-1;background:
+      radial-gradient(500px 300px at 85% 8%,rgba(255,255,255,.9),transparent 70%),
+      radial-gradient(120px 120px at 88% 9%,#fff7b0,transparent 70%),
+      linear-gradient(180deg,#1fa8ff 0%,#5cc8ff 35%,#a9e6ff 70%,#e6fbff 100%)}
+  a{color:inherit}
+  .back{position:fixed;top:14px;left:14px;z-index:5;text-decoration:none;font:900 15px Nunito;padding:9px 16px;border-radius:999px;
+    background:linear-gradient(180deg,#fff,#dfe8ef);border:2px solid #fff;box-shadow:0 6px 18px rgba(6,81,138,.25)}
+  header{text-align:center;padding:76px 16px 30px}
+  h1{margin:0;font:900 clamp(38px,8vw,76px)/.95 Overpass,sans-serif;color:#fff;text-shadow:0 3px 0 #0b7cc7,0 10px 30px rgba(0,60,120,.35)}
+  .sub{margin:12px auto 0;max-width:560px;font-weight:800;color:#0b4f80}
+  .legend{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:18px}
+  .legend span{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;background:var(--glass);font:800 13px Nunito;box-shadow:0 4px 12px rgba(6,81,138,.15)}
+  .legend i{width:28px;height:10px;border-radius:6px;display:inline-block}
+
+  main{position:relative;max-width:1000px;margin:0 auto;padding:0 16px 40px}
+  .phase{position:relative;padding:30px 0 10px}
+  /* the line itself: one track per phase, centered on wide screens, on the left on phones */
+  .track{position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);border-radius:999px}
+  .path .track{width:12px;background:radial-gradient(circle,var(--dirt) 45%,transparent 50%) 0 0/12px 22px repeat-y}
+  .road .track{width:46px;background:linear-gradient(90deg,transparent 46%,var(--line) 46%,var(--line) 54%,transparent 54%) 0 0/100% 46px repeat-y,
+      linear-gradient(90deg,#fff 0 3px,var(--asphalt) 3px calc(100% - 3px),#fff calc(100% - 3px));
+      background-size:100% 46px,100% 100%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.15)}
+  .road .track{background:
+      repeating-linear-gradient(180deg,var(--line) 0 22px,transparent 22px 46px) 50% 0/6px 100% no-repeat,
+      linear-gradient(90deg,#fff 0 3px,var(--asphalt) 3px calc(100% - 3px),#fff calc(100% - 3px))}
+  .runway .track{width:84px;border-radius:14px;background:
+      repeating-linear-gradient(180deg,#fff 0 30px,transparent 30px 70px) 50% 0/6px 100% no-repeat,
+      linear-gradient(90deg,#fff 0 4px,var(--concrete) 4px calc(100% - 4px),#fff calc(100% - 4px));box-shadow:0 0 0 3px rgba(255,255,255,.4)}
+  .runway .track::before,.runway .track::after{content:"";position:absolute;top:0;bottom:0;width:6px;
+      background:radial-gradient(circle,#ffe66b 40%,transparent 45%) 0 0/6px 40px repeat-y;animation:lights 1.6s steps(2) infinite}
+  .runway .track::before{left:-12px}.runway .track::after{right:-12px;animation-delay:.8s}
+  @keyframes lights{50%{opacity:.25}}
+  .launch .track{width:6px;background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,0));filter:blur(1px)}
+
+  .sign{position:relative;z-index:2;display:block;width:max-content;margin:0 auto 26px;padding:10px 24px;border-radius:999px;
+    font:900 20px Overpass,sans-serif;letter-spacing:.12em;color:#fff;border:3px solid #fff;box-shadow:0 8px 22px rgba(0,50,100,.3)}
+  .sign small{display:block;font:800 12px Nunito;letter-spacing:0;text-align:center;opacity:.92}
+  .path .sign{background:linear-gradient(180deg,#d39a5b,#9a6330)}
+  .road .sign{background:linear-gradient(180deg,#5d6670,#2c3238)}
+  .runway .sign{background:linear-gradient(180deg,#38c46f,#14864a)}
+  .launch .sign{background:linear-gradient(180deg,#ff6bd6,#9b5cff)}
+
+  ol{list-style:none;margin:0;padding:0;position:relative;z-index:1}
+  li{position:relative;width:calc(50% - 64px);margin:0 0 22px}
+  li:nth-child(odd){margin-right:auto}
+  li:nth-child(even){margin-left:auto}
+  .card{position:relative;padding:14px 18px 14px;border-radius:26px;background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.72));
+    border:2px solid #fff;box-shadow:0 10px 26px rgba(6,81,138,.2),inset 0 -6px 14px rgba(120,190,240,.18);backdrop-filter:blur(6px)}
+  .card::before{content:"";position:absolute;inset:4px 10px auto;height:40%;border-radius:22px 22px 60% 60%/22px 22px 18px 18px;
+    background:linear-gradient(180deg,rgba(255,255,255,.75),rgba(255,255,255,0));pointer-events:none}
+  .dot{position:absolute;top:22px;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#5cc8ff 45%,#0b7cc7);
+    border:3px solid #fff;box-shadow:0 3px 10px rgba(0,50,100,.35)}
+  li:nth-child(odd) .dot{right:-75px}
+  li:nth-child(even) .dot{left:-75px}
+  li:nth-child(odd)::after,li:nth-child(even)::after{content:"";position:absolute;top:32px;width:54px;height:3px;background:rgba(255,255,255,.85);border-radius:2px}
+  li:nth-child(odd)::after{right:-56px}
+  li:nth-child(even)::after{left:-56px}
+  .when{display:inline-block;padding:2px 10px;border-radius:999px;font:900 12px Overpass,sans-serif;letter-spacing:.06em;background:#0b7cc7;color:#fff}
+  .when.tbd{background:transparent;color:var(--soft);border:2px dashed #9fc3db}
+  h3{margin:6px 0 2px;font:900 20px/1.15 Overpass,sans-serif}
+  p{margin:0;color:#2a4a60;font-weight:700}
+  .tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px}
+  .tag{font:900 11px Nunito;text-transform:uppercase;letter-spacing:.06em;padding:3px 9px;border-radius:999px;color:#fff;box-shadow:inset 0 1px 0 rgba(255,255,255,.5)}
+  .t-car{background:#e2342b}.t-site{background:#1f8fe0}.t-beam{background:#f08a17}.t-youtube{background:#d61f1f}.t-tiktok{background:#111}
+  .t-song{background:#9b5cff}.t-event{background:#17a865}.t-crew{background:#ff4fb8}.t-plan{background:#2b5b84}
+  .ahead .card{background:linear-gradient(180deg,rgba(255,255,255,.62),rgba(255,255,255,.38));border-style:dashed}
+  .ahead .dot{background:radial-gradient(circle at 35% 30%,#fff,#cfe6f5 60%,#9fc3db)}
+
+  .here{position:relative;z-index:3;display:flex;justify-content:center;margin:6px 0 28px}
+  .here b{display:inline-flex;align-items:center;gap:10px;padding:10px 20px;border-radius:999px;color:#4a2a00;font:900 16px Overpass,sans-serif;
+    background:linear-gradient(180deg,#fffbd0,#ffe14d);border:3px solid #fff;box-shadow:0 0 0 6px rgba(255,225,77,.35),0 10px 24px rgba(150,110,0,.35);animation:bob 2.4s ease-in-out infinite}
+  .here svg{width:26px;height:26px}
+  @keyframes bob{50%{transform:translateY(-4px)}}
+
+  .finish{position:relative;z-index:2;text-align:center;padding:30px 0 90px}
+  .finish .flag{width:200px;height:34px;margin:0 auto 18px;border-radius:10px;border:3px solid #fff;box-shadow:0 8px 22px rgba(0,50,100,.25);
+    background:conic-gradient(#111 25%,#fff 0 50%,#111 0 75%,#fff 0) 0 0/17px 17px}
+  .finish h2{margin:0;font:900 clamp(26px,5vw,44px)/1 Overpass,sans-serif;color:#fff;text-shadow:0 3px 0 #9b5cff,0 10px 26px rgba(80,0,140,.35)}
+  .finish p{margin:10px auto 0;max-width:520px;color:#0b4f80;font-weight:800}
+  .plane{display:block;margin:0 auto 10px;width:70px;animation:climb 4s ease-in-out infinite}
+  @keyframes climb{50%{transform:translate(6px,-10px) rotate(-6deg)}}
+  .cloud{position:absolute;z-index:0;width:180px;height:60px;border-radius:60px;background:#fff;opacity:.85;filter:blur(.5px)}
+  .cloud::before,.cloud::after{content:"";position:absolute;background:#fff;border-radius:50%}
+  .cloud::before{width:80px;height:80px;left:24px;top:-36px}.cloud::after{width:60px;height:60px;left:90px;top:-24px}
+  .err{text-align:center;font-weight:900;color:#fff}
+
+  @media (max-width:760px){
+    .track{left:30px;transform:translateX(-50%)}
+    .road .track{width:34px}.runway .track{width:48px}
+    .sign{margin-left:0}
+    li,li:nth-child(odd),li:nth-child(even){width:auto;margin:0 0 18px 66px}
+    li:nth-child(odd) .dot,li:nth-child(even) .dot{left:-47px;right:auto}
+    li:nth-child(odd)::after,li:nth-child(even)::after{left:-26px;right:auto;width:26px}
+    .here{justify-content:flex-start}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true"></div>
+<a class="back" href="/">&larr; menu</a>
+<header>
+  <h1>the asaaab<br>flight path</h1>
+  <p class="sub">One dream car, then a path, then a road, then a runway. Then the launch, when we all take a step back and the next people get to use what we built.</p>
+  <div class="legend" aria-label="What each line means">
+    <span><i style="background:radial-gradient(circle,#b07a43 45%,transparent 50%) 0 0/10px 10px"></i>path</span>
+    <span><i style="background:#3b4148;box-shadow:inset 0 -4px 0 #3b4148,inset 0 4px 0 #3b4148,inset 0 0 0 9px #ffd23f"></i>road</span>
+    <span><i style="background:#c9d0d6;border:2px solid #fff"></i>runway</span>
+    <span><i style="background:linear-gradient(90deg,#ff6bd6,#9b5cff)"></i>launch</span>
+  </div>
+</header>
+<main id="line"><p class="err">Loading the flight path…</p></main>
+<script>
+// Reads /docs/timeline.md. "## Path|Road|Runway|Launch" = the kind of line. "- date | title | note | tags" = a milestone. "> you are here" = the marker.
+const SUBS = {path: "the dream finds its feet", road: "building the structures", runway: "picking up speed", launch: "step back and let it fly"};
+const PLANE = '<svg viewBox="0 0 64 64" aria-hidden="true"><path fill="#fff" stroke="#9b5cff" stroke-width="3" stroke-linejoin="round" d="M32 4c3 0 5 4 5 9v12l20 12v6l-20-6v11l7 5v5l-12-3-12 3v-5l7-5V37L7 43v-6l20-12V13c0-5 2-9 5-9z"/></svg>';
+function el(tag, cls, text){ const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+fetch("/docs/timeline.md", {cache: "no-store"}).then(r => { if (!r.ok) throw 0; return r.text(); }).then(md => {
+  const main = document.getElementById("line"); main.textContent = "";
+  let phase = null, ol = null, ahead = false;
+  for (const raw of md.split("\n")) {
+    const line = raw.trim();
+    const h = line.match(/^##\s+(path|road|runway|launch)\b/i);
+    if (h) {
+      const key = h[1].toLowerCase();
+      phase = el("section", "phase " + key); phase.append(el("div", "track"));
+      const sign = el("div", "sign", key.toUpperCase()); sign.append(el("small", null, SUBS[key])); phase.append(sign);
+      ol = el("ol"); phase.append(ol); main.append(phase);
+      if (key === "launch") { const c = el("div", "cloud"); c.style.cssText = "right:4%;top:60px"; phase.append(c); }
+      continue;
+    }
+    if (!phase) continue;
+    if (/^>\s*you are here/i.test(line)) {
+      const here = el("div", "here"); const b = el("b"); b.innerHTML = PLANE; b.append("you are here"); here.append(b);
+      phase.insertBefore(here, null); ol = el("ol"); phase.append(ol); ahead = true; continue;
+    }
+    if (!line.startsWith("- ")) continue;
+    const [date = "?", title = "", note = "", tags = ""] = line.slice(2).split("|").map(s => s.trim());
+    if (!title) continue;
+    const li = el("li", ahead ? "ahead" : ""), card = el("div", "card");
+    const known = date && date !== "?";
+    card.append(el("span", "when" + (known ? "" : " tbd"), known ? date : (ahead ? "ahead" : "date tbd")));
+    card.append(el("h3", null, title));
+    if (note) card.append(el("p", null, note));
+    const tg = el("div", "tags");
+    for (const t of tags.split(",").map(s => s.trim().toLowerCase()).filter(Boolean)) tg.append(el("span", "tag t-" + t.replace(/[^a-z]/g, ""), t));
+    if (tg.children.length) card.append(tg);
+    li.append(el("i", "dot"), card); ol.append(li);
+  }
+  const fin = el("div", "finish"); fin.innerHTML = '<span class="plane">' + PLANE + '</span><div class="flag" aria-hidden="true"></div>';
+  fin.append(el("h2", null, "keep the world whimsical forever"), el("p", null, "The finish line isn't infinite growth. It's a structure anyone can pick up and use to make life a little easier."));
+  main.append(fin);
+}).catch(() => { document.getElementById("line").innerHTML = '<p class="err">The flight path didn’t load. Try again in a minute.</p>'; });
+</script>
+</body>
+</html>
