@@ -92,3 +92,4 @@
 - asaaab is truly the mode in which this will happen. the transport.
 - lifes too short not to follow your dreams.
 - whimzmaxx believz gen z dezervez the frutiger aero future we were promised. before they did that big ios update that changed the youtube app.
+- asaaab and whimzmaxx are the same product just packaged differently. its like a subaru solterra and a toyota bz4x
