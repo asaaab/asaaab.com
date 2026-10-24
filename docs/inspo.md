@@ -3,6 +3,10 @@
 - The asaaab theme song, by Cole 2K
 - Fifth Gear
 - Club Penguin
+- Fantastic Contraption
+- Lime Diet Coke
+- Pre-2012 air
+- A childhood on Razor scooters
 - Jo Dee Messina, I'm Alright
 - Late-'90s radio pop-rock: Everclear, Sugar Ray, Sheryl Crow
 - Country-pop with a lift: Faith Hill, Jo Dee Messina
