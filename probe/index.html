@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>asaaab probe</title>
+<style>
+  :root{--bg:#06121b;--ink:#e6f4fb;--soft:#8fb7d1;--accent:#34beed;--hit:#39f27a}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.35 system-ui,sans-serif}
+  main{padding:12px 16px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  h1{grid-column:1/-1;margin:0;font-size:22px}
+  h1 small{color:var(--soft);font-weight:600;font-size:15px}
+  section{background:#0f2738;border-radius:18px;padding:10px 14px;min-width:0}
+  h2{margin:0 0 6px;font-size:16px;color:var(--accent)}
+  dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:2px 10px;font-size:15px}
+  dt{color:var(--soft)} dd{margin:0;word-break:break-word}
+  button{font:inherit;font-weight:800;border-radius:999px;border:2px solid var(--accent);background:#0b2232;color:var(--ink);padding:10px 18px;margin:0 8px 8px 0}
+  #log{font:600 16px ui-monospace,monospace;max-height:340px;overflow:auto;margin:0;white-space:pre-wrap}
+  #log b{color:var(--hit)}
+  @media (max-width:700px){main{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+  <h1>asaaab probe <small>shows what this screen can tell a web page. nothing is sent anywhere.</small></h1>
+  <section>
+    <h2>The screen</h2>
+    <dl id="info"></dl>
+  </section>
+  <section>
+    <h2>Live log: press car buttons now</h2>
+    <button id="audio" type="button">1. Start music test</button>
+    <button id="clear" type="button">Clear log</button>
+    <pre id="log"></pre>
+  </section>
+</main>
+<script>
+const info = document.getElementById("info"), log = document.getElementById("log");
+const t0 = Date.now();
+function row(k, v) { const dt = document.createElement("dt"), dd = document.createElement("dd"); dt.textContent = k; dd.textContent = v; info.append(dt, dd); }
+function add(what, detail) {
+  const s = ((Date.now() - t0) / 1000).toFixed(1).padStart(6, " ");
+  const line = document.createElement("div"); const b = document.createElement("b"); b.textContent = what;
+  line.append(s + "s  ", b, detail ? "  " + detail : ""); log.prepend(line);
+}
+// the screen
+row("Browser", navigator.userAgent);
+row("Screen", screen.width + " x " + screen.height + " @ " + devicePixelRatio + "x");
+row("Window", innerWidth + " x " + innerHeight);
+row("Touch points", navigator.maxTouchPoints);
+row("CPU cores", navigator.hardwareConcurrency || "?");
+row("RAM (GB, rough)", navigator.deviceMemory || "?");
+row("Language", navigator.language);
+try { const g = document.createElement("canvas").getContext("webgl"); const x = g && g.getExtension("WEBGL_debug_renderer_info");
+  row("Graphics", g ? (x ? g.getParameter(x.UNMASKED_RENDERER_WEBGL) : g.getParameter(g.RENDERER)) : "no WebGL"); } catch (e) { row("Graphics", "error"); }
+const v = document.createElement("video");
+row("Plays", ["video/mp4; codecs=\"avc1.42E01E\"", "video/mp4; codecs=\"hvc1\"", "video/webm; codecs=\"vp9\""].map(c => c.split("codecs=")[1].replace(/\W/g, "") + ":" + (v.canPlayType(c) || "no")).join("  "));
+row("Media buttons API", "mediaSession" in navigator ? "yes" : "no");
+row("Gamepad API", "getGamepads" in navigator ? "yes" : "no");
+if (navigator.getBattery) navigator.getBattery().then(b => row("Power", (b.charging ? "charging " : "battery ") + Math.round(b.level * 100) + "%")).catch(() => {});
+// keys: steering wheel / hard buttons often arrive as keys
+for (const ev of ["keydown", "keyup"]) addEventListener(ev, e => { add(ev, "key=" + e.key + " code=" + e.code + " keyCode=" + e.keyCode); if (ev === "keydown") e.preventDefault(); });
+// screen going off / dimming / camera covering the page
+document.addEventListener("visibilitychange", () => add("visibility", document.visibilityState));
+for (const ev of ["focus", "blur", "pagehide", "pageshow", "resize", "online", "offline"]) addEventListener(ev, () => add(ev, ev === "resize" ? innerWidth + "x" + innerHeight : ""));
+addEventListener("touchstart", e => add("touch", Math.round(e.touches[0].clientX) + "," + Math.round(e.touches[0].clientY)), {passive: true});
+// heartbeat: a gap in these means the page was frozen (screen off, camera)
+let last = Date.now(); setInterval(() => { const n = Date.now(); if (n - last > 2500) add("gap", ((n - last) / 1000).toFixed(1) + "s with no page time"); last = n; }, 1000);
+// music test: once a page is playing audio, track buttons may come here as media actions
+document.getElementById("audio").onclick = async () => {
+  const ac = new (window.AudioContext || window.webkitAudioContext)(); const o = ac.createOscillator(), g = ac.createGain();
+  o.frequency.value = 220; g.gain.value = 0.02; o.connect(g); const dst = ac.createMediaStreamDestination(); g.connect(dst); g.connect(ac.destination); o.start();
+  const a = new Audio(); a.srcObject = dst.stream; a.loop = true; try { await a.play(); } catch (e) {}
+  a.onpause = () => add("audio paused", "something else took the sound"); a.onplay = () => add("audio playing");
+  if ("mediaSession" in navigator) {
+    navigator.mediaSession.metadata = new MediaMetadata({title: "asaaab probe", artist: "press track buttons"});
+    for (const act of ["play", "pause", "stop", "previoustrack", "nexttrack", "seekbackward", "seekforward"]) {
+      try { navigator.mediaSession.setActionHandler(act, () => add("media", act)); } catch (e) {}
+    }
+  }
+  add("music test on", "quiet hum. now try track buttons, volume, reverse");
+};
+document.getElementById("clear").onclick = () => { log.textContent = ""; };
+add("probe loaded");
+</script>
+</body>
+</html>
