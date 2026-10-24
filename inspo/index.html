@@ -21,6 +21,13 @@ h1{font:900 clamp(36px, 7vw, 64px)/1 Overpass, sans-serif; margin:10px 0 6px}
 .thoughts{display:grid; grid-template-columns:repeat(auto-fill, minmax(260px, 1fr)); gap:14px; margin:0 0 34px}
 .q{position:relative; padding:20px 20px 18px; border-radius:26px; color:#fff; font:900 18px/1.3 Overpass, sans-serif;
   background:radial-gradient(circle at 25% 10%, rgba(255,255,255,.5), transparent 40%), linear-gradient(160deg, var(--a), var(--b)); box-shadow:0 10px 22px rgba(0,0,0,.14), inset 0 2px 0 rgba(255,255,255,.5)}
+.center{display:flex; flex-wrap:wrap; justify-content:center; gap:22px; margin:10px 0 40px}
+.big{padding:30px 40px; border-radius:999px; color:#fff; font:900 clamp(26px,5vw,44px)/1.05 Overpass, sans-serif; text-align:center; letter-spacing:-.5px;
+  background:radial-gradient(circle at 30% 15%, rgba(255,255,255,.6), transparent 45%), linear-gradient(160deg, var(--a), var(--b));
+  box-shadow:0 16px 34px rgba(0,0,0,.18), inset 0 3px 0 rgba(255,255,255,.55); animation:bob 6s ease-in-out infinite}
+.big:nth-child(2){animation-delay:-3s}
+@keyframes bob{50%{transform:translateY(-6px)}}
+@media (prefers-reduced-motion:reduce){.big{animation:none}}
 .q::before{content:"“"; position:absolute; right:16px; top:-6px; font-size:64px; opacity:.35}
 h2{font:900 22px Overpass, sans-serif; margin:26px 0 10px}
 .chips{display:flex; flex-wrap:wrap; gap:8px; margin:0; padding:0; list-style:none}
@@ -48,6 +55,7 @@ h2{font:900 22px Overpass, sans-serif; margin:26px 0 10px}
     const out = [];
     for (const part of t.split(/\n(?=## )/).slice(1)) {
       const [h, ...rest] = part.split("\n"), title = h.replace(/^##\s+/, ""), items = rest.filter(l => /^- \S/.test(l)).map(l => l.slice(2));
+      if (/^center$/i.test(title)) { out.unshift(`<div class="center">` + items.map((q, i) => `<div class="big" style="--a:${["#3aa8ff","#58d97c"][i % 2]};--b:${["#1d5fb8","#1f7a3a"][i % 2]}">${esc(q)}</div>`).join("") + `</div>`); continue; }
       if (/core core/i.test(title)) out.push(`<div class="thoughts">` + items.map((q, i) => `<div class="q" style="--a:${PAL[i % 5][0]};--b:${PAL[i % 5][1]}">${esc(q)}</div>`).join("") + `</div>`);
       else out.push(`<h2>${esc(title)}</h2><ul class="chips">` + items.map(x => `<li>${esc(x)}</li>`).join("") + `</ul>`);
     }

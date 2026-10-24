@@ -1,4 +1,8 @@
 # Inspo board
+## Center
+- think about who you are
+- move your mind
+
 ## Inspired by
 - The asaaab theme song, by Cole 2K
 - Fifth Gear
