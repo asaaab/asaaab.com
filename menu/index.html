@@ -74,6 +74,12 @@
   .clock{position:absolute;left:0;right:0;top:52px;text-align:center;pointer-events:none}
   .clock b{display:block;font-size:56px;font-weight:900;letter-spacing:1px;color:#1f9ff0;line-height:1;text-shadow:0 2px 0 #fff}
   .clock span{font-size:22px;font-weight:900;color:#2f8f16}
+  /* "fresh look!" sticker */
+  .fresh{position:absolute;z-index:3;left:max(16px,4vw);top:14px;padding:10px 18px;border-radius:999px;font-weight:800;font-size:17px;color:#06518a;
+    background:linear-gradient(180deg,#fffbd0,#ffe14d);border:2px solid #fff;box-shadow:0 6px 16px rgba(150,110,0,.3);transform:rotate(-4deg);animation:sticker 3s ease-in-out infinite}
+  .fresh b{color:#e2302f;font-weight:900}
+  @keyframes sticker{0%,100%{transform:rotate(-4deg) translateY(0)}50%{transform:rotate(-2deg) translateY(-4px)}}
+  @media (max-width:760px){.fresh{position:relative;left:auto;top:auto;margin:12px auto 0;width:max-content;font-size:14px}}
   /* old-school TV: switches on into the menu, switches off on the way out */
   html{background:#000}
   .wrap{transform-origin:50% 50%}
@@ -99,6 +105,7 @@
   <div class="cloud" aria-hidden="true" style="--w:150px;--t:22%;--d:120s;--dl:-70s"></div>
   <div class="cloud" aria-hidden="true" style="--w:260px;--t:48%;--d:140s;--dl:-35s"></div>
   <div class="cloud" aria-hidden="true" style="--w:180px;--t:66%;--d:105s;--dl:-90s"></div>
+  <div class="fresh" role="note"><b>fresh look!</b> take a peek around!</div>
   <main class="stage">
     <h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">asaaab channels</h1>
     <button class="arrow l" id="prev" type="button" aria-label="Previous channels"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
@@ -140,7 +147,7 @@ function draw() {
     if (name) { a.href = href; a.setAttribute("aria-label", name); }
     else a.setAttribute("aria-hidden", "true");
     const w = document.createElement("div"); w.className = "win";
-    if (img) w.style.backgroundImage = "url(/assets/menu-tiles/" + img + ".jpg?v=2)";
+    if (img) w.style.backgroundImage = "url(/assets/menu-tiles/page-" + img + ".jpg?v=3)";
     w.style.setProperty("--pd", (13 + Math.random() * 8).toFixed(1) + "s");
     a.append(w);
     if (name) { const t = document.createElement("span"); t.className = "tag"; t.textContent = name; a.append(t); }
