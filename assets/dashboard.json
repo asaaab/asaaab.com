@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-10-24T11:51:00Z",
+  "s": "Idling: nothing moved this hour.",
+  "idle": true
+ },
+ {
   "t": "2026-10-24T10:52:00Z",
   "s": "Yesterday's nightly recap was filed, along with a new crew dictionary of working terms, a short training note, and a small illustration marking the day.",
   "idle": false
