@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>asaaab editor</title>
+<link rel="icon" href="/banner.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap">
+<style>
+  :root{--ink:#08324f;--soft:#2f6f99;--glass:rgba(255,255,255,.78);--edge:rgba(255,255,255,.95);--go:#48b827;--cut:#e2302f}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Nunito,system-ui,sans-serif;color:var(--ink);min-height:100vh;
+    background:linear-gradient(180deg,#5cc4ff 0%,#a9e3ff 45%,#e8fbff 80%,#c9f1b0 100%) fixed;padding:20px 16px 60px}
+  main{max-width:1180px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+  h1{margin:0;font-size:clamp(34px,6vw,52px);font-weight:900;color:#fff;line-height:1;
+    text-shadow:0 3px 0 rgba(6,81,138,.35),0 10px 24px rgba(6,81,138,.3)}
+  .sub{margin:4px 0 0;font-weight:800;color:var(--soft)}
+  .glass{background:var(--glass);border:1.5px solid var(--edge);border-radius:28px;
+    box-shadow:inset 0 2px 0 #fff,0 10px 26px rgba(6,81,138,.18);padding:16px 18px}
+  .row{display:flex;flex-wrap:wrap;gap:16px}
+  .left{flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:12px}
+  .right{flex:999 1 480px;min-width:0;display:flex;flex-direction:column;gap:12px}
+  video{width:100%;max-height:62vh;border-radius:22px;background:#08324f}
+  .btns{display:flex;flex-wrap:wrap;gap:10px}
+  button,label.file{font:inherit;font-weight:900;font-size:15px;border-radius:999px;padding:11px 18px;cursor:pointer;
+    border:1px solid rgba(255,255,255,.95);background:linear-gradient(180deg,#fff,#cfeeff);color:#06518a;
+    box-shadow:0 4px 10px rgba(6,81,138,.22)}
+  button.go{background:radial-gradient(circle at 50% 20%,#9ff07a,#48b827 75%);color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.2)}
+  button:disabled{opacity:.5;cursor:default}
+  input[type=file]{position:absolute;left:-9999px}
+  .status{font-weight:800;color:var(--soft);min-height:1.4em}
+  .bar{height:12px;border-radius:999px;background:rgba(6,81,138,.12);overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#7fdcff,#1f9ff0);border-radius:999px;transition:width .2s}
+  #words{line-height:2.1;font-size:18px;font-weight:700;max-height:60vh;overflow:auto;padding-right:6px}
+  .w{padding:2px 3px;border-radius:8px;cursor:pointer}
+  .w:hover{background:rgba(31,159,240,.15)}
+  .w.cut{color:var(--cut);text-decoration:line-through;opacity:.65}
+  .w.now{background:#ffe48a}
+  .gap{display:inline-block;margin:0 3px;padding:0 8px;border-radius:999px;font-size:12px;font-weight:900;cursor:pointer;
+    background:rgba(226,48,47,.12);color:var(--cut);vertical-align:middle;line-height:20px}
+  .gap.keep{background:rgba(72,184,39,.15);color:#2f8f16}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;font-weight:800;color:var(--soft)}
+  .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  .stats div{background:rgba(255,255,255,.7);border-radius:20px;padding:10px 12px;text-align:center}
+  .stats b{display:block;font-size:22px;font-weight:900}
+  .stats small{font-size:12px;font-weight:800;color:var(--soft)}
+  .opts{display:flex;flex-wrap:wrap;gap:14px;font-weight:800;font-size:14px;align-items:center}
+  .opts input[type=number]{width:70px;font:inherit;border-radius:12px;border:1px solid #9cc8e8;padding:4px 8px}
+  @media(max-width:560px){.stats{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main>
+  <div>
+    <h1>asaaab editor</h1>
+    <p class="sub">Talk. It transcribes, cuts the dead air and the stumbles, and you say ya or na. Everything stays on this computer.</p>
+  </div>
+
+  <div class="row">
+    <section class="left">
+      <div class="glass" style="display:flex;flex-direction:column;gap:12px">
+        <video id="vid" controls playsinline></video>
+        <div class="btns">
+          <label class="file" for="pick">Open video</label>
+          <input type="file" id="pick" accept="video/*,audio/*">
+          <button id="transcribe" class="go" disabled>Transcribe</button>
+          <button id="preview" disabled>Play the cut</button>
+        </div>
+        <div class="bar" aria-hidden="true"><i id="prog"></i></div>
+        <div class="status" id="status" role="status">Open a video to start.</div>
+      </div>
+      <div class="glass" style="display:flex;flex-direction:column;gap:12px">
+        <div class="opts">
+          <label>Dead air longer than <input type="number" id="gapMin" value="0.6" step="0.1" min="0.2"> s</label>
+          <label>keep <input type="number" id="pad" value="0.15" step="0.05" min="0"> s of breath</label>
+        </div>
+        <div class="stats">
+          <div><b id="sOrig">–</b><small>original</small></div>
+          <div><b id="sCut">–</b><small>after cuts</small></div>
+          <div><b id="sN">–</b><small>cuts</small></div>
+        </div>
+        <div class="btns">
+          <button id="render" disabled>Render the cut</button>
+          <button id="exportCuts" disabled>Save cut list</button>
+          <button id="exportText" disabled>Save transcript</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="right glass">
+      <div class="legend"><span>Click a word to cut or keep it.</span><span style="color:var(--cut)">red = cut</span><span>⏸ pills = dead air</span></div>
+      <div id="words" aria-live="polite"></div>
+    </section>
+  </div>
+</main>
+
+<script type="module">
+const $ = id => document.getElementById(id);
+const vid = $("vid"), status = $("status"), prog = $("prog");
+let file = null, words = [], gaps = [], duration = 0, asr = null;
+
+const say = t => status.textContent = t;
+const fmt = s => { s = Math.max(0, s); const m = Math.floor(s / 60); return m + ":" + String(Math.round(s % 60)).padStart(2, "0"); };
+
+$("pick").addEventListener("change", e => {
+  file = e.target.files[0]; if (!file) return;
+  vid.src = URL.createObjectURL(file);
+  words = []; gaps = []; draw();
+  $("transcribe").disabled = false;
+  say("Loaded " + file.name + ". Hit Transcribe.");
+});
+vid.addEventListener("loadedmetadata", () => { duration = vid.duration; stats(); });
+
+async function audio16k(f) {
+  const buf = await f.arrayBuffer();
+  const ctx = new AudioContext();
+  const dec = await ctx.decodeAudioData(buf);
+  const off = new OfflineAudioContext(1, Math.ceil(dec.duration * 16000), 16000);
+  const src = off.createBufferSource(); src.buffer = dec; src.connect(off.destination); src.start();
+  const out = await off.startRendering(); ctx.close();
+  return out.getChannelData(0);
+}
+
+async function loadModel() {
+  if (asr) return asr;
+  say("Loading the speech model (first time downloads ~150 MB, then it's cached)…");
+  const { pipeline } = await import("https://cdn.jsdelivr.net/npm/@huggingface/transformers@3.0.2");
+  const progress = p => { if (p.status === "progress" && p.progress) prog.style.width = p.progress.toFixed(0) + "%"; };
+  const tries = navigator.gpu ? ["webgpu", "wasm"] : ["wasm"];
+  for (const device of tries) {
+    try {
+      asr = await pipeline("automatic-speech-recognition", "onnx-community/whisper-base_timestamped",
+        { device, dtype: device === "webgpu" ? { encoder_model: "fp32", decoder_model_merged: "q4" } : "q8", progress_callback: progress });
+      return asr;
+    } catch (e) { console.warn("model load failed on", device, e); }
+  }
+  throw new Error("Couldn't load the speech model.");
+}
+
+$("transcribe").addEventListener("click", async () => {
+  $("transcribe").disabled = true;
+  try {
+    const model = await loadModel();
+    say("Reading the audio…"); prog.style.width = "0%";
+    const pcm = await audio16k(file);
+    say("Transcribing " + fmt(pcm.length / 16000) + " of talking… (about real time or faster)");
+    prog.style.width = "35%";
+    const out = await model(pcm, { return_timestamps: "word", chunk_length_s: 30, stride_length_s: 5, language: "english", task: "transcribe" });
+    prog.style.width = "100%";
+    words = (out.chunks || []).map((c, i) => ({ i, text: c.text.trim(), s: c.timestamp[0], e: c.timestamp[1] ?? c.timestamp[0] + 0.3, cut: false, why: "" }))
+      .filter(w => w.text);
+    autoCut();
+    say("Done. " + words.length + " words. Red is what I'd cut. Click to change.");
+  } catch (e) {
+    console.error(e); say("Stalled: " + e.message + " (that's information, not damage).");
+  }
+  $("transcribe").disabled = false;
+});
+
+const FILLERS = new Set(["um", "uh", "uhh", "umm", "er", "ah", "erm", "hmm"]);
+const norm = t => t.toLowerCase().replace(/[^a-z0-9']/g, "");
+
+function autoCut() {
+  // fillers
+  for (const w of words) if (FILLERS.has(norm(w.text))) { w.cut = true; w.why = "filler"; }
+  // stumbles: a 1-3 word run immediately repeated keeps only the last try
+  for (let n = 3; n >= 1; n--) {
+    for (let i = 0; i + 2 * n <= words.length; i++) {
+      const a = words.slice(i, i + n).map(w => norm(w.text)).join(" ");
+      const b = words.slice(i + n, i + 2 * n).map(w => norm(w.text)).join(" ");
+      if (a && a === b) for (let k = i; k < i + n; k++) if (!words[k].cut) { words[k].cut = true; words[k].why = "stumble"; }
+    }
+  }
+  findGaps(); draw();
+}
+
+function findGaps() {
+  const min = +$("gapMin").value, pad = +$("pad").value;
+  gaps = [];
+  let prevEnd = 0;
+  const pts = [...words.map(w => [w.s, w.e]), [duration, duration]];
+  for (const [s, e] of pts) {
+    if (s - prevEnd > min) gaps.push({ s: prevEnd + pad, e: s - pad, cut: true, before: s });
+    prevEnd = Math.max(prevEnd, e);
+  }
+}
+
+function cutRanges() {
+  const r = [];
+  for (const w of words) if (w.cut) r.push([w.s, w.e]);
+  for (const g of gaps) if (g.cut && g.e > g.s) r.push([g.s, g.e]);
+  r.sort((a, b) => a[0] - b[0]);
+  const m = [];
+  for (const x of r) { if (m.length && x[0] <= m[m.length - 1][1] + 0.05) m[m.length - 1][1] = Math.max(m[m.length - 1][1], x[1]); else m.push([...x]); }
+  return m;
+}
+function keepRanges() {
+  const k = []; let t = 0;
+  for (const [s, e] of cutRanges()) { if (s > t) k.push([t, s]); t = Math.max(t, e); }
+  if (t < duration) k.push([t, duration]);
+  return k.filter(([s, e]) => e - s > 0.05);
+}
+
+function stats() {
+  $("sOrig").textContent = duration ? fmt(duration) : "–";
+  const keep = keepRanges();
+  $("sCut").textContent = words.length ? fmt(keep.reduce((a, [s, e]) => a + e - s, 0)) : "–";
+  $("sN").textContent = words.length ? cutRanges().length : "–";
+  const on = words.length > 0;
+  for (const id of ["preview", "render", "exportCuts", "exportText"]) $(id).disabled = !on;
+}
+
+function draw() {
+  const box = $("words"); box.innerHTML = "";
+  const gapAt = new Map(gaps.map(g => [g.before, g]));
+  for (const w of words) {
+    const g = gapAt.get(w.s);
+    if (g) {
+      const p = document.createElement("span");
+      p.className = "gap" + (g.cut ? "" : " keep");
+      p.textContent = "⏸ " + (g.e - g.s + 2 * +$("pad").value).toFixed(1) + "s";
+      p.title = g.cut ? "Dead air: cut (click to keep)" : "Dead air: kept (click to cut)";
+      p.onclick = () => { g.cut = !g.cut; draw(); };
+      box.append(p);
+    }
+    const s = document.createElement("span");
+    s.className = "w" + (w.cut ? " cut" : ""); s.textContent = w.text + " "; s.dataset.i = w.i;
+    s.title = (w.why ? w.why + " · " : "") + fmt(w.s);
+    s.onclick = ev => { if (ev.altKey) { vid.currentTime = w.s; return; } w.cut = !w.cut; w.why = w.cut ? "you" : ""; draw(); };
+    box.append(s);
+  }
+  stats();
+}
+$("gapMin").addEventListener("change", () => { if (words.length) { findGaps(); draw(); } });
+$("pad").addEventListener("change", () => { if (words.length) { findGaps(); draw(); } });
+
+// highlight the word being spoken; skip cuts while previewing
+let previewing = false;
+vid.addEventListener("timeupdate", () => {
+  const t = vid.currentTime;
+  if (previewing) for (const [s, e] of cutRanges()) if (t >= s && t < e) { vid.currentTime = e; break; }
+  document.querySelectorAll(".w.now").forEach(n => n.classList.remove("now"));
+  const w = words.find(w => t >= w.s && t < w.e);
+  if (w) document.querySelector('.w[data-i="' + w.i + '"]')?.classList.add("now");
+});
+$("preview").addEventListener("click", () => {
+  previewing = !previewing;
+  $("preview").textContent = previewing ? "Stop the cut" : "Play the cut";
+  if (previewing) { vid.currentTime = keepRanges()[0]?.[0] ?? 0; vid.play(); } else vid.pause();
+});
+vid.addEventListener("ended", () => { previewing = false; $("preview").textContent = "Play the cut"; });
+
+function save(name, text, type) {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([text], { type })); a.download = name; a.click();
+}
+const base = () => (file?.name || "video").replace(/\.[^.]+$/, "");
+$("exportCuts").addEventListener("click", () => save(base() + ".cuts.json",
+  JSON.stringify({ source: file.name, duration, keep: keepRanges(), cut: cutRanges(), words }, null, 1), "application/json"));
+$("exportText").addEventListener("click", () => save(base() + ".txt",
+  words.filter(w => !w.cut).map(w => w.text).join(" ").replace(/\s+([.,!?])/g, "$1"), "text/plain"));
+
+// Render: plays only the kept parts and records them (real time). Good enough for v0.
+$("render").addEventListener("click", async () => {
+  const keep = keepRanges(); if (!keep.length) return;
+  const stream = vid.captureStream ? vid.captureStream() : vid.mozCaptureStream();
+  const type = ["video/mp4;codecs=avc1,mp4a.40.2", "video/mp4", "video/webm;codecs=vp9,opus", "video/webm"].find(t => MediaRecorder.isTypeSupported(t));
+  const rec = new MediaRecorder(stream, { mimeType: type, videoBitsPerSecond: 12e6 });
+  const chunks = []; rec.ondataavailable = e => e.data.size && chunks.push(e.data);
+  const done = new Promise(r => rec.onstop = r);
+  previewing = false; vid.muted = false;
+  say("Rendering in real time… don't switch tabs.");
+  vid.currentTime = keep[0][0]; await new Promise(r => vid.onseeked = r);
+  rec.start(); vid.play();
+  for (let k = 0; k < keep.length; k++) {
+    const [s, e] = keep[k];
+    if (Math.abs(vid.currentTime - s) > 0.05) { rec.pause(); vid.currentTime = s; await new Promise(r => vid.onseeked = r); rec.resume(); }
+    await new Promise(r => { const t = () => { if (vid.currentTime >= e || vid.ended) { vid.removeEventListener("timeupdate", t); r(); } }; vid.addEventListener("timeupdate", t); });
+    prog.style.width = Math.round(100 * (k + 1) / keep.length) + "%";
+  }
+  vid.pause(); rec.stop(); await done;
+  const ext = type.includes("mp4") ? "mp4" : "webm";
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob(chunks, { type })); a.download = base() + ".asaaab-cut." + ext; a.click();
+  say("Rendered " + base() + ".asaaab-cut." + ext + ". Ya or na?");
+});
+</script>
+</body>
+</html>
