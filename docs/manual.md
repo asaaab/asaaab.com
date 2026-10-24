@@ -42,6 +42,8 @@ Heard "that'll never work"? Why? Look at the plan.
 
 [Open the master plan](/manual/master-plan/)
 
+There was no instruction booklet for gluing jeans on a car. So we made the video and posted it: the Jolvo. 214K views and 15K likes before any real promo, on a car that cost $700.
+
 ## Computer use policy
 This organization uses tools like computers and machine learning to create structures that empower artists.
 
