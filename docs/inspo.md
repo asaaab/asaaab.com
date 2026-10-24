@@ -1,4 +1,13 @@
 # Inspo board
+## Inspired by
+- The asaaab theme song, by Cole
+- Fifth Gear
+- Club Penguin
+- Jo Dee Messina, I'm Alright
+- Late-'90s radio pop-rock: Everclear, Sugar Ray, Sheryl Crow
+- Country-pop with a lift: Faith Hill, Jo Dee Messina
+- Open-road guitar pop: Barenaked Ladies, Del Amitri, Blues Traveler
+
 ## Core core thoughts
 - marketing socialism through Saabs and Rc shops is not how I saw career trajectory but ya know duct tape comes in all sorts of colors and health insurance is a thing . Two things can be true. Three things!
 - Whimsy is the ability to make mistakes, whimsymaxxing is the ability to live life making mistakes. Pobodys nerfect
