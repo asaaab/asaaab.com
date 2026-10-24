@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="whimzmaxx believz gen z dezervez the frutiger aero future we were promised.">
+<title>whimzmaxx</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Nunito:ital,wght@0,400;0,700;0,900;1,700;1,900&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<style>
+/* layout: one long scroll that changes worlds: yellowed newsprint, grey headlines, black, then a glossy aero sky */
+:root{
+  color-scheme: light;
+  --paper:#ece3cc; --ink:#2b2418; --fade:#7a6e57;
+  --ash:#3a3d42; --ash-ink:#d9dbdf; --ash-dim:#9aa0a8;
+  --void:#0b0b0d; --void-ink:#f3f3f3;
+  --sky-top:#4fb3f0; --sky-mid:#bfe9ff; --grass:#7fd36b; --aero-ink:#06324f; --gloss:#ffffff; --aqua:#10a6d8;
+  --serif:"Old Standard TT", "Times New Roman", Georgia, serif;
+  --round:"Nunito", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--void);color:var(--void-ink);font-family:var(--round)}
+.wrap{max-width:720px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+section{padding-block:72px}
+h1,h2,h3{text-wrap:balance;margin:0}
+p{margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--aqua);outline-offset:3px}
+
+/* 1. the boomer page */
+.boomer{background:var(--paper);color:var(--ink);font-family:var(--serif)}
+.masthead{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:3px double var(--ink);padding-bottom:8px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--fade)}
+.boomer h1{font-size:clamp(40px,9vw,76px);line-height:.98;font-weight:700;margin-top:28px}
+.letters{display:grid;gap:18px;margin-top:36px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.letter{border-top:1px solid var(--ink);padding-top:10px;font-size:18px;line-height:1.45}
+.letter i{display:block;font-size:13px;color:var(--fade);margin-top:6px}
+.boomer .note{margin-top:32px;font-size:13px;color:var(--fade);font-style:italic}
+
+/* 2. the headlines */
+.ash{background:var(--ash);color:var(--ash-ink)}
+.kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ash-dim)}
+.heads{display:grid;gap:12px;margin-top:22px}
+.head{display:block;text-decoration:none;font-family:var(--serif);font-size:clamp(20px,4.4vw,28px);line-height:1.2;padding:14px 0;border-bottom:1px solid #565a61}
+.head span{display:block;font-family:var(--mono);font-size:11px;color:var(--ash-dim);margin-top:6px;letter-spacing:.06em}
+.head:hover{color:var(--gloss)}
+.nails{margin-top:44px;font-family:var(--mono);font-size:16px;line-height:1.6;color:var(--ash-ink);max-width:60ch}
+
+/* 3 + 4. the question, the turn */
+.void{background:var(--void);color:var(--void-ink);text-align:left}
+.question{font-family:var(--serif);font-style:italic;font-size:clamp(28px,6vw,48px);line-height:1.15}
+.turn{margin-top:56px;font-family:var(--round);font-weight:900;font-size:clamp(34px,8vw,66px);line-height:1.02;letter-spacing:-.01em}
+.turn small{display:block;font-weight:700;font-size:clamp(18px,3.6vw,24px);margin-top:16px;color:#bdbdbd;letter-spacing:0}
+
+/* 5. the aero future */
+.aero{position:relative;overflow:hidden;color:var(--aero-ink);background:linear-gradient(180deg,var(--sky-top) 0%,var(--sky-mid) 62%,#e8fbff 74%,var(--grass) 74.2%,#4fae45 100%)}
+.bubble{position:absolute;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.95) 0 9%,rgba(255,255,255,.35) 18%,rgba(255,255,255,.08) 52%,rgba(255,255,255,.45) 70%,rgba(255,255,255,0) 72%);box-shadow:inset 0 0 18px rgba(255,255,255,.55)}
+.b1{width:180px;height:180px;left:-40px;top:40px}.b2{width:90px;height:90px;right:8%;top:120px}.b3{width:46px;height:46px;left:58%;top:30px}.b4{width:130px;height:130px;right:-30px;bottom:140px}.b5{width:60px;height:60px;left:12%;bottom:220px}
+@media (prefers-reduced-motion:no-preference){.bubble{animation:float 9s ease-in-out infinite}.b2{animation-delay:-3s}.b4{animation-delay:-5s}.b5{animation-delay:-7s}@keyframes float{50%{transform:translateY(-14px)}}}
+.aero .wrap{position:relative}
+.believz{font-weight:900;font-size:clamp(34px,7.6vw,62px);line-height:1.02;color:var(--gloss);text-shadow:0 2px 0 rgba(6,50,79,.35),0 10px 30px rgba(6,50,79,.25)}
+.believz em{font-style:italic}
+.ios{margin-top:16px;font-weight:700;font-size:18px;color:var(--aero-ink)}
+.glass{margin-top:44px;background:linear-gradient(180deg,rgba(255,255,255,.78),rgba(255,255,255,.45));border:1px solid rgba(255,255,255,.9);border-radius:28px;padding:24px;box-shadow:0 12px 40px rgba(6,50,79,.18),inset 0 1px 0 #fff;backdrop-filter:blur(8px)}
+.glass h2{font-weight:900;font-size:26px}
+.glass p{margin-top:10px;font-size:17px;line-height:1.5}
+.parts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding:0;list-style:none}
+.parts li{border-radius:999px;padding:7px 14px;font-weight:700;font-size:14px;background:linear-gradient(180deg,#fff,#d9f3ff);border:1px solid #9fdcf5;box-shadow:inset 0 -2px 0 rgba(16,166,216,.18)}
+.stamp{margin-top:14px;font-family:var(--mono);font-size:12px;color:#2b5b78}
+
+/* the two badges */
+.badges{display:grid;gap:16px;margin-top:22px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.badge{border-radius:24px;padding:22px;background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(225,246,255,.8));border:1px solid #fff;box-shadow:0 8px 26px rgba(6,50,79,.16);display:flex;flex-direction:column;gap:10px}
+.badge h3{font-weight:900;font-size:24px}
+.badge .tag{font-size:15px}
+.badge.w h3,.badge.w .tag{font-style:italic}
+.price{font-weight:900;font-size:34px;font-variant-numeric:tabular-nums}
+.price small{font-size:14px;font-weight:700}
+.badge .what{font-size:14px;line-height:1.45}
+.orb{margin-top:auto;align-self:flex-start;cursor:pointer;border:0;border-radius:999px;padding:12px 22px;font:900 16px var(--round);color:#fff;background:radial-gradient(circle at 50% 18%,#9ff0ff 0 18%,transparent 40%),linear-gradient(180deg,#3cc6f0,#0a7fb8);box-shadow:0 6px 16px rgba(10,127,184,.35),inset 0 -3px 0 rgba(0,0,0,.15)}
+.orb:active{transform:translateY(1px)}
+.orb[aria-pressed="true"]{background:linear-gradient(180deg,#7fd36b,#3d9a33)}
+.honest{margin-top:16px;font-size:15px;line-height:1.5}
+.honest b{font-weight:900}
+.mop{margin-top:30px;font-weight:900;font-size:clamp(22px,4.6vw,30px);color:var(--aero-ink)}
+.truth{margin-top:8px;font-size:18px}
+.truth em{font-style:italic;font-weight:900}
+.links{margin-top:26px;display:flex;flex-wrap:wrap;gap:14px;font-weight:700}
+.fine{margin-top:34px;font-family:var(--mono);font-size:11px;line-height:1.6;color:#123d26}
+</style>
+<script>if (/(^|\.)asaaab\.com$/.test(location.hostname)) { const s=document.createElement("script"); s.async=true; s.dataset.goatcounter="https://asaaab.goatcounter.com/count"; s.src="https://gc.zgo.at/count.js"; document.head.appendChild(s); }</script>
+</head>
+<body>
+
+
+<section class="boomer">
+  <div class="wrap">
+    <div class="masthead"><span>the daily complaint</span><span>letters to the editor</span><span>est. forever</span></div>
+    <h1>the young people dont wanna work anymore</h1>
+    <div class="letters">
+      <p class="letter">nobody wants to work anymore. back in my day we just showed up.<i>a concerned reader</i></p>
+      <p class="letter">maybe if they stopped buying avocado toast they could afford a house.<i>a homeowner since 1979</i></p>
+      <p class="letter">pull yourself up by your bootstraps. walk in, hand them a resume, firm handshake.<i>a man with a pension</i></p>
+      <p class="letter">kids these days want a trophy for everything. and a living wage.<i>name withheld</i></p>
+    </div>
+    <p class="note">and allllll the boomer nonsense. keep scrolling.</p>
+  </div>
+</section>
+
+<section class="ash">
+  <div class="wrap">
+    <p class="kicker">meanwhile, actual headlines</p>
+    <div class="heads">
+      <a class="head" href="https://www.foxcarolina.com/2026/10/01/personal-bankruptcy-filings-up-nearly-50-since-2022-analysis-finds/" target="_blank" rel="noopener">Personal bankruptcy filings up nearly 50% since 2022, analysis finds<span>fox carolina · oct 1, 2026</span></a>
+      <a class="head" href="https://www.koaa.com/us-news/housing/most-gen-z-workers-struggle-to-live-on-their-own-report-finds" target="_blank" rel="noopener">Most Gen Z workers struggle to live on their own, report finds<span>koaa · 2026</span></a>
+      <a class="head" href="https://www.roic.ai/news/housing-affordability-crisis-deepens-in-2026-with-gen-z-most-vulnerable-02-24-2026" target="_blank" rel="noopener">Housing affordability crisis deepens in 2026 with Gen Z most vulnerable<span>roic · feb 24, 2026</span></a>
+      <a class="head" href="https://www.badcredit.org/news/personal-bankruptcies-rise-12-percent-as-financial-pressure-builds/" target="_blank" rel="noopener">Personal bankruptcies rise 12% as financial pressure builds<span>badcredit.org</span></a>
+      <a class="head" href="https://www.baystatebanner.com/2025/01/15/advocates-cheer-new-credit-reporting-rule-but-want-more-action-on-medical-debt" target="_blank" rel="noopener">Advocates cheer new credit reporting rule but want more action on medical debt<span>bay state banner · jan 15, 2025</span></a>
+      <a class="head" href="https://newsweek.com/map-shows-bankruptcies-soaring-11997428" target="_blank" rel="noopener">Map shows bankruptcies soaring<span>newsweek</span></a>
+    </div>
+    <p class="nails">its peoples complaints about systemic violence being taken as nails to pound down rather than evidence the floor is gonna explode.</p>
+  </div>
+</section>
+
+<section class="void">
+  <div class="wrap">
+    <p class="question">and gen z is asked to plaster a smile on their face or get suspended?</p>
+    <p class="turn">fuckin fire me. im sick today. of this place.<small>lifes too short not to follow your dreams.</small></p>
+  </div>
+</section>
+
+<section class="aero">
+  <span class="bubble b1"></span><span class="bubble b2"></span><span class="bubble b3"></span><span class="bubble b4"></span><span class="bubble b5"></span>
+  <div class="wrap">
+    <p class="believz"><em>whimzmaxx believz</em> gen z dezervez the frutiger aero future we were promised.</p>
+    <p class="ios">before they did that big ios update that changed the youtube app.</p>
+
+    <div class="glass">
+      <h2>you want ai marketing and automated companies? aight here you go.</h2>
+      <p>this is the engine a real one-person business runs on right now. text your ideas in, the bots turn them into a plan with finish lines, lay the bricks, write you a recap every night and a short list every morning. you only make the clicks a human has to make.</p>
+      <ul class="parts">
+        <li>the rules every bot reads</li><li>head = think, body = do</li><li>a board with finish lines</li><li>nightly recap</li><li>morning brief</li><li>the purple buddy</li><li>minimum necessary lubrication</li>
+      </ul>
+      <p class="stamp">idea, domain and first draft: 10/24/2026, one afternoon. runs on your own ai.</p>
+    </div>
+
+    <div class="badges">
+      <article class="badge">
+        <h3>asaaab</h3>
+        <p class="tag">the truth.</p>
+        <p class="price">$231.36 <small>once</small></p>
+        <p class="what">one day at the LA living wage (8 hours at $28.92). the co-owners manual and the engine, yours to keep.</p>
+        <button class="orb" id="buy-asaaab" type="button" aria-pressed="false">i'd buy this</button>
+      </article>
+      <article class="badge w">
+        <h3>whimzmaxx</h3>
+        <p class="tag">the truth in italicz.</p>
+        <p class="price">$28.92 <small>a month</small></p>
+        <p class="what">one hour at the living wage, every month. the exact same materials, in the marketing font.</p>
+        <button class="orb" id="buy-whimzmaxx" type="button" aria-pressed="false">i'd buy this</button>
+      </article>
+    </div>
+    <p class="honest"><b>same car, two badges.</b> 8 months of whimzmaxx costs the same as one day of asaaab. after that youre paying for the font, and we told you. is one day of today at a living wage worth your dreams? i took a day off work to make the product.</p>
+
+    <p class="mop">workers owning the means of production.</p>
+    <p class="truth">asaaab is the truth. <em>whimzmaxx is the truth in italicz.</em></p>
+    <div class="links"><a href="https://asaaab.com/asaaabot/" target="_blank" rel="noopener">talk to asaaabot, free →</a><a href="https://asaaab.com/" target="_blank" rel="noopener">asaaab.com →</a></div>
+
+    <p class="fine">not on sale yet. lawyer first, then a checkout. the "i'd buy this" buttons just show us who's interested. headlines link to their sources. the letters up top are the stereotype, not real people. no income promises: it's an engine, not a guarantee.</p>
+  </div>
+</section>
+
+<script>
+(function(){
+  ["buy-asaaab","buy-whimzmaxx"].forEach(function(id){
+    var b=document.getElementById(id); if(!b) return;
+    var key="wz-"+id;
+    try{ if(localStorage.getItem(key)==="1"){ b.setAttribute("aria-pressed","true"); b.textContent="counted. not on sale yet"; } }catch(e){}
+    b.addEventListener("click",function(){
+      var on=b.getAttribute("aria-pressed")!=="true";
+      b.setAttribute("aria-pressed", on?"true":"false");
+      b.textContent = on ? "counted. not on sale yet" : "i'd buy this";
+      try{ localStorage.setItem(key, on?"1":"0"); }catch(e){}
+      try{ if(on && window.goatcounter && goatcounter.count){ goatcounter.count({path:"whimzmaxx-"+id, event:true}); } }catch(e){}
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
