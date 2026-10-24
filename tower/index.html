@@ -32,7 +32,7 @@
     radial-gradient(circle,transparent 74.5%,rgba(60,240,138,.25) 75%,transparent 75.5%),
     linear-gradient(90deg,transparent 49.8%,rgba(60,240,138,.18) 50%,transparent 50.2%),
     linear-gradient(0deg,transparent 49.8%,rgba(60,240,138,.18) 50%,transparent 50.2%)}
-  .sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(60,240,138,.45),rgba(60,240,138,0) 22%);animation:sweep 5s linear infinite}
+  .sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(60,240,138,0) 78%,rgba(60,240,138,.5));animation:sweep 5s linear infinite}
   @keyframes sweep{to{transform:rotate(360deg)}}
   .routes{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:1}
   .routes path{fill:none;stroke-width:.55;stroke-dasharray:1.6 1.2;opacity:.8;animation:flow 1.6s linear infinite}
@@ -46,6 +46,14 @@
   .blip i{width:14px;height:14px;border-radius:50%;background:currentColor;box-shadow:0 0 10px currentColor;position:relative}
   .blip i::after{content:"";position:absolute;left:50%;top:50%;border-left:5px solid transparent;border-right:5px solid transparent;border-bottom:9px solid currentColor;transform:translate(-50%,-50%) rotate(var(--hd,0deg)) translateY(-13px)}
   .blip.dim{opacity:.3}
+  .blip[data-s="done"]{color:#bfffd9}
+  .blip span.quiet{opacity:0;transition:opacity .2s}.blip:hover span.quiet,.blip:focus-visible span.quiet{opacity:1}
+  .blip.engine i{outline:2px solid #fff;outline-offset:2px}
+  .blip.ping i{animation:ping .9s ease-out}
+  @keyframes ping{0%{box-shadow:0 0 0 0 rgba(255,255,255,.9),0 0 18px currentColor}100%{box-shadow:0 0 0 16px rgba(255,255,255,0),0 0 10px currentColor}}
+  .lists{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+  .lists h3{margin:0 0 6px;font:800 14px var(--display)} .lists ol{margin:0;padding-left:18px;font-size:14px}
+  @media (max-width:520px){.lists{grid-template-columns:1fr}}
   .blip[data-s="holding"]{color:var(--amber)} .blip[data-s="grounded"]{color:var(--red)} .blip[data-s="filed"]{color:#9fe6ff}
   .blip[data-s="filed"] i{background:none;border:2px dashed currentColor;box-shadow:none}
   .blip:focus-visible{outline:2px solid #fff;border-radius:8px}
@@ -92,8 +100,9 @@
   <section class="glass" aria-labelledby="radarH">
     <h2 id="radarH">Radar</h2>
     <div class="scope" id="scope"><div class="rings"></div><div class="sweep"></div><div class="glare"></div></div>
-    <div class="strip" id="strip" aria-live="polite">Tap a blip: its routes light up and the strip shows what it feeds and what feeds it. Closer to the tower means more automatic. Each blip points where it is headed.</div>
-    <div class="legend"><span style="--c:var(--phos)">cruising</span><span style="--c:var(--amber)">holding</span><span style="--c:var(--red)">grounded</span><span style="--c:#9fe6ff">plan filed</span></div>
+    <div class="strip" id="strip" aria-live="polite">Tap a blip: its routes light up and the strip shows what it feeds and what feeds it. Every Board item is a blip: direction is its master-plan stage, distance is how far from its finish line (center = done), size is how connected it is. White-ringed blips are open engine work; the sweep pings them as it passes.</div>
+    <div class="lists"><div><h3>Most connected</h3><ol id="most"></ol></div><div><h3>Engine queue (the sweep pings these)</h3><ol id="queue"></ol></div></div>
+    <div class="legend"><span style="--c:var(--phos)">cruising</span><span style="--c:var(--amber)">holding</span><span style="--c:var(--red)">grounded</span><span style="--c:#9fe6ff">not started</span><span style="--c:#bfffd9">done (center)</span></div>
   </section>
 
   <section class="glass" aria-labelledby="radioH">
@@ -112,13 +121,13 @@ let flights = [];
 // Layout means something: the tower (the Board) is in the middle. Closer = more automatic.
 // Inner ring cruising (runs itself), middle ring holding (waiting on something), outer ring plan filed (idea).
 // Angle = lane: reports up top, the site to the right, life bottom right, content bottom left.
-const RING = {cruising: 22, holding: 32, grounded: 32, filed: 41};
-function pos(f){ const r = RING[f.status] ?? 41, a = (f.lane ?? 0) * Math.PI / 180; return {x: 50 + r * Math.sin(a), y: 50 - r * Math.cos(a)}; }
+const RING = {cruising: 22, holding: 32, grounded: 32, filed: 41, done: 8};
+function pos(f){ const r = f.r ?? RING[f.status] ?? 41, a = (f.lane ?? 0) * Math.PI / 180; return {x: 50 + r * Math.sin(a), y: 50 - r * Math.cos(a)}; }
 let sel = null;
 function drawRadar(list){
   const scope = $("scope"); scope.querySelectorAll(".blip,.routes,.ringlab,.tower").forEach(b => b.remove());
   const P = {BOARD: {x: 50, y: 50}}; list.forEach(f => P[f.cs] = pos(f));
-  for (const [t, r] of [["RUNS ITSELF", 22], ["HOLDING", 32], ["PLAN FILED", 41]]) { const l = document.createElement("span"); l.className = "ringlab"; l.style.top = (50 - r - 2.6) + "%"; l.textContent = t; scope.append(l); }
+  for (const [t, r] of [["DONE", 8], ["HALFWAY", 26], ["NOT STARTED", 44]]) { const l = document.createElement("span"); l.className = "ringlab"; l.style.top = (50 - r - 2.6) + "%"; l.textContent = t; scope.append(l); }
   const NS = "http://www.w3.org/2000/svg", svg = document.createElementNS(NS, "svg"); svg.setAttribute("viewBox", "0 0 100 100"); svg.setAttribute("class", "routes");
   const col = s => ({cruising: "#3cf08a", holding: "#ffb02e", grounded: "#ff5a4d"})[s] || "#9fe6ff";
   for (const f of list) for (const to of (f.to || [])) {
@@ -142,10 +151,23 @@ function drawRadar(list){
     b.style.left = A.x + "%"; b.style.top = A.y + "%"; b.style.setProperty("--hd", hd + "deg");
     b.setAttribute("aria-label", f.cs + ", " + (f.status || "filed"));
     const dot = document.createElement("i"), lab = document.createElement("span"); lab.textContent = f.cs; b.append(dot, lab);
+    if (f.deg != null) { const s = 10 + Math.min(14, f.deg * 3); dot.style.width = dot.style.height = s + "px"; if (!(f.deg >= 2 || f.engine || sel === f.cs)) lab.classList.add("quiet"); }
+    if (f.engine) b.classList.add("engine"); b.dataset.lane = f.lane ?? 0;
     b.onclick = () => { sel = sel === f.cs ? null : f.cs; drawRadar(list); strip(f, list); };
     scope.append(b);
   }
 }
+function fillLists(list){
+  const li = (ol, arr, txt) => { const o = $(ol); o.textContent = ""; arr.forEach(f => { const x = document.createElement("li"); x.textContent = txt(f); o.append(x); }); };
+  li("most", [...list].filter(f => f.deg).sort((a, b) => b.deg - a.deg).slice(0, 6), f => f.name + " (" + f.deg + ")");
+  li("queue", list.filter(f => f.engine), f => f.name);
+}
+document.querySelector(".sweep").style.animationDelay = (-(Date.now() % 5000) / 1000) + "s";
+setInterval(() => {   // the sweep is 5s per turn, starting straight up, clockwise: ping engine work as the beam passes
+  const a = (Date.now() % 5000) / 5000 * 360;
+  document.querySelectorAll(".blip.engine").forEach(b => { const d = ((+b.dataset.lane - a) % 360 + 360) % 360;
+    if (d > 352 || d < 4) { b.classList.remove("ping"); void b.offsetWidth; b.classList.add("ping"); } });
+}, 100);
 function strip(f, list){
   const s = $("strip"); s.textContent = "";
   const h = document.createElement("div"); const cs = document.createElement("b"); cs.textContent = f.cs; h.append(cs, " · " + (f.name || "") + " · " + (f.status || "filed"));
@@ -179,7 +201,7 @@ const wrap = c => ({data: () => c});
 async function refresh(){
   const r = await post("radar", {});
   if (!r.ok) { if (r.status === 401) lock("That code didn't clear."); else $("state").textContent = r.j.error || "The tower didn't answer."; return false; }
-  flights = r.j.flights || []; drawRadar(flights); drawLog((r.j.calls || []).map(wrap)); $("state").textContent = "Tower online. Cleared as " + r.j.label + "."; return true;
+  flights = r.j.flights || []; drawRadar(flights); fillLists(flights); drawLog((r.j.calls || []).map(wrap)); $("state").textContent = "Tower online. Cleared as " + r.j.label + "."; return true;
 }
 function lock(msg){ try { sessionStorage.removeItem("tower-code"); } catch (e) {} code = ""; $("app").hidden = true; $("gate").hidden = false; $("pinstate").textContent = msg || ""; }
 $("pinform").onsubmit = async e => { e.preventDefault(); code = $("pin").value.trim(); if (!code) return; $("pinstate").textContent = "Checking…";
