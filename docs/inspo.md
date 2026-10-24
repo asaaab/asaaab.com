@@ -86,4 +86,5 @@
 - sorry for shaking up your worldview, sugarpuss.
 - complain to my manager - or my owner.
 - sorry for forgetting your work keycard, the plane is taking off and the airport is on fire.
+- if its not clear to others its a lack of information, or a lack of understanding
 - "working" as the captain is "driving" the jolvo carspotting, auto edited - whimsymax.
