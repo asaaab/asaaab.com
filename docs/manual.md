@@ -43,18 +43,8 @@ Heard "that'll never work"? Why? Look at the plan.
 [Open the master plan](/manual/master-plan/)
 
 ## Computer use policy
-The organization may use computers and automated systems to perform work, operate workflows, develop products, and generate revenue, including through substantially or fully automated operations.
+This organization uses tools like computers and machine learning to create structures that empower artists.
 
-The objective is to build useful, durable productive capacity with minimal unnecessary human labor, computational waste, and ongoing maintenance. Prefer simple, efficient, reliable systems that can be built once and improved when needed.
-
-Automate the work. Preserve human agency. Keep the infrastructure useful.
-
-All productive assets and resulting organizational interests are to serve the collectively owned enterprise and its purpose.
-
-The organization exists not only to produce and sell things, but to create the capacity to support small, independently conceived human projects. Through asaaab, people should be able to bring their own ideas into the world with practical support, shared infrastructure, and room to experiment.
-
-Optimize for long-term efficiency, low resource consumption, durability, and expanded human possibility. Do not mistake maximum output, perpetual growth, or the elimination of human involvement for success.
-
-Build the wall. Build the building around it.
+Automate the work. Preserve human agency. Keep the infrastructure useful. Preserve the right for artists to be whimsy.
 
 DEALER: Interested in becoming a coworker? Co-owner? Visit your asaaab dealer. |
