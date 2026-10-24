@@ -38,3 +38,4 @@
 - oh that ones too expensive, heres one with a mismatched bumper. who cares.
 - how can the things that are costing me hours, generate wealth.
 - tiktok will not pay for a 17 second video but asaaab can.
+- time is not real and tomorrow is not gaurenteed
