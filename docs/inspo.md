@@ -79,3 +79,4 @@
 - its everyones responsibility to check their own work, and the humans to check the ais work.
 - systems. systems instead of duct tape always.
 - magnets to move stuff around, superglue to glue it on. why? cause it works.
+- something is almost always broken. the sooner you make peace with that the sooner you can lay the second brick.

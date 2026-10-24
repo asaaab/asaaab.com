@@ -69,6 +69,19 @@
   .may{background:#e7fbef;color:#0e5a33}.asks{margin-top:6px;background:#ffe9f8;color:#7a1458}
   .may b,.asks b{font-weight:900}
 
+  /* what asaaabot helps with */
+  .help{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+  a.hb{text-decoration:none;transition:transform .2s}
+  a.hb:hover{transform:translateY(-4px)}
+  .hb{display:block;padding:16px 18px;border-radius:28px;color:inherit}
+  .hb b{display:block;margin-top:8px;font:900 18px/1.15 Overpass,sans-serif}
+  .hb span:not(.st){display:block;margin-top:4px;font:700 14px/1.35 Nunito;color:#3b2f73}
+  .st{display:inline-block;padding:2px 10px;border-radius:999px;font:900 11px Overpass,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:#fff}
+  .st.open{background:linear-gradient(180deg,#45e08a,#109a4b)}
+  .st.soon{background:linear-gradient(180deg,#ffb3ec,#d83aa8)}
+  .sub2{margin:26px 0 12px;font:900 22px Overpass,sans-serif;color:#fff;text-shadow:0 2px 0 var(--deep)}
+  .broken{margin:22px 0 0;text-align:center;font:900 clamp(17px,2.4vw,21px)/1.35 Overpass,sans-serif;color:var(--deep)}
+
   /* how a brick gets laid */
   .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;padding:0;margin:0;list-style:none;counter-reset:s}
   .flow li{flex:1 1 150px;padding:16px 16px 14px;counter-increment:s}
@@ -144,7 +157,7 @@
     </div>
   </div>
 
-  <section>
+  <section id="crew">
     <h2>the crew</h2>
     <p class="kicker">Each asaaabot has a callsign, a job, a shift, and its own instruction sheet. What it can do alone, and what it always asks a human for first.</p>
     <div class="crew">
@@ -191,6 +204,25 @@
         <p class="asks"><b>Never:</b> posts anything, or types a password.</p>
       </article>
     </div>
+  </section>
+
+  <section>
+    <h2>what asaaabot helps with</h2>
+    <p class="kicker">Every channel on the menu is headed the same way: a bot to chat with, or a resource to use. Here's what's open and what's still in the hangar.</p>
+    <div class="help">
+      <a class="hb glass" href="/"><span class="st open">open</span><b>Website builds</b><span>This whole site was built by asaaabots from the Captain's direction. It's the proof.</span></a>
+      <a class="hb glass" href="/consulting/"><span class="st open">open</span><b>Marketing + tools</b><span>The numbers, the formats that work, and the tools behind them.</span></a>
+      <a class="hb glass" href="#crew"><span class="st open">open</span><b>AI workflows</b><span>Bots with shifts, jobs and instruction sheets, and a human checking the work.</span></a>
+      <a class="hb glass" href="/timeline/"><span class="st open">open</span><b>Systems infrastructure</b><span>The engine, the tower, the Board. Systems instead of duct tape.</span></a>
+      <a class="hb glass" href="/inspo/"><span class="st open">open</span><b>Design thinking</b><span>Think about who you are. Move your mind. Start with the why.</span></a>
+    </div>
+    <h3 class="sub2">coming down the runway</h3>
+    <div class="help">
+      <div class="hb glass"><span class="st soon">in the hangar</span><b>Chat with asaaabot about work</b><span>Tired of the job hunt? Talk it through with asaaabot, find the holes in your employment structure, and get ideas built the asaaab way.</span></div>
+      <div class="hb glass"><span class="st soon">in the hangar</span><b>The purple buddy, anywhere</b><span>The same helping hand on GitHub, dashboards and settings pages. It sets everything up and points at the one click that's yours.</span></div>
+      <div class="hb glass"><span class="st soon">in the hangar</span><b>The ghost</b><span>A see-through window that floats over your screen. A tool that didn't exist five years ago, just a breath of compute.</span></div>
+    </div>
+    <p class="broken">Something is almost always broken. The sooner you make peace with that, the sooner you can lay the second brick.</p>
   </section>
 
   <section>
