@@ -73,3 +73,4 @@
 - the saab plant would have offered fingerpainting classes to the robotic arms if they had the funds.
 - once everything is done we will turn the scaffolding engine off but now its working working working.
 - its all about the optics of the scaffolding.
+- a safer playground. (dad)
