@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>asaaab</title>
 <meta name="description" content="asaaab: pick a channel.">
-<meta name="theme-color" content="#f4f6f8">
+<meta name="theme-color" content="#1fa8ff">
 <link rel="icon" href="/banner.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,8 +16,13 @@
   *{box-sizing:border-box}
   html,body{margin:0;height:100%}
   body{font-family:Nunito,system-ui,sans-serif;color:var(--ink);overflow-x:hidden;
-    background:linear-gradient(180deg,rgba(150,215,255,.35),rgba(255,255,255,0) 45%),repeating-linear-gradient(180deg,#f4f6f8 0,#f4f6f8 3px,#eceff2 3px,#eceff2 4px)}
+    background:radial-gradient(circle at 88% 8%,rgba(255,236,90,.95) 0,rgba(255,226,60,.55) 70px,rgba(255,226,60,0) 190px),
+      linear-gradient(180deg,#1fa8ff 0%,#5cc8ff 30%,#a9e6ff 58%,#e6fbff 74%,#b8f08a 86%,#6fd23f 100%) fixed}
   .wrap{position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden}
+  /* rolling green hills behind the bar */
+  .hill{position:absolute;z-index:0;border-radius:50%;pointer-events:none}
+  .hill.a{left:-12%;bottom:40px;width:62%;height:300px;background:radial-gradient(ellipse at 50% 30%,#b6ef8a 0%,#5fc934 72%)}
+  .hill.b{right:-14%;bottom:20px;width:78%;height:320px;background:radial-gradient(ellipse at 50% 30%,#a6e87a 0%,#45b02a 72%)}
   /* four clouds drifting across the sky */
   .cloud{position:absolute;z-index:0;width:var(--w);height:calc(var(--w)*.34);top:var(--t);left:-30%;border-radius:999px;background:#fff;opacity:.9;
     filter:drop-shadow(0 8px 14px rgba(70,140,200,.18));animation:drift var(--d) linear var(--dl) infinite}
@@ -46,7 +51,7 @@
   @keyframes pan{from{background-position:0% 50%}to{background-position:100% 50%}}
   .win::after{content:"";position:absolute;left:0;right:0;top:0;height:45%;pointer-events:none;
     background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,0));border-radius:22px 22px 50% 50%/22px 22px 20px 20px}
-  .ch.empty .win{background:repeating-linear-gradient(135deg,#eef2f5 0 10px,#e3e8ec 10px 20px);animation:none}
+  .ch.empty .win{background:radial-gradient(circle at 50% 35%,#fff6b0,#ffd93a 75%);animation:none}
   .tag{position:absolute;left:50%;top:-16px;transform:translate(-50%,6px) scale(.9);opacity:0;pointer-events:none;z-index:2;white-space:nowrap;
     padding:8px 18px;border-radius:999px;background:#fff;border:2px solid var(--accent);font-weight:900;font-size:17px;color:var(--ink);
     box-shadow:0 8px 18px rgba(52,190,237,.3);transition:opacity .15s ease,transform .15s ease}
@@ -56,18 +61,19 @@
     background:radial-gradient(circle at 50% 30%,#fff,#dfe6ec);color:var(--accent);display:grid;place-items:center;cursor:pointer;padding:0}
   .arrow:disabled{opacity:.35;cursor:default}
   .arrow.l{left:14px}.arrow.r{right:14px}
+  .arrow[hidden]{display:none}
   .arrow svg{width:22px;height:22px}
   .bar{position:relative;z-index:1;height:170px;flex:none}
   .bar::before{content:"";position:absolute;left:-60px;right:-60px;top:22px;bottom:0;border-radius:50% 50% 0 0/80px 80px 0 0;
-    background:linear-gradient(180deg,#fff,#e6eaee);box-shadow:0 -2px 0 var(--accent),0 -12px 34px rgba(52,190,237,.18)}
+    background:linear-gradient(180deg,rgba(255,255,255,.88),rgba(255,255,255,.6));box-shadow:0 -2px 0 #fff,0 -12px 34px rgba(6,81,138,.2)}
   .orb{position:absolute;top:44px;width:108px;height:108px;border-radius:50%;display:grid;place-items:center;text-decoration:none;
     border:3px solid var(--accent);background:radial-gradient(circle at 50% 28%,#fff,#eef3f6 55%,#d6dde3);box-shadow:0 6px 16px rgba(70,90,110,.25);
     color:var(--accent);font-weight:900;font-size:22px}
   .orb.l{left:max(40px,6vw)}.orb.r{right:max(40px,6vw)}
   .orb svg{width:46px;height:46px}
   .clock{position:absolute;left:0;right:0;top:52px;text-align:center;pointer-events:none}
-  .clock b{display:block;font-size:56px;font-weight:800;letter-spacing:2px;color:#9aa4ad;line-height:1}
-  .clock span{font-size:22px;font-weight:800;color:var(--soft)}
+  .clock b{display:block;font-size:56px;font-weight:900;letter-spacing:1px;color:#1f9ff0;line-height:1;text-shadow:0 2px 0 #fff}
+  .clock span{font-size:22px;font-weight:900;color:#2f8f16}
   @media (prefers-reduced-motion:reduce){.ch,.ch::before,.win,.cloud{animation:none}}
   @media (max-width:760px){
     .stage{padding:26px 16px 16px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
@@ -78,6 +84,7 @@
 </head>
 <body>
 <div class="wrap">
+  <div class="hill a" aria-hidden="true"></div><div class="hill b" aria-hidden="true"></div>
   <div class="cloud" aria-hidden="true" style="--w:220px;--t:6%;--d:95s;--dl:-20s"></div>
   <div class="cloud" aria-hidden="true" style="--w:150px;--t:22%;--d:120s;--dl:-70s"></div>
   <div class="cloud" aria-hidden="true" style="--w:260px;--t:48%;--d:140s;--dl:-35s"></div>
