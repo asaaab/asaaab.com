@@ -32,6 +32,8 @@ a{color:inherit}
 /* 1. the boomer page */
 .boomer{background:var(--paper);color:var(--ink);font-family:var(--serif)}
 .masthead{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:3px double var(--ink);padding-bottom:8px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--fade)}
+.stack{display:inline-flex;flex-direction:column;align-items:flex-start;vertical-align:top}
+.ever{font-size:.42em;font-weight:400;font-style:italic;color:var(--fade);text-decoration-thickness:2px;margin-top:.1em}
 .boomer h1{font-size:clamp(40px,9vw,76px);line-height:.98;font-weight:700;margin-top:28px}
 .letters{display:grid;gap:18px;margin-top:36px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
 .letter{border-top:1px solid var(--ink);padding-top:10px;font-size:18px;line-height:1.45}
@@ -97,7 +99,7 @@ a{color:inherit}
 <section class="boomer">
   <div class="wrap">
     <div class="masthead"><span>the daily complaint</span><span>letters to the editor</span><span>est. forever</span></div>
-    <h1>the young people dont wanna work anymore</h1>
+    <h1>the young people dont wanna work <span class="stack">anymore<s class="ever">forever</s></span></h1>
     <div class="letters">
       <p class="letter">nobody wants to work anymore. back in my day we just showed up.<i>a concerned reader</i></p>
       <p class="letter">maybe if they stopped buying avocado toast they could afford a house.<i>a homeowner since 1979</i></p>
