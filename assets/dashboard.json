@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-10-24T14:52:00Z",
+  "s": "Idling: nothing moved this hour.",
+  "idle": true
+ },
+ {
   "t": "2026-10-24T13:52:00Z",
   "s": "Idling: nothing moved this hour.",
   "idle": true
