@@ -90,3 +90,5 @@
 - their right to whimsy is preserved.
 - "working" as the captain is "driving" the jolvo carspotting, auto edited - whimsymax.
 - asaaab is truly the mode in which this will happen. the transport.
+- lifes too short not to follow your dreams.
+- whimzmaxx believz gen z dezervez the frutiger aero future we were promised. before they did that big ios update that changed the youtube app.
