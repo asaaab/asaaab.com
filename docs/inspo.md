@@ -83,3 +83,5 @@
 - our goal is to keep the world whimsy. to gaurentee this, people need the ability to fail.
 - use the tools available to you. its foolish not to.
 - people love to complain. once we solve everything they will still find a way to complain. think of potential 0th world problems.
+- sorry for shaking up your worldview, sugarpuss.
+- complain to my manager - or my owner.
