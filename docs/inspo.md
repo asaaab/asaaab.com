@@ -66,3 +66,4 @@
 - 1% on 5 different things is 5%.
 - people name their company quality concrete consulting and make millions. asaaab has brand and character.
 - we are painting the bricks all colors of the rainbow first, and then building, so we dont have to decorate when we move in.
+- the saab plant would have offered fingerpainting classes to the robotic arms if they had the funds.
