@@ -1,6 +1,6 @@
 # Inspo board
 ## Inspired by
-- The asaaab theme song, by Cole
+- The asaaab theme song, by Cole 2K
 - Fifth Gear
 - Club Penguin
 - Jo Dee Messina, I'm Alright
