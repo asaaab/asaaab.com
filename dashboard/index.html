@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>engine · asaaab</title>
+<meta name="theme-color" content="#5cc4ff">
+<link rel="icon" href="/banner.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap">
+<style>
+  :root{--ink:#08324f;--soft:#2f6f99;--glass:rgba(255,255,255,.72);--edge:rgba(255,255,255,.95);--go:#48b827}
+  *{box-sizing:border-box}
+  html,body{margin:0;min-height:100%}
+  body{font-family:Nunito,system-ui,sans-serif;color:var(--ink);
+    background:linear-gradient(180deg,#5cc4ff 0%,#a9e3ff 45%,#e8fbff 75%,#c9f1b0 100%) fixed;padding:28px 16px 60px}
+  main{max-width:720px;margin:0 auto}
+  h1{margin:0;font-size:clamp(40px,9vw,64px);font-weight:900;line-height:1;color:#fff;
+    text-shadow:0 3px 0 rgba(6,81,138,.35),0 10px 24px rgba(6,81,138,.35)}
+  .sub{margin:8px 0 22px;font-weight:800;color:var(--soft)}
+  .status{display:flex;align-items:center;gap:12px;margin-bottom:22px;padding:14px 20px;border-radius:999px;
+    background:var(--glass);border:1.5px solid var(--edge);box-shadow:inset 0 2px 0 #fff,0 10px 26px rgba(6,81,138,.2);font-weight:900}
+  .orb{width:22px;height:22px;flex:none;border-radius:50%;background:radial-gradient(circle at 40% 30%,#c6ff9f,var(--go) 70%);
+    box-shadow:0 0 0 4px rgba(72,184,39,.18)}
+  .orb.idle{background:radial-gradient(circle at 40% 30%,#ffe3a1,#ffab1f 70%);box-shadow:0 0 0 4px rgba(255,171,31,.2)}
+  ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+  li{padding:16px 22px;border-radius:28px;background:var(--glass);border:1.5px solid var(--edge);
+    box-shadow:inset 0 2px 0 #fff,0 8px 20px rgba(6,81,138,.16)}
+  time{display:block;font-size:13px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-bottom:4px}
+  li p{margin:0;font-size:17px;font-weight:700;line-height:1.45}
+  .empty{font-weight:800;color:var(--soft)}
+</style>
+</head>
+<body>
+<main>
+  <h1>the engine</h1>
+  <p class="sub">One sentence an hour on what moved. Something almost always broken.</p>
+  <div class="status" id="status"><span class="orb" id="orb" aria-hidden="true"></span><span id="statusText">Checking…</span></div>
+  <ol id="log"><li class="empty">Loading the log…</li></ol>
+</main>
+<script>
+(async () => {
+  const log = document.getElementById("log"), st = document.getElementById("statusText"), orb = document.getElementById("orb");
+  let rows = [];
+  try { rows = await (await fetch("/assets/dashboard.json", {cache: "no-store"})).json(); } catch (e) {}
+  rows.sort((a, b) => b.t.localeCompare(a.t));
+  if (!rows.length) { log.innerHTML = '<li class="empty">Nothing logged yet.</li>'; st.textContent = "Warming up"; return; }
+  const fmt = new Intl.DateTimeFormat("en-US", {timeZone: "America/Los_Angeles", weekday: "short", month: "short", day: "numeric", hour: "numeric", minute: "2-digit"});
+  log.innerHTML = "";
+  for (const r of rows) {
+    const li = document.createElement("li"), tm = document.createElement("time"), p = document.createElement("p");
+    tm.dateTime = r.t; tm.textContent = fmt.format(new Date(r.t)); p.textContent = r.s;
+    li.append(tm, p); log.append(li);
+  }
+  const idle = rows[0].idle === true;
+  orb.classList.toggle("idle", idle);
+  st.textContent = (idle ? "Idling · last check " : "Running · last check ") + fmt.format(new Date(rows[0].t));
+})();
+</script>
+</body>
+</html>
