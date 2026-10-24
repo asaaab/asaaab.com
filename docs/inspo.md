@@ -85,3 +85,4 @@
 - people love to complain. once we solve everything they will still find a way to complain. think of potential 0th world problems.
 - sorry for shaking up your worldview, sugarpuss.
 - complain to my manager - or my owner.
+- sorry for forgetting your work keycard, the plane is taking off and the airport is on fire.
