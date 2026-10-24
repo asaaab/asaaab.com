@@ -93,3 +93,4 @@
 - lifes too short not to follow your dreams.
 - whimzmaxx believz gen z dezervez the frutiger aero future we were promised. before they did that big ios update that changed the youtube app.
 - asaaab and whimzmaxx are the same product just packaged differently. its like a subaru solterra and a toyota bz4x
+- is one day of today at a living wage worth your dreams? i took a day off work to make the product.
