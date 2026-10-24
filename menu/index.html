@@ -15,10 +15,10 @@
   :root{--accent:#34beed;--ink:#2c3a46;--soft:#8a949d}
   *{box-sizing:border-box}
   html,body{margin:0;height:100%}
-  body{font-family:Nunito,system-ui,sans-serif;color:var(--ink);overflow-x:hidden;
+  body{font-family:Nunito,system-ui,sans-serif;color:var(--ink);overflow-x:hidden;background:#000}
+  .wrap{position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;
     background:radial-gradient(circle at 88% 8%,rgba(255,236,90,.95) 0,rgba(255,226,60,.55) 70px,rgba(255,226,60,0) 190px),
-      linear-gradient(180deg,#1fa8ff 0%,#5cc8ff 30%,#a9e6ff 58%,#e6fbff 74%,#b8f08a 86%,#6fd23f 100%) fixed}
-  .wrap{position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden}
+      linear-gradient(180deg,#1fa8ff 0%,#5cc8ff 30%,#a9e6ff 58%,#e6fbff 74%,#b8f08a 86%,#6fd23f 100%)}
   /* rolling green hills behind the bar */
   .hill{position:absolute;z-index:0;border-radius:50%;pointer-events:none}
   .hill.a{left:-12%;bottom:40px;width:62%;height:300px;background:radial-gradient(ellipse at 50% 30%,#b6ef8a 0%,#5fc934 72%)}
@@ -74,6 +74,16 @@
   .clock{position:absolute;left:0;right:0;top:52px;text-align:center;pointer-events:none}
   .clock b{display:block;font-size:56px;font-weight:900;letter-spacing:1px;color:#1f9ff0;line-height:1;text-shadow:0 2px 0 #fff}
   .clock span{font-size:22px;font-weight:900;color:#2f8f16}
+  /* old-school TV: switches on into the menu, switches off on the way out */
+  html{background:#000}
+  .wrap{transform-origin:50% 50%}
+  body.tv-on .wrap{animation:tvOn .55s cubic-bezier(.2,.8,.2,1) both}
+  body.tv-off .wrap{animation:tvOff .42s cubic-bezier(.6,0,.9,.4) both}
+  @keyframes tvOn{0%{transform:scale(0,.004);filter:brightness(6)}35%{transform:scale(1,.004);filter:brightness(6)}
+    70%{transform:scale(1,1.04);filter:brightness(1.6)}100%{transform:scale(1,1);filter:none}}
+  @keyframes tvOff{0%{transform:scale(1,1);filter:none}45%{transform:scale(1,.004);filter:brightness(5)}
+    80%{transform:scale(.02,.004);filter:brightness(8)}100%{transform:scale(0,0);filter:brightness(8)}}
+  @media (prefers-reduced-motion:reduce){body.tv-on .wrap,body.tv-off .wrap{animation:none}}
   @media (prefers-reduced-motion:reduce){.ch,.ch::before,.win,.cloud{animation:none}}
   @media (max-width:760px){
     .stage{padding:26px 16px 16px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
@@ -140,6 +150,15 @@ function draw() {
 }
 prev.onclick = () => { page--; draw(); }; next.onclick = () => { page++; draw(); };
 addEventListener("resize", draw); draw();
+// TV switch on when the menu opens (and when you come back to it), switch off when you pick a channel
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+function tvOn() { document.body.classList.remove("tv-off"); document.body.classList.remove("tv-on"); void document.body.offsetWidth; document.body.classList.add("tv-on"); }
+tvOn(); addEventListener("pageshow", e => { if (e.persisted) tvOn(); });
+document.addEventListener("click", e => {
+  const a = e.target.closest("a[href]"); if (!a || reduce || e.metaKey || e.ctrlKey || e.shiftKey || a.target === "_blank" || a.href.startsWith("mailto:")) return;
+  e.preventDefault(); document.body.classList.remove("tv-on"); document.body.classList.add("tv-off");
+  setTimeout(() => { location.href = a.href; }, 430);
+});
 const tick = () => { const d = new Date();
   document.getElementById("time").textContent = d.toLocaleTimeString("en-US", {hour: "numeric", minute: "2-digit"}).replace(/\s?[AP]M/, "");
   document.getElementById("date").textContent = d.toLocaleDateString("en-US", {weekday: "short", month: "numeric", day: "numeric"}).replace(",", ""); };
