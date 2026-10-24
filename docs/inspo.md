@@ -89,3 +89,4 @@
 - if its not clear to others its a lack of information, or a lack of understanding
 - their right to whimsy is preserved.
 - "working" as the captain is "driving" the jolvo carspotting, auto edited - whimsymax.
+- asaaab is truly the mode in which this will happen. the transport.
