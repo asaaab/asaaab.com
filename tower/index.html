@@ -66,6 +66,12 @@
   /* radio */
   textarea{width:100%;min-height:90px;resize:vertical;border-radius:18px;border:1.5px solid var(--edge);background:rgba(255,255,255,.85);color:#0b2b40;padding:12px 14px;font:600 16px var(--body)}
   .row{display:flex;gap:10px;align-items:center;margin-top:10px;flex-wrap:wrap}
+  .who{display:inline-flex;gap:4px;padding:4px;border-radius:999px;background:var(--glass);border:1.5px solid var(--edge);box-shadow:0 4px 12px rgba(6,60,100,.12)}
+  .who button{font:900 14px var(--mono);letter-spacing:.06em;border:0;border-radius:999px;padding:8px 14px;cursor:pointer;background:transparent;color:var(--soft)}
+  .who button[aria-pressed="true"]{color:#fff;background:linear-gradient(135deg,#ff6bd6,#9b5cff);box-shadow:0 4px 10px rgba(155,92,255,.35)}
+  .swap{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  .swap input{font:700 16px var(--mono);padding:9px 14px;border-radius:999px;border:2px solid #cfe3f0;width:9em}
+  [hidden]{display:none!important}
   button.tx{font:900 16px var(--body);border:0;border-radius:999px;padding:12px 22px;cursor:pointer;color:#fff;background:radial-gradient(circle at 50% 20%,#7fdcff,var(--blue) 70%);box-shadow:inset 0 -3px 6px rgba(0,40,90,.35),0 6px 14px rgba(31,159,240,.35)}
   button.tx:disabled{opacity:.5;cursor:default}
   button:focus-visible,textarea:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
@@ -95,7 +101,7 @@
   <div class="row"><button class="tx" type="submit">Clear me in</button><span class="note" id="pinstate"></span></div>
 </form></div>
 <main id="app" hidden>
-  <header><h1>asaaab tower</h1><p class="sub">Radio in the cryptic text. The tower decodes it: big stuff to the Board, small stuff to the bots.</p></header>
+  <header><h1>asaaab tower</h1><div class="who" id="who" role="group" aria-label="Transmitting as"><button type="button" data-l="HEAD">HEAD</button><button type="button" data-l="BODY">BODY</button></div><form class="swap" id="swap" hidden><input id="swapin" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Code"><button class="tx" type="submit">Switch</button><span class="note" id="swapstate"></span></form><p class="sub">Radio in the cryptic text. The tower decodes it: big stuff to the Board, small stuff to the bots.</p></header>
 
   <section class="glass" aria-labelledby="radarH">
     <h2 id="radarH">Radar <a href="/tower/map/" style="float:right;font:900 14px var(--body);text-decoration:none;color:#fff;padding:6px 14px;border-radius:999px;border:2px solid #fff;background:linear-gradient(135deg,#ff6bd6,#9b5cff);box-shadow:0 4px 12px rgba(155,92,255,.4)">the autopilot map &rarr;</a></h2>
@@ -201,7 +207,7 @@ const wrap = c => ({data: () => c});
 async function refresh(){
   const r = await post("radar", {});
   if (!r.ok) { if (r.status === 401) lock("That code didn't clear."); else $("state").textContent = r.j.error || "The tower didn't answer."; return false; }
-  flights = r.j.flights || []; drawRadar(flights); fillLists(flights); drawLog((r.j.calls || []).map(wrap)); $("state").textContent = "Tower online. Cleared as " + r.j.label + "."; return true;
+  flights = r.j.flights || []; drawRadar(flights); fillLists(flights); drawLog((r.j.calls || []).map(wrap)); $("state").textContent = "Tower online. Cleared as " + r.j.label + "."; me = r.j.label; remember(me, code); showWho(); return true;
 }
 function lock(msg){ try { sessionStorage.removeItem("tower-code"); } catch (e) {} code = ""; $("app").hidden = true; $("gate").hidden = false; $("pinstate").textContent = msg || ""; }
 $("pinform").onsubmit = async e => { e.preventDefault(); code = $("pin").value.trim(); if (!code) return; $("pinstate").textContent = "Checking…";
@@ -216,6 +222,21 @@ $("send").onclick = async () => {
   busy = false; $("send").disabled = false;
 };
 if (code) refresh().then(ok => { if (ok) { $("gate").hidden = true; $("app").hidden = false; } }).catch(() => lock(""));
+
+// HEAD / BODY: switch who you're transmitting as. Codes you've cleared in with this session are kept in this tab only; the other one asks once.
+let me = "";
+function codes(){ try { return JSON.parse(sessionStorage.getItem("tower-codes") || "{}"); } catch (e) { return {}; } }
+function remember(label, c){ if (!label || !c) return; const m = codes(); m[label] = c; try { sessionStorage.setItem("tower-codes", JSON.stringify(m)); } catch (e) {} }
+function showWho(){ for (const b of document.querySelectorAll("#who button")) b.setAttribute("aria-pressed", String(b.dataset.l === me)); }
+for (const b of document.querySelectorAll("#who button")) b.onclick = async () => {
+  const want = b.dataset.l; if (want === me) { $("swap").hidden = true; return; }
+  const known = codes()[want];
+  if (known) { const old = code; code = known; try { if (await refresh()) { try { sessionStorage.setItem("tower-code", code); } catch (e) {} $("swap").hidden = true; return; } } catch (e) {} code = old; }
+  $("swap").hidden = false; $("swapin").value = ""; $("swapstate").textContent = "Code for " + want + "."; $("swapin").focus();
+};
+$("swap").onsubmit = async e => { e.preventDefault(); const c = $("swapin").value.trim(); if (!c) return; const old = code; code = c; $("swapstate").textContent = "Checking…";
+  try { const r = await post("radar", {}); if (r.ok) { $("swapin").value = ""; $("swap").hidden = true; try { sessionStorage.setItem("tower-code", code); } catch (e) {} await refresh(); return; } } catch (err) {}
+  code = old; $("swapstate").textContent = "That code didn't clear."; };
 </script>
 
 </body></html>
