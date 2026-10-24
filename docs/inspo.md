@@ -56,3 +56,13 @@
 - the first brick, the second brick, the first wall. not oh the bricks work. lets get an ikea right here and a walmart over there.
 - how am i able to do this all? its part of a business. dont uderstand? move your mind at asaaab.com
 - the life i live is like zaras friend in sweden im sure. a shed and friends and healthcare and a 9-3x and a few projects.
+- we are building the structure of the future we were promised.
+- asaaab is their ticket out. and if its not, it inspires them because it exists
+- i never knew my ticket out was the boarding pass to my own jet
+- this is boots on the ground building the walls of tomorrow.
+- this is a wide tent not a tall chair.
+- a town does not start with a wall. it starts with a brick.
+- we're here for a good time, and a long time.
+- 1% on 5 different things is 5%.
+- people name their company quality concrete consulting and make millions. asaaab has brand and character.
+- we are painting the bricks all colors of the rainbow first, and then building, so we dont have to decorate when we move in.
