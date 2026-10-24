@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-10-24T06:52:00Z",
+  "s": "Idling: nothing moved this hour.",
+  "idle": true
+ },
+ {
   "t": "2026-10-24T05:52:00Z",
   "s": "The car screen project tested the unit and found it runs older software than advertised, so a return and a better replacement joined the Board; a radio-style home screen mockup went up to try on it.",
   "idle": false
