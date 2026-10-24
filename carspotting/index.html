@@ -11,21 +11,56 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@600;800;900&family=Nunito:wght@500;700;800;900&display=swap">
 <link rel="stylesheet" href="/assets/pages.css">
-<link rel="stylesheet" href="/assets/bannerfold.css?v=2">
-<style>.hero-strip{background:none!important; height:var(--h)!important; overflow:visible!important; padding:0!important; display:block!important; width:auto!important}</style>
-
+<style>
+  html{scroll-behavior:smooth}
+  .drive{position:relative;height:100svh;min-height:420px;background:#0b0b0c;overflow:hidden}
+  .drive iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
+  .drive .title{position:absolute;left:50%;top:max(18px,env(safe-area-inset-top));transform:translateX(-50%);z-index:2;pointer-events:none;
+    font:900 clamp(26px,5vw,52px)/1 Overpass,system-ui,sans-serif;color:#fff;letter-spacing:.02em;text-shadow:0 3px 0 rgba(0,0,0,.35),0 10px 30px rgba(0,0,0,.45);white-space:nowrap}
+  .drive .down{position:absolute;left:50%;bottom:max(18px,env(safe-area-inset-bottom));transform:translateX(-50%);z-index:2;
+    font:800 14px/1 Nunito,system-ui,sans-serif;color:#16191c;background:rgba(255,255,255,.88);padding:11px 18px;border-radius:999px;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+  .spots{list-style:none;margin:18px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+  .spots a{display:flex;flex-direction:column;gap:6px;height:100%;box-sizing:border-box;padding:14px 16px;border-radius:24px;background:#fff;border:2px solid #16191c;box-shadow:0 4px 0 #16191c;color:#16191c;text-decoration:none}
+  .spots a:hover{transform:translateY(-2px)}
+  .spots b{font:900 24px/1 Overpass,system-ui,sans-serif}
+  .spots small{font-weight:800;color:#5b6268}
+  .spots span{font-weight:700;line-height:1.35}
+  .made{margin-top:28px}
+</style>
 </head>
 <body>
-<div class="hero-strip" role="banner" data-fban="red"></div>
-<main>
-<h1>Carspotting!!</h1>
-<p class="lede">The best of the carspotting TikToks, all in one place.</p>
-<p>Until then: <a href="https://www.tiktok.com/@asaaab93x">@asaaab93x on TikTok</a>.</p>
-<p style="color:#5b6268">Under construction.</p>
+<section class="drive" aria-label="Cruising past the carspotting billboards">
+  <iframe src="/hiddendemo/?cruise=1" title="Cruising past the carspotting billboards" loading="eager" tabindex="-1"></iframe>
+  <div class="title">CARSPOTTING!!</div>
+  <a class="down" href="#top">top spots ↓</a>
+</section>
+<main id="top">
+<h1>Top spots</h1>
+<p class="lede">The carspotting TikToks people watched the most. Tap one to watch it.</p>
+<ol class="spots" id="spots"><li>Loading…</li></ol>
+
+<section class="made">
+<h2>Made by people</h2>
+<p>The theme song was written by Cole. asaaab pays for the things people make, and it still points you to them, because it's about supporting people making things.</p>
+<!-- Cole's music link goes here once the Captain sends it -->
+</section>
 </main>
 <div class="road" aria-hidden="true"></div>
 <p class="foot">© 2026 asaaab · <a href="/privacy/">Privacy</a> · <a href="/copyright/">Copyright &amp; reuse</a> · <a href="mailto:asaaab93x@gmail.com">asaaab93x@gmail.com</a></p>
-<script src="/assets/bannerfold.js?v=2" defer></script>
+<script>
+fetch('/assets/carspotting/boards.json').then(r => r.json()).then(list => {
+  const ol = document.getElementById('spots'); ol.innerHTML = '';
+  const n = v => v >= 1e6 ? (v / 1e6).toFixed(1).replace(/\.0$/, '') + 'M' : v >= 1e3 ? Math.round(v / 1e3) + 'K' : v;
+  for (const s of list) {
+    const li = document.createElement('li'), a = document.createElement('a');
+    a.href = 'https://www.tiktok.com/@asaaab93x/video/' + s.id; a.target = '_blank'; a.rel = 'noopener';
+    const b = document.createElement('b'); b.textContent = n(s.v) + ' views';
+    const sm = document.createElement('small'); sm.textContent = new Date(s.d + 'T12:00:00').toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'});
+    const sp = document.createElement('span'); sp.textContent = s.cap.length > 110 ? s.cap.slice(0, 108) + '…' : s.cap;
+    a.append(b, sm, sp); li.append(a); ol.append(li);
+  }
+}).catch(() => { document.getElementById('spots').innerHTML = '<li>Couldn’t load the spots.</li>'; });
+</script>
 <script>if (/(^|\.)asaaab\.com$/.test(location.hostname)) { const s=document.createElement("script"); s.async=true; s.dataset.goatcounter="https://asaaab.goatcounter.com/count"; s.src="https://gc.zgo.at/count.js"; document.head.appendChild(s); }</script>
 </body>
 </html>
