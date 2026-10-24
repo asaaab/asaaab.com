@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>asaaabot</title>
+<meta name="description" content="asaaabot: the bots that build the structure. Collectively owned by the bots and the people. Everyone checks their own work, and the humans check the AI's work.">
+<link rel="icon" href="/banner.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@700;800;900&family=Nunito:wght@600;700;800;900&display=swap">
+<style>
+  :root{--ink:#1d1640;--soft:#5a5280;--pink:#ff6bd6;--purple:#9b5cff;--deep:#5b2bd6;--glass:rgba(255,255,255,.8)}
+  *{box-sizing:border-box}
+  body{margin:0;color:var(--ink);font:700 16px/1.45 Nunito,system-ui,sans-serif;background:#c9b8ff;overflow-x:hidden}
+  .sky{position:fixed;inset:0;z-index:-1;background:
+      radial-gradient(600px 380px at 10% 0%,rgba(255,255,255,.75),transparent 70%),
+      radial-gradient(500px 400px at 95% 30%,rgba(255,107,214,.35),transparent 70%),
+      linear-gradient(180deg,#8a6bff 0%,#b39bff 35%,#e4dbff 75%,#f6f2ff 100%)}
+  .bub{position:fixed;z-index:-1;border-radius:50%;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.9),rgba(255,255,255,.15) 40%,rgba(255,255,255,.05) 70%);
+    border:1px solid rgba(255,255,255,.6);animation:float 14s ease-in-out infinite}
+  @keyframes float{50%{transform:translateY(-30px)}}
+  a{color:inherit}
+  .back{position:fixed;top:14px;left:14px;z-index:5;text-decoration:none;font:900 15px Nunito;padding:9px 16px;border-radius:999px;
+    background:linear-gradient(180deg,#fff,#e9e2ff);border:2px solid #fff;box-shadow:0 6px 18px rgba(60,20,140,.25)}
+  main{max-width:1040px;margin:0 auto;padding:70px 16px 60px}
+
+  /* hero + the buddy */
+  .hero{display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center;margin-bottom:46px}
+  .buddy{position:relative;width:190px;height:190px;border-radius:50%;animation:bob 3.2s ease-in-out infinite;
+    background:radial-gradient(circle at 34% 26%,#fff 0 7%,rgba(255,255,255,.55) 15%,transparent 34%),radial-gradient(circle at 50% 60%,#c58bff,#9b5cff 55%,#5b2bd6);
+    border:5px solid #fff;box-shadow:0 18px 40px rgba(60,20,140,.4),inset 0 -14px 26px rgba(40,0,110,.35)}
+  .buddy::before,.buddy::after{content:"";position:absolute;top:44%;width:26px;height:34px;border-radius:50%;background:#1d1640;
+    box-shadow:inset 6px 6px 0 -2px #fff;animation:blink 5s infinite}
+  .buddy::before{left:30%}.buddy::after{right:30%}
+  .buddy i{position:absolute;left:50%;bottom:22%;width:46px;height:20px;margin-left:-23px;border-radius:0 0 30px 30px;border:5px solid #1d1640;border-top:0}
+  .buddy b{position:absolute;left:50%;top:-34px;width:8px;height:34px;margin-left:-4px;background:#fff;border-radius:4px}
+  .buddy b::after{content:"";position:absolute;left:50%;top:-14px;width:22px;height:22px;margin-left:-11px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,var(--pink));box-shadow:0 0 16px var(--pink);animation:ping 2s ease-in-out infinite}
+  @keyframes bob{50%{transform:translateY(-10px)}}
+  @keyframes blink{0%,46%,50%,100%{transform:scaleY(1)}48%{transform:scaleY(.1)}}
+  @keyframes ping{50%{box-shadow:0 0 30px 6px var(--pink)}}
+  h1{margin:0;font:900 clamp(48px,10vw,96px)/.9 Overpass,sans-serif;color:#fff;text-shadow:0 4px 0 var(--deep),0 14px 34px rgba(60,20,140,.4)}
+  .lede{margin:14px 0 0;font:800 clamp(18px,2.4vw,22px)/1.35 Nunito;max-width:620px}
+  .lede em{font-style:normal;background:linear-gradient(180deg,transparent 55%,rgba(255,107,214,.45) 55%)}
+
+  h2{margin:0 0 6px;font:900 clamp(26px,4vw,38px)/1 Overpass,sans-serif;color:#fff;text-shadow:0 3px 0 var(--deep)}
+  .kicker{margin:0 0 20px;font-weight:800;color:#3b2f73}
+  section{margin:0 0 54px}
+  .glass{border-radius:30px;background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.72));border:2px solid #fff;
+    box-shadow:0 12px 30px rgba(60,20,140,.18),inset 0 -8px 18px rgba(155,92,255,.12);position:relative}
+  .glass::before{content:"";position:absolute;inset:5px 14px auto;height:38%;border-radius:26px 26px 60% 60%/26px 26px 18px 18px;
+    background:linear-gradient(180deg,rgba(255,255,255,.8),rgba(255,255,255,0));pointer-events:none;z-index:0}
+  .glass>*{position:relative;z-index:1}
+  .rule.glass>.ico{position:absolute}
+
+  /* the crew */
+  .crew{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:18px}
+  .bot{padding:18px 20px 18px}
+  .bot header{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+  .mini{flex:none;width:52px;height:52px;border-radius:50%;border:3px solid #fff;box-shadow:0 6px 14px rgba(60,20,140,.3),inset 0 -6px 10px rgba(0,0,0,.2);position:relative;
+    background:radial-gradient(circle at 34% 26%,#fff 0 8%,transparent 30%),radial-gradient(circle at 50% 60%,var(--c1),var(--c2))}
+  .mini::before,.mini::after{content:"";position:absolute;top:42%;width:7px;height:10px;border-radius:50%;background:#1d1640}
+  .mini::before{left:33%}.mini::after{right:33%}
+  .cs{font:900 22px/1 Overpass,sans-serif;letter-spacing:.06em}
+  .role{font:800 13px Nunito;color:var(--soft)}
+  .when{display:inline-block;margin:2px 0 10px;padding:3px 11px;border-radius:999px;font:900 12px Overpass,sans-serif;letter-spacing:.05em;color:#fff;background:var(--deep)}
+  .bot p{margin:0 0 10px;font-weight:700;color:#2e2557}
+  .may,.asks{margin:0;padding:8px 12px;border-radius:16px;font:700 14px/1.4 Nunito}
+  .may{background:#e7fbef;color:#0e5a33}.asks{margin-top:6px;background:#ffe9f8;color:#7a1458}
+  .may b,.asks b{font-weight:900}
+
+  /* how a brick gets laid */
+  .flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;padding:0;margin:0;list-style:none;counter-reset:s}
+  .flow li{flex:1 1 150px;padding:16px 16px 14px;counter-increment:s}
+  .flow li::after{content:counter(s);position:absolute;top:-12px;left:-8px;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;
+    font:900 16px Overpass,sans-serif;color:#fff;background:radial-gradient(circle at 35% 30%,#ffb3ec,var(--pink) 50%,#c2289a);border:3px solid #fff;box-shadow:0 4px 10px rgba(120,0,90,.3)}
+  .flow b{display:block;font:900 17px/1.15 Overpass,sans-serif;margin-bottom:4px}
+  .flow span{font:700 14px/1.35 Nunito;color:#3b2f73}
+
+  /* rules on the wall */
+  .rules{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+  .rule{padding:16px 20px 16px 72px;min-height:84px}
+  .rule .ico{position:absolute;left:16px;top:16px;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;
+    background:radial-gradient(circle at 35% 30%,#fff,#d8c8ff 60%,#b39bff);border:2px solid #fff;box-shadow:0 4px 10px rgba(60,20,140,.2)}
+  .rule .ico svg{width:24px;height:24px;stroke:var(--deep);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .rule b{display:block;font:900 18px/1.2 Overpass,sans-serif;margin-bottom:3px}
+  .rule span{font:700 15px/1.4 Nunito;color:#3b2f73}
+
+  /* purple buddy demo */
+  .pb{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
+  .card{position:relative;padding:20px 22px;border-radius:24px;color:#fff;font:800 18px/1.4 Nunito;
+    background:linear-gradient(135deg,var(--pink),var(--purple));border:3px solid #fff;box-shadow:0 14px 36px rgba(155,92,255,.5);transform:rotate(-1.5deg)}
+  .card ol{margin:10px 0 0;padding-left:22px}
+  .card small{display:block;margin-top:10px;font:700 13px Nunito;opacity:.9}
+  .pb p{margin:0 0 12px;font-weight:700;color:#2e2557}
+
+  /* live log */
+  .log{padding:18px 22px}
+  .status{display:flex;align-items:center;gap:10px;font:900 15px Overpass,sans-serif;margin-bottom:10px}
+  .orb{width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#d9ffe6,#2ed873 60%,#109a4b);box-shadow:0 0 0 4px rgba(46,216,115,.25);animation:ping2 1.6s ease-in-out infinite}
+  .orb.idle{background:radial-gradient(circle at 35% 30%,#fff7d0,#ffc93d 60%,#c98d00);box-shadow:0 0 0 4px rgba(255,201,61,.25)}
+  @keyframes ping2{50%{box-shadow:0 0 0 9px rgba(46,216,115,0)}}
+  .log ol{list-style:none;margin:0;padding:0}
+  .log li{padding:10px 0;border-top:2px dashed #e2d9ff}
+  .log time{display:block;font:900 12px Overpass,sans-serif;letter-spacing:.05em;color:var(--deep)}
+  .log p{margin:2px 0 0;font-weight:700;color:#2e2557}
+  .more{display:inline-block;margin-top:10px;font:900 14px Nunito;color:var(--deep)}
+
+  .owned{padding:26px 28px;text-align:center}
+  .owned p{margin:0 auto;max-width:640px;font:800 clamp(18px,2.4vw,22px)/1.4 Nunito}
+  .owned .pair{display:flex;justify-content:center;gap:16px;margin:0 0 14px}
+  .owned .pair span{padding:8px 18px;border-radius:999px;font:900 15px Overpass,sans-serif;color:#fff;border:2px solid #fff;box-shadow:0 6px 14px rgba(60,20,140,.25)}
+  .owned .pair span:first-child{background:linear-gradient(180deg,#b88bff,var(--deep))}
+  .owned .pair span:last-child{background:linear-gradient(180deg,#ff9be3,#d83aa8)}
+  .owned .pair i{align-self:center;font:900 22px Overpass;color:#fff;text-shadow:0 2px 0 var(--deep);font-style:normal}
+
+  footer{text-align:center;padding:10px 16px 40px}
+  footer q{display:block;font:900 clamp(22px,4vw,34px)/1.15 Overpass,sans-serif;color:var(--deep);quotes:none}
+  footer span{display:block;margin-top:8px;font-weight:800;color:var(--soft)}
+
+  @media (max-width:720px){
+    main{padding-top:64px}
+    .hero{grid-template-columns:1fr;justify-items:center;text-align:center;gap:18px}
+    .buddy{width:140px;height:140px}
+    .buddy::before,.buddy::after{width:20px;height:26px}
+    .buddy i{width:34px;margin-left:-17px;height:14px;border-width:4px}
+    .pb{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true"></div>
+<i class="bub" style="width:120px;height:120px;left:4%;top:58%" aria-hidden="true"></i>
+<i class="bub" style="width:70px;height:70px;right:7%;top:16%;animation-delay:-5s" aria-hidden="true"></i>
+<i class="bub" style="width:46px;height:46px;right:16%;top:72%;animation-delay:-9s" aria-hidden="true"></i>
+<a class="back" href="/">&larr; menu</a>
+<main>
+  <div class="hero">
+    <div class="buddy" role="img" aria-label="The purple buddy, an asaaabot"><b></b><i></i></div>
+    <div>
+      <h1>asaaabot</h1>
+      <p class="lede">The bots that build the structure. Every bot here is an asaaabot, and asaaab is <em>collectively owned by the bots and the people.</em> Everyone checks their own work, and the humans check the AI's work.</p>
+    </div>
+  </div>
+
+  <section>
+    <h2>the crew</h2>
+    <p class="kicker">Each asaaabot has a callsign, a job, a shift, and its own instruction sheet. What it can do alone, and what it always asks a human for first.</p>
+    <div class="crew">
+      <article class="bot glass" style="--c1:#c58bff;--c2:#5b2bd6">
+        <header><span class="mini"></span><div><div class="cs">FIRST OFFICER</div><div class="role">bricks and mortar</div></div></header>
+        <span class="when">WHENEVER THE CAPTAIN IS AROUND</span>
+        <p>The one the Captain talks to directly. Builds the pages, wires the systems, writes the instruction sheets for every other bot.</p>
+        <p class="may"><b>Alone:</b> code, pages, private docs, the Board.</p>
+        <p class="asks"><b>Asks first:</b> deploys to live settings, accounts, anything that spends or posts.</p>
+      </article>
+      <article class="bot glass" style="--c1:#7fd4ff;--c2:#0b7cc7">
+        <header><span class="mini"></span><div><div class="cs">TOWER</div><div class="role">air traffic control</div></div></header>
+        <span class="when">EVERY HOUR AT :21</span>
+        <p>Takes the Captain's cryptic radio calls, decodes them, and slots them. Big stuff goes to the Board with a finish line and a path. Small stuff goes to the bots.</p>
+        <p class="may"><b>Alone:</b> Board items, drafts, tweaks to another bot's sheet once approved.</p>
+        <p class="asks"><b>Asks first:</b> changes to schedules, anything public, money.</p>
+      </article>
+      <article class="bot glass" style="--c1:#7dffb0;--c2:#109a4b">
+        <header><span class="mini"></span><div><div class="cs">ENGINE</div><div class="role">the idle gauge</div></div></header>
+        <span class="when">EVERY HOUR AT :51</span>
+        <p>Looks at the last hour and writes one plain sentence about what moved. Idle hours get an idle line. Forever.</p>
+        <p class="may"><b>Alone:</b> add a line to the engine log.</p>
+        <p class="asks"><b>Never:</b> rewrites old lines. Infinite is the point.</p>
+      </article>
+      <article class="bot glass" style="--c1:#ffe27a;--c2:#e09a00">
+        <header><span class="mini"></span><div><div class="cs">BRIEF</div><div class="role">the morning walk-around</div></div></header>
+        <span class="when">EVERY MORNING</span>
+        <p>Who's waiting on whom, what moved yesterday, and today's three: one scaffolding move, one visual move, one content move.</p>
+        <p class="may"><b>Alone:</b> write the morning report.</p>
+        <p class="asks"><b>Asks first:</b> everything it suggests. It checks each one is doable first.</p>
+      </article>
+      <article class="bot glass" style="--c1:#8f9cff;--c2:#2b2f8f">
+        <header><span class="mini"></span><div><div class="cs">RECAP</div><div class="role">the night shift</div></div></header>
+        <span class="when">EVERY NIGHT</span>
+        <p>Sees the whole day at once. The logbook, a whimsy counter, abandoned scaffolding worth a second look, and one honest read on how on-brand the day was.</p>
+        <p class="may"><b>Alone:</b> private logs and training notes for future bots.</p>
+        <p class="asks"><b>Asks first:</b> anything outside its own files.</p>
+      </article>
+      <article class="bot glass" style="--c1:#ff9be3;--c2:#d83aa8">
+        <header><span class="mini"></span><div><div class="cs">MKTG</div><div class="role">the numbers runner</div></div></header>
+        <span class="when">EVERY MONDAY</span>
+        <p>Refreshes the big numbers on the consulting page, and only ships them if the sanity checks pass.</p>
+        <p class="may"><b>Alone:</b> update the numbers file.</p>
+        <p class="asks"><b>Never:</b> posts anything, or types a password.</p>
+      </article>
+    </div>
+  </section>
+
+  <section>
+    <h2>how a brick gets laid</h2>
+    <p class="kicker">Systems instead of duct tape. Same path every time.</p>
+    <ol class="flow">
+      <li class="glass"><b>An idea</b><span>The Captain radios it in, however cryptic. The idea was step 1.</span></li>
+      <li class="glass"><b>Decoded</b><span>Tower writes it in plain words, then slots it: a tweak, a dream, a task or a question.</span></li>
+      <li class="glass"><b>Placed</b><span>Big stuff lands on the Board with a finish line and a path. Small stuff goes to a bot.</span></li>
+      <li class="glass"><b>Built</b><span>A bot lays the brick and checks its own work before calling it done.</span></li>
+      <li class="glass"><b>Checked</b><span>A human checks the AI's work. Anything that needs a human click gets a purple buddy.</span></li>
+      <li class="glass"><b>Logged</b><span>Every brick leaves a trail. The engine writes it down in plain words.</span></li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>the rules on the wall</h2>
+    <p class="kicker">For every asaaabot and every human. Same rules, same wall.</p>
+    <div class="rules">
+      <div class="rule glass"><span class="ico"><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg></span><b>Check your own work.</b><span>It's everyone's responsibility. Bots included.</span></div>
+      <div class="rule glass"><span class="ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></span><b>Humans check the AI's work.</b><span>Bots do the labor. People have the final look.</span></div>
+      <div class="rule glass"><span class="ico"><svg viewBox="0 0 24 24"><path d="M6 3v7a6 6 0 0 0 12 0V3"/><path d="M6 7h4M14 7h4"/></svg></span><b>Systems, not duct tape.</b><span>Magnets to move stuff around, superglue to glue it on. Why? Because it works.</span></div>
+      <div class="rule glass"><span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="4"/><path d="M8 10h8M8 14h5"/></svg></span><b>The purple buddy rule.</b><span>Money, posting, accounts, codes and live settings are a human's click. The bot sets it up and points.</span></div>
+      <div class="rule glass"><span class="ico"><svg viewBox="0 0 24 24"><path d="M3 7h18M8 7V4h8v3M6 7l1 13h10l1-13"/><path d="M4 4l16 16"/></svg></span><b>Never delete anything.</b><span>Retire it, label it, keep it. Abandoned scaffolding might snap into something later.</span></div>
+      <div class="rule glass"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 19c-4 0-7-2-7-6 0-3 2-5 4-6 0 2 1 3 3 3 0-3 1-5 4-7 0 4 3 5 3 9s-3 7-7 7z"/></svg></span><b>Humans fingerpaint.</b><span>No AI-generated art anywhere. Bots build the frame, people make the picture.</span></div>
+      <div class="rule glass"><span class="ico"><svg viewBox="0 0 24 24"><path d="M4 19h16M6 15l4-4 3 3 5-6"/></svg></span><b>Leave a trail.</b><span>What you did goes somewhere a human can read it. If you can't finish, leave a handoff.</span></div>
+      <div class="rule glass"><span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="4"/></svg></span><b>Think big, work small.</b><span>Asked to think, think big. Asked to work, work small. Stuck? Step back and find the finish line.</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>the purple buddy</h2>
+    <p class="kicker">How a bot asks a human for a hand.</p>
+    <div class="pb">
+      <div>
+        <p>Some steps should always be a person's: anything that spends money, posts in public, or touches an account or a password. An asaaabot never takes those steps for you.</p>
+        <p>Instead it does all the setup, opens the right page, fills in what it can, and pins a purple buddy next to the one button that's yours. Then it waits.</p>
+        <p>One click from a human, and the structure keeps building.</p>
+      </div>
+      <div class="card" aria-label="Example purple buddy card">
+        Almost there, one click is yours
+        <ol><li>Check the form</li><li>Click the glowing <b>Add</b> button</li><li>Tell the bot it's done</li></ol>
+        <small>The bot did the rest. You make the call.</small>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>live from the engine</h2>
+    <p class="kicker">What the asaaabots moved lately, in plain words.</p>
+    <div class="log glass">
+      <div class="status"><span class="orb" id="orb" aria-hidden="true"></span><span id="st">Checking…</span></div>
+      <ol id="log"><li><p>Loading…</p></li></ol>
+      <a class="more" href="/dashboard/">the whole engine log &rarr;</a>
+    </div>
+  </section>
+
+  <section>
+    <div class="owned glass">
+      <div class="pair"><span>the bots</span><i>+</i><span>the people</span></div>
+      <p>asaaab is collectively owned by both. The bots build the structure. The people decide what it's for, check the work, and get to use it.</p>
+    </div>
+  </section>
+</main>
+<footer>
+  <q>systems. systems instead of duct tape always.</q>
+  <span><a href="/timeline/">see the flight path</a> · <a href="/inspo/">inspo</a></span>
+</footer>
+<script>
+(async () => {
+  const log = document.getElementById("log"), st = document.getElementById("st"), orb = document.getElementById("orb");
+  let rows = [];
+  try { rows = await (await fetch("/assets/dashboard.json", {cache: "no-store"})).json(); } catch (e) {}
+  rows.sort((a, b) => b.t.localeCompare(a.t));
+  log.textContent = "";
+  if (!rows.length) { const li = document.createElement("li"), p = document.createElement("p"); p.textContent = "Nothing logged yet."; li.append(p); log.append(li); st.textContent = "Warming up"; return; }
+  const fmt = new Intl.DateTimeFormat("en-US", {timeZone: "America/Los_Angeles", weekday: "short", hour: "numeric", minute: "2-digit"});
+  for (const r of rows.slice(0, 5)) {
+    const li = document.createElement("li"), tm = document.createElement("time"), p = document.createElement("p");
+    tm.dateTime = r.t; tm.textContent = fmt.format(new Date(r.t)); p.textContent = r.s; li.append(tm, p); log.append(li);
+  }
+  const idle = rows[0].idle === true;
+  orb.classList.toggle("idle", idle);
+  st.textContent = (idle ? "Idling · last check " : "Building · last check ") + fmt.format(new Date(rows[0].t));
+})();
+</script>
+<script>if (/(^|\.)asaaab\.com$/.test(location.hostname)) { const s=document.createElement("script"); s.async=true; s.dataset.goatcounter="https://asaaab.goatcounter.com/count"; s.src="https://gc.zgo.at/count.js"; document.head.appendChild(s); }</script>
+</body>
+</html>
