@@ -345,7 +345,7 @@
     const text = ans.value.trim(); if (!text) return;
     bubble(text, "me"); ans.value = ""; form.hidden = true;
     if (NOPE.test(text)) {
-      await bot("sorry for pointing this out, but that one doesnt get a plan here. now that you know, here is the question again: what else could your day look like?");
+      await bot("pointing this out: that one doesnt get a plan here. now that you know, here is the question again: what else could your day look like? youre welcome.");
       form.hidden = false; ans.focus(); return;
     }
     await bot("ok!! yeah! lets put a plan in place and put one step in front of the other. time is passing anyway.");

@@ -82,3 +82,4 @@
 - something is almost always broken. the sooner you make peace with that the sooner you can lay the second brick.
 - our goal is to keep the world whimsy. to gaurentee this, people need the ability to fail.
 - use the tools available to you. its foolish not to.
+- people love to complain. once we solve everything they will still find a way to complain. think of potential 0th world problems.
