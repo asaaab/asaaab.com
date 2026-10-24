@@ -74,3 +74,8 @@
 - once everything is done we will turn the scaffolding engine off but now its working working working.
 - its all about the optics of the scaffolding.
 - a safer playground. (dad)
+- asaaab is for everyone.
+- i am trying to blanket out the forest fire that is capitalism with radical optimism. eventually the fire will burn itself out. i just managed to find an engine that runs on burnt logs.
+- its everyones responsibility to check their own work, and the humans to check the ais work.
+- systems. systems instead of duct tape always.
+- magnets to move stuff around, superglue to glue it on. why? cause it works.
