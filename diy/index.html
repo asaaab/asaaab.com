@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>diy carspotting editor</title>
+<meta name="description" content="Drop in your carspotting clips, hit move your mind, get a whimsymaxxed vertical video with asaaab frames and the theme song. Free. Runs on your phone. Nothing is uploaded.">
+<link rel="icon" href="/banner.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Overpass:wght@800;900&family=Nunito:wght@700;800;900&display=swap">
+<style>
+  :root{--ink:#0b2b40;--soft:#3f6a84;--pink:#ff6bd6;--purple:#9b5cff;--gold:#ffc93d;--blue:#1f9ff0}
+  *{box-sizing:border-box}
+  body{margin:0;color:var(--ink);font:800 16px/1.45 Nunito,system-ui,sans-serif;background:#8fd6ff;overflow-x:hidden}
+  .sky{position:fixed;inset:0;z-index:-1;background:radial-gradient(500px 300px at 85% 6%,rgba(255,255,255,.9),transparent 70%),linear-gradient(180deg,#1fa8ff 0%,#5cc8ff 32%,#a9e6ff 62%,#e6fbff 78%,#b8f08a 90%,#6fd23f 100%)}
+  .back{position:fixed;top:14px;left:14px;z-index:5;text-decoration:none;color:var(--ink);font:900 14px Nunito;padding:8px 14px;border-radius:999px;background:linear-gradient(180deg,#fff,#dfe8ef);border:2px solid #fff;box-shadow:0 4px 12px rgba(6,81,138,.25)}
+  main{max-width:720px;margin:0 auto;padding:70px 16px 50px}
+  h1{margin:0;text-align:center;font:900 clamp(38px,9vw,64px)/.95 Overpass,sans-serif;color:#fff;text-shadow:0 3px 0 #0b7cc7,0 10px 26px rgba(0,60,120,.35)}
+  .lede{margin:12px auto 22px;max-width:520px;text-align:center;color:#0b4f80}
+  .glass{position:relative;border-radius:30px;background:linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.75));border:2px solid #fff;box-shadow:0 12px 30px rgba(6,81,138,.2),inset 0 -8px 16px rgba(120,190,240,.15);padding:18px}
+  .step{margin:0 0 16px}
+  .step h2{margin:0 0 8px;font:900 20px Overpass,sans-serif}
+  .drop{display:block;text-align:center;padding:26px 16px;border-radius:24px;border:3px dashed #9fd2f0;background:#f4fbff;cursor:pointer}
+  .drop b{display:block;font:900 20px Overpass,sans-serif}
+  .drop input{display:none}
+  .clips{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+  .clip{position:relative;width:86px;height:86px;border-radius:50%;overflow:hidden;border:4px solid #fff;box-shadow:0 6px 14px rgba(6,81,138,.25)}
+  .clip video{width:100%;height:100%;object-fit:cover}
+  .clip button{position:absolute;top:2px;right:2px;width:26px;height:26px;border-radius:50%;border:2px solid #fff;background:#e2302f;color:#fff;font:900 14px Nunito;cursor:pointer;line-height:1}
+  .clip span{position:absolute;bottom:4px;left:0;right:0;text-align:center;font:900 11px Nunito;color:#fff;text-shadow:0 1px 3px #000}
+  .row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  input[type=range]{flex:1;min-width:160px;accent-color:var(--purple)}
+  .go{display:block;width:100%;margin-top:6px;padding:18px;border-radius:999px;border:4px solid #fff;cursor:pointer;color:#fff;font:900 clamp(22px,5vw,30px) Overpass,sans-serif;letter-spacing:.02em;
+    background:linear-gradient(135deg,var(--pink),var(--purple));box-shadow:0 12px 30px rgba(155,92,255,.5),inset 0 4px 0 rgba(255,255,255,.35)}
+  .go:disabled{opacity:.5;cursor:default}
+  .bar{height:14px;border-radius:999px;background:#e3f1fa;overflow:hidden;margin-top:12px}
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--pink),var(--purple));transition:width .2s}
+  .note{margin:8px 0 0;color:var(--soft);font-weight:700;font-size:14px}
+  .stage{display:flex;justify-content:center;margin-top:12px}
+  canvas,#out{width:min(100%,320px);aspect-ratio:9/16;border-radius:26px;background:#0b2b40;box-shadow:0 12px 30px rgba(6,81,138,.3)}
+  .btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:14px}
+  .btns a,.btns button{text-decoration:none;cursor:pointer;color:#fff;font:900 15px Nunito;padding:11px 18px;border-radius:999px;border:3px solid #fff;box-shadow:0 6px 14px rgba(6,81,138,.25)}
+  .b1{background:linear-gradient(180deg,#45e08a,#109a4b)}.b2{background:linear-gradient(180deg,#333,#000)}.b3{background:linear-gradient(180deg,#ff5a5a,#c4161c)}.b4{background:linear-gradient(180deg,#8f9cff,#4b5bd6)}
+  .rate{display:flex;gap:8px;justify-content:center;margin-top:10px}
+  .rate button{width:46px;height:46px;border-radius:50%;border:3px solid #fff;cursor:pointer;font:900 18px Overpass;color:#fff;background:radial-gradient(circle at 35% 30%,#fff7c2,var(--gold) 55%,#c98d00);box-shadow:0 4px 10px rgba(150,110,0,.3)}
+  .rate button[aria-pressed=true]{background:radial-gradient(circle at 35% 30%,#ffd0ec,var(--pink) 55%,#c2289a)}
+  [hidden]{display:none!important}
+  .fine{margin:18px 0 0;text-align:center;font:700 13px Nunito;color:#24506b}
+</style>
+</head>
+<body>
+<div class="sky" aria-hidden="true"></div>
+<a class="back" href="/">&larr; menu</a>
+<main>
+  <h1>diy carspotting<br>editor</h1>
+  <p class="lede">Drop in your carspotting clips. Hit move your mind. Get a vertical video with asaaab frames and the theme song. Same frames, same sound for everyone. Your clips never leave your device.</p>
+
+  <section class="glass step">
+    <h2>1. your clips</h2>
+    <label class="drop"><input id="pick" type="file" accept="video/*" multiple><b>tap to add clips</b><span class="note">a few short ones work best. they play in this order.</span></label>
+    <div class="clips" id="clips"></div>
+  </section>
+
+  <section class="glass step">
+    <h2>2. how long</h2>
+    <div class="row"><input id="len" type="range" min="8" max="48" step="1" value="15" aria-label="Video length in seconds"><b id="lenv">15 s</b></div>
+    <p class="note">13 to 15 seconds is the sweet spot. Each clip gets an equal slice from its middle.</p>
+  </section>
+
+  <button class="go" id="go" disabled>move your mind</button>
+  <div class="bar" aria-hidden="true"><i id="prog"></i></div>
+  <p class="note" id="state" style="text-align:center">Add at least one clip.</p>
+
+  <div class="stage"><canvas id="cv" width="1080" height="1920" hidden></canvas><video id="out" controls playsinline hidden></video></div>
+
+  <section class="glass" id="done" hidden style="margin-top:16px;text-align:center">
+    <h2 style="margin:0;font:900 22px Overpass,sans-serif">whimsymaxxed.</h2>
+    <p class="note">It's yours. Post it wherever. Using the sound helps everyone.</p>
+    <div class="btns">
+      <a class="b1" id="save" download="asaaab-carspotting.mp4">save video</a>
+      <button class="b4" id="share" type="button" hidden>share</button>
+      <a class="b2" href="https://www.tiktok.com/upload" target="_blank" rel="noopener">TikTok</a>
+      <a class="b3" href="https://www.youtube.com/upload" target="_blank" rel="noopener">YouTube Shorts</a>
+      <a class="b4" href="https://discord.gg/e7FUMwjNah" target="_blank" rel="noopener">the hangar</a>
+    </div>
+    <p class="note" style="margin-top:16px">how did this go?</p>
+    <div class="rate" id="rate"></div>
+    <p class="note" id="thanks" hidden>thanks. that's the only thing we count.</p>
+  </section>
+
+  <p class="fine">Free. No account. No ads except the asaaab frame and sound. Nothing you add is uploaded or kept. We only count visits and the star you tap.</p>
+</main>
+<script>
+const $ = id => document.getElementById(id);
+const W = 1080, H = 1920, FPS = 30;
+const FRAMES = [ // alternating asaaab bubble frames: ring color, glow, accent
+  {ring: "#ffc93d", glow: "rgba(255,201,61,.55)", sky1: "#1fa8ff", sky2: "#b8f08a"},
+  {ring: "#ff6bd6", glow: "rgba(255,107,214,.5)", sky1: "#9b5cff", sky2: "#ffd0ec"},
+  {ring: "#1f9ff0", glow: "rgba(31,159,240,.5)", sky1: "#5cc8ff", sky2: "#e6fbff"},
+];
+let clips = [];
+
+$("len").oninput = () => { $("lenv").textContent = $("len").value + " s"; };
+$("pick").onchange = e => { for (const f of e.target.files) addClip(f); e.target.value = ""; };
+function addClip(file){
+  const url = URL.createObjectURL(file), v = document.createElement("video");
+  v.src = url; v.muted = true; v.playsInline = true; v.preload = "auto";
+  const c = {file, url, v, dur: 0};
+  v.onloadedmetadata = () => { c.dur = v.duration || 0; draw(); };
+  clips.push(c); draw();
+}
+function draw(){
+  const box = $("clips"); box.textContent = "";
+  clips.forEach((c, i) => {
+    const d = document.createElement("div"); d.className = "clip";
+    const pv = document.createElement("video"); pv.src = c.url; pv.muted = true; pv.playsInline = true; pv.preload = "metadata";
+    const x = document.createElement("button"); x.type = "button"; x.textContent = "×"; x.setAttribute("aria-label", "remove clip " + (i + 1));
+    x.onclick = () => { URL.revokeObjectURL(c.url); clips.splice(i, 1); draw(); };
+    const s = document.createElement("span"); s.textContent = (i + 1) + (c.dur ? " · " + c.dur.toFixed(0) + "s" : "");
+    d.append(pv, x, s); box.append(d);
+  });
+  $("go").disabled = !clips.length;
+  $("state").textContent = clips.length ? clips.length + " clip" + (clips.length > 1 ? "s" : "") + " ready." : "Add at least one clip.";
+}
+
+// drawing
+function rr(ctx, x, y, w, h, r){ ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); }
+function frame(ctx, v, fr, t){
+  const g = ctx.createLinearGradient(0, 0, 0, H); g.addColorStop(0, fr.sky1); g.addColorStop(1, fr.sky2);
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  // drifting bubbles
+  for (let i = 0; i < 7; i++) {
+    const bx = (i * 173 + t * 40) % (W + 200) - 100, by = 120 + ((i * 263) % 1600) - Math.sin(t + i) * 30, br = 30 + (i * 17) % 60;
+    const bg = ctx.createRadialGradient(bx - br * .3, by - br * .3, br * .1, bx, by, br); bg.addColorStop(0, "rgba(255,255,255,.85)"); bg.addColorStop(.5, "rgba(255,255,255,.18)"); bg.addColorStop(1, "rgba(255,255,255,.05)");
+    ctx.fillStyle = bg; ctx.beginPath(); ctx.arc(bx, by, br, 0, 7); ctx.fill();
+  }
+  // the bubble window
+  const X = 70, Y = 150, w = W - 140, h = H - 380, r = 110;
+  ctx.save(); ctx.shadowColor = fr.glow; ctx.shadowBlur = 60; rr(ctx, X - 22, Y - 22, w + 44, h + 44, r + 22); ctx.fillStyle = fr.ring; ctx.fill(); ctx.restore();
+  rr(ctx, X - 10, Y - 10, w + 20, h + 20, r + 10); ctx.fillStyle = "#fff"; ctx.fill();
+  ctx.save(); rr(ctx, X, Y, w, h, r); ctx.clip();
+  if (v && v.videoWidth) { const s = Math.max(w / v.videoWidth, h / v.videoHeight), dw = v.videoWidth * s, dh = v.videoHeight * s; ctx.drawImage(v, X + (w - dw) / 2, Y + (h - dh) / 2, dw, dh); }
+  else { ctx.fillStyle = "#0b2b40"; ctx.fillRect(X, Y, w, h); }
+  const gl = ctx.createLinearGradient(0, Y, 0, Y + h * .3); gl.addColorStop(0, "rgba(255,255,255,.38)"); gl.addColorStop(1, "rgba(255,255,255,0)");
+  ctx.fillStyle = gl; ctx.beginPath(); ctx.ellipse(X + w / 2, Y, w * .48, h * .18, 0, 0, Math.PI); ctx.fill();
+  ctx.restore();
+  // the tag
+  const tw = 420, th = 92, tx = (W - tw) / 2, ty = H - 170;
+  rr(ctx, tx, ty, tw, th, 46); const tg = ctx.createLinearGradient(0, ty, 0, ty + th); tg.addColorStop(0, "#fff"); tg.addColorStop(1, "#dfe8ef"); ctx.fillStyle = tg; ctx.fill();
+  ctx.lineWidth = 6; ctx.strokeStyle = fr.ring; ctx.stroke();
+  ctx.fillStyle = "#0b2b40"; ctx.font = "900 50px Overpass, Nunito, sans-serif"; ctx.textAlign = "center"; ctx.textBaseline = "middle"; ctx.fillText("asaaab.com", W / 2, ty + th / 2 + 3);
+}
+function endCard(ctx, t){
+  frame(ctx, null, FRAMES[0], t);
+  ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.textBaseline = "middle";
+  ctx.font = "900 110px Overpass, Nunito, sans-serif"; ctx.fillText("asaaab", W / 2, H / 2 - 80);
+  ctx.font = "800 54px Nunito, sans-serif"; ctx.fillText("made with the diy", W / 2, H / 2 + 40); ctx.fillText("carspotting editor", W / 2, H / 2 + 110);
+}
+
+const wait = ms => new Promise(r => setTimeout(r, ms));
+function seek(v, t){ return new Promise(r => { const on = () => { v.removeEventListener("seeked", on); r(); }; v.addEventListener("seeked", on); v.currentTime = t; }); }
+function pickType(){ for (const t of ["video/mp4;codecs=avc1.42E01E,mp4a.40.2", "video/mp4", "video/webm;codecs=vp9,opus", "video/webm"]) if (window.MediaRecorder && MediaRecorder.isTypeSupported(t)) return t; return ""; }
+
+$("go").onclick = async () => {
+  if (!clips.length) return;
+  if (!window.MediaRecorder || !HTMLCanvasElement.prototype.captureStream) { $("state").textContent = "This browser can't record video. Try Chrome or Safari."; return; }
+  $("go").disabled = true; $("done").hidden = true; $("out").hidden = true;
+  const cv = $("cv"); cv.hidden = false; const ctx = cv.getContext("2d");
+  const total = +$("len").value, END = 1.6, per = total / clips.length;
+  $("state").textContent = "Cooking. Keep this tab open, it records in real time.";
+  // sound: the asaaab theme, faded at the end
+  const ac = new (window.AudioContext || window.webkitAudioContext)(); await ac.resume();
+  let buf = null; try { buf = await ac.decodeAudioData(await (await fetch("/theme.mp3")).arrayBuffer()); } catch (e) {}
+  const dest = ac.createMediaStreamDestination(), gain = ac.createGain(); gain.connect(dest);
+  const stream = cv.captureStream(FPS); for (const tr of dest.stream.getAudioTracks()) stream.addTrack(tr);
+  const type = pickType(), rec = new MediaRecorder(stream, type ? {mimeType: type, videoBitsPerSecond: 8e6} : {});
+  const parts = []; rec.ondataavailable = e => e.data.size && parts.push(e.data);
+  const stopped = new Promise(r => rec.onstop = r);
+  frame(ctx, null, FRAMES[0], 0);
+  rec.start(250);
+  if (buf) { const src = ac.createBufferSource(); src.buffer = buf; src.connect(gain); const t0 = ac.currentTime; gain.gain.setValueAtTime(1, t0); gain.gain.setValueAtTime(1, t0 + total + END - 1.2); gain.gain.linearRampToValueAtTime(0, t0 + total + END); src.start(t0); }
+  const start = performance.now();
+  for (let i = 0; i < clips.length; i++) {
+    const c = clips[i], v = c.v, fr = FRAMES[i % FRAMES.length];
+    const dur = c.dur || v.duration || per, slice = Math.min(per, dur), from = Math.max(0, (dur - slice) / 2);
+    await seek(v, from); await v.play().catch(() => {});
+    const until = from + slice;
+    await new Promise(r => { const tick = () => { const t = (performance.now() - start) / 1000; frame(ctx, v, fr, t); $("prog").style.width = Math.min(100, t / (total + END) * 100) + "%"; if (v.currentTime >= until || v.ended) { v.pause(); r(); } else requestAnimationFrame(tick); }; tick(); });
+    // if a clip was shorter than its slice, hold its last frame so the length stays right
+    const target = (i + 1) * per; while ((performance.now() - start) / 1000 < target - .02) { frame(ctx, v, fr, (performance.now() - start) / 1000); await wait(1000 / FPS); }
+  }
+  const endAt = total + END; while ((performance.now() - start) / 1000 < endAt) { const t = (performance.now() - start) / 1000; endCard(ctx, t); $("prog").style.width = Math.min(100, t / endAt * 100) + "%"; await wait(1000 / FPS); }
+  rec.stop(); await stopped; ac.close();
+  const mime = (type || "video/webm").split(";")[0], ext = mime.includes("mp4") ? "mp4" : "webm";
+  const blob = new Blob(parts, {type: mime}), url = URL.createObjectURL(blob);
+  cv.hidden = true; const out = $("out"); out.src = url; out.hidden = false;
+  $("save").href = url; $("save").download = "asaaab-carspotting." + ext;
+  const file = new File([blob], "asaaab-carspotting." + ext, {type: mime});
+  if (navigator.canShare && navigator.canShare({files: [file]})) { $("share").hidden = false; $("share").onclick = () => navigator.share({files: [file], title: "carspotting, whimsymaxxed"}).catch(() => {}); }
+  $("done").hidden = false; $("go").disabled = false; $("state").textContent = "Done. " + (ext === "webm" ? "Saved as WebM; TikTok and YouTube both take it." : "");
+  count("diy-made");
+};
+// ratings: just a count of which bubble was tapped. Nothing else.
+for (let n = 1; n <= 5; n++) { const b = document.createElement("button"); b.type = "button"; b.textContent = n; b.setAttribute("aria-pressed", "false"); b.setAttribute("aria-label", n + " out of 5");
+  b.onclick = () => { if ($("thanks").hidden === false) return; b.setAttribute("aria-pressed", "true"); $("thanks").hidden = false; count("diy-rating-" + n); }; $("rate").append(b); }
+function count(path){ try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({path, title: path, event: true}); } catch (e) {} }
+</script>
+<script>if (/(^|\.)asaaab\.com$/.test(location.hostname)) { const s=document.createElement("script"); s.async=true; s.dataset.goatcounter="https://asaaab.goatcounter.com/count"; s.src="https://gc.zgo.at/count.js"; document.head.appendChild(s); }</script>
+</body>
+</html>
