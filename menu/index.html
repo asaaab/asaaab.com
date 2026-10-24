@@ -22,6 +22,9 @@
   .ch{position:relative;display:block;aspect-ratio:16/10.5;border-radius:64px;padding:12px;text-decoration:none;
     background:linear-gradient(180deg,#fff,#dde3e8);box-shadow:inset 0 0 0 2px #cdd4da,0 10px 24px rgba(70,90,110,.18);
     transition:transform .18s ease,box-shadow .18s ease}
+  .ch{animation:bob var(--bd,6s) ease-in-out var(--dl,0s) infinite}
+  @keyframes bob{0%,100%{translate:0 0}25%{translate:3px -9px}50%{translate:0 -14px}75%{translate:-3px -6px}}
+  @media (prefers-reduced-motion:reduce){.ch{animation:none}}
   .ch:hover,.ch:focus-visible{transform:scale(1.04);box-shadow:inset 0 0 0 3px var(--accent),0 14px 30px rgba(52,190,237,.3);outline:none}
   .win{position:relative;width:100%;height:100%;border-radius:52px;overflow:hidden;background:#dfe6ec}
   .win img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top}
@@ -95,6 +98,8 @@ function draw() {
   for (const [name, href, img] of CH.slice(page * n, page * n + n)) {
     const a = document.createElement(name ? "a" : "div");
     a.className = "ch" + (name ? "" : " empty");
+    a.style.setProperty("--bd", (5.2 + Math.random() * 2.4).toFixed(2) + "s");   // each bubble floats on its own clock
+    a.style.setProperty("--dl", (-Math.random() * 6).toFixed(2) + "s");
     if (name) { a.href = href; a.setAttribute("aria-label", name); }
     else a.setAttribute("aria-hidden", "true");
     const w = document.createElement("div"); w.className = "win";
