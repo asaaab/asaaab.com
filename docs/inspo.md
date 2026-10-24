@@ -80,3 +80,5 @@
 - systems. systems instead of duct tape always.
 - magnets to move stuff around, superglue to glue it on. why? cause it works.
 - something is almost always broken. the sooner you make peace with that the sooner you can lay the second brick.
+- our goal is to keep the world whimsy. to gaurentee this, people need the ability to fail.
+- use the tools available to you. its foolish not to.
