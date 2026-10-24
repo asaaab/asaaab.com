@@ -39,3 +39,5 @@
 - how can the things that are costing me hours, generate wealth.
 - tiktok will not pay for a 17 second video but asaaab can.
 - time is not real and tomorrow is not gaurenteed
+- the clutch pedal is often the one with the most wear. but highway cruising uses 0 clutch wear.
+- the first brick, the second brick, the first wall. not oh the bricks work. lets get an ikea right here and a walmart over there.
