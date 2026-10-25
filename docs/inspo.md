@@ -107,3 +107,4 @@
 - this loudmouth of truth is required to combat the lies or just incomplete info designed to divide.
 - Everyone should get this opportunity. Asaaab is our ticket outta here.
 - Stickers and bullshit emotional purchases build this idea of belonging. It's as serious as you take it.
+- dont equivocate visibility with emotional availability.
