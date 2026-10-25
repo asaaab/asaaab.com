@@ -38,6 +38,9 @@
   svg.focus .edge{opacity:.07}svg.focus .elab{opacity:0}svg.focus .node{opacity:.28}
   svg.focus .edge.on{opacity:.95;stroke-width:3.4}svg.focus .elab.on{opacity:1}svg.focus .node.on{opacity:1}
   .dot{pointer-events:none}
+  .edge.idle{opacity:.07}.elab.idle{opacity:0}
+  .livebar{font:800 12px var(--body);color:#24506b;margin:6px 0 0;padding-left:max(16px, env(safe-area-inset-left, 0px))}
+  .livebar b{color:#7b3ff0}
   .center-count{font:900 34px var(--display);fill:#fff;text-anchor:middle;paint-order:stroke;stroke:#0b4f80;stroke-width:3px}
   .panes{max-width:1400px;margin:14px auto 40px;padding:0 16px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
   .glass{background:var(--glass);border:2px solid var(--edge);border-radius:28px;padding:16px 18px;box-shadow:0 10px 26px rgba(6,60,100,.14)}
@@ -76,7 +79,7 @@
 <div class="panes">
   <section class="glass info" id="info" aria-live="polite">
     <h2>Tap something</h2>
-    <p class="muted">The lines move in the direction the information flows. Dashed pink lines are proposed automations waiting on the two-way street check.</p>
+    <p class="muted">Lines only light up while two things are actually talking: a bot on its round, a radio call in the last 15 minutes, a commit in the last 20. Tap a node or Show all wiring to see every connection. The lines move in the direction the information flows. Dashed pink lines are proposed automations waiting on the two-way street check.</p>
   </section>
   <section class="glass">
     <h2>Birth an automation</h2>
@@ -153,6 +156,37 @@ const COL = {person:"#e39400", bot:"#7b3ff0", place:"#1f9ff0", data:"#22a356", o
 const NS = "http://www.w3.org/2000/svg", svg = $("map");
 const mk = (t, a = {}) => { const e = document.createElementNS(NS, t); for (const k in a) e.setAttribute(k, a[k]); return e; };
 let props = [], sel = null, connect = false, picks = [];
+// Lines light up only while two things are actually talking (Captain, 10/24: "only show neurons sharing info when they are").
+let LIVE = new Set(), showAll = false, lastCalls = [], lastCommit = 0;
+const PT = () => { const d = new Date(new Date().toLocaleString("en-US", {timeZone: "America/Los_Angeles"})); return {m: d.getMinutes(), h: d.getHours(), dow: d.getDay()}; };
+function running(){
+  const t = PT(), on = new Set(), inW = (a, b) => t.m >= a && t.m <= b;
+  if (inW(21, 33) || inW(46, 58)) on.add("TOWER");                 // dispatcher + turbo
+  if (inW(51, 56)) on.add("ENGINE");                                // idle gauge
+  if (t.h === 3 && t.m >= 7) on.add("RECAP");                       // night shift
+  if (t.h === 8 && t.m >= 41) on.add("BRIEF");                      // morning walk-around
+  if (t.dow === 1 && t.h === 4 && t.m >= 47) on.add("MKTG");        // Mondays
+  if (Date.now() - lastCommit < 20 * 60e3) on.add("FO");            // a commit in the last 20 minutes
+  return on;
+}
+function computeLive(){
+  const on = running(), live = new Set(), now = Date.now(), fresh = ms => ms && now - ms < 15 * 60e3;
+  const radioIn = lastCalls.some(c => fresh(Date.parse(c.at))), radioOut = lastCalls.some(c => fresh(Date.parse(c.answered_at)));
+  for (const [f, t] of E) {
+    const k = f + ">" + t;
+    if (on.has(f) || on.has(t)) live.add(k);
+    if (radioIn && (k === "CAP>TP" || k === "TP>TOWER")) live.add(k);
+    if (radioOut && k === "TOWER>TP") live.add(k);
+    if (on.has("FO") && (k === "CAP>FO" || k === "PURPLE>CAP")) live.add(k);
+    if (k === "VIS>SITE" || k === "BOARD>TP") live.add(k);           // someone is looking right now: you
+  }
+  LIVE = live;
+  const lb = document.getElementById("livebar");
+  if (lb) { const names = [...on].map(id => BYID[id].label); lb.innerHTML = names.length ? "talking right now: <b>" + names.join(", ") + "</b>" : "quiet right now. the next round is TOWER at :21 or :46."; }
+}
+async function commits(){
+  try { const r = await fetch("https://api.github.com/repos/asaaab/asaaab.com/commits?per_page=1"); if (!r.ok) return; const j = await r.json(); lastCommit = Date.parse(j[0].commit.committer.date) || 0; } catch (e) {}
+}
 
 function curve(a, b, bend){ const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2, dx = b.x - a.x, dy = b.y - a.y, len = Math.hypot(dx, dy) || 1;
   // stop at the circle edges so arrowheads stay visible
@@ -176,10 +210,11 @@ function draw(){
     const bend = (e.prop ? .28 : .12) * (seen[key] % 2 ? 1 : -1);
     const c = curve(a, b, bend), col = e.prop ? "#ff3fbf" : COL[a.kind];
     const on = sel && (e.f === sel || e.t === sel);
-    const p = mk("path", {d: c.d, class: "edge" + (e.prop ? " prop" : "") + (on ? " on" : ""), stroke: col, "marker-end": `url(#a-${e.prop ? "prop" : a.kind})`});
+    const idle = !e.prop && !showAll && !on && !LIVE.has(e.f + ">" + e.t);
+    const p = mk("path", {d: c.d, class: "edge" + (e.prop ? " prop" : "") + (on ? " on" : "") + (idle ? " idle" : ""), stroke: col, "marker-end": `url(#a-${e.prop ? "prop" : a.kind})`});
     const ti = mk("title"); ti.textContent = `${a.label} → ${b.label}: ${e.l}`; p.append(ti); gE.append(p);
-    if (!e.prop) { const dot = mk("circle", {r: 3.6, fill: col, class: "dot"}); const am = mk("animateMotion", {dur: (3.4 + (e.l.length % 5) * .5) + "s", repeatCount: "indefinite", path: c.d}); dot.append(am); gE.append(dot); }
-    const lab = mk("text", {x: c.lx, y: c.ly, class: "elab" + (on ? " on" : ""), "text-anchor": "middle"}); lab.textContent = e.l; gL.append(lab);
+    if (!e.prop && !idle) { const dot = mk("circle", {r: 3.6, fill: col, class: "dot"}); const am = mk("animateMotion", {dur: (3.4 + (e.l.length % 5) * .5) + "s", repeatCount: "indefinite", path: c.d}); dot.append(am); gE.append(dot); }
+    const lab = mk("text", {x: c.lx, y: c.ly, class: "elab" + (on ? " on" : "") + (idle ? " idle" : ""), "text-anchor": "middle"}); lab.textContent = e.l; gL.append(lab);
   }
   for (const n of N) {
     const linked = sel && (n.id === sel || all.some(e => (e.f === sel && e.t === n.id) || (e.t === sel && e.f === n.id)));
@@ -231,6 +266,10 @@ function keys(){
   const b = document.createElement("button"); b.className = "birth"; b.type = "button"; b.setAttribute("aria-pressed", "false"); b.textContent = "Connect two";
   b.onclick = () => { connect = !connect; b.setAttribute("aria-pressed", String(connect)); b.textContent = connect ? "Connecting… tap two" : "Connect two"; picks = []; sel = null; draw(); showForm(); info(null); };
   k.append(b);
+  const w = document.createElement("button"); w.className = "birth"; w.type = "button"; w.setAttribute("aria-pressed", "false"); w.textContent = "Show all wiring";
+  w.onclick = () => { showAll = !showAll; w.setAttribute("aria-pressed", String(showAll)); w.textContent = showAll ? "Only what's talking" : "Show all wiring"; draw(); };
+  k.append(w);
+  const lb = document.createElement("p"); lb.id = "livebar"; lb.className = "livebar"; k.after(lb);
 }
 // Proposed automations travel as radio calls: "CONNECT: A + B | how: ...". TOWER runs the two-way street check on its round.
 const RX = /^CONNECT:\s*([A-Z]+)\s*\+\s*([A-Z]+)\s*\|\s*how:\s*([\s\S]*)$/;
@@ -257,7 +296,7 @@ async function refresh(){
   const r = await post("radar", {});
   if (!r.ok) return false;
   const open = (r.j.flights || []).filter(f => f.status !== "done").length;
-  boardCount = String(open); readProps(r.j.calls || []); draw(); return true;
+  boardCount = String(open); lastCalls = r.j.calls || []; readProps(lastCalls); computeLive(); draw(); return true;
 }
 $("send").onclick = async () => {
   const how = $("how").value.trim(); if (picks.length < 2 || !how) { $("state").textContent = "Pick two things and say how they'd talk."; return; }
@@ -269,7 +308,10 @@ $("send").onclick = async () => {
   } catch (e) { $("state").textContent = "Can't reach the tower right now."; }
   $("send").disabled = false;
 };
-keys(); draw();
+keys(); computeLive(); draw();
+commits().then(() => { computeLive(); draw(); });
+setInterval(() => { computeLive(); if (!connect) draw(); }, 30e3);
+setInterval(() => { commits(); if (code) refresh().catch(() => {}); }, 3 * 60e3);
 (async () => {
   if (!code) { $("gate").hidden = false; return; }
   try { if (await refresh()) { $("app").hidden = false; } else { $("gate").hidden = false; } }
