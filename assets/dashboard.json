@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-10-25T03:51:00Z",
+  "s": "Idling: nothing moved this hour.",
+  "idle": true
+ },
+ {
   "t": "2026-10-25T02:52:00Z",
   "s": "The tower took 2 new calls and answered 4, a menu channel for the side project got drafted and is waiting on a yes, two Board items moved forward, and the brand notes grew.",
   "idle": false
