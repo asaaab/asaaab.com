@@ -111,3 +111,4 @@
 - I am building a machine that is learning exactly what to do and which bricks to lay when I'm playing around living life
 - People love limited edition. People love cheap junk. This is just branded accurately as cheap junk to support us!!
 - “ai” is divisive language to brand “computing in English”
+- instead of flipping the monopoly board why not just like start a money printing machine??
