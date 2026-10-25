@@ -12,6 +12,8 @@
 - Pre-2012 air
 - A childhood on Razor scooters
 - Jo Dee Messina, I'm Alright
+- Everclear, Wonderful (the first song on the whimsymaxxing playlist)
+- Barenaked Ladies, Pinch Me
 - Late-'90s radio pop-rock: Everclear, Sugar Ray, Sheryl Crow
 - Country-pop with a lift: Faith Hill, Jo Dee Messina
 - Open-road guitar pop: Barenaked Ladies, Del Amitri, Blues Traveler
