@@ -51,6 +51,10 @@
   .blip.engine i{outline:2px solid #fff;outline-offset:2px}
   .blip.ping i{animation:ping .9s ease-out}
   @keyframes ping{0%{box-shadow:0 0 0 0 rgba(255,255,255,.9),0 0 18px currentColor}100%{box-shadow:0 0 0 16px rgba(255,255,255,0),0 0 10px currentColor}}
+  .bell{font:900 14px var(--body);cursor:pointer;color:#fff;border:2px solid #fff;border-radius:999px;padding:6px 14px;margin-left:8px;vertical-align:middle;display:inline-flex;gap:6px;align-items:center;background:linear-gradient(135deg,#ffb02e,#ff5a1f);box-shadow:0 4px 12px rgba(255,90,31,.4)}
+  .bell.rung{animation:ring .6s ease-in-out 3}
+  @keyframes ring{25%{transform:rotate(-12deg)}75%{transform:rotate(12deg)}}
+  @media (prefers-reduced-motion:reduce){.bell.rung{animation:none}}
   .lists{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
   .lists h3{margin:0 0 6px;font:800 14px var(--display)} .lists ol{margin:0;padding-left:18px;font-size:14px}
   @media (max-width:520px){.lists{grid-template-columns:1fr}}
@@ -105,7 +109,7 @@
   <header><h1>asaaab tower</h1><div class="who" id="who" role="group" aria-label="Transmitting as"><button type="button" data-l="HEAD">HEAD</button><button type="button" data-l="BODY">BODY</button></div><button class="lockb" id="lockb" type="button" aria-label="Lock the tower"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>lock</button><form class="swap" id="swap" hidden><input id="swapin" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Code"><button class="tx" type="submit">Switch</button><span class="note" id="swapstate"></span></form><p class="sub">Radio in the cryptic text. The tower decodes it: big stuff to the Board, small stuff to the bots.</p></header>
 
   <section class="glass" aria-labelledby="radarH">
-    <h2 id="radarH">Radar <a href="/tower/map/" style="float:right;font:900 14px var(--body);text-decoration:none;color:#fff;padding:6px 14px;border-radius:999px;border:2px solid #fff;background:linear-gradient(135deg,#ff6bd6,#9b5cff);box-shadow:0 4px 12px rgba(155,92,255,.4)">the autopilot map &rarr;</a></h2>
+    <h2 id="radarH">Radar <button type="button" id="bell" class="bell" aria-label="Ring the alarm bell: batch ping the radar"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>ring the bell</button> <a href="/tower/map/" style="float:right;font:900 14px var(--body);text-decoration:none;color:#fff;padding:6px 14px;border-radius:999px;border:2px solid #fff;background:linear-gradient(135deg,#ff6bd6,#9b5cff);box-shadow:0 4px 12px rgba(155,92,255,.4)">the autopilot map &rarr;</a></h2>
     <div class="scope" id="scope"><div class="rings"></div><div class="sweep"></div><div class="glare"></div></div>
     <div class="strip" id="strip" aria-live="polite">Tap a blip: its routes light up and the strip shows what it feeds and what feeds it. Every Board item is a blip: direction is its master-plan stage, distance is how far from its finish line (center = done), size is how connected it is. White-ringed blips are open engine work; the sweep pings them as it passes.</div>
     <div class="lists"><div><h3>Most connected</h3><ol id="most"></ol></div><div><h3>Engine queue (the sweep pings these)</h3><ol id="queue"></ol></div></div>
@@ -221,6 +225,19 @@ $("send").onclick = async () => {
   try { const r = await post("radio", {text}); if (r.ok) { $("msg").value = ""; $("state").textContent = "Copy. Logged. The tower decodes it on its next round."; await refresh(); } else { $("state").textContent = r.j.error || "Didn't go through."; if (r.status === 401) lock("Code expired. Clear in again."); } }
   catch (e) { $("state").textContent = "Can't reach the tower right now. Try again."; }
   busy = false; $("send").disabled = false;
+};
+
+// The alarm bell (Captain, 10/24: "add an alarm bell to batch ping radar from radar screen").
+// It drops a BELL call on the radio. TOWER's next round (:21 or :46) works every open call, oldest first, instead of just the new ones.
+function nextRound(){ const m = new Date().getMinutes(); const r = m < 21 ? 21 : m < 46 ? 46 : 81; return {at: r % 60 === 21 ? ":21" : ":46", mins: r - m}; }
+$("bell").onclick = async () => {
+  const b = $("bell"); if (busy) return; busy = true; b.disabled = true;
+  try {
+    const r = await post("radio", {text: "BELL: batch ping. work every open call this round, oldest first, and answer each one."});
+    if (r.ok) { b.classList.add("rung"); await refresh(); const n = nextRound(); $("state").textContent = "Bell rung. TOWER works the whole queue at " + n.at + " (about " + n.mins + " min)."; }
+    else { $("state").textContent = r.j.error || "The bell didn't ring."; if (r.status === 401) lock("Code expired. Clear in again."); }
+  } catch (e) { $("state").textContent = "Can't reach the tower right now."; }
+  setTimeout(() => b.classList.remove("rung"), 2000); busy = false; b.disabled = false;
 };
 if (code) refresh().then(ok => { if (ok) { $("gate").hidden = true; $("app").hidden = false; } }).catch(() => lock(""));
 
