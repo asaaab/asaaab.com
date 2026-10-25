@@ -253,5 +253,6 @@ $("msg").addEventListener("input", grow);
 setInterval(() => { if (code && !document.hidden) refresh().catch(() => {}); }, 30e3);
 document.addEventListener("visibilitychange", () => { if (!document.hidden && code) refresh().catch(() => {}); });
 </script>
+<script src="/tower/combo.js"></script>
 </body>
 </html>
