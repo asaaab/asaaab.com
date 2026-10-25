@@ -91,7 +91,9 @@
   const tryB = el("button", "v-try", "TRY THE LOCK"); tryB.type = "button";
   face.append(light, dialsBox, rowA, tryB, msg);
   door.append(face); vault.append(door);
-  const typeRow = el("div", "v-type"), typeB = el("button", "", "type it instead"); typeB.type = "button"; typeRow.append(typeB); vault.append(typeRow);
+  const typeRow = el("div", "v-type"), typeB = el("button", "", "type it instead"); typeB.type = "button";
+  const newB = el("a", "", "new here?"); newB.href = "/tower/join/"; newB.style.cssText = "margin-left:18px;font:800 13px Nunito,system-ui,sans-serif;color:#ffd54a";
+  typeRow.append(typeB, newB); vault.append(typeRow);
   document.body.append(vault);
 
   // back to the vault from the typing box

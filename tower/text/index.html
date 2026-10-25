@@ -239,11 +239,12 @@ $("pinform").onsubmit = async e => { e.preventDefault(); code = $("pin").value.t
 let busy = false;
 async function send(text, btn){
   if (!text || busy) return; busy = true; $("send").disabled = true; if (btn) btn.disabled = true;
-  try { const r = await post("radio", {text}); if (r.ok) { if (!btn) { $("msg").value = ""; grow(); } await refresh(); } else { if (r.status === 401) lock("Code expired. Clear in again."); else alertLine(r.j.error || "Didn't go through."); } }
+  try { const r = await post("radio", {text}); if (r.ok) { if (/^CHECK IN:/i.test(text)) party(); if (!btn) { $("msg").value = ""; grow(); } await refresh(); } else { if (r.status === 401) lock("Code expired. Clear in again."); else alertLine(r.j.error || "Didn't go through."); } }
   catch (e) { alertLine("Can't reach the tower right now."); }
   busy = false; $("send").disabled = false; if (btn) btn.disabled = false;
 }
 function alertLine(t){ $("msgs").append(el("typing", t)); $("thread").scrollTop = $("thread").scrollHeight; }
+{ const pre = new URLSearchParams(location.search).get("say"); if (pre) { $("msg").value = pre.slice(0, 300); history.replaceState(null, "", location.pathname); } }   // prefill from /tower/join (check-in), never auto-sent
 $("say").onsubmit = e => { e.preventDefault(); send($("msg").value.trim()); };
 $("msg").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey && !e.isComposing && window.matchMedia("(pointer:fine)").matches) { e.preventDefault(); $("say").requestSubmit(); } });
 function grow(){ const t = $("msg"); t.style.height = "auto"; t.style.height = Math.min(140, t.scrollHeight) + "px"; }

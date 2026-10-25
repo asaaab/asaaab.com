@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b2c42">
+<title>new here?</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap">
+<style>
+  /* Onboarding: the frictionbot applied to joining the crew. Captain whimZ, 10/25 1:10pm: "Duct tape solution. Think about onboarding"
+     / 1:11pm: "Bingo." Same four bricks for everyone: who, key, pipes, check in. Done = the radio hears you. */
+  :root{--sky:#eaf6fb;--sky2:#cdeeff;--glass:rgba(255,255,255,.86);--edge:rgba(16,166,216,.25);--ink:#0d2b3e;--soft:#4f7790;--p1:#c9a6ff;--p2:#9b5cff;--p3:#6c2fe0;--ok:#38b26b;color-scheme:light}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sky:#061826;--sky2:#0b2c42;--glass:rgba(12,40,60,.88);--edge:rgba(120,200,255,.25);--ink:#e3f3fc;--soft:#93bdd6;color-scheme:dark}}
+  :root[data-theme="dark"]{--sky:#061826;--sky2:#0b2c42;--glass:rgba(12,40,60,.88);--edge:rgba(120,200,255,.25);--ink:#e3f3fc;--soft:#93bdd6;color-scheme:dark}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100svh;background:radial-gradient(120% 80% at 50% -10%,var(--sky2),var(--sky) 60%) fixed,var(--sky);color:var(--ink);font:700 16px/1.45 Nunito,system-ui,sans-serif}
+  main{max-width:620px;margin:0 auto;padding:max(18px,env(safe-area-inset-top)) 16px 60px}
+  a{color:inherit}
+  .back{display:inline-block;margin-bottom:8px;text-decoration:none;font-weight:900;color:var(--soft)}
+  h1{font-weight:900;font-size:clamp(30px,8vw,44px);line-height:1.05;margin:4px 0 6px}
+  .lede{color:var(--soft);margin:0 0 18px}
+  .who{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+  .who button{all:unset;cursor:pointer;text-align:center;padding:14px 8px;border-radius:24px;background:var(--glass);border:2px solid var(--edge);box-shadow:0 4px 14px rgba(0,0,0,.06);font-weight:900}
+  .who button span{display:block;font-size:28px;line-height:1.2}
+  .who button small{display:block;font-weight:700;font-size:12px;color:var(--soft)}
+  .who button[aria-pressed="true"]{border-color:var(--p2);background:radial-gradient(circle at 50% 10%,#f3ebff,var(--glass));box-shadow:0 6px 18px rgba(108,47,224,.25)}
+  .who button:focus-visible{outline:3px solid var(--p2);outline-offset:2px}
+  .bar{height:12px;border-radius:999px;background:rgba(155,92,255,.15);overflow:hidden;margin:0 0 14px}
+  .bar i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--p1),var(--p2));transition:width .4s}
+  .step{display:flex;gap:12px;align-items:flex-start;padding:14px;margin-bottom:10px;border-radius:24px;background:var(--glass);border:1px solid var(--edge);box-shadow:0 4px 14px rgba(0,0,0,.05)}
+  .step input{appearance:none;flex:none;width:30px;height:30px;margin:2px 0 0;border-radius:50%;border:2.5px solid var(--p2);background:radial-gradient(circle at 40% 30%,#fff,#efe6ff);cursor:pointer;display:grid;place-items:center}
+  .step input:checked{background:radial-gradient(circle at 40% 30%,#c6ffd9,var(--ok));border-color:var(--ok)}
+  .step input:checked::after{content:"✓";color:#fff;font-weight:900;font-size:17px}
+  .step input:focus-visible{outline:3px solid var(--p2);outline-offset:2px}
+  .step.done .txt{opacity:.55}
+  .txt b{display:block;font-weight:900;font-size:17px}
+  .txt p{margin:4px 0 0;color:var(--soft)}
+  .txt ul{margin:6px 0 0;padding-left:18px;color:var(--soft)}
+  .go{display:inline-block;margin-top:8px;padding:10px 18px;border-radius:999px;text-decoration:none;font-weight:900;color:#fff;background:radial-gradient(circle at 50% 20%,var(--p1),var(--p2) 55%,var(--p3));box-shadow:0 5px 14px rgba(108,47,224,.35)}
+  .namebox{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+  .namebox input{flex:1;min-width:150px;padding:10px 14px;border-radius:999px;border:1.5px solid var(--edge);background:var(--glass);color:var(--ink);font:800 16px Nunito,system-ui,sans-serif}
+  .note{font-size:13px;color:var(--soft);margin-top:18px}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="/tower/text/">&larr; tower text</a>
+  <h1>new here? 🧱</h1>
+  <p class="lede">Four bricks and you're on the crew: who you are, your key, your pipes, check in. You're done when the radio hears you.</p>
+
+  <div class="who" role="group" aria-label="Who's joining">
+    <button type="button" data-w="captain" aria-pressed="false"><span>🧢</span>the Captain<small>a new device</small></button>
+    <button type="button" data-w="crew" aria-pressed="false"><span>🧑‍🔧</span>crew<small>a person</small></button>
+    <button type="button" data-w="computer" aria-pressed="false"><span>💻</span>a computer<small>a cockpit</small></button>
+  </div>
+
+  <div id="flow" hidden>
+    <div class="bar" aria-hidden="true"><i id="fill"></i></div>
+    <div id="steps"></div>
+    <p class="note">A tower code can read the whole radio, so codes only go to crew the Captain trusts. Your checkmarks are kept on this device only.</p>
+  </div>
+</main>
+<script>
+(() => {
+  const STEPS = {
+    captain: [
+      ["Who: the Captain", "<p>Same you, new screen. You keep your HEAD and BODY codes. No new key needed.</p>"],
+      ["Your key", "<p>Open the vault once on this device with your code. The code is remembered until you close the tab.</p><a class='go' href='/tower/text/'>open the vault →</a>"],
+      ["Your pipes", "<ul><li><b>Phone:</b> on tower text, Share → Add to Home Screen.</li><li><b>Computer:</b> bookmark tower text and the radar (asaaab.com/tower/).</li><li><b>Telegram:</b> install it and log in with the QR from your phone, so the radio follows you.</li></ul>"],
+      ["Check in", "<p>Name this device, then send the check-in. The crew badges it on the roster.</p>"]
+    ],
+    crew: [
+      ["Who: crew", "<p>Welcome aboard. The Captain directs, the bots do the repeat work, and humans do the whimsy: the art, the OKs, the calls only a person can make.</p>"],
+      ["Your key", "<p>Ask the Captain for your tower code. He makes one with your name on it, so the radio knows it's you. Never share it.</p>"],
+      ["Your pipes", "<ul><li>Open the vault with your code: <a href='/tower/text/'>tower text</a>.</li><li><b>Phone:</b> Share → Add to Home Screen, so the tower lives next to your apps.</li><li>Look for the purple <b>crew</b> bubble on asaaab.com any time you're lost.</li></ul>"],
+      ["Check in", "<p>Type your name, then send the check-in. You'll get a bubble party and a spot on the roster.</p>"]
+    ],
+    computer: [
+      ["Who: a computer", "<p>A cockpit, not a hangar. No repo, no git, no setup. It only needs the pipe to the radio. The radio is the shared brain.</p>"],
+      ["Your key", "<p>Use the Captain's code, or ask him for a code labeled with this computer's name, so its calls are easy to spot.</p>"],
+      ["Your pipes", "<ul><li>Bookmark tower text and the radar, and open the vault once.</li><li>Install Telegram and log in with the phone's QR.</li><li><b>Claude chats on this computer:</b> their brief is \"post what you find to tower text as a radio call.\" The crew picks it up from there.</li></ul>"],
+      ["Check in", "<p>Name this computer, then send the check-in from it.</p>"]
+    ]
+  };
+  const LS = "tower-join";
+  const load = () => { try { return JSON.parse(localStorage.getItem(LS) || "{}"); } catch (e) { return {}; } };
+  const save = s => { try { localStorage.setItem(LS, JSON.stringify(s)); } catch (e) {} };
+  let st = load();
+  const $ = id => document.getElementById(id);
+  function draw(){
+    document.querySelectorAll(".who button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.w === st.who)));
+    $("flow").hidden = !st.who; if (!st.who) return;
+    const steps = STEPS[st.who], done = st.done || {}, box = $("steps"); box.textContent = "";
+    steps.forEach(([title, html], i) => {
+      const key = st.who + i, row = document.createElement("label"); row.className = "step" + (done[key] ? " done" : "");
+      const cb = document.createElement("input"); cb.type = "checkbox"; cb.checked = !!done[key]; cb.setAttribute("aria-label", title);
+      const txt = document.createElement("div"); txt.className = "txt"; txt.innerHTML = "<b>" + title + "</b>" + html;
+      if (i === steps.length - 1) {
+        const nb = document.createElement("div"); nb.className = "namebox";
+        const inp = document.createElement("input"); inp.placeholder = st.who === "crew" ? "your name" : "name this device"; inp.value = st.name || ""; inp.maxLength = 40; inp.setAttribute("aria-label", "Name");
+        const go = document.createElement("a"); go.className = "go"; go.textContent = "send the check-in →";
+        const href = () => "/tower/text/?say=" + encodeURIComponent("CHECK IN: " + (inp.value.trim() || "new crew") + " (" + st.who + ")");
+        go.href = href(); inp.oninput = () => { st.name = inp.value; save(st); go.href = href(); };
+        nb.append(inp, go); txt.append(nb);
+      }
+      cb.onchange = () => { st.done = st.done || {}; st.done[key] = cb.checked; save(st); row.classList.toggle("done", cb.checked); bar(); try { cb.checked && navigator.vibrate && navigator.vibrate(12); } catch (e) {} };
+      row.append(cb, txt); box.append(row);
+    });
+    bar();
+  }
+  function bar(){ const steps = STEPS[st.who] || [], d = st.done || {}; const n = steps.filter((_, i) => d[st.who + i]).length; $("fill").style.width = (steps.length ? n / steps.length * 100 : 0) + "%"; }
+  document.querySelectorAll(".who button").forEach(b => b.onclick = () => { st.who = b.dataset.w; save(st); draw(); });
+  draw();
+})();
+</script>
+</body>
+</html>
