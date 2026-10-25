@@ -129,3 +129,4 @@
 - Ai is not saving us. You have to coach it to save you. And your friends and then you look around and it's all built
 - You need an internet connection, and an idea. Complaining is step 1.
 - Wow. You're really worked up about this system. How can you come up with an alternative? I'm here to help visualize and plan and build one click at a time if you need.
+- This is a computer coding in English.
