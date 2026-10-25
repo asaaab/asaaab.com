@@ -178,6 +178,37 @@ body.exposed .stamp-x{opacity:.92;transform:rotate(-9deg) scale(1)}
 .again{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
 .again button{cursor:pointer;border:2px solid var(--void-ink);background:transparent;color:var(--void-ink);font:900 15px var(--round);padding:10px 18px;border-radius:999px}
 .again button:hover{background:var(--void-ink);color:var(--void)}
+
+/* v9: the wealth cake, to scale. 1px = $1 billion */
+.wealth{background:var(--void);color:var(--void-ink);padding-block:0}
+.wealth-intro{padding-block:56px 40px}
+.wealth-intro h2{font-family:var(--shout);text-transform:uppercase;font-size:clamp(40px,9vw,80px);line-height:.92;color:var(--gloss)}
+.wealth-intro h2 span{color:var(--blood)}
+.wealth-intro p{margin-top:14px;font-family:var(--mono);font-size:14px;line-height:1.6;color:#cfcfcf;max-width:60ch}
+.wealth-intro .rule{display:inline-block;margin-top:14px;background:var(--gloss);color:var(--void);font-family:var(--mono);font-weight:600;font-size:13px;padding:4px 8px}
+.spire-candles{position:relative;height:60px}
+.spire-candles i{position:absolute;bottom:0;width:4px;height:26px;background:repeating-linear-gradient(180deg,#fff 0 4px,var(--blood) 4px 8px)}
+.spire-candles i::after{content:"";position:absolute;left:50%;top:-12px;width:8px;height:12px;transform:translateX(-50%);border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:radial-gradient(circle at 50% 70%,#fff 0 20%,var(--flame) 45%,#ff5a00 100%)}
+.cakebody{position:relative}
+.ruler{position:absolute;left:0;top:0;bottom:0;width:100%;pointer-events:none}
+.ruler span{position:absolute;left:max(8px, env(safe-area-inset-left, 0px));font-family:var(--mono);font-size:10px;color:#6c6c72;border-top:1px solid #34343a;padding-top:2px;width:56px}
+.tierrow{position:relative;display:flex;justify-content:center}
+.slab{position:relative;height:100%;background:var(--sponge) repeating-linear-gradient(180deg,transparent 0 280px,var(--frost) 280px 300px);border-left:2px solid #c99550;border-right:2px solid #c99550}
+.slab::before{content:"";position:absolute;left:-2px;right:-2px;top:0;height:46px;background:var(--icing);border-radius:6px 6px 0 0}
+.slab::after{content:"";position:absolute;left:-2px;right:-2px;top:40px;height:70px;background:radial-gradient(7px 30px at 15% 0,var(--blood) 98%,transparent),radial-gradient(6px 52px at 48% 0,var(--blood) 98%,transparent),radial-gradient(8px 36px at 80% 0,var(--blood) 98%,transparent);background-repeat:no-repeat}
+.tag-sticky{position:absolute;top:0;bottom:0;right:max(10px, env(safe-area-inset-right, 0px));width:min(46%,260px);pointer-events:none}
+.tag-sticky div{position:sticky;top:30vh;margin-top:60px;background:rgba(11,11,13,.82);border-left:4px solid var(--blood);padding:10px 12px;pointer-events:auto}
+.tag-sticky b{display:block;font-family:var(--shout);font-weight:400;font-size:28px;line-height:1;color:var(--gloss)}
+.tag-sticky span{display:block;font-family:var(--mono);font-size:12px;line-height:1.45;color:#d6d6d6;margin-top:6px}
+.tierrow.bottom .tag-sticky{position:relative;width:100%;right:auto}
+.tierrow.bottom .tag-sticky div{position:static;margin:0}
+.bottomhalf{padding-block:28px 64px}
+.bottomhalf p{font-family:var(--mono);font-size:14px;line-height:1.6;color:#d6d6d6;max-width:60ch}
+.bottomhalf p+p{margin-top:12px}
+.bottomhalf .crumb{display:inline-block;width:2px;height:2px;background:var(--blood);vertical-align:middle;margin:0 4px}
+.answer{margin-top:40px;font-family:var(--shout);text-transform:uppercase;font-size:clamp(40px,9vw,80px);line-height:.92;color:var(--blood)}
+.elevator{position:sticky;top:calc(12px + env(safe-area-inset-top, 0px));z-index:6;display:flex;justify-content:flex-start;padding-left:max(12px, env(safe-area-inset-left, 0px));height:0;overflow:visible}
+.elevator button{cursor:pointer;border:1px solid #5a5a60;background:rgba(11,11,13,.85);color:#cfcfcf;font:600 11px var(--mono);padding:6px 10px;border-radius:999px}
 </style>
 <script>if (/(^|\.)asaaab\.com$/.test(location.hostname)) { const s=document.createElement("script"); s.async=true; s.dataset.goatcounter="https://asaaab.goatcounter.com/count"; s.src="https://gc.zgo.at/count.js"; document.head.appendChild(s); }</script>
 </head>
@@ -223,6 +254,40 @@ body.exposed .stamp-x{opacity:.92;transform:rotate(-9deg) scale(1)}
       <div class="plate"></div>
     </div>
     <p class="cake-cap">in one year the richest 15 americans watched their wealth grow <b>33%, to $3.2 trillion.</b> CEOs took home <b>325 times</b> what their typical worker made. you were told to cut back on toast.</p>
+  </div>
+</section>
+
+<section class="wealth on-dark" id="wealth" aria-label="US wealth, drawn to scale as a cake">
+  <span class="stamp-x" aria-hidden="true">the scale (real)</span>
+  <div class="wrap wealth-intro">
+    <h2>this is the cake. <span>to scale.</span></h2>
+    <p>all the household wealth in america: $185 trillion. one pixel is one billion dollars. the top tier is the richest 1%. keep scrolling. no, really. keep scrolling.</p>
+    <span class="rule">1 pixel = $1,000,000,000</span>
+  </div>
+  <div class="elevator"><button type="button" id="elevator">take the elevator to the bottom ↓</button></div>
+  <div class="cakebody" id="cakebody">
+    <div class="ruler" id="ruler" aria-hidden="true"></div>
+    <div class="spire-candles" aria-hidden="true"><i style="left:calc(50% - 6px)"></i><i style="left:calc(50% + 2px)"></i></div>
+    <div class="tierrow" style="height:60300px">
+      <div class="slab" style="width:max(2%,8px)"></div>
+      <div class="tag-sticky"><div><b>$60.3 trillion</b><span>the top 1% of households. 32.5% of everything. a record.</span></div></div>
+    </div>
+    <div class="tierrow" style="height:69200px">
+      <div class="slab" style="width:18%"></div>
+      <div class="tag-sticky"><div><b>~$69.2 trillion</b><span>the next 9%. the 90th to 99th percentile.</span></div></div>
+    </div>
+    <div class="tierrow" style="height:51200px">
+      <div class="slab" style="width:80%"></div>
+      <div class="tag-sticky"><div><b>~$51.2 trillion</b><span>the 50th to 90th percentile. what's left of the middle.</span></div></div>
+    </div>
+    <div class="tierrow" style="height:4300px">
+      <div class="slab" style="width:100%"></div>
+    </div>
+  </div>
+  <div class="wrap bottomhalf" id="cakebottom">
+    <p><b style="color:var(--gloss);font-family:var(--shout);font-weight:400;font-size:30px">$4.3 trillion.</b><br>the bottom half of america. half of all households. that last little slice, the 4,300 pixels you just flew past in a blink.</p>
+    <p>your whole working life at the LA living wage, 45 years at $60,161 a year, is about $2.7 million. on this cake that's 0.0027 of a pixel. here it is, roughly: <span class="crumb" title="not to scale. it's way smaller."></span> (we had to make it bigger so you could see it)</p>
+    <p class="answer">so here's the answer.</p>
   </div>
 </section>
 <div class="drips on-ash" aria-hidden="true"></div>
@@ -300,6 +365,7 @@ body.exposed .stamp-x{opacity:.92;transform:rotate(-9deg) scale(1)}
     <ol class="moves">
       <li><b>strawman</b><p>those letters up top aren't real people. we made them up. it worked anyway, didn't it.</p></li>
       <li><b>villain</b><p>"let them eat cake." nobody can prove marie antoinette ever said it. didn't matter. you knew who the bad guy was.</p></li>
+      <li><b>the scale</b><p>the cake is not a trick. 1 pixel = $1 billion. the scroll was real. so was your thumb getting tired.</p></li>
       <li><b>fear</b><p>the receipts are real. real is scarier than anything we could invent.</p></li>
       <li><b>outrage</b><p>the smile question. you felt it in your jaw.</p></li>
       <li><b>catharsis</b><p>the swear. it felt good to read. that's the point.</p></li>
@@ -319,7 +385,7 @@ body.exposed .stamp-x{opacity:.92;transform:rotate(-9deg) scale(1)}
     <div class="links"><a href="https://asaaab.com/asaaabot/" target="_blank" rel="noopener">talk to asaaabot, free →</a><a href="https://asaaab.com/" target="_blank" rel="noopener">asaaab.com →</a></div>
     <div class="receipts">
       <p>not on sale yet. lawyer first, then a checkout. the "i'd buy this" buttons just show us who's interested. no income promises: it's an engine, not a guarantee.</p>
-      <p>made up on purpose: the letters to the editor, and the cake quote is famously unproven. real, with links: <a href="https://www.epi.org/blog/ceo-pay-surged-in-2025-ceos-are-paid-325-times-as-much-as-the-typical-worker/" target="_blank" rel="noopener">EPI on CEO pay</a> · <a href="https://www.foxla.com/news/americans-medical-debt-poll" target="_blank" rel="noopener">medical debt poll</a> · <a href="https://ips-dc.org/resource-richest-15-u-s-centi-billionaires-see-wealth-surge-33-percent-to-3-2-trillion/" target="_blank" rel="noopener">IPS on the richest 15</a> · <a href="https://www.foxcarolina.com/2026/10/01/personal-bankruptcy-filings-up-nearly-50-since-2022-analysis-finds/" target="_blank" rel="noopener">bankruptcy filings</a> · <a href="https://www.koaa.com/us-news/housing/most-gen-z-workers-struggle-to-live-on-their-own-report-finds" target="_blank" rel="noopener">gen z living alone</a> · <a href="https://www.roic.ai/news/housing-affordability-crisis-deepens-in-2026-with-gen-z-most-vulnerable-02-24-2026" target="_blank" rel="noopener">housing</a> · <a href="https://www.badcredit.org/news/personal-bankruptcies-rise-12-percent-as-financial-pressure-builds/" target="_blank" rel="noopener">bankruptcies +12%</a> · <a href="https://livingwage.mit.edu/counties/06037" target="_blank" rel="noopener">MIT living wage, LA</a></p>
+      <p>made up on purpose: the letters to the editor, and the cake quote is famously unproven. real, with links: <a href="https://www.epi.org/blog/ceo-pay-surged-in-2025-ceos-are-paid-325-times-as-much-as-the-typical-worker/" target="_blank" rel="noopener">EPI on CEO pay</a> · <a href="https://www.foxla.com/news/americans-medical-debt-poll" target="_blank" rel="noopener">medical debt poll</a> · <a href="https://ips-dc.org/resource-richest-15-u-s-centi-billionaires-see-wealth-surge-33-percent-to-3-2-trillion/" target="_blank" rel="noopener">IPS on the richest 15</a> · <a href="https://www.foxcarolina.com/2026/10/01/personal-bankruptcy-filings-up-nearly-50-since-2022-analysis-finds/" target="_blank" rel="noopener">bankruptcy filings</a> · <a href="https://www.koaa.com/us-news/housing/most-gen-z-workers-struggle-to-live-on-their-own-report-finds" target="_blank" rel="noopener">gen z living alone</a> · <a href="https://www.roic.ai/news/housing-affordability-crisis-deepens-in-2026-with-gen-z-most-vulnerable-02-24-2026" target="_blank" rel="noopener">housing</a> · <a href="https://www.badcredit.org/news/personal-bankruptcies-rise-12-percent-as-financial-pressure-builds/" target="_blank" rel="noopener">bankruptcies +12%</a> · <a href="https://livingwage.mit.edu/counties/06037" target="_blank" rel="noopener">MIT living wage, LA</a> · <a href="https://www.benzinga.com/markets/economic-data/26/10/62153752/top-one-percent-sixty-trillion-bottom-fifty-percent-wealth-middle-class" target="_blank" rel="noopener">wealth by percentile (fed data, oct 2026)</a>. the 9% and 50-90% tiers are worked out from the same report: top 10% = 70% of $185T.</p>
     </div>
   </div>
 </section>
@@ -350,6 +416,30 @@ body.exposed .stamp-x{opacity:.92;transform:rotate(-9deg) scale(1)}
     var done=function(){ cl.textContent='copied. send it to a boomer'; };
     try{ navigator.clipboard.writeText('https://whimzmaxx.com').then(done,function(){ cl.textContent='whimzmaxx.com'; }); }catch(e){ cl.textContent='whimzmaxx.com'; }
   });
+})();
+
+(function(){
+  var body=document.getElementById('cakebody'), ruler=document.getElementById('ruler');
+  if(ruler && body){
+    var total=185300, frag=document.createDocumentFragment();
+    for(var t=5;t*1000<total;t+=5){ var sp=document.createElement('span'); sp.style.top=(60+t*1000)+'px'; sp.textContent='$'+t+'T'; frag.appendChild(sp); }
+    ruler.appendChild(frag);
+  }
+  var meterP=document.querySelector('.meter p'), base=meterP?meterP.innerHTML:'';
+  var inCake=false;
+  function onScroll(){
+    if(!body||!meterP) return;
+    var r=body.getBoundingClientRect(), mid=window.innerHeight*0.5;
+    var px=mid-r.top-60;
+    if(r.top<mid && r.bottom>mid){
+      var tr=Math.max(0,px)/1000;
+      meterP.innerHTML='you have scrolled past <b>$'+tr.toFixed(1)+' trillion</b> of cake. 1 pixel = $1 billion.';
+      inCake=true;
+    } else if(inCake){ meterP.innerHTML=base; inCake=false; }
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  var el=document.getElementById('elevator');
+  if(el) el.addEventListener('click',function(){ var b=document.getElementById('cakebottom'); if(b) b.scrollIntoView({behavior:'auto'}); });
 })();
 (function(){
   ["buy-asaaab","buy-whimzmaxx"].forEach(function(id){
