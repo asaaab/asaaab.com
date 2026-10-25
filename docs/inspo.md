@@ -14,6 +14,7 @@
 - Jo Dee Messina, I'm Alright
 - Everclear, Wonderful (the first song on the whimsymaxxing playlist)
 - Barenaked Ladies, Pinch Me
+- Blues Traveler, Hook
 - Late-'90s radio pop-rock: Everclear, Sugar Ray, Sheryl Crow
 - Country-pop with a lift: Faith Hill, Jo Dee Messina
 - Open-road guitar pop: Barenaked Ladies, Del Amitri, Blues Traveler
