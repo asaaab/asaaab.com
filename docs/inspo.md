@@ -120,3 +120,4 @@
 - automation futures: learn the process, chug through it, then teach it button by button.
 - This is the bread and butter that promotes the content. The content is he he haha.
 - I want to create the structure of the future and it doesn't seem that complicated at least to me.
+- I am the whimsy. You are the maxxing.
