@@ -72,7 +72,9 @@
   .orb{position:absolute;top:44px;width:108px;height:108px;border-radius:50%;display:grid;place-items:center;text-decoration:none;
     border:3px solid var(--accent);background:radial-gradient(circle at 50% 28%,#fff,#eef3f6 55%,#d6dde3);box-shadow:0 6px 16px rgba(70,90,110,.25);
     color:var(--accent);font-weight:900;font-size:22px}
-  .orb.l{left:max(40px,6vw)}.orb.r{right:max(40px,6vw)}
+  .orb.l{left:max(40px,6vw)}
+  .orb.crew{background:radial-gradient(circle at 50% 28%,#fff,#efe6ff 55%,#d9c8ff);border-color:#9b5cff;color:#7a3ff0}
+  @media (max-width:760px){.orb.crew{position:fixed;left:16px;bottom:16px;top:auto;z-index:5;width:72px;height:72px}}   /* phones: always on screen, no scrolling to find it */.orb.r{right:max(40px,6vw)}
   .orb svg{width:46px;height:46px}
   .clock{position:absolute;left:0;right:0;top:52px;text-align:center;pointer-events:none}
   .clock b{display:block;font-size:56px;font-weight:900;letter-spacing:1px;color:#1f9ff0;line-height:1;text-shadow:0 2px 0 #fff}
@@ -116,7 +118,8 @@
     <button class="arrow r" id="next" type="button" aria-label="More channels"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
   </main>
   <div class="bar">
-    <a class="orb l" href="/" aria-label="asaaab home">asaaab</a>
+    <!-- Captain 10/25 12:47pm: "make it rly easy to click through to the employee portal ... find the human tickets as easily as possible from a new device". Was a home link to this same page. -->
+    <a class="orb l crew" href="/tower/text/" aria-label="Crew portal: human tickets">crew</a>
     <div class="clock" aria-hidden="true"><b id="time">--:--</b><span id="date"></span></div>
     <a class="orb r" href="mailto:asaaab93x@gmail.com?subject=Media%20inquiry" aria-label="Media contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3 7 12 13 21 7"/></svg></a>
   </div>
