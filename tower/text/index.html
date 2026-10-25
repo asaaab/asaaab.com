@@ -62,6 +62,26 @@
   @keyframes rise{to{transform:translateY(-110vh) translateX(var(--dx));opacity:0}}
   @keyframes pop{50%{transform:scale(1.25)}}
   @media (prefers-reduced-motion:reduce){.bub{display:none}.st.on .ck{animation:none}.bar i{transition:none}}
+  #msgs{display:flex;flex-direction:column;gap:6px;min-width:0}
+  /* the crumpled basket: done human tickets, crumpled, never emptied */
+  .basket{display:flex;align-items:flex-end;gap:12px;cursor:pointer;margin:2px 4px 8px;border:0;background:none;padding:0;font:inherit;color:inherit;text-align:left}
+  .bk{position:relative;width:74px;height:64px;flex:none}
+  .bk .can{position:absolute;left:6px;right:6px;bottom:0;height:46px;border-radius:6px 6px 16px 16px;background:repeating-linear-gradient(90deg,#c9a36b 0 6px,#b58d55 6px 9px);box-shadow:inset 0 -6px 10px rgba(0,0,0,.18),0 3px 8px rgba(0,0,0,.15)}
+  .bk .rim{position:absolute;left:2px;right:2px;bottom:42px;height:9px;border-radius:999px;background:linear-gradient(180deg,#e2c08b,#a87d45)}
+  .wad{position:absolute;width:20px;height:18px;border-radius:44% 56% 52% 48% / 55% 45% 58% 42%;background:radial-gradient(circle at 35% 30%,#fff,#e9eef2 55%,#c9d2d9);box-shadow:inset -2px -2px 3px rgba(0,0,0,.12)}
+  .basket b{font-weight:900} .basket small{display:block;color:var(--soft);font-weight:700}
+  .bklist{margin:0 4px 10px;padding:10px 14px;border-radius:18px;background:var(--glass);border:1px solid var(--edge);font-size:14px}
+  .bklist li{margin:3px 0;color:var(--soft)} .bklist li b{color:var(--ink)}
+  .crumple{animation:crumple .7s ease-in forwards}
+  @keyframes crumple{40%{transform:scale(.6) rotate(-12deg);border-radius:46%}100%{transform:translateY(60vh) scale(.08) rotate(160deg);opacity:0}}
+  /* the computer: tickets on the left, the thread on the right */
+  @media (min-width:900px){
+    main{max-width:1180px;display:grid;grid-template-columns:400px 1fr;gap:20px;align-items:start}
+    #tray{position:sticky;top:8px;max-height:calc(100vh - 150px);overflow:auto}
+    #msgs{display:flex;flex-direction:column;gap:6px;min-width:0}
+    .b{max-width:72%}
+  }
+  @media (prefers-reduced-motion:reduce){.crumple{animation:none}}
   .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
 </head>
@@ -111,7 +131,9 @@ function party(){ for (let i = 0; i < 18; i++) { const b = document.createElemen
 function drawTray(tickets){
   const tray = $("tray"); tray.textContent = ""; const local = checks();
   const open = tickets.filter(t => !(t.steps || []).every((s, i) => s.done || (local[t.file] || {})[i]));
-  const all = tickets.slice(0, 3);
+  const isDone = t => (t.steps || []).every((st, i) => st.done || (local[t.file] || {})[i]);
+  const all = tickets.filter(t => !isDone(t)).slice(0, 3);
+  const trash = tickets.filter(isDone);
   let nextShown = false;
   for (const t of all) {
     const mine = local[t.file] || {}; const steps = t.steps || [];
@@ -142,12 +164,26 @@ function drawTray(tickets){
     });
     tray.append(card);
   }
+  // the basket: every finished human ticket, crumpled. Never emptied.
+  const bt = document.createElement("button"); bt.className = "basket"; bt.type = "button"; bt.setAttribute("aria-expanded", "false");
+  const bk = document.createElement("div"); bk.className = "bk"; bk.innerHTML = '<div class="can"></div><div class="rim"></div>';
+  trash.slice(-14).forEach((t, k) => { const w = document.createElement("i"); w.className = "wad";
+    w.style.left = (8 + (k * 13) % 44) + "px"; w.style.bottom = (40 + Math.floor(k / 4) * 9) + "px"; w.style.transform = `rotate(${(k * 47) % 360}deg)`; bk.append(w); });
+  const lab = document.createElement("div"); lab.innerHTML = "<b></b><small>the crumpled basket · never emptied</small>";
+  lab.querySelector("b").textContent = trash.length === 1 ? "1 ticket crumpled" : trash.length + " tickets crumpled";
+  bt.append(bk, lab); tray.append(bt);
+  const list = document.createElement("ol"); list.className = "bklist"; list.hidden = true;
+  for (const t of [...trash].reverse()) { const li = document.createElement("li"); const b = document.createElement("b"); b.textContent = t.title || "ticket"; li.append(b, document.createTextNode(" · " + dy(t.at))); list.append(li); }
+  if (!trash.length) { const li = document.createElement("li"); li.textContent = "empty for now. finish a ticket to crumple it."; list.append(li); }
+  tray.append(list);
+  bt.onclick = () => { list.hidden = !list.hidden; bt.setAttribute("aria-expanded", String(!list.hidden)); };
 }
 function tick(t, i, on){
   const m = checks(); m[t.file] = m[t.file] || {}; if (on) m[t.file][i] = 1; else delete m[t.file][i]; saveChecks(m);
   const steps = t.steps || [], allDone = steps.every((s, k) => s.done || m[t.file][k]);
   if (on) { post("radio", {text: `✓ ${t.file} step ${i + 1}` + (allDone ? " (all done)" : "")}).catch(() => {}); if (navigator.vibrate) navigator.vibrate(18); }
-  if (on && allDone) party();
+  if (on && allDone) { party(); const card = [...document.querySelectorAll(".ht")].find(c => c.querySelector("h3") && c.querySelector("h3").textContent === (t.title || "human ticket"));
+    if (card && !matchMedia("(prefers-reduced-motion:reduce)").matches) { card.classList.add("crumple"); setTimeout(() => { last = ""; refresh().catch(() => {}); }, 800); return; } }
   last = ""; refresh().catch(() => {});
 }
 function el(cls, text){ const d = document.createElement("div"); d.className = cls; if (text != null) d.textContent = text; return d; }
