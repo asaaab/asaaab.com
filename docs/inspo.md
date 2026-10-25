@@ -109,3 +109,4 @@
 - Stickers and bullshit emotional purchases build this idea of belonging. It's as serious as you take it.
 - dont equivocate visibility with emotional availability.
 - I am building a machine that is learning exactly what to do and which bricks to lay when I'm playing around living life
+- People love limited edition. People love cheap junk. This is just branded accurately as cheap junk to support us!!
