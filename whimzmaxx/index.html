@@ -221,6 +221,7 @@ body.exposed .stamp-x{opacity:.92;transform:rotate(-9deg) scale(1)}
 .bottomhalf .crumb{display:inline-block;width:2px;height:2px;background:#ff3b3b;vertical-align:middle;margin:0 4px}
 .bottomhalf p.answer{margin-top:40px;max-width:none;font-family:var(--shout);text-transform:uppercase;font-size:clamp(40px,9vw,80px);line-height:.92;color:var(--blood)}
 .elevator{position:sticky;top:calc(12px + env(safe-area-inset-top, 0px));z-index:6;height:0;overflow:visible;padding-left:max(12px, env(safe-area-inset-left, 0px))}
+.elevator{display:flex;gap:8px;flex-wrap:wrap}
 .elevator button{cursor:pointer;border:1px solid #5a5a60;background:rgba(11,11,13,.85);color:#cfcfcf;font:600 11px var(--mono);padding:6px 10px;border-radius:999px}
 
 .longdrip{position:absolute;top:44px;width:4px;background:var(--blood);border-radius:0 0 4px 4px;z-index:1}
@@ -313,7 +314,7 @@ body.exposed .stamp-x{opacity:.92;transform:rotate(-9deg) scale(1)}
     <p>all the household wealth in america: $185 trillion. one pixel is one billion dollars. the cake up top was a cupcake. this is the real one. the needle at the top is the richest 1%. keep scrolling. no, really. keep scrolling.</p>
     <span class="rule">1 pixel = $1,000,000,000</span>
   </div>
-  <div class="elevator"><button type="button" id="elevator">take the elevator to the bottom</button></div>
+  <div class="elevator"><button type="button" id="autopilot">watch it at $1 trillion a second</button> <button type="button" id="elevator">take the elevator to the bottom</button></div>
   <div class="cakebody" id="cakebody">
     <div class="ruler" id="ruler" aria-hidden="true"></div>
     <div class="spire-candles" aria-hidden="true"><i style="left:calc(50% - 6px)"></i><i style="left:calc(50% + 2px)"></i></div>
@@ -478,6 +479,28 @@ body.exposed .stamp-x{opacity:.92;transform:rotate(-9deg) scale(1)}
   Object.keys(map).forEach(function(sel){ var el=document.querySelector(sel); if(el) el.addEventListener('click',function(){ ev(map[sel]); }); });
   var bottom=document.getElementById('cakebottom'), sent=false;
   if(bottom && 'IntersectionObserver' in window){ new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && !sent){ sent=true; ev('reached-cake-bottom'); } }); }).observe(bottom); }
+})();
+
+(function(){
+  var btn=document.getElementById('autopilot'), body=document.getElementById('cakebody'), bottom=document.getElementById('cakebottom');
+  if(!btn||!body||!bottom) return;
+  var on=false, last=0, raf=0;
+  function stop(){ on=false; cancelAnimationFrame(raf); btn.textContent='watch it at $1 trillion a second'; }
+  function step(t){
+    if(!on) return;
+    var dt=last?Math.min(64,t-last):16; last=t;
+    window.scrollBy(0, dt);  /* 1000 px per second = $1 trillion per second */
+    if(bottom.getBoundingClientRect().top < window.innerHeight*0.6){ stop(); return; }
+    raf=requestAnimationFrame(step);
+  }
+  btn.addEventListener('click',function(){
+    if(on){ stop(); return; }
+    on=true; last=0; btn.textContent='stop';
+    var r=body.getBoundingClientRect(); if(r.top>0) window.scrollBy(0, r.top);
+    raf=requestAnimationFrame(step);
+    try{ if(window.goatcounter&&goatcounter.count) goatcounter.count({path:'whimzmaxx-autopilot',event:true}); }catch(e){}
+  });
+  ['wheel','touchstart','keydown'].forEach(function(ev){ window.addEventListener(ev,function(){ if(on) stop(); },{passive:true}); });
 })();
 (function(){
   ["buy-asaaab","buy-whimzmaxx"].forEach(function(id){
