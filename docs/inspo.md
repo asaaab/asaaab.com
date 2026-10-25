@@ -115,3 +115,5 @@
 - It's all corp a ok if you write it down clearly enough
 - My investment is just in my vision. If others wanna help that's fine but my goal is the oxygen mask.
 - the road is written down.
+- an idiot in motion.
+- do one person or two people that know nothing know less
