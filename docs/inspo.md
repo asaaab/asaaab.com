@@ -130,3 +130,4 @@
 - You need an internet connection, and an idea. Complaining is step 1.
 - Wow. You're really worked up about this system. How can you come up with an alternative? I'm here to help visualize and plan and build one click at a time if you need.
 - This is a computer coding in English.
+- What is the duct tape solution I'm begging for and how can I build a duct tape factory
