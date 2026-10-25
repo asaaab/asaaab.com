@@ -108,3 +108,4 @@
 - Everyone should get this opportunity. Asaaab is our ticket outta here.
 - Stickers and bullshit emotional purchases build this idea of belonging. It's as serious as you take it.
 - dont equivocate visibility with emotional availability.
+- I am building a machine that is learning exactly what to do and which bricks to lay when I'm playing around living life
