@@ -117,3 +117,4 @@
 - the road is written down.
 - an idiot in motion.
 - do one person or two people that know nothing know less
+- automation futures: learn the process, chug through it, then teach it button by button.
