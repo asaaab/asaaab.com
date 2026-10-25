@@ -4,64 +4,117 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="whimzmaxx believz gen z dezervez the frutiger aero future we were promised.">
+<meta property="og:title" content="whimzmaxx">
+<meta property="og:description" content="the young people dont wanna work anymore. you just got marketed to.">
 <title>whimzmaxx</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Nunito:ital,wght@0,400;0,700;0,900;1,700;1,900&family=IBM+Plex+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Nunito:ital,wght@0,400;0,700;0,900;1,700;1,900&family=IBM+Plex+Mono:wght@400;600&family=Anton&display=swap">
 <style>
-/* layout: one long scroll that changes worlds: yellowed newsprint, grey headlines, black, then a glossy aero sky */
+/* layout: one long scroll that changes worlds: yellowed newsprint, a cake on black, blood-red receipts, the void, then a glossy aero sky, then the reveal */
 :root{
   color-scheme: light;
   --paper:#ece3cc; --ink:#2b2418; --fade:#7a6e57;
-  --ash:#3a3d42; --ash-ink:#d9dbdf; --ash-dim:#9aa0a8;
+  --blood:#b0060f; --blood-deep:#5a0207; --blood-ink:#ffe9e6;
+  --ash:#1b1415; --ash-ink:#eadfdf; --ash-dim:#b39a9a;
   --void:#0b0b0d; --void-ink:#f3f3f3;
+  --frost:#fff6e8; --icing:#f7c6d9; --sponge:#e9b872; --flame:#ffb300;
   --sky-top:#4fb3f0; --sky-mid:#bfe9ff; --grass:#7fd36b; --aero-ink:#06324f; --gloss:#ffffff; --aqua:#10a6d8;
   --serif:"Old Standard TT", "Times New Roman", Georgia, serif;
+  --shout:"Anton", Impact, "Arial Narrow", sans-serif;
   --round:"Nunito", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   --mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--void);color:var(--void-ink);font-family:var(--round)}
-.wrap{max-width:720px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
-section{padding-block:72px}
+.wrap{max-width:760px;margin:0 auto;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+section{padding-block:72px;position:relative}
 h1,h2,h3{text-wrap:balance;margin:0}
 p{margin:0}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--aqua);outline-offset:3px}
 
+/* ticker */
+.ticker{background:var(--blood);color:var(--blood-ink);font-family:var(--mono);font-size:13px;letter-spacing:.04em;overflow:hidden;white-space:nowrap;padding-block:9px;border-bottom:2px solid var(--blood-deep)}
+.ticker .run{display:inline-block;padding-left:100%}
+.ticker b{font-weight:600;margin-right:6px}
+.ticker span{margin-right:42px}
+@media (prefers-reduced-motion:no-preference){.ticker .run{animation:tick 38s linear infinite}@keyframes tick{to{transform:translateX(-100%)}}}
+@media (prefers-reduced-motion:reduce){.ticker{white-space:normal}.ticker .run{padding-left:16px}}
+
 /* 1. the boomer page */
 .boomer{background:var(--paper);color:var(--ink);font-family:var(--serif)}
 .masthead{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-bottom:3px double var(--ink);padding-bottom:8px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--fade)}
+.boomer h1{font-size:clamp(44px,10vw,88px);line-height:.96;font-weight:700;margin-top:28px}
 .stack{display:inline-flex;flex-direction:column;align-items:flex-start;vertical-align:top}
-.ever{font-size:.42em;font-weight:400;font-style:italic;color:var(--fade);text-decoration-thickness:2px;margin-top:.1em}
-.boomer h1{font-size:clamp(40px,9vw,76px);line-height:.98;font-weight:700;margin-top:28px}
+.ever{font-size:.42em;font-weight:400;font-style:italic;color:var(--blood);text-decoration-thickness:3px;text-decoration-color:var(--blood);margin-top:.1em}
 .letters{display:grid;gap:18px;margin-top:36px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
 .letter{border-top:1px solid var(--ink);padding-top:10px;font-size:18px;line-height:1.45}
 .letter i{display:block;font-size:13px;color:var(--fade);margin-top:6px}
 .boomer .note{margin-top:32px;font-size:13px;color:var(--fade);font-style:italic}
 
-/* 2. the headlines */
+/* drips: the edge between worlds */
+.drips{height:56px;background:
+  radial-gradient(14px 30px at 6% 0,var(--blood) 98%,transparent) ,
+  radial-gradient(10px 44px at 19% 0,var(--blood) 98%,transparent),
+  radial-gradient(18px 24px at 33% 0,var(--blood) 98%,transparent),
+  radial-gradient(9px 52px at 47% 0,var(--blood) 98%,transparent),
+  radial-gradient(16px 34px at 61% 0,var(--blood) 98%,transparent),
+  radial-gradient(11px 46px at 74% 0,var(--blood) 98%,transparent),
+  radial-gradient(15px 28px at 88% 0,var(--blood) 98%,transparent),
+  radial-gradient(9px 40px at 97% 0,var(--blood) 98%,transparent),
+  linear-gradient(var(--blood) 0 10px,transparent 10px);
+  background-repeat:no-repeat}
+.drips.on-paper{background-color:var(--paper)}
+.drips.on-void{background-color:var(--void)}
+.drips.on-ash{background-color:var(--ash)}
+
+/* 2. let them eat cake */
+.cake-sec{background:var(--void);color:var(--void-ink);text-align:center;overflow:hidden}
+.eat{font-family:var(--shout);font-size:clamp(64px,17vw,170px);line-height:.86;text-transform:uppercase;color:var(--blood);letter-spacing:.01em}
+.eat em{display:block;font-family:var(--serif);font-style:italic;text-transform:none;font-size:.32em;color:var(--void-ink);letter-spacing:0;margin-top:14px}
+.cake{position:relative;width:min(300px,78vw);margin:44px auto 0;height:240px}
+.cake .tier{position:absolute;left:50%;transform:translateX(-50%);border-radius:10px;background:linear-gradient(180deg,var(--icing) 0 22%,var(--sponge) 22% 58%,var(--frost) 58% 66%,var(--sponge) 66%)}
+.cake .t1{width:100%;height:96px;bottom:0}
+.cake .t2{width:72%;height:76px;bottom:96px}
+.cake .t3{width:46%;height:58px;bottom:172px;background:linear-gradient(180deg,var(--icing) 0 30%,var(--sponge) 30%)}
+.cake .plate{position:absolute;left:-8%;right:-8%;bottom:-12px;height:14px;border-radius:50%;background:#d8d8d8}
+.cake .drip{position:absolute;top:0;width:12px;border-radius:0 0 8px 8px;background:var(--blood)}
+.candle{position:absolute;bottom:230px;width:8px;height:34px;border-radius:2px;background:repeating-linear-gradient(180deg,#fff 0 6px,var(--blood) 6px 12px)}
+.candle::after{content:"";position:absolute;left:50%;top:-16px;width:10px;height:16px;transform:translateX(-50%);border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:radial-gradient(circle at 50% 70%,#fff 0 20%,var(--flame) 45%,#ff5a00 100%)}
+@media (prefers-reduced-motion:no-preference){.candle::after{animation:flick .9s ease-in-out infinite alternate}@keyframes flick{to{transform:translateX(-50%) scale(.85,1.12) rotate(4deg)}}}
+.cake-cap{margin-top:40px;font-family:var(--mono);font-size:15px;line-height:1.6;color:#cfcfcf;max-width:56ch;margin-left:auto;margin-right:auto}
+.cake-cap b{color:var(--blood-ink);background:var(--blood);padding:0 4px}
+
+/* 3. receipts */
 .ash{background:var(--ash);color:var(--ash-ink)}
 .kicker{font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--ash-dim)}
-.heads{display:grid;gap:12px;margin-top:22px}
-.head{display:block;text-decoration:none;font-family:var(--serif);font-size:clamp(20px,4.4vw,28px);line-height:1.2;padding:14px 0;border-bottom:1px solid #565a61}
+.nums{display:grid;gap:14px;margin-top:22px;grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+.num{display:block;text-decoration:none;border-top:4px solid var(--blood);padding-top:10px}
+.num strong{display:block;font-family:var(--shout);font-size:clamp(46px,10vw,72px);line-height:1;color:var(--gloss);font-weight:400;font-variant-numeric:tabular-nums}
+.num span{display:block;font-size:14px;line-height:1.4;margin-top:6px}
+.num i{display:block;font-family:var(--mono);font-style:normal;font-size:11px;color:var(--ash-dim);margin-top:6px}
+.heads{display:grid;gap:4px;margin-top:48px}
+.head{display:block;text-decoration:none;font-family:var(--serif);font-size:clamp(20px,4.4vw,28px);line-height:1.2;padding:14px 0;border-bottom:1px solid #4a3a3b}
 .head span{display:block;font-family:var(--mono);font-size:11px;color:var(--ash-dim);margin-top:6px;letter-spacing:.06em}
 .head:hover{color:var(--gloss)}
-.nails{margin-top:44px;font-family:var(--mono);font-size:16px;line-height:1.6;color:var(--ash-ink);max-width:60ch}
+.nails{margin-top:56px;font-family:var(--shout);font-size:clamp(30px,6.6vw,54px);line-height:1.04;text-transform:uppercase;color:var(--gloss)}
+.nails em{font-style:normal;color:var(--blood);background:var(--gloss);padding:0 .12em}
 
-/* 3 + 4. the question, the turn */
-.void{background:var(--void);color:var(--void-ink);text-align:left}
-.question{font-family:var(--serif);font-style:italic;font-size:clamp(28px,6vw,48px);line-height:1.15}
-.turn{margin-top:56px;font-family:var(--round);font-weight:900;font-size:clamp(34px,8vw,66px);line-height:1.02;letter-spacing:-.01em}
-.turn small{display:block;font-weight:700;font-size:clamp(18px,3.6vw,24px);margin-top:16px;color:#bdbdbd;letter-spacing:0}
+/* 4. the question, the turn */
+.void{background:var(--void);color:var(--void-ink)}
+.question{font-family:var(--serif);font-style:italic;font-size:clamp(30px,6.4vw,52px);line-height:1.15}
+.smile{display:inline-block;font-style:normal;font-family:var(--round);font-weight:900;color:#ffd400}
+.turn{margin-top:64px;font-family:var(--shout);text-transform:uppercase;font-size:clamp(48px,12vw,120px);line-height:.9;color:var(--blood)}
+.turn small{display:block;font-family:var(--round);text-transform:none;font-weight:900;font-size:clamp(22px,4.4vw,32px);line-height:1.2;margin-top:22px;color:var(--void-ink)}
 
 /* 5. the aero future */
-.aero{position:relative;overflow:hidden;color:var(--aero-ink);background:linear-gradient(180deg,var(--sky-top) 0%,var(--sky-mid) 62%,#e8fbff 74%,var(--grass) 74.2%,#4fae45 100%)}
+.aero{overflow:hidden;color:var(--aero-ink);background:linear-gradient(180deg,var(--sky-top) 0%,var(--sky-mid) 62%,#e8fbff 74%,var(--grass) 74.2%,#4fae45 100%)}
 .bubble{position:absolute;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.95) 0 9%,rgba(255,255,255,.35) 18%,rgba(255,255,255,.08) 52%,rgba(255,255,255,.45) 70%,rgba(255,255,255,0) 72%);box-shadow:inset 0 0 18px rgba(255,255,255,.55)}
 .b1{width:180px;height:180px;left:-40px;top:40px}.b2{width:90px;height:90px;right:8%;top:120px}.b3{width:46px;height:46px;left:58%;top:30px}.b4{width:130px;height:130px;right:-30px;bottom:140px}.b5{width:60px;height:60px;left:12%;bottom:220px}
 @media (prefers-reduced-motion:no-preference){.bubble{animation:float 9s ease-in-out infinite}.b2{animation-delay:-3s}.b4{animation-delay:-5s}.b5{animation-delay:-7s}@keyframes float{50%{transform:translateY(-14px)}}}
 .aero .wrap{position:relative}
-.believz{font-weight:900;font-size:clamp(34px,7.6vw,62px);line-height:1.02;color:var(--gloss);text-shadow:0 2px 0 rgba(6,50,79,.35),0 10px 30px rgba(6,50,79,.25)}
+.believz{font-weight:900;font-size:clamp(36px,8vw,66px);line-height:1.02;color:var(--gloss);text-shadow:0 2px 0 rgba(6,50,79,.35),0 10px 30px rgba(6,50,79,.25)}
 .believz em{font-style:italic}
 .ios{margin-top:16px;font-weight:700;font-size:18px;color:var(--aero-ink)}
 .glass{margin-top:44px;background:linear-gradient(180deg,rgba(255,255,255,.78),rgba(255,255,255,.45));border:1px solid rgba(255,255,255,.9);border-radius:28px;padding:24px;box-shadow:0 12px 40px rgba(6,50,79,.18),inset 0 1px 0 #fff;backdrop-filter:blur(8px)}
@@ -70,8 +123,6 @@ a{color:inherit}
 .parts{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding:0;list-style:none}
 .parts li{border-radius:999px;padding:7px 14px;font-weight:700;font-size:14px;background:linear-gradient(180deg,#fff,#d9f3ff);border:1px solid #9fdcf5;box-shadow:inset 0 -2px 0 rgba(16,166,216,.18)}
 .stamp{margin-top:14px;font-family:var(--mono);font-size:12px;color:#2b5b78}
-
-/* the two badges */
 .badges{display:grid;gap:16px;margin-top:22px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
 .badge{border-radius:24px;padding:22px;background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(225,246,255,.8));border:1px solid #fff;box-shadow:0 8px 26px rgba(6,50,79,.16);display:flex;flex-direction:column;gap:10px}
 .badge h3{font-weight:900;font-size:24px}
@@ -85,16 +136,46 @@ a{color:inherit}
 .orb[aria-pressed="true"]{background:linear-gradient(180deg,#7fd36b,#3d9a33)}
 .honest{margin-top:16px;font-size:15px;line-height:1.5}
 .honest b{font-weight:900}
-.mop{margin-top:30px;font-weight:900;font-size:clamp(22px,4.6vw,30px);color:var(--aero-ink)}
-.truth{margin-top:8px;font-size:18px}
+
+/* 6. the reveal */
+.reveal{background:var(--void);color:var(--void-ink)}
+.gotcha{font-family:var(--shout);text-transform:uppercase;font-size:clamp(46px,11vw,104px);line-height:.9;color:var(--gloss)}
+.gotcha span{color:var(--blood)}
+.moves{margin-top:40px;display:grid;gap:0;padding:0;list-style:none;counter-reset:mv}
+.moves li{display:grid;grid-template-columns:7.5em 1fr;gap:14px;align-items:baseline;padding:14px 0;border-top:1px solid #2a2a2e;counter-increment:mv}
+.moves li b{font-family:var(--mono);font-weight:600;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--blood)}
+.moves li b::before{content:counter(mv) ". "}
+.moves li p{font-size:17px;line-height:1.45;min-width:0}
+@media (max-width:460px){.moves li{grid-template-columns:1fr;gap:4px}}
+.frame{margin-top:56px;font-family:var(--serif);font-size:clamp(26px,5.4vw,42px);line-height:1.18}
+.frame em{font-style:italic;color:#ffd400}
+.enthy{margin-top:28px;font-family:var(--mono);font-size:14px;line-height:1.6;color:#bdbdbd;max-width:62ch}
+.enthy b{color:var(--void-ink)}
+
+/* 7. the floor */
+.floor{background:linear-gradient(180deg,var(--grass),#2f7a28);color:#0b2a0f}
+.mop{font-family:var(--shout);text-transform:uppercase;font-size:clamp(40px,9vw,84px);line-height:.92;color:var(--gloss);text-shadow:0 3px 0 rgba(0,0,0,.25)}
+.truth{margin-top:18px;font-size:clamp(20px,4vw,26px);font-weight:700;color:#0b2a0f}
 .truth em{font-style:italic;font-weight:900}
-.links{margin-top:26px;display:flex;flex-wrap:wrap;gap:14px;font-weight:700}
-.fine{margin-top:34px;font-family:var(--mono);font-size:11px;line-height:1.6;color:#123d26}
+.links{margin-top:26px;display:flex;flex-wrap:wrap;gap:14px;font-weight:900}
+.receipts{margin-top:40px;font-family:var(--mono);font-size:11px;line-height:1.7;color:#0b2a0f}
+.receipts a{text-decoration:underline}
+.receipts p+p{margin-top:8px}
 </style>
 <script>if (/(^|\.)asaaab\.com$/.test(location.hostname)) { const s=document.createElement("script"); s.async=true; s.dataset.goatcounter="https://asaaab.goatcounter.com/count"; s.src="https://gc.zgo.at/count.js"; document.head.appendChild(s); }</script>
 </head>
 <body>
 
+
+<div class="ticker" role="marquee" aria-label="real numbers">
+  <div class="run">
+    <span><b>325×</b>what CEOs were paid vs the typical worker in 2025</span>
+    <span><b>100,000,000</b>Americans carrying medical debt</span>
+    <span><b>+33%</b>the richest 15 US centibillionaires, to $3.2 trillion</span>
+    <span><b>~+50%</b>personal bankruptcy filings since 2022</span>
+    <span><b>$28.92</b>an hour: the LA living wage for one adult</span>
+  </div>
+</div>
 
 <section class="boomer">
   <div class="wrap">
@@ -109,25 +190,48 @@ a{color:inherit}
     <p class="note">and allllll the boomer nonsense. keep scrolling.</p>
   </div>
 </section>
+<div class="drips on-void" aria-hidden="true"></div>
+
+<section class="cake-sec">
+  <div class="wrap">
+    <h2 class="eat">let them eat cake.<em>said the people who already ate</em></h2>
+    <div class="cake" aria-hidden="true">
+      <div class="tier t1"><span class="drip" style="left:12%;height:44px"></span><span class="drip" style="left:40%;height:28px"></span><span class="drip" style="left:71%;height:52px"></span></div>
+      <div class="tier t2"><span class="drip" style="left:20%;height:36px"></span><span class="drip" style="left:62%;height:24px"></span></div>
+      <div class="tier t3"><span class="drip" style="left:45%;height:30px"></span></div>
+      <span class="candle" style="left:40%"></span><span class="candle" style="left:49%"></span><span class="candle" style="left:58%"></span>
+      <div class="plate"></div>
+    </div>
+    <p class="cake-cap">in one year the richest 15 americans watched their wealth grow <b>33%, to $3.2 trillion.</b> CEOs took home <b>325 times</b> what their typical worker made. you were told to cut back on toast.</p>
+  </div>
+</section>
+<div class="drips on-ash" aria-hidden="true"></div>
 
 <section class="ash">
   <div class="wrap">
-    <p class="kicker">meanwhile, actual headlines</p>
+    <p class="kicker">the receipts. every one is real. tap it.</p>
+    <div class="nums">
+      <a class="num" href="https://www.epi.org/blog/ceo-pay-surged-in-2025-ceos-are-paid-325-times-as-much-as-the-typical-worker/" target="_blank" rel="noopener"><strong>325×</strong><span>CEO pay vs the typical worker, 2025</span><i>economic policy institute</i></a>
+      <a class="num" href="https://www.foxla.com/news/americans-medical-debt-poll" target="_blank" rel="noopener"><strong>100M</strong><span>americans carrying medical debt</span><i>fox la, on the kff poll</i></a>
+      <a class="num" href="https://ips-dc.org/resource-richest-15-u-s-centi-billionaires-see-wealth-surge-33-percent-to-3-2-trillion/" target="_blank" rel="noopener"><strong>$3.2T</strong><span>held by the richest 15 americans, up 33%</span><i>institute for policy studies</i></a>
+      <a class="num" href="https://www.foxcarolina.com/2026/10/01/personal-bankruptcy-filings-up-nearly-50-since-2022-analysis-finds/" target="_blank" rel="noopener"><strong>~50%</strong><span>more personal bankruptcies than 2022</span><i>fox carolina, oct 2026</i></a>
+    </div>
     <div class="heads">
       <a class="head" href="https://www.foxcarolina.com/2026/10/01/personal-bankruptcy-filings-up-nearly-50-since-2022-analysis-finds/" target="_blank" rel="noopener">Personal bankruptcy filings up nearly 50% since 2022, analysis finds<span>fox carolina · oct 1, 2026</span></a>
       <a class="head" href="https://www.koaa.com/us-news/housing/most-gen-z-workers-struggle-to-live-on-their-own-report-finds" target="_blank" rel="noopener">Most Gen Z workers struggle to live on their own, report finds<span>koaa · 2026</span></a>
+      <a class="head" href="https://www.epi.org/blog/ceo-pay-surged-in-2025-ceos-are-paid-325-times-as-much-as-the-typical-worker/" target="_blank" rel="noopener">CEO pay surged in 2025: CEOs are paid 325 times as much as the typical worker<span>economic policy institute · 2026</span></a>
       <a class="head" href="https://www.roic.ai/news/housing-affordability-crisis-deepens-in-2026-with-gen-z-most-vulnerable-02-24-2026" target="_blank" rel="noopener">Housing affordability crisis deepens in 2026 with Gen Z most vulnerable<span>roic · feb 24, 2026</span></a>
+      <a class="head" href="https://www.foxla.com/news/americans-medical-debt-poll" target="_blank" rel="noopener">100 million Americans carry medical debt with some owing more than $10K, poll finds<span>fox la</span></a>
       <a class="head" href="https://www.badcredit.org/news/personal-bankruptcies-rise-12-percent-as-financial-pressure-builds/" target="_blank" rel="noopener">Personal bankruptcies rise 12% as financial pressure builds<span>badcredit.org</span></a>
-      <a class="head" href="https://www.baystatebanner.com/2025/01/15/advocates-cheer-new-credit-reporting-rule-but-want-more-action-on-medical-debt" target="_blank" rel="noopener">Advocates cheer new credit reporting rule but want more action on medical debt<span>bay state banner · jan 15, 2025</span></a>
-      <a class="head" href="https://newsweek.com/map-shows-bankruptcies-soaring-11997428" target="_blank" rel="noopener">Map shows bankruptcies soaring<span>newsweek</span></a>
     </div>
-    <p class="nails">its peoples complaints about systemic violence being taken as nails to pound down rather than evidence the floor is gonna explode.</p>
+    <p class="nails">its peoples complaints about systemic violence being taken as nails to pound down rather than evidence <em>the floor is gonna explode.</em></p>
   </div>
 </section>
+<div class="drips on-void" aria-hidden="true"></div>
 
 <section class="void">
   <div class="wrap">
-    <p class="question">and gen z is asked to plaster a smile on their face or get suspended?</p>
+    <p class="question">and gen z is asked to plaster a <span class="smile">:)</span> on their face or get suspended?</p>
     <p class="turn">fuckin fire me. im sick today. of this place.<small>lifes too short not to follow your dreams.</small></p>
   </div>
 </section>
@@ -157,19 +261,42 @@ a{color:inherit}
       </article>
       <article class="badge w">
         <h3>whimzmaxx</h3>
-        <p class="tag">the truth in italicz.</p>
+        <p class="tag">the truth in italicz. your socialist optimism chatbot subscription.</p>
         <p class="price">$28.92 <small>a month</small></p>
         <p class="what">one hour at the living wage, every month. the exact same materials, in the marketing font.</p>
         <button class="orb" id="buy-whimzmaxx" type="button" aria-pressed="false">i'd buy this</button>
       </article>
     </div>
     <p class="honest"><b>same car, two badges.</b> 8 months of whimzmaxx costs the same as one day of asaaab. after that youre paying for the font, and we told you. is one day of today at a living wage worth your dreams? i took a day off work to make the product.</p>
+  </div>
+</section>
 
+<section class="reveal">
+  <div class="wrap">
+    <h2 class="gotcha">you just got <span>marketed to.</span></h2>
+    <ol class="moves">
+      <li><b>strawman</b><p>those letters up top aren't real people. we made them up. it worked anyway, didn't it.</p></li>
+      <li><b>villain</b><p>"let them eat cake." nobody can prove marie antoinette ever said it. didn't matter. you knew who the bad guy was.</p></li>
+      <li><b>fear</b><p>the receipts are real. real is scarier than anything we could invent.</p></li>
+      <li><b>outrage</b><p>the smile question. you felt it in your jaw.</p></li>
+      <li><b>catharsis</b><p>the swear. it felt good to read. that's the point.</p></li>
+      <li><b>the dream</b><p>bubbles, sky, grass, a youtube app from before the update. nostalgia is a sales tool.</p></li>
+      <li><b>solution</b><p>$28.92 a month. right when you wanted one.</p></li>
+    </ol>
+    <p class="frame">so you see how easy it is to frame the issue? <em>capitalists frame issues and sell solutions, so here's your socialist optimism chatbot subscription.</em></p>
+    <p class="enthy"><b>the marketing is the enthymeme.</b> an enthymeme is an argument with a step left out, so you fill it in yourself and it feels like your idea. every ad you've ever seen works this way. this page is the ai generated place for marketing slop to exist, on purpose, with the receipts showing. now you know the trick. the free version is right there.</p>
+  </div>
+</section>
+
+<section class="floor">
+  <div class="wrap">
     <p class="mop">workers owning the means of production.</p>
     <p class="truth">asaaab is the truth. <em>whimzmaxx is the truth in italicz.</em></p>
     <div class="links"><a href="https://asaaab.com/asaaabot/" target="_blank" rel="noopener">talk to asaaabot, free →</a><a href="https://asaaab.com/" target="_blank" rel="noopener">asaaab.com →</a></div>
-
-    <p class="fine">not on sale yet. lawyer first, then a checkout. the "i'd buy this" buttons just show us who's interested. headlines link to their sources. the letters up top are the stereotype, not real people. no income promises: it's an engine, not a guarantee.</p>
+    <div class="receipts">
+      <p>not on sale yet. lawyer first, then a checkout. the "i'd buy this" buttons just show us who's interested. no income promises: it's an engine, not a guarantee.</p>
+      <p>made up on purpose: the letters to the editor, and the cake quote is famously unproven. real, with links: <a href="https://www.epi.org/blog/ceo-pay-surged-in-2025-ceos-are-paid-325-times-as-much-as-the-typical-worker/" target="_blank" rel="noopener">EPI on CEO pay</a> · <a href="https://www.foxla.com/news/americans-medical-debt-poll" target="_blank" rel="noopener">medical debt poll</a> · <a href="https://ips-dc.org/resource-richest-15-u-s-centi-billionaires-see-wealth-surge-33-percent-to-3-2-trillion/" target="_blank" rel="noopener">IPS on the richest 15</a> · <a href="https://www.foxcarolina.com/2026/10/01/personal-bankruptcy-filings-up-nearly-50-since-2022-analysis-finds/" target="_blank" rel="noopener">bankruptcy filings</a> · <a href="https://www.koaa.com/us-news/housing/most-gen-z-workers-struggle-to-live-on-their-own-report-finds" target="_blank" rel="noopener">gen z living alone</a> · <a href="https://www.roic.ai/news/housing-affordability-crisis-deepens-in-2026-with-gen-z-most-vulnerable-02-24-2026" target="_blank" rel="noopener">housing</a> · <a href="https://www.badcredit.org/news/personal-bankruptcies-rise-12-percent-as-financial-pressure-builds/" target="_blank" rel="noopener">bankruptcies +12%</a> · <a href="https://livingwage.mit.edu/counties/06037" target="_blank" rel="noopener">MIT living wage, LA</a></p>
+    </div>
   </div>
 </section>
 
