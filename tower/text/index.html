@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b2c42">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="tower text">
+<title>tower text</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap">
+<style>
+  /* tower text: the radio as a text thread (Captain whimZ, 10/25: "a message of text"). Same tower, same code. */
+  :root{--sky:#eaf6fb;--sky2:#cdeeff;--glass:rgba(255,255,255,.82);--edge:rgba(16,166,216,.25);--ink:#0d2b3e;--soft:#4f7790;
+    --me1:#4fc3ff;--me2:#1677e8;--ok:#38b26b;--hold:#d930c9;--body:Nunito,system-ui,sans-serif;color-scheme:light}
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sky:#061826;--sky2:#0b2c42;--glass:rgba(12,40,60,.85);--edge:rgba(120,200,255,.25);--ink:#e3f3fc;--soft:#93bdd6;color-scheme:dark}}
+  :root[data-theme="dark"]{--sky:#061826;--sky2:#0b2c42;--glass:rgba(12,40,60,.85);--edge:rgba(120,200,255,.25);--ink:#e3f3fc;--soft:#93bdd6;color-scheme:dark}
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0;background:radial-gradient(120% 80% at 50% -10%,var(--sky2),var(--sky) 60%) fixed,var(--sky);color:var(--ink);font:16px/1.4 var(--body);display:flex;flex-direction:column}
+  header{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:10px;padding:max(10px,env(safe-area-inset-top)) 16px 10px;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--edge)}
+  header a{color:inherit;text-decoration:none;font-weight:900}
+  .av{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#c58bff 40%,#5b2bd6);box-shadow:inset 0 -3px 6px rgba(0,0,0,.2)}
+  header b{font-weight:900;font-size:17px;display:block;line-height:1.1} header small{color:var(--soft);font-weight:700;font-size:12px}
+  main{flex:1;overflow-y:auto;padding:12px 16px 8px;display:flex;flex-direction:column;gap:6px;max-width:720px;width:100%;margin:0 auto}
+  .day{align-self:center;font-size:12px;font-weight:800;color:var(--soft);margin:10px 0 4px}
+  .b{max-width:82%;padding:9px 14px;border-radius:22px;white-space:pre-wrap;word-wrap:break-word;overflow-wrap:anywhere}
+  .me{align-self:flex-end;color:#fff;background:linear-gradient(180deg,var(--me1),var(--me2));border-bottom-right-radius:8px;box-shadow:inset 0 1px 0 rgba(255,255,255,.5),0 3px 10px rgba(22,119,232,.25)}
+  .them{align-self:flex-start;background:var(--glass);border:1px solid var(--edge);border-bottom-left-radius:8px;box-shadow:0 3px 10px rgba(0,0,0,.06)}
+  .meta{font-size:11px;font-weight:800;color:var(--soft);padding:0 6px}
+  .meta.r{align-self:flex-end} .meta.l{align-self:flex-start}
+  .chip{display:inline-block;margin-left:6px;padding:1px 8px;border-radius:999px;color:#fff;background:var(--c,#8aa3b0)}
+  .qok{align-self:flex-start;margin:2px 0 6px 6px;border:0;border-radius:999px;padding:6px 16px;font:900 14px var(--body);color:#fff;background:linear-gradient(180deg,#5fe08f,var(--ok));cursor:pointer}
+  .typing{align-self:flex-start;color:var(--soft);font-style:italic;font-size:14px;padding:0 6px}
+  form{display:flex;gap:8px;align-items:flex-end;padding:8px 16px max(10px,env(safe-area-inset-bottom));background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--edge)}
+  textarea{flex:1;resize:none;max-height:140px;min-height:40px;border-radius:22px;border:1px solid var(--edge);padding:9px 14px;font:16px/1.35 var(--body);background:var(--sky);color:var(--ink)}
+  .send{width:40px;height:40px;flex:none;border:0;border-radius:50%;cursor:pointer;color:#fff;background:linear-gradient(180deg,var(--me1),var(--me2));display:grid;place-items:center}
+  .send:disabled{opacity:.5}
+  #gate{margin:auto;padding:24px 16px;max-width:360px;width:100%;text-align:center}
+  #gate input{width:100%;margin:12px 0;padding:12px 16px;border-radius:999px;border:1px solid var(--edge);font:18px var(--body);text-align:center;background:var(--glass);color:var(--ink)}
+  #gate button{border:0;border-radius:999px;padding:10px 26px;font:900 16px var(--body);color:#fff;background:linear-gradient(180deg,var(--me1),var(--me2));cursor:pointer}
+  #gate p{color:var(--soft);font-weight:700}
+  .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<header>
+  <a href="/tower/" aria-label="back to the tower">&larr;</a>
+  <div class="av" aria-hidden="true"></div>
+  <div><b>tower</b><small id="sub">clearing in…</small></div>
+</header>
+
+<div id="gate">
+  <h1 style="font-weight:900;margin:0">tower text</h1>
+  <p>Same tower, as a text thread. Your code, please.</p>
+  <form id="pinform" style="display:block;background:none;border:0;padding:0">
+    <label for="pin" class="vh">Tower code</label>
+    <input id="pin" type="password" autocomplete="current-password" inputmode="text">
+    <button type="submit">clear in</button>
+  </form>
+  <p id="pinstate" role="status"></p>
+</div>
+
+<main id="thread" hidden aria-live="polite"></main>
+<form id="say" hidden>
+  <label for="msg" class="vh">Message</label>
+  <textarea id="msg" rows="1" placeholder="text the tower"></textarea>
+  <button class="send" id="send" type="submit" aria-label="Send"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
+</form>
+
+<script>
+const $ = id => document.getElementById(id);
+const API = "https://pit.asaaab.com/tower/";
+let code = ""; try { code = sessionStorage.getItem("tower-code") || ""; } catch (e) {}
+const post = (p, b) => fetch(API + p, {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({code, ...b})}).then(async r => ({ok: r.ok, status: r.status, j: await r.json().catch(() => ({}))}));
+const ST = {sent:["waiting","#8aa3b0"], decoded:["decoded","#1f9ff0"], routed:["routed","#48b827"], done:["done","#48b827"], needs_ok:["needs your ok","#d930c9"], parked:["parked","#ffb02e"], flagged:["needs your read","#ff7a00"]};
+const tm = t => { try { return new Date(t).toLocaleTimeString("en-US",{hour:"numeric",minute:"2-digit"}); } catch (e) { return ""; } };
+const dy = t => { try { return new Date(t).toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"}); } catch (e) { return ""; } };
+let last = "", me = "";
+
+function el(cls, text){ const d = document.createElement("div"); d.className = cls; if (text != null) d.textContent = text; return d; }
+function nextRound(){ const m = new Date().getMinutes(); return m < 21 ? ":21" : m < 46 ? ":46" : ":21"; }
+
+function draw(calls){
+  const key = JSON.stringify(calls.map(c => [c.at, c.status, c.answer]));
+  if (key === last) return; last = key;
+  const th = $("thread"), atBottom = th.scrollHeight - th.scrollTop - th.clientHeight < 80;
+  th.textContent = "";
+  const list = [...calls].sort((a, b) => Date.parse(a.at) - Date.parse(b.at));
+  let day = "";
+  for (const c of list) {
+    const d = dy(c.at); if (d !== day) { day = d; th.append(el("day", d)); }
+    th.append(el("b me", c.text || ""));
+    const [lab, col] = ST[c.status] || ST.sent;
+    const m = el("meta r", (c.from ? c.from + " · " : "") + tm(c.at)); th.append(m);
+    const reply = c.answer || (c.status !== "sent" ? c.decoded : "");
+    if (reply) {
+      th.append(el("b them", reply));
+      const ml = el("meta l", "tower" + (c.answered_at ? " · " + tm(c.answered_at) : ""));
+      const chip = document.createElement("span"); chip.className = "chip"; chip.style.setProperty("--c", col); chip.textContent = lab; ml.append(chip);
+      th.append(ml);
+      if (c.status === "needs_ok") {
+        const b = document.createElement("button"); b.className = "qok"; b.type = "button"; b.textContent = "ok";
+        b.onclick = () => send("ok on " + c.at + " (\"" + (c.text || "").slice(0, 60) + "\")", b);
+        th.append(b);
+      }
+    } else {
+      th.append(el("typing", "the tower picks this up at " + nextRound() + "…"));
+    }
+  }
+  if (atBottom || !th.dataset.seen) { th.scrollTop = th.scrollHeight; th.dataset.seen = "1"; }
+}
+
+async function refresh(){
+  const r = await post("radar", {});
+  if (!r.ok) { if (r.status === 401) lock("That code didn't clear."); return false; }
+  me = r.j.label || ""; $("sub").textContent = "cleared as " + me + " · next round " + nextRound();
+  draw(r.j.calls || []); return true;
+}
+function lock(msg){ try { sessionStorage.removeItem("tower-code"); } catch (e) {} code = ""; $("thread").hidden = true; $("say").hidden = true; $("gate").hidden = false; $("pinstate").textContent = msg || ""; $("sub").textContent = "locked"; }
+function open(){ $("gate").hidden = true; $("thread").hidden = false; $("say").hidden = false; }
+
+$("pinform").onsubmit = async e => { e.preventDefault(); code = $("pin").value.trim(); if (!code) return; $("pinstate").textContent = "Checking…";
+  try { if (await refresh()) { try { sessionStorage.setItem("tower-code", code); } catch (e) {} $("pin").value = ""; open(); } }
+  catch (err) { $("pinstate").textContent = "Can't reach the tower right now."; } };
+
+let busy = false;
+async function send(text, btn){
+  if (!text || busy) return; busy = true; $("send").disabled = true; if (btn) btn.disabled = true;
+  try { const r = await post("radio", {text}); if (r.ok) { if (!btn) { $("msg").value = ""; grow(); } await refresh(); } else { if (r.status === 401) lock("Code expired. Clear in again."); else alertLine(r.j.error || "Didn't go through."); } }
+  catch (e) { alertLine("Can't reach the tower right now."); }
+  busy = false; $("send").disabled = false; if (btn) btn.disabled = false;
+}
+function alertLine(t){ $("thread").append(el("typing", t)); $("thread").scrollTop = $("thread").scrollHeight; }
+$("say").onsubmit = e => { e.preventDefault(); send($("msg").value.trim()); };
+$("msg").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey && !e.isComposing && window.matchMedia("(pointer:fine)").matches) { e.preventDefault(); $("say").requestSubmit(); } });
+function grow(){ const t = $("msg"); t.style.height = "auto"; t.style.height = Math.min(140, t.scrollHeight) + "px"; }
+$("msg").addEventListener("input", grow);
+
+(async () => { if (code) { try { if (await refresh()) open(); else lock(""); } catch (e) { lock("Can't reach the tower right now."); } } else lock(""); })();
+setInterval(() => { if (code && !document.hidden) refresh().catch(() => {}); }, 30e3);
+document.addEventListener("visibilitychange", () => { if (!document.hidden && code) refresh().catch(() => {}); });
+</script>
+</body>
+</html>
