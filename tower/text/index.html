@@ -41,6 +41,27 @@
   #gate input{width:100%;margin:12px 0;padding:12px 16px;border-radius:999px;border:1px solid var(--edge);font:18px var(--body);text-align:center;background:var(--glass);color:var(--ink)}
   #gate button{border:0;border-radius:999px;padding:10px 26px;font:900 16px var(--body);color:#fff;background:linear-gradient(180deg,var(--me1),var(--me2));cursor:pointer}
   #gate p{color:var(--soft);font-weight:700}
+  /* quick human tickets: one glossy card per ticket, checkmarks, progress, a little party at the end */
+  #tray{display:flex;flex-direction:column;gap:10px;padding:10px 0 4px}
+  .ht{background:linear-gradient(180deg,#ffffff,#e8f8ff);border:1px solid var(--edge);border-radius:26px;padding:14px 16px;box-shadow:0 6px 18px rgba(16,166,216,.18),inset 0 1px 0 #fff;color:#0d2b3e}
+  .ht h3{margin:0;font-size:17px;font-weight:900} .ht .why{margin:2px 0 8px;font-size:13px;color:#4f7790;font-weight:700}
+  .bar{height:12px;border-radius:999px;background:#d7eef8;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.12)}
+  .bar i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(180deg,#8ff0b4,#2fb36a);transition:width .5s cubic-bezier(.2,1.4,.4,1)}
+  .meta2{display:flex;justify-content:space-between;font-size:12px;font-weight:800;color:#4f7790;margin:4px 2px 8px}
+  .st{display:flex;gap:10px;align-items:flex-start;padding:7px 4px;border-top:1px dashed #cfe8f3;font-size:15px}
+  .st:first-of-type{border-top:0}
+  .ck{flex:none;width:30px;height:30px;border-radius:50%;border:2px solid #9fdcf5;background:radial-gradient(circle at 35% 30%,#fff,#e6f7ff);cursor:pointer;display:grid;place-items:center;font-weight:900;color:#fff;transition:transform .15s}
+  .ck:active{transform:scale(.88)}
+  .st.on .ck{border-color:#2fb36a;background:radial-gradient(circle at 35% 30%,#bff7d4,#2fb36a);animation:pop .35s}
+  .st.on .tx{color:#7a96a6;text-decoration:line-through;text-decoration-color:#2fb36a}
+  .act{margin-top:6px;border:0;border-radius:999px;padding:7px 16px;font:900 14px var(--body);color:#fff;background:linear-gradient(180deg,#c58bff,#5b2bd6);cursor:pointer}
+  .next{display:block;width:100%;margin:2px 0 10px;border:0;border-radius:999px;padding:12px 16px;font:900 16px var(--body);color:#fff;text-align:left;cursor:pointer;background:linear-gradient(180deg,#5fe08f,#2fb36a);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 4px 12px rgba(47,179,106,.35)}
+  .next small{display:block;font-weight:700;opacity:.9}
+  .done{text-align:center;font-weight:900;font-size:17px;padding:8px 0;color:#2f7a22}
+  .bub{position:fixed;bottom:-40px;border-radius:50%;pointer-events:none;background:radial-gradient(circle at 35% 30%,#fff,rgba(120,210,255,.55) 45%,rgba(60,160,230,.25));animation:rise 2.4s ease-out forwards;z-index:9}
+  @keyframes rise{to{transform:translateY(-110vh) translateX(var(--dx));opacity:0}}
+  @keyframes pop{50%{transform:scale(1.25)}}
+  @media (prefers-reduced-motion:reduce){.bub{display:none}.st.on .ck{animation:none}.bar i{transition:none}}
   .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 </style>
 </head>
@@ -62,7 +83,7 @@
   <p id="pinstate" role="status"></p>
 </div>
 
-<main id="thread" hidden aria-live="polite"></main>
+<main id="thread" hidden aria-live="polite"><div id="tray"></div><div id="msgs"></div></main>
 <form id="say" hidden>
   <label for="msg" class="vh">Message</label>
   <textarea id="msg" rows="1" placeholder="text the tower"></textarea>
@@ -79,37 +100,90 @@ const tm = t => { try { return new Date(t).toLocaleTimeString("en-US",{hour:"num
 const dy = t => { try { return new Date(t).toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"}); } catch (e) { return ""; } };
 let last = "", me = "";
 
+
+// ---- quick human tickets ----
+const LS = "tower-human-checks";
+function checks(){ try { return JSON.parse(localStorage.getItem(LS) || "{}"); } catch (e) { return {}; } }
+function saveChecks(m){ try { localStorage.setItem(LS, JSON.stringify(m)); } catch (e) {} }
+function party(){ for (let i = 0; i < 18; i++) { const b = document.createElement("i"); b.className = "bub"; const z = 14 + Math.random() * 34;
+  b.style.cssText = `width:${z}px;height:${z}px;left:${Math.random() * 100}vw;animation-delay:${Math.random() * .6}s;--dx:${(Math.random() - .5) * 120}px`;
+  document.body.append(b); setTimeout(() => b.remove(), 3200); } }
+function drawTray(tickets){
+  const tray = $("tray"); tray.textContent = ""; const local = checks();
+  const open = tickets.filter(t => !(t.steps || []).every((s, i) => s.done || (local[t.file] || {})[i]));
+  const all = tickets.slice(0, 3);
+  let nextShown = false;
+  for (const t of all) {
+    const mine = local[t.file] || {}; const steps = t.steps || [];
+    const isOn = i => !!(steps[i].done || mine[i]);
+    const n = steps.filter((_, i) => isOn(i)).length, total = steps.length || 1;
+    const card = document.createElement("section"); card.className = "ht";
+    const h = document.createElement("h3"); h.textContent = t.title || "human ticket"; card.append(h);
+    if (t.why) { const w = document.createElement("p"); w.className = "why"; w.textContent = t.why; card.append(w); }
+    const bar = document.createElement("div"); bar.className = "bar"; const fill = document.createElement("i"); bar.append(fill); card.append(bar);
+    requestAnimationFrame(() => fill.style.width = (100 * n / total) + "%");
+    const m = document.createElement("div"); m.className = "meta2"; m.innerHTML = `<span>${n} of ${total} bricks</span><span>~${t.minutes || 5} min</span>`; card.append(m);
+    if (n === total) { const d = document.createElement("div"); d.className = "done"; d.textContent = t.done_msg || "done. brick laid. 🧱"; card.append(d); tray.append(card); continue; }
+    const first = steps.findIndex((_, i) => !isOn(i));
+    if (!nextShown && first >= 0) { nextShown = true;
+      const nb = document.createElement("button"); nb.className = "next"; nb.type = "button";
+      nb.innerHTML = "next brick →<small></small>"; nb.querySelector("small").textContent = steps[first].t.slice(0, 90) + (steps[first].t.length > 90 ? "…" : "");
+      nb.onclick = () => card.querySelectorAll(".st")[first].scrollIntoView({behavior: "smooth", block: "center"}); card.prepend(nb); }
+    steps.forEach((st, i) => {
+      const row = document.createElement("div"); row.className = "st" + (isOn(i) ? " on" : "");
+      const ck = document.createElement("button"); ck.className = "ck"; ck.type = "button"; ck.setAttribute("aria-label", "check step " + (i + 1)); ck.textContent = isOn(i) ? "✓" : "";
+      const tx = document.createElement("div"); tx.className = "tx"; tx.textContent = (i + 1) + ". " + st.t;
+      if (st.action === "telegram-setup" && !isOn(i)) { const b = document.createElement("button"); b.className = "act"; b.type = "button"; b.textContent = "connect";
+        b.onclick = async () => { b.disabled = true; b.textContent = "connecting…"; const r = await post("telegram-setup", {}).catch(() => ({ok: false, j: {}}));
+          if (r.ok) { tick(t, i, true); } else { b.disabled = false; b.textContent = "connect"; alertLine(r.j.error || "Didn't connect yet."); } };
+        tx.append(document.createElement("br"), b); }
+      ck.onclick = () => tick(t, i, !isOn(i));
+      row.append(ck, tx); card.append(row);
+    });
+    tray.append(card);
+  }
+}
+function tick(t, i, on){
+  const m = checks(); m[t.file] = m[t.file] || {}; if (on) m[t.file][i] = 1; else delete m[t.file][i]; saveChecks(m);
+  const steps = t.steps || [], allDone = steps.every((s, k) => s.done || m[t.file][k]);
+  if (on) { post("radio", {text: `✓ ${t.file} step ${i + 1}` + (allDone ? " (all done)" : "")}).catch(() => {}); if (navigator.vibrate) navigator.vibrate(18); }
+  if (on && allDone) party();
+  last = ""; refresh().catch(() => {});
+}
 function el(cls, text){ const d = document.createElement("div"); d.className = cls; if (text != null) d.textContent = text; return d; }
 function nextRound(){ const m = new Date().getMinutes(); return m < 21 ? ":21" : m < 46 ? ":46" : ":21"; }
 
 function draw(calls){
   const key = JSON.stringify(calls.map(c => [c.at, c.status, c.answer]));
   if (key === last) return; last = key;
-  const th = $("thread"), atBottom = th.scrollHeight - th.scrollTop - th.clientHeight < 80;
-  th.textContent = "";
-  const list = [...calls].sort((a, b) => Date.parse(a.at) - Date.parse(b.at));
+  const th = $("thread"), box = $("msgs"), atBottom = th.scrollHeight - th.scrollTop - th.clientHeight < 80;
+  box.textContent = "";
+  drawTray(calls.filter(c => c.kind === "human").sort((a, b) => Date.parse(a.at) - Date.parse(b.at)));
+  const list = calls.filter(c => c.kind !== "human" && !/^✓ .*HUMAN-/.test(c.text || "")).sort((a, b) => Date.parse(a.at) - Date.parse(b.at));
   let day = "";
   for (const c of list) {
-    const d = dy(c.at); if (d !== day) { day = d; th.append(el("day", d)); }
-    th.append(el("b me", c.text || ""));
+    const d = dy(c.at); if (d !== day) { day = d; box.append(el("day", d)); }
+    box.append(el("b me", c.text || ""));
     const [lab, col] = ST[c.status] || ST.sent;
-    const m = el("meta r", (c.from ? c.from + " · " : "") + tm(c.at)); th.append(m);
+    const m = el("meta r", (c.from ? c.from + " · " : "") + tm(c.at)); box.append(m);
     const reply = c.answer || (c.status !== "sent" ? c.decoded : "");
     if (reply) {
-      th.append(el("b them", reply));
+      box.append(el("b them", reply));
       const ml = el("meta l", "tower" + (c.answered_at ? " · " + tm(c.answered_at) : ""));
       const chip = document.createElement("span"); chip.className = "chip"; chip.style.setProperty("--c", col); chip.textContent = lab; ml.append(chip);
-      th.append(ml);
+      box.append(ml);
       if (c.status === "needs_ok") {
         const b = document.createElement("button"); b.className = "qok"; b.type = "button"; b.textContent = "ok";
         b.onclick = () => send("ok on " + c.at + " (\"" + (c.text || "").slice(0, 60) + "\")", b);
-        th.append(b);
+        box.append(b);
       }
     } else {
-      th.append(el("typing", "the tower picks this up at " + nextRound() + "…"));
+      box.append(el("typing", "the tower picks this up at " + nextRound() + "…"));
     }
   }
-  if (atBottom || !th.dataset.seen) { th.scrollTop = th.scrollHeight; th.dataset.seen = "1"; }
+  const openTicket = $("tray").querySelector(".next");
+  if (!th.dataset.seen) { th.scrollTop = openTicket ? 0 : th.scrollHeight; th.dataset.seen = "1"; }
+  else if (atBottom) th.scrollTop = th.scrollHeight;
 }
 
 async function refresh(){
@@ -132,7 +206,7 @@ async function send(text, btn){
   catch (e) { alertLine("Can't reach the tower right now."); }
   busy = false; $("send").disabled = false; if (btn) btn.disabled = false;
 }
-function alertLine(t){ $("thread").append(el("typing", t)); $("thread").scrollTop = $("thread").scrollHeight; }
+function alertLine(t){ $("msgs").append(el("typing", t)); $("thread").scrollTop = $("thread").scrollHeight; }
 $("say").onsubmit = e => { e.preventDefault(); send($("msg").value.trim()); };
 $("msg").addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey && !e.isComposing && window.matchMedia("(pointer:fine)").matches) { e.preventDefault(); $("say").requestSubmit(); } });
 function grow(){ const t = $("msg"); t.style.height = "auto"; t.style.height = Math.min(140, t.scrollHeight) + "px"; }
