@@ -161,6 +161,13 @@ a{color:inherit}
 .receipts{margin-top:40px;font-family:var(--mono);font-size:11px;line-height:1.7;color:#0b2a0f}
 .receipts a{text-decoration:underline}
 .receipts p+p{margin-top:8px}
+
+/* live meter */
+.meter{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;justify-content:center;padding:0 max(12px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(12px, env(safe-area-inset-left, 0px));pointer-events:none}
+.meter p{pointer-events:auto;max-width:560px;background:var(--blood);color:var(--blood-ink);font-family:var(--mono);font-size:12px;line-height:1.4;padding:9px 14px;border-radius:999px;box-shadow:0 6px 20px rgba(0,0,0,.35);text-align:center}
+.meter b{font-weight:600;font-variant-numeric:tabular-nums;background:var(--gloss);color:var(--blood);padding:0 5px;border-radius:4px}
+.meter a{text-decoration:underline}
+.dateline{font-family:var(--mono);font-size:11px;color:var(--fade);margin-top:10px;letter-spacing:.04em}
 </style>
 <script>if (/(^|\.)asaaab\.com$/.test(location.hostname)) { const s=document.createElement("script"); s.async=true; s.dataset.goatcounter="https://asaaab.goatcounter.com/count"; s.src="https://gc.zgo.at/count.js"; document.head.appendChild(s); }</script>
 </head>
@@ -180,6 +187,7 @@ a{color:inherit}
 <section class="boomer">
   <div class="wrap">
     <div class="masthead"><span>the daily complaint</span><span>letters to the editor</span><span>est. forever</span></div>
+    <p class="dateline" id="dateline">today · price: your whole life</p>
     <h1>the young people dont wanna work <span class="stack">anymore<s class="ever">forever</s></span></h1>
     <div class="letters">
       <p class="letter">nobody wants to work anymore. back in my day we just showed up.<i>a concerned reader</i></p>
@@ -288,7 +296,7 @@ a{color:inherit}
   </div>
 </section>
 
-<section class="floor">
+<section class="floor" style="padding-bottom:110px">
   <div class="wrap">
     <p class="mop">workers owning the means of production.</p>
     <p class="truth">asaaab is the truth. <em>whimzmaxx is the truth in italicz.</em></p>
@@ -300,7 +308,19 @@ a{color:inherit}
   </div>
 </section>
 
+<div class="meter" aria-live="off"><p>since you opened this page, the average big-company CEO earned <b id="clock">0 min</b> of a typical worker's pay. (<a href="https://www.epi.org/blog/ceo-pay-surged-in-2025-ceos-are-paid-325-times-as-much-as-the-typical-worker/" target="_blank" rel="noopener">325×</a>)</p></div>
+
 <script>
+(function(){
+  var t0=Date.now(), el=document.getElementById('clock');
+  function fmt(sec){ var m=Math.floor(sec/60), h=Math.floor(m/60), d=Math.floor(h/24);
+    if(d>0) return d+'d '+(h%24)+'h '+(m%60)+'m';
+    if(h>0) return h+'h '+(m%60)+'m'; return m+' min'; }
+  function tick(){ if(el) el.textContent=fmt((Date.now()-t0)/1000*325); }
+  tick(); setInterval(tick,1000);
+  var dl=document.getElementById('dateline');
+  if(dl){ try{ dl.textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'}).toLowerCase()+' · price: your whole life'; }catch(e){} }
+})();
 (function(){
   ["buy-asaaab","buy-whimzmaxx"].forEach(function(id){
     var b=document.getElementById(id); if(!b) return;
