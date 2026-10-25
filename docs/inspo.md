@@ -132,3 +132,4 @@
 - This is a computer coding in English.
 - What is the duct tape solution I'm begging for and how can I build a duct tape factory
 - Teach people it's just coding and building bricks.
+- Of course it can't be whimsy. Why would a computer even try? To do something just cause? No!!! Someone told it to do it!!
