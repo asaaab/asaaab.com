@@ -124,3 +124,4 @@
 - I did it cause I could. It was available. Why not.
 - People's issues are they don't dream big enough and they can't work small enough.
 - Use the ai to gas u up and to get the work done. But only if you need gassed up. You gotta understand you are just using a computer.
+- the ai output is the output of a larger stroke of the human brush.
