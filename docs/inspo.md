@@ -126,3 +126,4 @@
 - Use the ai to gas u up and to get the work done. But only if you need gassed up. You gotta understand you are just using a computer.
 - the ai output is the output of a larger stroke of the human brush.
 - Using the flaws as exactly the levers to show where the flaws are.
+- Ai is not saving us. You have to coach it to save you. And your friends and then you look around and it's all built
