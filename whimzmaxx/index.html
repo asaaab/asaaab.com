@@ -404,7 +404,7 @@ body.exposed .stamp-x{opacity:.92;transform:rotate(-9deg) scale(1)}
     </ol>
     <p class="frame">so you see how easy it is to frame the issue? <em>capitalists frame issues and sell solutions, so here's your socialist optimism chatbot subscription.</em></p>
     <p class="enthy" style="margin-bottom:22px"><b>the enthymeme of reality is absurd.</b> time is money. knowledge is power. power is work over time. so knowledge is work over money, and money is work over knowledge: the less you know, the more you get paid. every step is a lie about what "is" means. and the answer still matches the cake.</p>
-    <p class="enthy"><b>the marketing is the enthymeme.</b> an enthymeme is an argument with a step left out, so you fill it in yourself and it feels like your idea. every ad you've ever seen works this way. this page is the ai generated place for marketing slop to exist, on purpose, with the receipts showing. now you know the trick. the free version is right there.</p>
+    <p class="enthy"><b>the marketing is the enthymeme.</b> an enthymeme is an argument with a step left out, so you fill it in yourself and it feels like your idea. every ad you've ever seen works this way. this page is the ai generated place for marketing slop to exist, on purpose, with the receipts showing. now you know the trick. the free part is <a href="https://asaaab.com/asaaabot/" target="_blank" rel="noopener">asaaabot</a>. it asks what your day would look like if you didnt have to work full time, and then it helps you plan it.</p>
     <div class="again"><button type="button" id="lookagain">scroll back up. its all labeled now.</button><button type="button" id="copylink">copy whimzmaxx.com</button></div>
   </div>
 </section>
@@ -470,6 +470,14 @@ body.exposed .stamp-x{opacity:.92;transform:rotate(-9deg) scale(1)}
   window.addEventListener('scroll',onScroll,{passive:true});
   var el=document.getElementById('elevator');
   if(el) el.addEventListener('click',function(){ var b=document.getElementById('cakebottom'); if(b) b.scrollIntoView(); });
+})();
+
+(function(){
+  function ev(name){ try{ if(window.goatcounter && goatcounter.count){ goatcounter.count({path:'whimzmaxx-'+name, event:true}); } }catch(e){} }
+  var map={'.fixit':'fixit','#elevator':'elevator','#lookagain':'lookagain','#copylink':'copylink'};
+  Object.keys(map).forEach(function(sel){ var el=document.querySelector(sel); if(el) el.addEventListener('click',function(){ ev(map[sel]); }); });
+  var bottom=document.getElementById('cakebottom'), sent=false;
+  if(bottom && 'IntersectionObserver' in window){ new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && !sent){ sent=true; ev('reached-cake-bottom'); } }); }).observe(bottom); }
 })();
 (function(){
   ["buy-asaaab","buy-whimzmaxx"].forEach(function(id){
