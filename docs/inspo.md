@@ -121,3 +121,4 @@
 - This is the bread and butter that promotes the content. The content is he he haha.
 - I want to create the structure of the future and it doesn't seem that complicated at least to me.
 - I am the whimsy. You are the maxxing.
+- I did it cause I could. It was available. Why not.
