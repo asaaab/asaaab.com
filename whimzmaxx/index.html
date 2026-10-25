@@ -222,6 +222,9 @@ body.exposed .stamp-x{opacity:.92;transform:rotate(-9deg) scale(1)}
 .bottomhalf p.answer{margin-top:40px;max-width:none;font-family:var(--shout);text-transform:uppercase;font-size:clamp(40px,9vw,80px);line-height:.92;color:var(--blood)}
 .elevator{position:sticky;top:calc(12px + env(safe-area-inset-top, 0px));z-index:6;height:0;overflow:visible;padding-left:max(12px, env(safe-area-inset-left, 0px))}
 .elevator button{cursor:pointer;border:1px solid #5a5a60;background:rgba(11,11,13,.85);color:#cfcfcf;font:600 11px var(--mono);padding:6px 10px;border-radius:999px}
+
+.longdrip{position:absolute;top:44px;width:4px;background:var(--blood);border-radius:0 0 4px 4px;z-index:1}
+.longdrip::after{content:"";position:absolute;left:50%;bottom:-14px;width:12px;height:16px;transform:translateX(-50%);background:var(--blood);border-radius:50% 50% 50% 50%/40% 40% 60% 60%}
 </style>
 <script>if (/(^|\.)asaaab\.com$/.test(location.hostname)) { const s=document.createElement("script"); s.async=true; s.dataset.goatcounter="https://asaaab.goatcounter.com/count"; s.src="https://gc.zgo.at/count.js"; document.head.appendChild(s); }</script>
 </head>
@@ -307,7 +310,7 @@ body.exposed .stamp-x{opacity:.92;transform:rotate(-9deg) scale(1)}
   <span class="stamp-x" aria-hidden="true">the scale (real)</span>
   <div class="wrap wealth-intro">
     <h2>this is the cake. <span>to scale.</span></h2>
-    <p>all the household wealth in america: $185 trillion. one pixel is one billion dollars. the needle at the top is the richest 1%. keep scrolling. no, really. keep scrolling.</p>
+    <p>all the household wealth in america: $185 trillion. one pixel is one billion dollars. the cake up top was a cupcake. this is the real one. the needle at the top is the richest 1%. keep scrolling. no, really. keep scrolling.</p>
     <span class="rule">1 pixel = $1,000,000,000</span>
   </div>
   <div class="elevator"><button type="button" id="elevator">take the elevator to the bottom</button></div>
@@ -316,14 +319,17 @@ body.exposed .stamp-x{opacity:.92;transform:rotate(-9deg) scale(1)}
     <div class="spire-candles" aria-hidden="true"><i style="left:calc(50% - 6px)"></i><i style="left:calc(50% + 2px)"></i></div>
     <div class="tierrow" style="height:60300px">
       <div class="slab" style="width:max(2%,8px)"></div>
+      <span class="longdrip" aria-hidden="true" style="left:calc(50% + 2px);height:21000px"></span>
       <div class="tag-sticky"><div><b>$60.3 trillion</b><span>the top 1% of households. 32.5% of everything. a record.</span></div></div>
     </div>
     <div class="tierrow" style="height:69200px">
       <div class="slab" style="width:18%"></div>
+      <span class="longdrip" aria-hidden="true" style="left:calc(50% - 6%);height:12500px"></span><span class="longdrip" aria-hidden="true" style="left:calc(50% + 5%);height:4200px"></span>
       <div class="tag-sticky"><div><b>~$69.2 trillion</b><span>the next 9%. the 90th to 99th percentile.</span></div></div>
     </div>
     <div class="tierrow" style="height:51200px">
       <div class="slab" style="width:80%"></div>
+      <span class="longdrip" aria-hidden="true" style="left:22%;height:7000px"></span><span class="longdrip" aria-hidden="true" style="left:63%;height:2600px"></span>
       <div class="tag-sticky"><div><b>~$51.2 trillion</b><span>the 50th to 90th percentile. what's left of the middle.</span></div></div>
     </div>
     <div class="tierrow" style="height:4300px">
