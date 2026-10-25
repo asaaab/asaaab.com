@@ -136,7 +136,7 @@ a{color:inherit}
 .price{font-weight:900;font-size:34px;font-variant-numeric:tabular-nums}
 .price small{font-size:14px;font-weight:700}
 .badge .what{font-size:14px;line-height:1.45}
-.orb{margin-top:auto;align-self:flex-start;cursor:pointer;border:0;border-radius:999px;padding:12px 22px;font:900 16px var(--round);color:#fff;background:radial-gradient(circle at 50% 18%,#9ff0ff 0 18%,transparent 40%),linear-gradient(180deg,#3cc6f0,#0a7fb8);box-shadow:0 6px 16px rgba(10,127,184,.35),inset 0 -3px 0 rgba(0,0,0,.15)}
+.orb{display:inline-block;text-decoration:none;margin-top:auto;align-self:flex-start;cursor:pointer;border:0;border-radius:999px;padding:12px 22px;font:900 16px var(--round);color:#fff;background:radial-gradient(circle at 50% 18%,#9ff0ff 0 18%,transparent 40%),linear-gradient(180deg,#3cc6f0,#0a7fb8);box-shadow:0 6px 16px rgba(10,127,184,.35),inset 0 -3px 0 rgba(0,0,0,.15)}
 .orb:active{transform:translateY(1px)}
 .orb[aria-pressed="true"]{background:linear-gradient(180deg,#7fd36b,#3d9a33)}
 .honest{margin-top:16px;font-size:15px;line-height:1.5}
@@ -376,14 +376,14 @@ body.exposed .stamp-x{opacity:.92;transform:rotate(-9deg) scale(1)}
         <p class="tag">the truth.</p>
         <p class="price">$231.36 <small>once</small></p>
         <p class="what">one day at the LA living wage (8 hours at $28.92). the co-owners manual and the engine, yours to keep.</p>
-        <button class="orb" id="buy-asaaab" type="button" aria-pressed="false">i'd buy this</button>
+        <a class="orb" id="buy-asaaab" href="https://asaaab.com/shop/">i'd buy this →</a>
       </article>
       <article class="badge w">
         <h3>whimzmaxx</h3>
         <p class="tag">the truth in italicz. your socialist optimism chatbot subscription.</p>
         <p class="price">$28.92 <small>a month</small></p>
         <p class="what">one hour at the living wage, every month. the exact same materials, in the marketing font.</p>
-        <button class="orb" id="buy-whimzmaxx" type="button" aria-pressed="false">i'd buy this</button>
+        <a class="orb" id="buy-whimzmaxx" href="https://asaaab.com/shop/">i'd buy this →</a>
       </article>
     </div>
     <p class="honest"><b>same car, two badges.</b> 8 months of whimzmaxx costs the same as one day of asaaab. after that youre paying for the font, and we told you. is one day of today at a living wage worth your dreams? i took a day off work to make the product.</p>
@@ -417,7 +417,7 @@ body.exposed .stamp-x{opacity:.92;transform:rotate(-9deg) scale(1)}
     <p class="truth">asaaab is the truth. <em>whimzmaxx is the truth in italicz.</em></p>
     <div class="links"><a href="https://asaaab.com/asaaabot/" target="_blank" rel="noopener">talk to asaaabot, free →</a><a href="https://asaaab.com/" target="_blank" rel="noopener">asaaab.com →</a></div>
     <div class="receipts">
-      <p>not on sale yet. lawyer first, then a checkout. the "i'd buy this" buttons just show us who's interested. no income promises: it's an engine, not a guarantee.</p>
+      <p>not on sale yet. lawyer first, then a checkout. the "i'd buy this" buttons go to the asaaab vending machine, where checkout is still jammed on purpose and you just get counted. no income promises: it's an engine, not a guarantee.</p>
       <p>made up on purpose: the letters to the editor, and the cake quote is famously unproven. real, with links: <a href="https://www.epi.org/blog/ceo-pay-surged-in-2025-ceos-are-paid-325-times-as-much-as-the-typical-worker/" target="_blank" rel="noopener">EPI on CEO pay</a> · <a href="https://www.foxla.com/news/americans-medical-debt-poll" target="_blank" rel="noopener">medical debt poll</a> · <a href="https://ips-dc.org/resource-richest-15-u-s-centi-billionaires-see-wealth-surge-33-percent-to-3-2-trillion/" target="_blank" rel="noopener">IPS on the richest 15</a> · <a href="https://www.foxcarolina.com/2026/10/01/personal-bankruptcy-filings-up-nearly-50-since-2022-analysis-finds/" target="_blank" rel="noopener">bankruptcy filings</a> · <a href="https://www.koaa.com/us-news/housing/most-gen-z-workers-struggle-to-live-on-their-own-report-finds" target="_blank" rel="noopener">gen z living alone</a> · <a href="https://www.roic.ai/news/housing-affordability-crisis-deepens-in-2026-with-gen-z-most-vulnerable-02-24-2026" target="_blank" rel="noopener">housing</a> · <a href="https://www.badcredit.org/news/personal-bankruptcies-rise-12-percent-as-financial-pressure-builds/" target="_blank" rel="noopener">bankruptcies +12%</a> · <a href="https://livingwage.mit.edu/counties/06037" target="_blank" rel="noopener">MIT living wage, LA</a> · <a href="https://www.benzinga.com/markets/economic-data/26/10/62153752/top-one-percent-sixty-trillion-bottom-fifty-percent-wealth-middle-class" target="_blank" rel="noopener">wealth by percentile (fed data, reported oct 2026)</a> · <a href="https://en.wikipedia.org/wiki/Wealth_of_Elon_Musk" target="_blank" rel="noopener">musk net worth figures</a>. the 9% and 50 to 90% tiers are worked out from the same report: the top 10% hold 70% of $185T.</p>
     </div>
   </div>
@@ -506,15 +506,7 @@ body.exposed .stamp-x{opacity:.92;transform:rotate(-9deg) scale(1)}
 (function(){
   ["buy-asaaab","buy-whimzmaxx"].forEach(function(id){
     var b=document.getElementById(id); if(!b) return;
-    var key="wz-"+id;
-    try{ if(localStorage.getItem(key)==="1"){ b.setAttribute("aria-pressed","true"); b.textContent="counted. not on sale yet"; } }catch(e){}
-    b.addEventListener("click",function(){
-      var on=b.getAttribute("aria-pressed")!=="true";
-      b.setAttribute("aria-pressed", on?"true":"false");
-      b.textContent = on ? "counted. not on sale yet" : "i'd buy this";
-      try{ localStorage.setItem(key, on?"1":"0"); }catch(e){}
-      try{ if(on && window.goatcounter && goatcounter.count){ goatcounter.count({path:"whimzmaxx-"+id, event:true}); } }catch(e){}
-    });
+    b.addEventListener("click",function(){ try{ if(window.goatcounter && goatcounter.count){ goatcounter.count({path:"whimzmaxx-"+id, event:true}); } }catch(e){} });
   });
 })();
 </script>
