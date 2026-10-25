@@ -103,3 +103,4 @@
 - the enthymeme of reality is absurd.
 - the national endowment for democratic whimsicality.
 - I speak with 101 percent of the truth but because I see 100% of the scenario
+- its only gaurenteed to live life as a critique of the systems when you have the opportunity to be whimsy.
