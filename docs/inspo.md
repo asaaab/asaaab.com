@@ -95,3 +95,4 @@
 - asaaab and whimzmaxx are the same product just packaged differently. its like a subaru solterra and a toyota bz4x
 - is one day of today at a living wage worth your dreams? i took a day off work to make the product.
 - asaaab is the truth. whimzmaxx is the truth in italicz
+- whimzmaxx is whimsymaxxed to the max.
