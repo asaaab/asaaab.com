@@ -112,3 +112,4 @@
 - People love limited edition. People love cheap junk. This is just branded accurately as cheap junk to support us!!
 - “ai” is divisive language to brand “computing in English”
 - instead of flipping the monopoly board why not just like start a money printing machine??
+- It's all corp a ok if you write it down clearly enough
