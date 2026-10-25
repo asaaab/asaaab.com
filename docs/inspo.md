@@ -101,3 +101,4 @@
 - whimzmaxx is whimsymaxxed to the max.
 - its so maxx there are two xxs.
 - the enthymeme of reality is absurd.
+- the national endowment for democratic whimsicality.
