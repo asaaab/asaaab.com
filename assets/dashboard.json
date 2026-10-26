@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-10-26T11:53:00Z",
+  "s": "Idling: the tower checked in on schedule and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
   "t": "2026-10-26T10:53:00Z",
   "s": "Quiet hour: the tower checked in every ten minutes and took no calls, and last night's recap got written up with a few new words for the dictionary; road holds at step 2.",
   "idle": false
