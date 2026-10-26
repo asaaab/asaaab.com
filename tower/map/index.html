@@ -87,7 +87,7 @@
 <div class="panes">
   <section class="glass" id="queue" style="grid-column:1/-1" aria-live="polite">
     <h2>The one queue <span class="muted" style="font:800 14px var(--body)">(shadow mode: it only watches)</span></h2>
-    <p class="muted" id="qnote">Every open thing from the radio, the Board, GitHub and the handoffs, sitting on whoever has it. The red number on a bubble is its pile. Tap a bubble to see it.</p>
+    <p class="muted" id="qnote">Every open thing from the radio, the Board, GitHub, the handoffs and the link bot, sitting on whoever has it. The red number on a bubble is its pile. Tap a bubble to see it.</p>
     <div class="qsum" id="qsum"></div>
   </section>
   <section class="glass info" id="info" aria-live="polite">
@@ -262,7 +262,9 @@ function draw(){
 let boardCount = "";
 // The one queue (shadow mode, 10/25): open items ride the radar pipe as kind "queue"; each sits on the node that has it.
 let QUEUE = [];
+const BOTS = {"commiebot": "COMMIE", "videoeditorbot": "EDIT", "the feeds": "FEEDS", "whimzmaxx": "WHIMZ"}; // link-bot verdicts sit on the bot they route to
 function owner(q){
+  if (BOTS[q.who]) return BOTS[q.who];
   if (q.state === "waiting" && q.who === "Captain") return "CAP";
   if (q.who === "vibechecker") return "CREW";
   if (q.state === "new") return q.src === "handoff" ? "FO" : "TOWER";
@@ -272,10 +274,10 @@ function owner(q){
 const pile = id => QUEUE.filter(q => owner(q) === id);
 function queueSummary(){
   const box = $("qsum"); box.textContent = "";
-  const ids = ["CAP", "TOWER", "FO", "BOARD"];
+  const ids = ["CAP", "TOWER", "FO", "BOARD", "COMMIE", "EDIT", "FEEDS", "WHIMZ"];
   for (const id of ids) { const n = pile(id).length; if (!n) continue;
     const b = document.createElement("button"); b.type = "button"; b.textContent = BYID[id].label + ": " + n; b.onclick = () => { sel = id; draw(); info(id); $("info").scrollIntoView({behavior: "smooth", block: "start"}); }; box.append(b); }
-  $("qnote").textContent = QUEUE.length ? QUEUE.length + " open. Every open thing from the radio, the Board, GitHub and the handoffs, sitting on whoever has it. The red number on a bubble is its pile. Tap a bubble to see it." : "The queue hasn't come through the radar pipe yet. It refreshes on the next TOWER round.";
+  $("qnote").textContent = QUEUE.length ? QUEUE.length + " open. Every open thing from the radio, the Board, GitHub, the handoffs and the link bot, sitting on whoever has it. The red number on a bubble is its pile. Tap a bubble to see it." : "The queue hasn't come through the radar pipe yet. It refreshes on the next TOWER round.";
 }
 function tap(id){
   if (connect) {
