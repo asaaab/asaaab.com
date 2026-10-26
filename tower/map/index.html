@@ -23,7 +23,7 @@
   .birth{margin-left:auto;font:900 15px var(--body);color:#fff;border:3px solid #fff;border-radius:999px;padding:10px 18px;cursor:pointer;
     background:linear-gradient(135deg,var(--pink),var(--purple));box-shadow:0 8px 20px rgba(155,92,255,.45)}
   .birth[aria-pressed="true"]{background:linear-gradient(135deg,#ffb3ec,#c58bff);box-shadow:0 0 0 6px rgba(255,107,214,.3),0 8px 20px rgba(155,92,255,.45)}
-  .wrap{max-width:1400px;margin:10px auto 0;padding:0 16px}
+  .wrap{max-width:2100px;margin:10px auto 0;padding:0 16px}
   .poster{border-radius:34px;background:linear-gradient(180deg,rgba(255,255,255,.55),rgba(255,255,255,.3));border:2px solid #fff;box-shadow:0 18px 40px rgba(6,60,100,.18);overflow-x:auto;overflow-y:hidden}
   svg{display:block;width:100%;min-width:980px;height:auto}
   .edge{fill:none;stroke-width:2.6;opacity:.55;transition:opacity .2s}
@@ -83,7 +83,7 @@
   <p class="sub">Every bot, every place, and how they talk to each other. The Board is the middle. Tap anything to light up its lines. To birth a new automation, connect two things and explain how they'd talk.</p>
 </header>
 <div class="bar" id="keys"></div>
-<div class="wrap"><div class="poster"><svg id="map" viewBox="0 0 1600 1040" role="img" aria-label="Map of the asaaab autopilot: bots, places and their connections"></svg></div></div>
+<div class="wrap"><div class="poster"><svg id="map" viewBox="0 0 2320 1040" role="img" aria-label="Map of the asaaab autopilot: bots, places and their connections"></svg></div></div>
 <div class="panes">
   <section class="glass" id="queue" style="grid-column:1/-1" aria-live="polite">
     <h2>The one queue <span class="muted" style="font:800 14px var(--body)">(shadow mode: it only watches)</span></h2>
@@ -149,6 +149,13 @@ const N = [
   {id:"NIGHT", label:"nightly log", kind:"data", x:520, y:950, r:38, what:"The captain's log, whimsy counter, training notes and the free expression."},
   {id:"INBOX", label:"inbox", kind:"outside", x:150, y:800, r:36, what:"The asaaab inbox. Read only."},
   {id:"SOCIAL", label:"TikTok · Bluesky · YouTube", kind:"outside", x:230, y:960, r:40, what:"What got posted, and the TikTok Studio numbers."},
+  // The content funnel (Captain, 10/25): "this is where whimzmaxx goes, and the entire content funnel of automated agents failing at
+  // whimsymaxxing, utilizing the commiebot and the videoeditorbot to induce productive division to fuel engagement into the site."
+  {id:"WHIMZ", label:"whimzmaxx", kind:"place", x:1880, y:150, r:56, what:"The Captain's dream business under the asaaab tent, and where the funnel lands people. The real thing: human whimsy."},
+  {id:"COMMIE", label:"commiebot", cs:true, kind:"bot", x:2190, y:250, r:46, what:"The private voice with the systemic hot take. Feeds the fails their subject. Never the public asaaabot voice."},
+  {id:"FAIL", label:"failuremaxx bots", cs:true, kind:"bot", x:2120, y:500, r:52, what:"Automated agents trying to whimsymaxx and failing on camera. Labeled, deliberately bad AI bits that prove a human has to be the whimsy (the carve-out: critique only, never selling anything but human output)."},
+  {id:"EDIT", label:"videoeditorbot", cs:true, kind:"bot", x:1850, y:620, r:48, what:"Cuts the fails in the Captain's style: 24 fps, 2-second hard cuts, white-bar captions, a long hero shot to end. Drafts only; posting is the Captain's tap."},
+  {id:"FEEDS", label:"the feeds", kind:"outside", x:2150, y:820, r:44, what:"Where the cuts get posted (Captain's OK). Productive division: people argue, then get curious."},
 ];
 const E = [
   ["CAP","TP","radios cryptic texts"],["TP","TOWER","calls land on the radio"],["TOWER","TP","answers + needs-your-ok"],
@@ -162,7 +169,10 @@ const E = [
   ["INBOX","RECAP","triage, read only"],["SOCIAL","RECAP","what got posted"],["RECAP","NIGHT","log + whimsy counter"],["RECAP","DICT","new lingo"],["NIGHT","CAP","morning message"],
   ["SOCIAL","MKTG","TikTok Studio numbers"],["MKTG","SITE","consulting numbers"],
   ["CREW","PORTAL","signs in"],["PORTAL","BOARD","edits the Board"],["CAP","PORTAL","runs the crew"],
-  ["VIS","ASAAABOT","what would your day look like?"],["ASAAABOT","SITE","poke around"],["VIS","SITE","finds it"],
+  ["VIS","ASAAABOT","what would your day look like?"],
+  ["CAP","WHIMZ","his dream business"],["COMMIE","FAIL","the hot take they fail at"],["FAIL","EDIT","raw fails"],
+  ["EDIT","CAP","draft cut for his ok"],["EDIT","FEEDS","posted after his ok"],["FEEDS","VIS","productive division, then curiosity"],
+  ["VIS","WHIMZ","lands on"],["WHIMZ","SITE","the real thing"],["WHIMZ","COMMIE","what to poke at next"],["ASAAABOT","SITE","poke around"],["VIS","SITE","finds it"],
 ];
 const BYID = Object.fromEntries(N.map(n => [n.id, n]));
 const COL = {person:"#e39400", bot:"#7b3ff0", place:"#1f9ff0", data:"#22a356", outside:"#e0409f", center:"#0b7cc7"};
