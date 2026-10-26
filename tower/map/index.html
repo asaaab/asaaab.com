@@ -254,6 +254,7 @@ let boardCount = "";
 let QUEUE = [];
 function owner(q){
   if (q.state === "waiting" && q.who === "Captain") return "CAP";
+  if (q.who === "vibechecker") return "CREW";
   if (q.state === "new") return q.src === "handoff" ? "FO" : "TOWER";
   if (q.src === "board" || /^another item/.test(q.who)) return "BOARD";
   return "FO";
@@ -282,7 +283,12 @@ function info(id){
   if (mine.length) {
     const s = document.createElement("p"); s.className = "muted"; s.style.margin = "10px 0 0"; s.textContent = "In the queue here: " + mine.length; box.append(s);
     const ul = document.createElement("ul"); ul.className = "qlist";
-    for (const q of mine) { const li = document.createElement("li"), src = document.createElement("span"); src.className = "src"; src.textContent = q.src; li.append(src, q.name || q.id);
+    const ASK = {tap: "tap an answer", say: "say one fact", do: "your hands"};
+    const ord = {do: 0, say: 1, tap: 2};
+    mine.sort((a, b) => (ord[a.ask] ?? 3) - (ord[b.ask] ?? 3));
+    for (const q of mine) { const li = document.createElement("li"), src = document.createElement("span"); src.className = "src"; src.textContent = q.src; li.append(src);
+      if (q.ask) { const a = document.createElement("span"); a.className = "src"; a.style.background = q.ask === "do" ? "#e2302f" : q.ask === "say" ? "#e09a00" : "#7b3ff0"; a.textContent = ASK[q.ask] + (q.choices && q.choices.length ? ": " + q.choices.join(" / ") : ""); li.append(a); }
+      li.append(q.name || q.id);
       if (q.next) { const nx = document.createElement("span"); nx.className = "nx"; nx.textContent = "next: " + q.next; li.append(nx); } ul.append(li); }
     box.append(ul);
   }
