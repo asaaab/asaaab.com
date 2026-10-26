@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-10-26T17:53:00Z",
+  "s": "The site got a new wall page that shows the Captain's posts newest first, opening with the mission; the tower made its rounds with no calls. Road holds at step 2.",
+  "idle": false
+ },
+ {
   "t": "2026-10-26T16:51:00Z",
   "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
   "idle": true
