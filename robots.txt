@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /tower/
+Disallow: /admin/
+Sitemap: https://asaaab.com/sitemap.xml
