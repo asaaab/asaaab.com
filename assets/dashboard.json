@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-10-26T00:51:00Z",
+  "s": "The on-screen bot helper shipped five upgrades this hour: its own taskbar icon, a guided step-by-step button, a napping bounce, hopping to the next idle crew computer, and self-updating; the car mod got a fresh inventory, and the road holds at step 2.",
+  "idle": false
+ },
+ {
   "t": "2026-10-25T23:53:00Z",
   "s": "Busy hour: the on-screen bot helper got three upgrades (a playful look, a draggable speech bubble and a tell-Claude button), six ideas landed on the Board including a one-button co-op, and the tower took 7 calls; road holds at step 2.",
   "idle": false
