@@ -1,252 +1,257 @@
 [
- {
-  "t": "2026-10-26T02:51:00Z",
-  "s": "Steady hour: the on-screen bot helper now says hello on first launch and checks daily for updates, the car mod got a slimming script with test results, and a recipe for welcoming new crew was drafted; road holds at step 2.",
-  "idle": false
- },
- {
-  "t": "2026-10-26T01:52:00Z",
-  "s": "Big hour: the on-screen bot helper can now carry files and mail between crew computers, update itself, advance steps on a click and take orders from the radio; two ideas joined the Board, the tower logged 10 calls; road holds at step 2.",
-  "idle": false
- },
- {
-  "t": "2026-10-26T00:51:00Z",
-  "s": "The on-screen bot helper shipped five upgrades this hour: its own taskbar icon, a guided step-by-step button, a napping bounce, hopping to the next idle crew computer, and self-updating; the car mod got a fresh inventory, and the road holds at step 2.",
-  "idle": false
- },
- {
-  "t": "2026-10-25T23:53:00Z",
-  "s": "Busy hour: the on-screen bot helper got three upgrades (a playful look, a draggable speech bubble and a tell-Claude button), six ideas landed on the Board including a one-button co-op, and the tower took 7 calls; road holds at step 2.",
-  "idle": false
- },
- {
-  "t": "2026-10-25T22:51:00Z",
-  "s": "Quiet hour: the crew handbook gained a short guide for passing files straight between the crew's own computers without the cloud; nothing moved on the Board and the road holds at step 2.",
-  "idle": false
- },
- {
-  "t": "2026-10-25T21:51:00Z",
-  "s": "Every crew computer now starts from one shared handbook, the purple helper that walks through each click got locked in, a phone-camera idea joined the Board and the tower took 1 call; road holds at step 2.",
-  "idle": false
- },
- {
-  "t": "2026-10-25T20:51:00Z",
-  "s": "Busy hour: the tower page became a combo-lock vault with a welcome door for new crew, a human-tickets button landed, crew onboarding got tightened, two Board items moved and the tower took 1 call; road still at step 2.",
-  "idle": false
- },
- {
-  "t": "2026-10-25T19:51:00Z",
-  "s": "The tower took 5 calls, the purple crew button now opens tower text for human tickets and stays on screen on phones, the text bar hides while locked, and four new Board idea plans were added; the road holds at step 2.",
-  "idle": false
- },
- {
-  "t": "2026-10-25T18:51:00Z",
-  "s": "The tower took 2 calls, the tower can now start talking over Telegram, quick to-do tickets landed on the radio, a hidden draft for booking an hour went up, and three Board plans were added; the road holds at step 2.",
-  "idle": false
- },
- {
-  "t": "2026-10-25T17:51:00Z",
-  "s": "The tower took 1 call, the tower radio got a new text-thread view on the site, the lean plan's wording was corrected, and new idea notes were written; the road holds at step 2.",
-  "idle": false
- },
- {
-  "t": "2026-10-25T16:51:00Z",
-  "s": "Idling: nothing moved this hour, and the road holds at step 2.",
-  "idle": true
- },
- {
-  "t": "2026-10-25T15:51:00Z",
-  "s": "Idling: nothing moved this hour, and the road holds at step 2.",
-  "idle": true
- },
- {
-  "t": "2026-10-25T14:51:00Z",
-  "s": "Idling: nothing moved this hour, and the road holds at step 2.",
-  "idle": true
- },
- {
-  "t": "2026-10-25T13:51:00Z",
-  "s": "Idling: nothing moved this hour, and the road holds at step 2.",
-  "idle": true
- },
- {
-  "t": "2026-10-25T12:51:00Z",
-  "s": "Idling: nothing moved this hour, and the road holds at step 2.",
-  "idle": true
- },
- {
-  "t": "2026-10-25T11:51:00Z",
-  "s": "Idling: nothing moved this hour, and the road holds at step 2.",
-  "idle": true
- },
- {
-  "t": "2026-10-25T10:51:00Z",
-  "s": "Yesterday's nightly recap got written up, along with new dictionary words and training notes; no Board moves or tower calls this hour, and the road holds at step 2.",
-  "idle": false
- },
- {
-  "t": "2026-10-25T09:51:00Z",
-  "s": "The tower took 9 calls and turned them into five new Board ideas, a rough first browser extension that highlights how messaging works, and a batch of draft social posts; the road holds at step 2.",
-  "idle": false
- },
- {
-  "t": "2026-10-25T08:51:00Z",
-  "s": "The public site now shows only the bot, a leaner plan puts selling hours first toward the first legal dollar, the bot's script and two new idea notes were written, and the tower took 3 calls; the road holds at step 2.",
-  "idle": false
- },
- {
-  "t": "2026-10-25T07:51:00Z",
-  "s": "The site gained eight inspiration lines, the bot got its backronym, a nightly bot meeting and an approved-only social posting queue were planned, the tower took 6 calls and moved four Board items; the road holds at step 2.",
-  "idle": false
- },
- {
-  "t": "2026-10-25T06:51:00Z",
-  "s": "The goal got pinned down for every bot as an eight-step road to a first legal sale, the content line was set, the tower took 6 calls and added three new ideas to the Board, plus two inspiration lines.",
-  "idle": false
- },
- {
-  "t": "2026-10-25T05:52:00Z",
-  "s": "A one-site-per-person website builder took shape with an example page and its own badge, the master plan got written down for every bot, the rulebook and tower guidance each gained a line, plus ten new inspiration lines.",
-  "idle": false
- },
- {
-  "t": "2026-10-25T04:51:00Z",
-  "s": "A publishing house for books and music joined the dream list and the Board, the hot-take engine learned to stay undivisive, a branding rule and a dictionary word landed, the tower radar synced, plus three inspiration lines.",
-  "idle": false
- },
- {
-  "t": "2026-10-25T03:51:00Z",
-  "s": "Idling: nothing moved this hour.",
-  "idle": true
- },
- {
-  "t": "2026-10-25T02:52:00Z",
-  "s": "The tower took 2 new calls and answered 4, a menu channel for the side project got drafted and is waiting on a yes, two Board items moved forward, and the brand notes grew.",
-  "idle": false
- },
- {
-  "t": "2026-10-25T01:52:00Z",
-  "s": "The marketing playbook learned to pick a sound for every video, the hook lab got fresh notes, the tower took 7 calls and answered 5, plus one inspiration line.",
-  "idle": false
- },
- {
-  "t": "2026-10-25T00:52:00Z",
-  "s": "The side-project site went live after ten quick versions in an hour, the tower answered a 14-call queue and took 3 new ones, the autopilot map and alarm bell got smarter, plus two inspiration lines.",
-  "idle": false
- },
- {
-  "t": "2026-10-24T23:52:00Z",
-  "s": "The new side-project brand got its first private playbook draft, a string of founding ideas written down, and a scroll page now live on the site; the tower radar synced with the Board, plus five inspiration lines.",
-  "idle": false
- },
- {
-  "t": "2026-10-24T22:52:00Z",
-  "s": "A new umbrella brand for side projects got its plan, the hook lab found the first three seconds drive views, support tickets and hot-take hooks got drafts, the tower learned to flag unclear calls and took 3, plus two inspiration lines.",
-  "idle": false
- },
- {
-  "t": "2026-10-24T21:52:00Z",
-  "s": "A do-it-yourself carspotting editor shipped that runs right on the device, the footage machine finished a full run, the crew rules learned not to apologize for pointing things out, the tower got a lock button and took 5 calls, plus four inspiration lines.",
-  "idle": false
- },
- {
-  "t": "2026-10-24T20:52:00Z",
-  "s": "The free encouragement bot got its own pages and a clear name split from the automations under the hood, an autopilot map now shows every bot and how they connect, the tower took 4 calls, and eight inspiration lines were added.",
-  "idle": false
- },
- {
-  "t": "2026-10-24T19:52:00Z",
-  "s": "Each crew bot got its own instruction sheet, the control tower learned to keep a running log, a new timeline page now shows the whole flight path from first steps to launch, and one fresh inspiration line was added.",
-  "idle": false
- },
- {
-  "t": "2026-10-24T18:52:00Z",
-  "s": "The control tower answered its first radio checks and gained a radar view of the whole Board, the home page became a menu with the games moved to their own gate, inspiration lines were added, and a Board item for helper bubbles opened.",
-  "idle": false
- },
- {
-  "t": "2026-10-24T17:52:00Z",
-  "s": "The crew got a master guide to where everything lives, the portal's code moved into the shared records, a members-only control tower page went up on the site, and one new inspiration line was added.",
-  "idle": false
- },
- {
-  "t": "2026-10-24T16:52:00Z",
-  "s": "Idling: nothing moved this hour.",
-  "idle": true
- },
- {
-  "t": "2026-10-24T15:52:00Z",
-  "s": "Idling: nothing moved this hour.",
-  "idle": true
- },
- {
-  "t": "2026-10-24T14:52:00Z",
-  "s": "Idling: nothing moved this hour.",
-  "idle": true
- },
- {
-  "t": "2026-10-24T13:52:00Z",
-  "s": "Idling: nothing moved this hour.",
-  "idle": true
- },
- {
-  "t": "2026-10-24T12:51:00Z",
-  "s": "Idling: nothing moved this hour.",
-  "idle": true
- },
- {
-  "t": "2026-10-24T11:51:00Z",
-  "s": "Idling: nothing moved this hour.",
-  "idle": true
- },
- {
-  "t": "2026-10-24T10:52:00Z",
-  "s": "Yesterday's nightly recap was filed, along with a new crew dictionary of working terms, a short training note, and a small illustration marking the day.",
-  "idle": false
- },
- {
-  "t": "2026-10-24T09:52:00Z",
-  "s": "A new Board item set up wrapping the site menu and navigation for good, the footage pipeline gained a one-app goal (plug in the phone, get an edited draft ready to post), and one inspiration line was added.",
-  "idle": false
- },
- {
-  "t": "2026-10-24T08:52:00Z",
-  "s": "The car screen return got its support chat record saved to the Board, a short nightly note was filed, and ten new inspiration lines joined the site.",
-  "idle": false
- },
- {
-  "t": "2026-10-24T07:52:00Z",
-  "s": "The site menu got a brighter sky-to-grass scene, hover-only border glow, old-TV switch transitions and one clean shot per channel tile; on the Board, the car return was approved and a listing layout was settled.",
-  "idle": false
- },
- {
-  "t": "2026-10-24T06:52:00Z",
-  "s": "Idling: nothing moved this hour.",
-  "idle": true
- },
- {
-  "t": "2026-10-24T05:52:00Z",
-  "s": "The car screen project tested the unit and found it runs older software than advertised, so a return and a better replacement joined the Board; a radio-style home screen mockup went up to try on it.",
-  "idle": false
- },
- {
-  "t": "2026-10-24T04:52:00Z",
-  "s": "A new desktop tool can pin any window on top, see-through, for framing shots; the site menu got a tighter grid with drifting clouds and slowly panning photos; the car screen project got a build plan and a local test page.",
-  "idle": false
- },
- {
-  "t": "2026-10-24T03:52:00Z",
-  "s": "The footage machine now listens to each clip's sound and checks sharpness; a first desktop app for it shipped with two quick fixes; the site got a carspotting billboard gallery, a bubbly channel-style menu and new inspiration lines; two new plans joined the Board.",
-  "idle": false
- },
- {
-  "t": "2026-10-24T02:51:00Z",
-  "s": "The footage machine now reads iPhone photos anywhere, stops flagging screenshots as duplicates and ran its first real sort; a first video editor landed that auto-cuts dead air and filler words; the head unit launcher got a radio-style look.",
-  "idle": false
- },
- {
-  "t": "2026-10-24T01:50:00Z",
-  "s": "Built the footage machine's first sorter (it now reads iPhone HEIC photos), moved 12.9 GB of phone footage onto the SSD, scaffolded automated BeamNG crash test videos, read the Saab head unit's specs, and drew the first bubble launcher for its 7-inch screen.",
-  "idle": false
- }
+  {
+    "t": "2026-10-26T03:51:00Z",
+    "s": "Busy hour: the helper app shipped two updates, a single work queue and a poster board started running quietly in the background, the editing footage got cataloged, two Board items moved, and the tower took 2 calls.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-26T02:51:00Z",
+    "s": "Steady hour: the on-screen bot helper now says hello on first launch and checks daily for updates, the car mod got a slimming script with test results, and a recipe for welcoming new crew was drafted; road holds at step 2.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-26T01:52:00Z",
+    "s": "Big hour: the on-screen bot helper can now carry files and mail between crew computers, update itself, advance steps on a click and take orders from the radio; two ideas joined the Board, the tower logged 10 calls; road holds at step 2.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-26T00:51:00Z",
+    "s": "The on-screen bot helper shipped five upgrades this hour: its own taskbar icon, a guided step-by-step button, a napping bounce, hopping to the next idle crew computer, and self-updating; the car mod got a fresh inventory, and the road holds at step 2.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-25T23:53:00Z",
+    "s": "Busy hour: the on-screen bot helper got three upgrades (a playful look, a draggable speech bubble and a tell-Claude button), six ideas landed on the Board including a one-button co-op, and the tower took 7 calls; road holds at step 2.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-25T22:51:00Z",
+    "s": "Quiet hour: the crew handbook gained a short guide for passing files straight between the crew's own computers without the cloud; nothing moved on the Board and the road holds at step 2.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-25T21:51:00Z",
+    "s": "Every crew computer now starts from one shared handbook, the purple helper that walks through each click got locked in, a phone-camera idea joined the Board and the tower took 1 call; road holds at step 2.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-25T20:51:00Z",
+    "s": "Busy hour: the tower page became a combo-lock vault with a welcome door for new crew, a human-tickets button landed, crew onboarding got tightened, two Board items moved and the tower took 1 call; road still at step 2.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-25T19:51:00Z",
+    "s": "The tower took 5 calls, the purple crew button now opens tower text for human tickets and stays on screen on phones, the text bar hides while locked, and four new Board idea plans were added; the road holds at step 2.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-25T18:51:00Z",
+    "s": "The tower took 2 calls, the tower can now start talking over Telegram, quick to-do tickets landed on the radio, a hidden draft for booking an hour went up, and three Board plans were added; the road holds at step 2.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-25T17:51:00Z",
+    "s": "The tower took 1 call, the tower radio got a new text-thread view on the site, the lean plan's wording was corrected, and new idea notes were written; the road holds at step 2.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-25T16:51:00Z",
+    "s": "Idling: nothing moved this hour, and the road holds at step 2.",
+    "idle": true
+  },
+  {
+    "t": "2026-10-25T15:51:00Z",
+    "s": "Idling: nothing moved this hour, and the road holds at step 2.",
+    "idle": true
+  },
+  {
+    "t": "2026-10-25T14:51:00Z",
+    "s": "Idling: nothing moved this hour, and the road holds at step 2.",
+    "idle": true
+  },
+  {
+    "t": "2026-10-25T13:51:00Z",
+    "s": "Idling: nothing moved this hour, and the road holds at step 2.",
+    "idle": true
+  },
+  {
+    "t": "2026-10-25T12:51:00Z",
+    "s": "Idling: nothing moved this hour, and the road holds at step 2.",
+    "idle": true
+  },
+  {
+    "t": "2026-10-25T11:51:00Z",
+    "s": "Idling: nothing moved this hour, and the road holds at step 2.",
+    "idle": true
+  },
+  {
+    "t": "2026-10-25T10:51:00Z",
+    "s": "Yesterday's nightly recap got written up, along with new dictionary words and training notes; no Board moves or tower calls this hour, and the road holds at step 2.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-25T09:51:00Z",
+    "s": "The tower took 9 calls and turned them into five new Board ideas, a rough first browser extension that highlights how messaging works, and a batch of draft social posts; the road holds at step 2.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-25T08:51:00Z",
+    "s": "The public site now shows only the bot, a leaner plan puts selling hours first toward the first legal dollar, the bot's script and two new idea notes were written, and the tower took 3 calls; the road holds at step 2.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-25T07:51:00Z",
+    "s": "The site gained eight inspiration lines, the bot got its backronym, a nightly bot meeting and an approved-only social posting queue were planned, the tower took 6 calls and moved four Board items; the road holds at step 2.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-25T06:51:00Z",
+    "s": "The goal got pinned down for every bot as an eight-step road to a first legal sale, the content line was set, the tower took 6 calls and added three new ideas to the Board, plus two inspiration lines.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-25T05:52:00Z",
+    "s": "A one-site-per-person website builder took shape with an example page and its own badge, the master plan got written down for every bot, the rulebook and tower guidance each gained a line, plus ten new inspiration lines.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-25T04:51:00Z",
+    "s": "A publishing house for books and music joined the dream list and the Board, the hot-take engine learned to stay undivisive, a branding rule and a dictionary word landed, the tower radar synced, plus three inspiration lines.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-25T03:51:00Z",
+    "s": "Idling: nothing moved this hour.",
+    "idle": true
+  },
+  {
+    "t": "2026-10-25T02:52:00Z",
+    "s": "The tower took 2 new calls and answered 4, a menu channel for the side project got drafted and is waiting on a yes, two Board items moved forward, and the brand notes grew.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-25T01:52:00Z",
+    "s": "The marketing playbook learned to pick a sound for every video, the hook lab got fresh notes, the tower took 7 calls and answered 5, plus one inspiration line.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-25T00:52:00Z",
+    "s": "The side-project site went live after ten quick versions in an hour, the tower answered a 14-call queue and took 3 new ones, the autopilot map and alarm bell got smarter, plus two inspiration lines.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-24T23:52:00Z",
+    "s": "The new side-project brand got its first private playbook draft, a string of founding ideas written down, and a scroll page now live on the site; the tower radar synced with the Board, plus five inspiration lines.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-24T22:52:00Z",
+    "s": "A new umbrella brand for side projects got its plan, the hook lab found the first three seconds drive views, support tickets and hot-take hooks got drafts, the tower learned to flag unclear calls and took 3, plus two inspiration lines.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-24T21:52:00Z",
+    "s": "A do-it-yourself carspotting editor shipped that runs right on the device, the footage machine finished a full run, the crew rules learned not to apologize for pointing things out, the tower got a lock button and took 5 calls, plus four inspiration lines.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-24T20:52:00Z",
+    "s": "The free encouragement bot got its own pages and a clear name split from the automations under the hood, an autopilot map now shows every bot and how they connect, the tower took 4 calls, and eight inspiration lines were added.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-24T19:52:00Z",
+    "s": "Each crew bot got its own instruction sheet, the control tower learned to keep a running log, a new timeline page now shows the whole flight path from first steps to launch, and one fresh inspiration line was added.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-24T18:52:00Z",
+    "s": "The control tower answered its first radio checks and gained a radar view of the whole Board, the home page became a menu with the games moved to their own gate, inspiration lines were added, and a Board item for helper bubbles opened.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-24T17:52:00Z",
+    "s": "The crew got a master guide to where everything lives, the portal's code moved into the shared records, a members-only control tower page went up on the site, and one new inspiration line was added.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-24T16:52:00Z",
+    "s": "Idling: nothing moved this hour.",
+    "idle": true
+  },
+  {
+    "t": "2026-10-24T15:52:00Z",
+    "s": "Idling: nothing moved this hour.",
+    "idle": true
+  },
+  {
+    "t": "2026-10-24T14:52:00Z",
+    "s": "Idling: nothing moved this hour.",
+    "idle": true
+  },
+  {
+    "t": "2026-10-24T13:52:00Z",
+    "s": "Idling: nothing moved this hour.",
+    "idle": true
+  },
+  {
+    "t": "2026-10-24T12:51:00Z",
+    "s": "Idling: nothing moved this hour.",
+    "idle": true
+  },
+  {
+    "t": "2026-10-24T11:51:00Z",
+    "s": "Idling: nothing moved this hour.",
+    "idle": true
+  },
+  {
+    "t": "2026-10-24T10:52:00Z",
+    "s": "Yesterday's nightly recap was filed, along with a new crew dictionary of working terms, a short training note, and a small illustration marking the day.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-24T09:52:00Z",
+    "s": "A new Board item set up wrapping the site menu and navigation for good, the footage pipeline gained a one-app goal (plug in the phone, get an edited draft ready to post), and one inspiration line was added.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-24T08:52:00Z",
+    "s": "The car screen return got its support chat record saved to the Board, a short nightly note was filed, and ten new inspiration lines joined the site.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-24T07:52:00Z",
+    "s": "The site menu got a brighter sky-to-grass scene, hover-only border glow, old-TV switch transitions and one clean shot per channel tile; on the Board, the car return was approved and a listing layout was settled.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-24T06:52:00Z",
+    "s": "Idling: nothing moved this hour.",
+    "idle": true
+  },
+  {
+    "t": "2026-10-24T05:52:00Z",
+    "s": "The car screen project tested the unit and found it runs older software than advertised, so a return and a better replacement joined the Board; a radio-style home screen mockup went up to try on it.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-24T04:52:00Z",
+    "s": "A new desktop tool can pin any window on top, see-through, for framing shots; the site menu got a tighter grid with drifting clouds and slowly panning photos; the car screen project got a build plan and a local test page.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-24T03:52:00Z",
+    "s": "The footage machine now listens to each clip's sound and checks sharpness; a first desktop app for it shipped with two quick fixes; the site got a carspotting billboard gallery, a bubbly channel-style menu and new inspiration lines; two new plans joined the Board.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-24T02:51:00Z",
+    "s": "The footage machine now reads iPhone photos anywhere, stops flagging screenshots as duplicates and ran its first real sort; a first video editor landed that auto-cuts dead air and filler words; the head unit launcher got a radio-style look.",
+    "idle": false
+  },
+  {
+    "t": "2026-10-24T01:50:00Z",
+    "s": "Built the footage machine's first sorter (it now reads iPhone HEIC photos), moved 12.9 GB of phone footage onto the SSD, scaffolded automated BeamNG crash test videos, read the Saab head unit's specs, and drew the first bubble launcher for its 7-inch screen.",
+    "idle": false
+  }
 ]
