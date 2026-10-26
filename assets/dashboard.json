@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-10-26T01:52:00Z",
+  "s": "Big hour: the on-screen bot helper can now carry files and mail between crew computers, update itself, advance steps on a click and take orders from the radio; two ideas joined the Board, the tower logged 10 calls; road holds at step 2.",
+  "idle": false
+ },
+ {
   "t": "2026-10-26T00:51:00Z",
   "s": "The on-screen bot helper shipped five upgrades this hour: its own taskbar icon, a guided step-by-step button, a napping bounce, hopping to the next idle crew computer, and self-updating; the car mod got a fresh inventory, and the road holds at step 2.",
   "idle": false
