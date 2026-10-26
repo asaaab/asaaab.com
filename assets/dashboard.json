@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-10-26T14:51:00Z",
+  "s": "The helper bot shipped version 0.29, now watching links with one shared recipe, and the crew added a safety check for every copy; the tower made its rounds with no calls. Road holds at step 2.",
+  "idle": false
+ },
+ {
   "t": "2026-10-26T13:53:00Z",
   "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
   "idle": true
