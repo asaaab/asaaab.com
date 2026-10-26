@@ -135,3 +135,4 @@
 - Of course it can't be whimsy. Why would a computer even try? To do something just cause? No!!! Someone told it to do it!!
 - instead of doing anything the idea is to teach a computer EXACTLY how you want it done
 - human smarts automated labor. It's nothing new . Coding in English
+- all weeks are 4 day work weeks. friday you are paid to go be whimsy. thats why youre an whimsymaxxing influencer. thats the role for just a guy.
