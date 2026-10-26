@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-10-26T13:53:00Z",
+  "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
   "t": "2026-10-26T12:57:00Z",
   "s": "The weekly marketing refresh landed: a fresh pull of 812 video stats with old data safely backed up, and the tower kept its regular rounds with no calls coming in.",
   "idle": false
