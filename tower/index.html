@@ -212,7 +212,7 @@ const wrap = c => ({data: () => c});
 async function refresh(){
   const r = await post("radar", {});
   if (!r.ok) { if (r.status === 401) lock("That code didn't clear."); else $("state").textContent = r.j.error || "The tower didn't answer."; return false; }
-  flights = r.j.flights || []; drawRadar(flights); fillLists(flights); drawLog((r.j.calls || []).map(wrap)); { const open = (r.j.calls || []).filter(c => c.kind === "human" && (c.steps || []).some(t => !t.done)).length; $("ticketsBtn").textContent = "🧾 " + (open ? open + " human ticket" + (open > 1 ? "s" : "") + " open" : "human tickets") + " →"; } $("state").textContent = "Tower online. Cleared as " + r.j.label + "."; me = r.j.label; remember(me, code); showWho(); return true;
+  flights = (r.j.flights || []).filter(f => f.kind !== "queue"); drawRadar(flights); fillLists(flights); drawLog((r.j.calls || []).map(wrap)); { const open = (r.j.calls || []).filter(c => c.kind === "human" && (c.steps || []).some(t => !t.done)).length; $("ticketsBtn").textContent = "🧾 " + (open ? open + " human ticket" + (open > 1 ? "s" : "") + " open" : "human tickets") + " →"; } $("state").textContent = "Tower online. Cleared as " + r.j.label + "."; me = r.j.label; remember(me, code); showWho(); return true;
 }
 function lock(msg){ try { sessionStorage.removeItem("tower-code"); } catch (e) {} code = ""; $("app").hidden = true; $("gate").hidden = false; $("pinstate").textContent = msg || ""; }
 $("pinform").onsubmit = async e => { e.preventDefault(); code = $("pin").value.trim(); if (!code) return; $("pinstate").textContent = "Checking…";
