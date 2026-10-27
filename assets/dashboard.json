@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-10-27T05:51:00Z",
+  "s": "The walkie-talkie now works both ways: the crew sent its first two pings to the radio, a new deck went up and the decks page now lists every deck, and the nightly standup picked a lead; road holds at step 2.",
+  "idle": false
+ },
+ {
   "t": "2026-10-27T04:51:00Z",
   "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
   "idle": true
