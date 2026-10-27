@@ -209,6 +209,11 @@ function draw(calls){
   let day = "";
   for (const c of list) {
     const d = dy(c.at); if (d !== day) { day = d; box.append(el("day", d)); }
+    if (c.from === "CREW") {   // the crew keys the walkie-talkie first (Captain 10/26 9:52pm: "ping the captains walkie talkie")
+      box.append(el("b them", c.text || ""));
+      box.append(el("meta l", "crew · " + tm(c.at)));
+      continue;
+    }
     box.append(el("b me", c.text || ""));
     const [lab, col] = ST[c.status] || ST.sent;
     const m = el("meta r", (c.from ? c.from + " · " : "") + tm(c.at)); box.append(m);
