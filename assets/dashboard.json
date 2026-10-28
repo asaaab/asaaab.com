@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-10-28T15:53:00Z",
+  "s": "Idling: the tower made five routine rounds and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
   "t": "2026-10-28T14:57:00Z",
   "s": "Idling: the tower checked in on schedule and took no calls, and nothing else moved this hour.",
   "idle": true
