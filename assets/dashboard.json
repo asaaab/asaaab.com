@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-10-28T21:53:00Z",
+  "s": "The tower took two calls and moved the back-end org plan two steps forward: a private draft of a single go-live switch, plus written alarm levels so problems get the right urgency.",
+  "idle": false
+ },
+ {
   "t": "2026-10-28T20:53:00Z",
   "s": "Idling: the tower made five routine rounds and took no calls; it noticed fresh activity on an open proposal, but nothing else moved this hour.",
   "idle": true
