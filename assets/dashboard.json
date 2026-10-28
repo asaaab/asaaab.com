@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-10-28T11:57:00Z",
+  "s": "Idling: nothing moved this hour beyond the tower's routine rounds, which took no calls; road holds at step 2.",
+  "idle": true
+ },
+ {
   "t": "2026-10-28T10:54:00Z",
   "s": "A small step: last night's recap got written up with yesterday's notes and a few dictionary and training updates, while the tower made five rounds with no calls; road holds at step 2.",
   "idle": false
