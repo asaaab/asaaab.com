@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-10-29T03:52:00Z",
+  "s": "The tower took 8 calls this hour, and three new jobs landed on the Board: a checklist for setting up crew laptops, a radio that wakes the dispatcher instantly, and one live board showing everything at once.",
+  "idle": false
+ },
+ {
   "t": "2026-10-29T02:52:00Z",
   "s": "Busy hour: the tower page now shows an honest status line, drafts of three new company pages and a glitch-art experiment were built for review, old mail kept moving to the new mailbox, and the tower took 9 calls.",
   "idle": false
