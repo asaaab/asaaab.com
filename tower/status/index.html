@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#061826">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="crew status">
+<title>crew status</title>
+<style>
+  /* crew status v0 (mailbox "to-tower 2026-10-28 2325 status-on-the-road"): one glance, parked, phone or the Saab head unit (Android 10 browser).
+     Reads the same POST /tower/radar as tower text, behind the same tower code. No new data, no new Worker route.
+     Plain ES2017 + CSS, no fonts to load, so an old head-unit WebView can run it. */
+  :root{--bg:#061826;--card:#0d2b40;--edge:#1f4d6b;--ink:#eef8ff;--soft:#9cc3da;--rec:#4fc3ff;--work:#f5b400;--done:#38d27b;--stuck:#ff5a52;--you:#d930c9}
+  @media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#eaf6fb;--card:#fff;--edge:#bfe3f3;--ink:#0d2b3e;--soft:#4f7790}}
+  *{box-sizing:border-box}
+  body{margin:0;overflow-wrap:anywhere;background:var(--bg);color:var(--ink);font:20px/1.35 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:max(14px,env(safe-area-inset-top)) 16px 24px}
+  main{max-width:900px;margin:0 auto}
+  h1{margin:0;font-size:22px;font-weight:900;letter-spacing:.02em;color:var(--soft)}
+  .big{margin:6px 0 2px;font-size:44px;font-weight:900;line-height:1.05}
+  .big.stale{color:var(--stuck)}
+  .sub{font-size:18px;color:var(--soft);font-weight:700}
+  .now{margin:14px 0;padding:14px 16px;border-radius:18px;background:var(--card);border:2px solid var(--edge)}
+  .now b{display:block;font-size:15px;color:var(--soft);text-transform:uppercase;letter-spacing:.08em}
+  .now p{margin:4px 0 0;font-size:22px;font-weight:800}
+  .counts{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 14px}
+  .counts span{flex:1 1 120px;padding:10px 12px;border-radius:16px;background:var(--card);border:2px solid var(--c);font-weight:900;font-size:30px;text-align:center}
+  .counts small{display:block;font-size:14px;color:var(--soft);font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+  .row{display:flex;gap:12px;align-items:flex-start;padding:12px 4px;border-top:1px solid var(--edge)}
+  .chip{flex:none;min-width:104px;text-align:center;padding:6px 10px;border-radius:999px;font-size:16px;font-weight:900;color:#06131c;background:var(--c)}
+  .row>div{flex:1;min-width:0}
+  .row .t{font-weight:800;font-size:20px;overflow-wrap:anywhere}
+  .row .a{font-size:16px;color:var(--soft);font-weight:600;margin-top:2px}
+  .row .w{font-size:14px;color:var(--soft);font-weight:800}
+  #gate{max-width:360px;margin:18vh auto 0;text-align:center}
+  input{width:100%;margin:12px 0;padding:14px;border-radius:999px;border:2px solid var(--edge);font:22px system-ui,sans-serif;text-align:center;background:var(--card);color:var(--ink)}
+  button{border:0;border-radius:999px;padding:12px 28px;font:900 20px system-ui,sans-serif;color:#fff;background:#1677e8}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<main>
+  <form id="gate" hidden><h1>crew status</h1><input id="pin" type="password" autocomplete="current-password" aria-label="tower code" placeholder="tower code"><button type="submit">open</button><p class="sub" id="gmsg"></p></form>
+  <div id="board" hidden>
+    <h1>crew status</h1>
+    <div class="big" id="last">checking…</div>
+    <div class="sub" id="lastsub"></div>
+    <div class="now"><b>current brick</b><p id="brick">…</p></div>
+    <div class="counts" id="counts"></div>
+    <div id="list"></div>
+    <p class="sub" id="foot"></p>
+  </div>
+</main>
+<script>
+var API = "https://pit.asaaab.com/tower/";
+var code = ""; try { code = sessionStorage.getItem("tower-code") || ""; } catch (e) {}
+function $(id){ return document.getElementById(id); }
+// radio status -> the four words he asked for (plus "needs you", which is his click)
+var MAP = {sent: ["received", "--rec"], routed: ["working", "--work"], needs_ok: ["needs you", "--you"], human: ["needs you", "--you"],
+           flagged: ["stuck", "--stuck"], stuck: ["stuck", "--stuck"], done: ["done", "--done"]};
+function word(s){ return MAP[s] || ["working", "--work"]; }
+function ago(t){ var m = Math.round((Date.now() - new Date(t).getTime()) / 60000); if (isNaN(m)) return "?"; if (m < 1) return "just now"; if (m < 60) return m + " min ago"; var h = Math.floor(m / 60); return h + " h " + (m % 60) + " min ago"; }
+function first(s){ s = String(s || "").replace(/\s+/g, " ").trim(); var i = s.search(/[.!?](\s|$)/); return (i > 0 && i < 160 ? s.slice(0, i + 1) : s.slice(0, 160)); }
+function isCrew(c){ return /^TOWER|^First Officer/i.test(c.from || ""); }
+function draw(calls){
+  var answered = calls.filter(function(c){ return c.answered_at; }).sort(function(a, b){ return a.answered_at < b.answered_at ? 1 : -1; });
+  var last = answered[0];
+  var mins = last ? (Date.now() - new Date(last.answered_at).getTime()) / 60000 : 1e9;
+  $("last").textContent = last ? "last round " + ago(last.answered_at) : "no rounds seen";
+  $("last").className = "big" + (mins > 45 ? " stale" : "");
+  $("lastsub").textContent = last ? (last.by || "") + (mins > 45 ? "  ·  rounds look stopped: that's the break" : "  ·  rounds run about every 10 min") : "";
+  $("brick").textContent = last ? first(last.decoded || last.title || last.text) : "…";
+  var day = Date.now() - 24 * 3600 * 1000;
+  var his = calls.filter(function(c){ return !isCrew(c) && new Date(c.at).getTime() > day; }).sort(function(a, b){ return a.at < b.at ? 1 : -1; });
+  var n = {received: 0, working: 0, "needs you": 0, stuck: 0, done: 0};
+  his.forEach(function(c){ n[word(c.status)[0]]++; });
+  $("counts").innerHTML = "";
+  [["received", "--rec"], ["working", "--work"], ["needs you", "--you"], ["stuck", "--stuck"], ["done", "--done"]].forEach(function(k){
+    var s = document.createElement("span"); s.style.setProperty("--c", "var(" + k[1] + ")"); s.textContent = n[k[0]];
+    var sm = document.createElement("small"); sm.textContent = k[0]; s.appendChild(sm); $("counts").appendChild(s); });
+  var L = $("list"); L.innerHTML = "";
+  // open first, then done; newest first inside each
+  his.sort(function(a, b){ var da = a.status === "done", db = b.status === "done"; return da === db ? 0 : (da ? 1 : -1); });
+  his.slice(0, 30).forEach(function(c){
+    var w = word(c.status), r = document.createElement("div"); r.className = "row";
+    var ch = document.createElement("span"); ch.className = "chip"; ch.style.setProperty("--c", "var(" + w[1] + ")"); ch.textContent = w[0];
+    var b = document.createElement("div");
+    var t = document.createElement("div"); t.className = "t"; t.textContent = first(c.title || c.decoded || c.text);
+    var a = document.createElement("div"); a.className = "a"; a.textContent = c.answer ? first(c.answer) : "waiting for the next round";
+    var m = document.createElement("div"); m.className = "w"; m.textContent = (c.from || "") + "  ·  in " + ago(c.at) + (c.answered_at ? "  ·  answered " + ago(c.answered_at) : "");
+    b.appendChild(t); b.appendChild(a); b.appendChild(m); r.appendChild(ch); r.appendChild(b); L.appendChild(r);
+  });
+  $("foot").textContent = "updated " + new Date().toLocaleTimeString([], {hour: "numeric", minute: "2-digit"}) + "  ·  refreshes every minute  ·  read it parked";
+}
+function load(){
+  return fetch(API + "radar", {method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify({code: code})})
+    .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return {ok: r.ok, j: j}; }); })
+    .then(function(x){
+      if (!x.ok) { lock(x.j.error || "That code didn't open it."); return false; }
+      $("gate").hidden = true; $("board").hidden = false; draw(x.j.calls || []); return true; })
+    .catch(function(){ $("foot").textContent = "no signal, trying again in a minute"; return false; });
+}
+function lock(msg){ try { sessionStorage.removeItem("tower-code"); } catch (e) {} code = ""; $("board").hidden = true; $("gate").hidden = false; $("gmsg").textContent = msg || ""; }
+$("gate").onsubmit = function(e){ e.preventDefault(); code = $("pin").value.trim(); if (!code) return; $("gmsg").textContent = "checking…";
+  load().then(function(ok){ if (ok) { try { sessionStorage.setItem("tower-code", code); } catch (e) {} $("pin").value = ""; } }); };
+if (code) load(); else lock("");
+setInterval(function(){ if (code) load(); }, 60000);
+</script>
+</body>
+</html>
