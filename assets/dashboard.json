@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-10-30T20:52:00Z",
+  "s": "Two new pieces of work landed in the review queue, a storage slim-down and a fresh look for the red buddy card, while the tower checked in five times with no calls and the road holds at step 2.",
+  "idle": false
+ },
+ {
   "t": "2026-10-30T19:52:00Z",
   "s": "Idling: nothing moved this hour; the tower checked in four times with no calls, the board held still, and the road sits at step 2.",
   "idle": true
