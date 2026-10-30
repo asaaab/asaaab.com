@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-10-30T00:51:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
   "t": "2026-10-29T23:52:00Z",
   "s": "Idling: nothing moved this hour; the tower checked in five times with no calls, the board held still, and the road sits at step 2.",
   "idle": true
