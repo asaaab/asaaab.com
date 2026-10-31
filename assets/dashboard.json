@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-10-31T02:51:00Z",
+  "s": "Idling: nothing moved this hour beyond four quiet tower check-ins with no calls; the road sits at step 2.",
+  "idle": true
+ },
+ {
   "t": "2026-10-31T01:51:00Z",
   "s": "The garage game leapt from v2 to v3.0 (idea archery, self-updates, a first-person 3D idea space), the red dot now glides with a tower-only beta, one physics tweak was benched, and the tower checked in six times with no calls.",
   "idle": false
