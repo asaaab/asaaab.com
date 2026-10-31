@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-10-31T14:51:00Z",
+  "s": "A quiet hour: the tower checked in five times with no calls, and today's morning brief got written; the road sits at step 2.",
+  "idle": false
+ },
+ {
   "t": "2026-10-31T13:51:00Z",
   "s": "Idling: nothing moved this hour beyond five quiet tower check-ins with no calls; the road sits at step 2.",
   "idle": true
