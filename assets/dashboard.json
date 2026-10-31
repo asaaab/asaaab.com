@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-10-31T06:51:00Z",
+  "s": "Idling: nothing moved this hour beyond six quiet tower check-ins with no calls; the road sits at step 2.",
+  "idle": true
+ },
+ {
   "t": "2026-10-31T05:51:00Z",
   "s": "Last night's red dot standup got its verdict and a new lead dot was picked, while the tower checked in six times with no calls; the road sits at step 2.",
   "idle": false
