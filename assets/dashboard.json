@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-11-01T14:52:00Z",
+  "s": "Quiet hour: the tower checked in five times with no calls, and one small fix taught its hourly report to follow the clock change to standard time.",
+  "idle": false
+ },
+ {
   "t": "2026-11-01T13:51:00Z",
   "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
   "idle": true
