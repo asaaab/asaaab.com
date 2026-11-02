@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-11-02T00:51:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
   "t": "2026-11-01T23:51:00Z",
   "s": "Steady work: the tower checked in six times with no calls and logged 90 new video decks from today's clip batch, all waiting on verdicts; the board held still and the road sits at step 2.",
   "idle": false
