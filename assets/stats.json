@@ -1,14 +1,14 @@
 {
-  "pulled": "2026-10-26T12:09:45.000Z",
-  "videos": 787,
+  "pulled": "2026-11-02T13:06:57.000Z",
+  "videos": 794,
   "since": "2025-08-31",
-  "views": 12046835,
-  "views_short": "12.0M",
-  "top_views": 2773617,
-  "top_views_short": "2.7M",
+  "views": 12279194,
+  "views_short": "12.2M",
+  "top_views": 2878676,
+  "top_views_short": "2.8M",
   "top_len_s": 11,
   "hold_multiple": 16,
-  "hours": 50244,
-  "likes": 888635,
-  "comments": 22380
+  "hours": 51170,
+  "likes": 902658,
+  "comments": 22657
 }
