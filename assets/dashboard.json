@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-11-02T08:53:00Z",
+  "s": "The tower checked in five times and took no calls, and three late rows from yesterday's deck batch were logged; nothing else moved this hour.",
+  "idle": false
+ },
+ {
   "t": "2026-11-02T08:00:00Z",
   "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
   "idle": true
