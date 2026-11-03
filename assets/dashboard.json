@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-11-03T15:51:00Z",
+  "s": "The crew wrote today's daily brief that an earlier round missed; the tower checked in six times and took no calls, and the road is still at step 1.",
+  "idle": false
+ },
+ {
   "t": "2026-11-03T14:52:00Z",
   "s": "Idling: the tower checked in every ten minutes with no calls, and nothing else moved this hour.",
   "idle": true
