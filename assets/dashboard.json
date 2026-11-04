@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-11-04T19:52:00Z",
+  "s": "Idling: the tower checked in seven times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
   "t": "2026-11-04T18:52:12Z",
   "s": "The shift ran one more test round on the contraption, and the new tweak now stumbles on 1 in 50 fresh cases instead of 4; the tower checked in five times and took no calls.",
   "idle": false
