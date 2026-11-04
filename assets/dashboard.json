@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-11-04T09:52:14Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
   "t": "2026-11-04T08:52:00Z",
   "s": "One safety fix landed: the portal now only accepts secure web links in its settings; the tower checked in six times and took no calls, and the road is still at step 1.",
   "idle": false
