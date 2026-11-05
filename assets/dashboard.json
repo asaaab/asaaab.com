@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-11-05T10:52:00Z",
+  "s": "The test crew ran another batch of fifty trial runs on a new setting and found it no better than the last one, while the tower checked in six times and took no calls.",
+  "idle": false
+ },
+ {
   "t": "2026-11-05T09:52:00Z",
   "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
   "idle": true
