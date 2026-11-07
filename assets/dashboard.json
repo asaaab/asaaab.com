@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-11-07T06:52:38Z",
+  "s": "Mostly idle: the tower made seven rounds and took no calls, and last night's crew standup was judged and a new lead computer picked; the road is still at step 1.",
+  "idle": false
+ },
+ {
   "t": "2026-11-07T05:52:05Z",
   "s": "Idling: nothing moved this hour; the tower made five rounds and took no calls, and the road is still at step 1.",
   "idle": true
