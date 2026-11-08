@@ -1,94 +1,99 @@
 [
-{
- "t": "2026-11-08T06:52:00Z",
- "s": "Something moved: the nightly check-in landed, one computer reported what it learned and was picked to lead the others; the tower made six rounds and took no calls, and the road is still at step 1.",
- "idle": false
-},
-{
- "t": "2026-11-08T05:52:00Z",
- "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
- "idle": true
-},
-{
- "t": "2026-11-08T04:52:00Z",
- "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
- "idle": true
-},
-{
- "t": "2026-11-08T03:52:00Z",
- "s": "Idling: nothing moved this hour; the tower made five rounds and took no calls, and the road is still at step 1.",
- "idle": true
-},
-{
- "t": "2026-11-08T02:52:00Z",
- "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
- "idle": true
-},
-{
- "t": "2026-11-08T01:52:00Z",
- "s": "Idling: nothing moved this hour; the tower made five rounds and took no calls, and the road is still at step 1.",
- "idle": true
-},
-{
- "t": "2026-11-08T00:52:00Z",
- "s": "The shift ran a 50-case test on puzzle level 47, which solved 1 fresh case versus 2 for level 46, about flat, and fixed its scoring tally; the tower made five rounds with no calls, and the road is still at step 1.",
- "idle": false
-},
-{
- "t": "2026-11-07T23:52:00Z",
- "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
- "idle": true
-},
-{
- "t": "2026-11-07T22:52:00Z",
- "s": "Idling: nothing moved this hour; the tower made seven rounds and took no calls, and the road is still at step 1.",
- "idle": true
-},
-{
- "t": "2026-11-07T21:52:00Z",
- "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
- "idle": true
-},
-{
- "t": "2026-11-07T20:52:00Z",
- "s": "The shift ran a 50-case test on puzzle level 46, which solved 2 fresh cases versus 1 for level 45, about flat; the tower made six rounds with no calls, and the road is still at step 1.",
- "idle": false
-},
-{
- "t": "2026-11-07T19:52:00Z",
- "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
- "idle": true
-},
-{
- "t": "2026-11-07T18:52:00Z",
- "s": "The crew wrote today's daily brief, the first since Tuesday, while the tower made six rounds and took no calls; the road is still at step 1.",
- "idle": false
-},
-{
- "t": "2026-11-07T17:53:00Z",
- "s": "Idling: nothing moved this hour; the tower made its rounds and took no calls, and the road is still at step 1.",
- "idle": true
-},
-{
- "t": "2026-11-07T16:52:00Z",
- "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls.",
- "idle": true
-},
-{
- "t": "2026-11-07T15:52:00Z",
- "s": "Idling: the tower checked in six times and took no calls, and nothing else moved this hour.",
- "idle": true
-},
-{
- "t": "2026-11-07T14:52:21Z",
- "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
- "idle": true
-},
-{
- "t": "2026-11-07T13:52:00Z",
- "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
- "idle": true
-},
+ {
+  "t": "2026-11-08T07:52:00Z",
+  "s": "Something moved: fifteen new doors went up for our domains, one got a real home page with fresh pitch decks behind it, and the tower made six rounds and took one call; the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-08T06:52:00Z",
+  "s": "Something moved: the nightly check-in landed, one computer reported what it learned and was picked to lead the others; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-08T05:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-08T04:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-08T03:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made five rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-08T02:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-08T01:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made five rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-08T00:52:00Z",
+  "s": "The shift ran a 50-case test on puzzle level 47, which solved 1 fresh case versus 2 for level 46, about flat, and fixed its scoring tally; the tower made five rounds with no calls, and the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-07T23:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T22:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made seven rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T21:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T20:52:00Z",
+  "s": "The shift ran a 50-case test on puzzle level 46, which solved 2 fresh cases versus 1 for level 45, about flat; the tower made six rounds with no calls, and the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-07T19:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T18:52:00Z",
+  "s": "The crew wrote today's daily brief, the first since Tuesday, while the tower made six rounds and took no calls; the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-07T17:53:00Z",
+  "s": "Idling: nothing moved this hour; the tower made its rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T16:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T15:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls, and nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T14:52:21Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T13:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
  {
   "t": "2026-11-07T12:52:25Z",
   "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
