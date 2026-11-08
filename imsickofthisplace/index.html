@@ -40,7 +40,10 @@ h1 small{display:block;font-size:.5em;margin-top:8px;letter-spacing:0}
 .zz{position:absolute;right:8px;top:4px;font:400 18px Anton;color:var(--red);opacity:.9}
 .thesis{margin-top:auto;padding-top:26px;font:italic 14px/1.45 Lora,serif;color:#4a3a2a}
 .thesis b{font-style:normal;color:var(--ink)}
-.strip{margin:18px -18px -28px;background:var(--ink);color:var(--cream);padding:10px 18px;font:700 11px "Nunito Sans";letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between}
+.door{display:block;margin-top:18px;padding:14px 16px;background:var(--ink);color:var(--cream);text-decoration:none;font:500 14px/1.4 "Nunito Sans";border:4px solid var(--ink);box-shadow:5px 5px 0 var(--red);position:relative}
+.door .dl{display:block;font:700 10px "Nunito Sans";letter-spacing:.16em;text-transform:uppercase;color:var(--yel);margin-bottom:4px}
+.door b{color:#fff}.door .arr{position:absolute;right:14px;bottom:10px;font:400 22px Anton;color:var(--yel)}
+.strip{margin:14px -18px -28px;background:var(--ink);color:var(--cream);padding:10px 18px;font:700 11px "Nunito Sans";letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between}
 .strip a{color:var(--yel);text-decoration:none}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 </style>
@@ -67,7 +70,8 @@ function ev(n){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({p
 
   <p class="thesis">"i don't hate the coworkers but nobody wants to strike. if we all call out on the same day it's so understaffed it's gonna fail at least enough for us to <b>get chips back.</b>"</p>
 
-  <div class="strip"><span>demo · first arc</span><a href="https://asaaab.com/">an asaaab tool →</a></div>
+  <a class="door" href="https://asaaab.com/" onclick="ev('door-isotp-asaaab')"><span class="dl">the door to asaaab</span>if you have a different perspective on things, you don't just build another x. <b>you build asaaab.</b> <span class="arr">→</span></a>
+  <div class="strip"><span>demo · first arc</span><span>an asaaab tool</span></div>
 </div>
 </body>
 </html>
