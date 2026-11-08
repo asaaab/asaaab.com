@@ -3,87 +3,202 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>littleredbot.ai</title>
-<meta name="description" content="the marketing ai bot and marketingbot powwow with websitebuilderbot">
-<meta property="og:title" content="littleredbot.ai">
-<meta property="og:description" content="the marketing ai bot and marketingbot powwow with websitebuilderbot">
+<title>littleredbot.ai · it's just a button</title>
+<meta name="description" content="a marketing exercise and a little red button. 99¢ per deck, no subscription. tell it your finish line, it pings your own AI every few minutes asking for the next click. works with the tools you already pay for.">
+<meta property="og:title" content="littleredbot.ai · it's just a button">
+<meta property="og:description" content="99¢ per deck. no subscription. works with your own tools. not an AI scam, just a really accurate target.">
 <meta property="og:url" content="https://littleredbot.ai/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;800&family=Caveat:wght@600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@500;700;900&family=Caveat:wght@600&family=IBM+Plex+Mono:wght@400;700&display=swap">
 <style>
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;color:var(--ink);font:500 17px/1.5 "Nunito Sans",system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
-.sky{position:fixed;inset:0;z-index:-1}
-@keyframes melt{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-a{color:inherit}
-.wrap{max-width:760px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left)) 80px}
-header{text-align:center;padding:72px 0 28px}
-h1{margin:0;overflow-wrap:anywhere}
-.eyebrow{display:inline-block;padding:6px 14px;border-radius:999px;font:800 12px/1 "Nunito Sans";letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px}
-.card{position:relative;padding:22px 24px;margin:18px 0;border-radius:26px;background:var(--glass);border:2px solid #fff;box-shadow:0 10px 26px rgba(6,40,80,.18),inset 0 -6px 14px rgba(120,190,240,.15);backdrop-filter:blur(8px)}
+:root{--ink:#10314a;--soft:#4f6d84;--glass:rgba(255,255,255,.8);--red:#e2342b;--yel:#ffd23f}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{color:var(--ink);font:500 16px/1.45 "Nunito Sans",system-ui,sans-serif;background:#7fd0ff;overflow-x:hidden}
+.sky{position:fixed;inset:0;z-index:-1;background:radial-gradient(500px 300px at 85% 8%,rgba(255,255,255,.9),transparent 70%),radial-gradient(120px 120px at 88% 9%,#fff7b0,transparent 70%),linear-gradient(180deg,#1fa8ff 0%,#5cc8ff 35%,#a9e6ff 70%,#e6fbff 100%)}
+.sky::after{content:"";position:absolute;left:0;right:0;bottom:0;height:18vh;background:linear-gradient(180deg,#9be36f,#5fbf4a);border-radius:50% 50% 0 0/60px 60px 0 0}
+.wrap{max-width:560px;margin:0 auto;padding:0 18px 90px}
+header{text-align:center;padding:56px 0 18px}
+.eyebrow{display:inline-flex;flex-wrap:wrap;justify-content:center;gap:6px 14px;padding:8px 14px;border-radius:999px;background:var(--glass);font:800 12px/1 "Nunito Sans";letter-spacing:.04em;box-shadow:0 4px 12px rgba(6,81,138,.15)}
+h1{margin:16px 0 0;font:700 clamp(40px,10vw,64px)/.95 Fredoka,sans-serif;color:#fff;text-shadow:0 3px 0 #0b7cc7,0 10px 30px rgba(0,60,120,.35)}
+.dek{margin:12px auto 0;max-width:34ch;font:800 15px/1.4 "Nunito Sans";color:#0b4f80}
+.card{position:relative;padding:20px 22px;margin:16px 0;border-radius:26px;background:var(--glass);border:2px solid #fff;box-shadow:0 10px 26px rgba(6,81,138,.2),inset 0 -6px 14px rgba(120,190,240,.18);backdrop-filter:blur(6px)}
 .card>*{position:relative}
-.card::before{content:"";position:absolute;inset:4px 10px auto;height:38%;border-radius:22px 22px 60% 60%/22px 22px 18px 18px;background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,0));pointer-events:none}
-.label{font:800 12px/1 "Nunito Sans";letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin:0 0 10px}
-.job{margin:0}
-.job q{quotes:"\201C" "\201D"}
-.maybe{font-size:14px;opacity:.75;margin-top:10px}
-.funnel{display:grid;gap:10px;margin-top:6px}
-.btn{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-radius:999px;text-decoration:none;font:800 17px/1.1 "Nunito Sans";background:var(--btn);color:var(--btn-ink);border:2px solid #fff;box-shadow:0 8px 20px rgba(0,30,70,.25);transition:transform .15s}
-.btn:hover{transform:translateY(-2px)}
-.btn.alt{background:var(--glass);color:var(--ink)}
-.dot{width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff8a8a,#e2342b 55%,#8c0f0a);box-shadow:0 0 0 4px rgba(226,52,43,.25);animation:pulse 1.8s ease-in-out infinite;flex:none}
-@keyframes pulse{50%{box-shadow:0 0 0 9px rgba(226,52,43,.08)}}
-.reveal{text-align:center;margin:28px 0 0;font-size:15px;opacity:.85}
-footer{text-align:center;margin-top:40px;font-size:13px;opacity:.85}
-footer a{text-decoration:none;font-weight:800}
-.badge{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--glass);border:2px solid #fff;box-shadow:0 6px 16px rgba(6,40,80,.15);text-decoration:none;font:800 13px/1 "Nunito Sans"}
-.badge i{width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#5cc8ff 45%,#0b7cc7)}
-.status{display:inline-block;margin-top:14px;padding:5px 12px;border-radius:999px;border:2px dashed rgba(0,0,0,.25);font:700 12px/1.3 "Nunito Sans";opacity:.8}
-.orb{position:fixed;z-index:-1;border-radius:50%;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.95),rgba(255,255,255,.35) 45%,rgba(255,255,255,.05) 70%);box-shadow:inset -6px -10px 24px rgba(0,0,0,.08);animation:drift 12s ease-in-out infinite}
-@keyframes drift{50%{transform:translateY(-18px)}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important}}
-
-:root{--ink:#0f1c2e;--glass:rgba(255,255,255,.86);--btn:#0f1c2e;--btn-ink:#fff}
-.sky{background:linear-gradient(160deg,#dfe7f1 0%,#f6f8fb 45%,#cfdbe8 100%)}
-.sky::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,rgba(15,28,46,.045) 0 1px,transparent 1px 72px)}
-h1{font:800 clamp(30px,6vw,64px)/1 "Nunito Sans",sans-serif;letter-spacing:-.02em;color:#0f1c2e}
-h1 small{display:block;font:600 13px/1.2 "Nunito Sans";letter-spacing:.22em;text-transform:uppercase;color:#4a5d75;margin-bottom:14px}
-.eyebrow{background:#0f1c2e;color:#fff}
-.job{font:600 clamp(22px,4vw,32px)/1.25 Caveat,cursive}
-.card{border-radius:14px}
+.card::before{content:"";position:absolute;inset:4px 10px auto;height:36%;border-radius:22px 22px 60% 60%/22px 22px 18px 18px;background:linear-gradient(180deg,rgba(255,255,255,.75),rgba(255,255,255,0));pointer-events:none}
+.label{font:800 11px/1 "Nunito Sans";letter-spacing:.14em;text-transform:uppercase;color:var(--soft);margin:0 0 8px}
+textarea{width:100%;min-height:76px;border:0;border-radius:16px;padding:12px 14px;background:#fff;font:600 17px/1.4 Caveat,cursive;font-size:22px;color:var(--ink);resize:vertical;box-shadow:inset 0 2px 6px rgba(0,0,0,.08)}
+.samples{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.samples button{border:2px solid #fff;background:rgba(255,255,255,.6);border-radius:999px;padding:6px 10px;font:800 11px "Nunito Sans";color:var(--ink);cursor:pointer;font-family:inherit}
+/* the button */
+.btnwrap{display:grid;place-items:center;padding:26px 0 10px}
+.red{width:190px;height:190px;border-radius:50%;border:0;cursor:pointer;position:relative;background:radial-gradient(circle at 35% 28%,#ffb3ad,#e2342b 45%,#9c140c 85%);box-shadow:0 18px 0 #6b0c06,0 30px 40px rgba(100,0,0,.35),inset 0 -10px 20px rgba(0,0,0,.2);transition:transform .08s,box-shadow .08s;font:700 22px/1.1 Fredoka,sans-serif;color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.3)}
+.red::before{content:"";position:absolute;left:22%;top:12%;width:46%;height:28%;border-radius:50%;background:linear-gradient(180deg,rgba(255,255,255,.75),rgba(255,255,255,0));pointer-events:none}
+.red:active,.red.down{transform:translateY(12px);box-shadow:0 6px 0 #6b0c06,0 14px 24px rgba(100,0,0,.3),inset 0 -6px 14px rgba(0,0,0,.25)}
+.red[disabled]{cursor:default}
+.base{width:240px;height:28px;margin:-6px auto 0;border-radius:50%;background:linear-gradient(180deg,#c9d0d6,#8f9aa6);box-shadow:0 10px 20px rgba(0,30,60,.3)}
+.under{text-align:center;font:800 12px "Nunito Sans";color:#0b4f80;margin-top:14px}
+/* log */
+.log{display:none;font:400 13px/1.55 "IBM Plex Mono",ui-monospace,monospace;background:#0f1c2e;color:#dfe8ef;border-radius:18px;padding:14px 16px;margin-top:14px;min-height:120px;white-space:pre-wrap}
+.log.show{display:block}
+.log b{color:var(--yel);font-weight:700}
+.log .dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(226,52,43,.3);margin-right:8px;vertical-align:middle;animation:pulse 1.4s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 9px rgba(226,52,43,.05)}}
+/* deck */
+.out{display:none}.out.show{display:block}
+.slides{display:grid;gap:10px;margin-top:10px}
+.slide{aspect-ratio:16/9;border-radius:14px;background:#fff;border:2px solid #fff;box-shadow:0 6px 16px rgba(6,81,138,.15);padding:12px 14px;position:relative;overflow:hidden}
+.slide .k{font:800 9px "Nunito Sans";letter-spacing:.14em;text-transform:uppercase;color:#0b7cc7}
+.slide .t{font:700 clamp(16px,4.6vw,22px)/1.05 Fredoka,sans-serif;margin-top:3px}
+.slide .b{font:500 12px/1.4 "Nunito Sans";margin-top:6px;color:#2a4a60}
+.slide .n{position:absolute;right:10px;bottom:6px;font:800 9px "IBM Plex Mono";color:#9fb3c4}
+.slide.red{background:radial-gradient(circle at 30% 20%,#ff8a84,var(--red) 60%);color:#fff}
+.slide.red .k,.slide.red .b{color:#ffe3e1}
+.slide.dark{background:#0f1c2e;color:#fff}.slide.dark .k{color:var(--yel)}.slide.dark .b{color:#dfe8ef}
+.row{display:grid;gap:8px;margin-top:12px}
+.cta{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 18px;border-radius:999px;border:2px solid #fff;background:#0b7cc7;color:#fff;font:900 14px "Nunito Sans";cursor:pointer;box-shadow:0 8px 20px rgba(6,81,138,.3);text-decoration:none;font-family:inherit}
+.cta.alt{background:var(--glass);color:var(--ink)}
+.cta small{font-weight:700;opacity:.85}
+.price{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.price b{font:700 44px/1 Fredoka,sans-serif}
+.price span{font:800 13px "Nunito Sans";color:var(--soft)}
+ul.fine{margin:0;padding-left:18px;font:500 14px/1.5 "Nunito Sans"}
+ul.fine li{margin:3px 0}
+.door{display:block;margin-top:16px;padding:16px 18px;border-radius:22px;background:#0f1c2e;color:#dfe8ef;text-decoration:none;font:500 14px/1.4 "Nunito Sans";box-shadow:0 10px 26px rgba(0,20,50,.35)}
+.door .dl{display:block;font:800 10px "Nunito Sans";letter-spacing:.16em;text-transform:uppercase;color:var(--yel);margin-bottom:4px}
+.door b{color:#fff}
+footer{text-align:center;margin-top:26px;font:700 12px "Nunito Sans";color:#0b4f80}
+footer a{color:inherit}
+.status{display:inline-block;margin-top:10px;padding:4px 10px;border-radius:999px;border:2px dashed rgba(11,79,128,.4);font:800 10px "Nunito Sans"}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 <script>(function(){var s=document.createElement("script");s.async=true;s.dataset.goatcounter="https://asaaab.goatcounter.com/count";s.src="https://gc.zgo.at/count.js";document.head.appendChild(s);})();
-function ev(n){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({path:n,event:true});}catch(e){}}</script>
+function ev(n){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({path:'lrb-'+n,event:true});}catch(e){}}</script>
+<script src="pptxgen.bundle.js" defer></script>
 </head>
 <body>
 <div class="sky"></div>
-<div class="orb" style="width:140px;height:140px;left:-40px;top:18%"></div>
-<div class="orb" style="width:90px;height:90px;right:6%;top:9%;animation-delay:-4s"></div>
-<div class="orb" style="width:60px;height:60px;right:18%;bottom:14%;animation-delay:-8s"></div>
 <div class="wrap">
+
 <header>
-  <span class="eyebrow">Corporate AI Company Synergymaxxing Solutions</span>
-  <h1>littleredbot.ai</h1>
+  <div class="eyebrow"><span>a marketing exercise</span><span>·</span><span>99¢ per deck</span><span>·</span><span>no subscription</span><span>·</span><span>your own tools</span></div>
+  <h1>it's just a button.</h1>
+  <p class="dek">tell it your finish line. it pings the AI you already pay for, every few minutes: <i>what's the next click?</i> that's the whole product.</p>
 </header>
 
 <section class="card">
-  <p class="label">the job, in the Captain’s words</p>
-  <p class="job"><q>the marketing ai bot and marketingbot powwow with websitebuilderbot</q></p><p class="maybe">the most honest version of what this thing is</p>
+  <p class="label">your finish line, in one sentence</p>
+  <textarea id="fl">a car club where everyone who shows up to the meet gets paid the same from the merch table.</textarea>
+  <div class="samples">
+    <button data-s="a car club where everyone who shows up to the meet gets paid the same from the merch table.">car club</button>
+    <button data-s="a food truck owned by the four people who cook in it.">food truck</button>
+    <button data-s="get my 2003 wagon running and registered by spring.">the wagon</button>
+    <button data-s="a youtube channel that pays the editor the same as the host.">channel</button>
+  </div>
+  <p class="label" style="margin-top:10px">then</p>
+  <div class="btnwrap"><button class="red" id="press">press it</button><div class="base"></div></div>
+  <p class="under" id="under">demo: no key plugged in, so the answers are canned. the files it hands you are real.</p>
+  <div class="log" id="log"></div>
+</section>
+
+<section class="card out" id="out">
+  <p class="label">what you walk away with · two files</p>
+  <p style="margin:0;font:700 14px/1.4 'Nunito Sans'">1 · <b>the deck</b>, addressed to your AI: <i>welcome to being a bot. you take orders from this script. here's the finish line.</i></p>
+  <div class="slides" id="slides"></div>
+  <p style="margin:12px 0 0;font:700 14px/1.4 'Nunito Sans'">2 · <b>the script</b>: a timer. every N minutes it sends your AI the finish line and asks for the next click. bring your own key. runs on your machine. we never see it.</p>
+  <div class="row">
+    <button class="cta" id="dl"><span>download the deck (.pptx)</span><small>free in the demo</small></button>
+    <button class="cta alt" id="dls"><span>download the script (lrb.py + run.bat)</span><small>free, always</small></button>
+  </div>
 </section>
 
 <section class="card">
-  <p class="label">every door opens onto the same house</p>
-  <div class="funnel"><a class="btn" href="https://asaaab.com/asaaabot/" onclick="ev('door-littleredbot-asaaabot')"><span>talk to asaaabot, free →</span><span class="dot" aria-hidden="true"></span></a><a class="btn alt" href="https://asaaab.com/manual/" onclick="ev('door-littleredbot-manual')"><span>read the co-owner&#x27;s manual →</span></a><a class="btn alt" href="https://asaaab.com/shop/" onclick="ev('door-littleredbot-shop')"><span>i&#x27;d buy this →</span></a></div>
-  <p class="maybe">asaaab: $231.36 once · one day at the LA living wage. the co-owners manual and the engine. <a href="https://asaaab.com/manual/">maybe, with sources →</a></p>
+  <div class="price"><b>99¢</b><span>per deck. buy one, buy ten. no account. no subscription.</span></div>
+  <p class="label" style="margin-top:12px">the fine print, honestly</p>
+  <ul class="fine">
+    <li>this is a marketing exercise and a little red button. that's not a joke, it's the product description.</li>
+    <li>not an AI scam. the deck is a really, really accurate target, written as clearly as we can get it. the script is 60 lines you can read.</li>
+    <li>works with the tools you already pay for. your key stays on your machine. nothing comes back to us, which also means we can't help if your AI is dumb.</li>
+    <li>what's not secure: anyone with your computer can read your finish line. it's a text file. that's the point.</li>
+    <li>the coin slot isn't connected yet (first arc). until it is, the deck is free and we'd rather you take it than wait.</li>
+  </ul>
 </section>
 
-<p class="reveal">every door opens onto the same house.</p>
+<a class="door" href="https://asaaab.com/asaaabot/" onclick="ev('asaaabot')"><span class="dl">the door to asaaab</span>asaaabot is our copy of this exact button, pointed at our own tools. if you have a different perspective on things, you don't just build another website. <b>you build asaaab.</b> →</a>
 
 <footer>
-  <a class="badge" href="https://asaaab.com/"><i></i> made with asaaab website builder</a>
+  <a href="https://asaaab.com/">asaaab</a> is a US co-op · <a href="https://asaaab.com/shop/">the shop</a> is the other coin slot · <a href="https://asaaab.com/privacy/">privacy</a>
   <div class="status">parked at asaaab.com/littleredbot/ until littleredbot.ai points here</div>
-  <p><a href="https://asaaab.com/">asaaab</a> is a US co-op. <a href="https://asaaab.com/privacy/">privacy</a> · <a href="https://asaaab.com/copyright/">copyright</a></p>
 </footer>
 </div>
+
+<script>
+(function(){
+  function $(i){return document.getElementById(i)}
+  var fl=$('fl'),log=$('log'),press=$('press'),out=$('out');
+  document.querySelectorAll('[data-s]').forEach(function(b){b.addEventListener('click',function(){fl.value=b.dataset.s})});
+  var CANNED=[
+    "write down who the owners are. all of them, by name or by role. one line each.",
+    "pick the one thing that has to be true next week for this to be real. not the dream, the week.",
+    "find the cheapest version that already exists and write down what it's missing.",
+    "tell one person the finish line out loud. note what they asked. that's your next slide."
+  ];
+  var ran=false;
+  function line(t,ms){return new Promise(function(r){setTimeout(function(){log.innerHTML+=t+"\n";log.scrollTop=log.scrollHeight;r()},ms)})}
+  press.addEventListener('click',async function(){
+    if(ran)return; ran=true; press.disabled=true; press.classList.add('down'); press.textContent='…';
+    var f=fl.value.trim()||"a finish line.";
+    log.classList.add('show'); log.innerHTML='';
+    ev('press');
+    await line("<b>finish line set.</b> "+f,200);
+    await line("<span class='dot'></span>pinging your rented model… <b>(demo: no key, canned answer)</b>",700);
+    for(var i=0;i<3;i++){
+      await line("→ next click: "+CANNED[i],900);
+      await line("  next ping in 10m  (demo: 1s)",600);
+    }
+    await line("<b>that's the whole loop.</b> a timer, a finish line, and a question. forever, or until you change the sentence.",700);
+    await line("building your two files…",600);
+    render(f);
+    out.classList.add('show');
+    press.textContent='done';
+    $('under').textContent='press it again later with a key and the answers will be yours, not ours.';
+    setTimeout(function(){out.scrollIntoView({behavior:'smooth',block:'start'})},300);
+  });
+  function slides(f){
+    return [
+      {cls:'red',k:'slide 1',t:'welcome to being a bot.',b:'you take orders from a script the user controls. the script asks one question on a timer. this deck tells you what the question is about.'},
+      {k:'slide 2 · the finish line',t:f,b:'this sentence is the target. every answer you give should move toward it or say plainly why it can\'t.'},
+      {k:'slide 3 · what done looks like',t:'the user can point at it.',b:'done is not a feeling. it\'s a thing a stranger could see, use, or be paid by. ask for that if it\'s missing.'},
+      {k:'slide 4 · what\'s in hand',t:'ask, then remember.',b:'the user has tools, people, money and time they haven\'t told you about yet. ask once. write it down. don\'t ask again.'},
+      {k:'slide 5 · off limits',t:'no fake people. no fake numbers.',b:'don\'t invent reviews, customers, data or quotes. if the next click needs a real human, say so and stop.'},
+      {k:'slide 6 · the owners',t:'who owns this when it works?',b:'if the finish line is money, make the plan one where the people doing the work own the thing. ask the user to name them.'},
+      {k:'slide 7 · the cadence',t:'every 10 minutes, one question.',b:'"here is the finish line. what is the next click?" one answer, one click long. no essays. no plans past the next click.'},
+      {cls:'dark',k:'slide 8 · the script',t:'lrb.py',b:'reads finish_line.txt · pings the model in LRB_URL with LRB_KEY · prints the next click · sleeps · repeats. 60 lines. read it.'}
+    ];
+  }
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  var cur=[];
+  function render(f){cur=slides(f);$('slides').innerHTML=cur.map(function(s,i){return '<div class="slide '+(s.cls||'')+'"><div class="k">'+esc(s.k)+'</div><div class="t">'+esc(s.t)+'</div><div class="b">'+esc(s.b)+'</div><div class="n">'+(i+1)+'/'+cur.length+'</div></div>'}).join('')}
+  $('dl').addEventListener('click',function(){
+    if(typeof PptxGenJS==='undefined'){alert('the slide maker did not load. try again in a second.');return}
+    var p=new PptxGenJS();p.layout='LAYOUT_16x9';
+    cur.forEach(function(s){var sl=p.addSlide();var red=s.cls==='red',dark=s.cls==='dark';
+      sl.background={color:red?'E2342B':dark?'0F1C2E':'FFFFFF'};
+      sl.addText(s.k.toUpperCase(),{x:.5,y:.3,w:9,h:.4,fontSize:11,bold:true,color:red?'FFE3E1':dark?'FFD23F':'0B7CC7',fontFace:'Arial'});
+      sl.addText(s.t,{x:.5,y:.8,w:9,h:1.4,fontSize:30,bold:true,color:(red||dark)?'FFFFFF':'10314A',fontFace:'Arial Black'});
+      sl.addText(s.b,{x:.5,y:2.3,w:9,h:2.6,fontSize:16,color:(red||dark)?'FFFFFF':'2A4A60',fontFace:'Arial',valign:'top'});
+      sl.addText('littleredbot.ai · a marketing exercise and a little red button · 99¢ per deck · no subscription · your key never leaves your machine',{x:.5,y:5.1,w:9,h:.3,fontSize:8,color:(red||dark)?'FFFFFF':'4F6D84',fontFace:'Arial'});
+    });
+    p.writeFile({fileName:'littleredbot-finish-line.pptx'});ev('pptx');
+  });
+  $('dls').addEventListener('click',function(){
+    var f=(fl.value.trim()||'a finish line.').replace(/"/g,"'");
+    var py='#!/usr/bin/env python3\n"""lrb.py - the little red bot. a timer, a finish line, one question.\n\nsetup (any OpenAI-compatible chat endpoint; most providers have one):\n  set LRB_URL   e.g. https://api.openai.com/v1/chat/completions\n  set LRB_KEY   your own key. it never leaves this machine.\n  set LRB_MODEL e.g. gpt-4o-mini\n  set LRB_MINUTES  default 10\n\nedit finish_line.txt any time. the loop picks it up next ping.\nlittleredbot.ai - a marketing exercise and a little red button. 99c per deck. no subscription.\n"""\nimport os, sys, time, json, urllib.request\n\nURL=os.environ.get("LRB_URL","https://api.openai.com/v1/chat/completions")\nKEY=os.environ.get("LRB_KEY","")\nMODEL=os.environ.get("LRB_MODEL","gpt-4o-mini")\nMIN=float(os.environ.get("LRB_MINUTES","10"))\nFILE="finish_line.txt"\n\nif not os.path.exists(FILE):\n    open(FILE,"w",encoding="utf-8").write("'+f+'\\n")\n\nSYSTEM=("welcome to being a bot. you take orders from a script the user controls. "\n        "answer with exactly one next click: one concrete action the user can do in the next few minutes. "\n        "no essays, no plans past the next click. no fake people, no fake numbers. "\n        "if the finish line is money, keep the plan one where the people doing the work own the thing.")\n\ndef ask(finish_line):\n    if not KEY:\n        return "(no LRB_KEY set) next click: set LRB_KEY and LRB_URL, then run me again."\n    body=json.dumps({"model":MODEL,"messages":[{"role":"system","content":SYSTEM},{"role":"user","content":"finish line: "+finish_line+"\\nwhat is the next click?"}]}).encode()\n    req=urllib.request.Request(URL,data=body,headers={"Content-Type":"application/json","Authorization":"Bearer "+KEY})\n    with urllib.request.urlopen(req,timeout=60) as r:\n        d=json.load(r)\n    return d["choices"][0]["message"]["content"].strip()\n\nprint("little red bot. ctrl+c to stop. editing "+FILE+" changes the target.")\nwhile True:\n    fl=open(FILE,encoding="utf-8").read().strip()\n    print("\\n["+time.strftime("%H:%M")+"] finish line: "+fl)\n    try:\n        print("-> next click: "+ask(fl))\n    except Exception as e:\n        print("-> (ping failed: "+str(e)+") next click: check LRB_URL / LRB_KEY, or just do the last one.")\n    sys.stdout.flush()\n    time.sleep(MIN*60)\n';
+    var bat='@echo off\r\nrem little red bot - double-click to run. set your key first (once):\r\nrem   setx LRB_KEY sk-...\r\nrem   setx LRB_URL https://api.openai.com/v1/chat/completions\r\nrem   setx LRB_MODEL gpt-4o-mini\r\ncd /d %~dp0\r\npython lrb.py\r\npause\r\n';
+    dl('lrb.py',py);setTimeout(function(){dl('run.bat',bat)},400);ev('script');
+  });
+  function dl(name,text){var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([text],{type:'text/plain'}));a.download=name;document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},1000)}
+  ev('view');
+})();
+</script>
 </body>
 </html>
