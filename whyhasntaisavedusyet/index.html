@@ -3,85 +3,117 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>whyhasntaisavedusyet.com</title>
-<meta name="description" content="catches people googling the question, with a link to follow to whimzmaxx">
-<meta property="og:title" content="whyhasntaisavedusyet.com">
-<meta property="og:description" content="catches people googling the question, with a link to follow to whimzmaxx">
+<title>why hasn't AI saved us yet?</title>
+<meta name="description" content="you googled it. fair question. the short honest answer, and what saving looks like at a small size. an asaaab door that leads to whimzmaxx.">
+<meta property="og:title" content="why hasn't AI saved us yet?">
+<meta property="og:description" content="because it keeps getting pointed at the wrong finish line. the short version, in plain words.">
 <meta property="og:url" content="https://whyhasntaisavedusyet.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito+Sans:wght@500;700;800&family=Caveat:wght@600&display=swap">
 <style>
+/* soft register: melting sky, glass, orbs. the page a person lands on after typing the question into google. */
+:root{--ink:#10314a;--ink-2:#3d6178;--glass:rgba(255,255,255,.82);--btn:#0b7cc7;--btn-ink:#fff;--red:#e2342b}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;color:var(--ink);font:500 17px/1.5 "Nunito Sans",system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
-.sky{position:fixed;inset:0;z-index:-1}
-@keyframes melt{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+body{margin:0;color:var(--ink);font:500 17px/1.55 "Nunito Sans",system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
 a{color:inherit}
+.sky{position:fixed;inset:0;z-index:-1;background:radial-gradient(500px 300px at 85% 8%,rgba(255,255,255,.9),transparent 70%),radial-gradient(120px 120px at 88% 9%,#fff7b0,transparent 70%),linear-gradient(180deg,#1fa8ff 0%,#5cc8ff 35%,#a9e6ff 70%,#e6fbff 100%)}
+.sky::after{content:"";position:absolute;left:0;right:0;bottom:0;height:22vh;background:linear-gradient(180deg,#9be36f,#5fbf4a);border-radius:50% 50% 0 0/60px 60px 0 0}
+.orb{position:fixed;z-index:-1;border-radius:50%;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.95),rgba(255,255,255,.35) 45%,rgba(255,255,255,.05) 70%);box-shadow:inset -6px -10px 24px rgba(0,0,0,.08);animation:drift 12s ease-in-out infinite}
+@keyframes drift{50%{transform:translateY(-18px)}}
 .wrap{max-width:760px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left)) 80px}
-header{text-align:center;padding:72px 0 28px}
-h1{margin:0;overflow-wrap:anywhere}
-.eyebrow{display:inline-block;padding:6px 14px;border-radius:999px;font:800 12px/1 "Nunito Sans";letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px}
+header{text-align:center;padding:64px 0 24px}
+.eyebrow{display:inline-block;padding:6px 14px;border-radius:999px;font:800 12px/1 "Nunito Sans";letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px;background:var(--btn);color:#fff}
+h1{margin:0;font:600 clamp(40px,9vw,88px)/.95 Fredoka,sans-serif;color:#fff;text-shadow:0 3px 0 #0b7cc7,0 10px 30px rgba(0,60,120,.35);text-wrap:balance}
+.answer{margin:22px auto 0;max-width:30ch;font:600 clamp(24px,4.6vw,36px)/1.2 Caveat,cursive;color:#fff;text-shadow:0 2px 0 rgba(11,124,199,.6)}
 .card{position:relative;padding:22px 24px;margin:18px 0;border-radius:26px;background:var(--glass);border:2px solid #fff;box-shadow:0 10px 26px rgba(6,40,80,.18),inset 0 -6px 14px rgba(120,190,240,.15);backdrop-filter:blur(8px)}
 .card>*{position:relative}
 .card::before{content:"";position:absolute;inset:4px 10px auto;height:38%;border-radius:22px 22px 60% 60%/22px 22px 18px 18px;background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,0));pointer-events:none}
 .label{font:800 12px/1 "Nunito Sans";letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin:0 0 10px}
-.job{margin:0}
-.job q{quotes:"\201C" "\201D"}
-.maybe{font-size:14px;opacity:.75;margin-top:10px}
-.funnel{display:grid;gap:10px;margin-top:6px}
-.btn{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-radius:999px;text-decoration:none;font:800 17px/1.1 "Nunito Sans";background:var(--btn);color:var(--btn-ink);border:2px solid #fff;box-shadow:0 8px 20px rgba(0,30,70,.25);transition:transform .15s}
+h2{margin:0 0 8px;font:600 clamp(22px,4vw,30px)/1.15 Fredoka,sans-serif}
+p{margin:8px 0}
+q{quotes:"\201C" "\201D";font:600 1.25em/1.25 Caveat,cursive}
+.said{font-size:14px;color:var(--ink-2);margin-top:4px}
+.three{display:grid;gap:14px}
+.three .card{margin:0}
+.three h3{margin:0 0 6px;font:600 20px/1.2 Fredoka,sans-serif}
+.three p{margin:0;font-size:15.5px}
+.doors{display:grid;gap:10px}
+.door{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 18px;border-radius:999px;text-decoration:none;font:800 15px/1.2 "Nunito Sans";background:var(--glass);border:2px solid #fff;box-shadow:0 6px 16px rgba(6,40,80,.15)}
+.door small{display:block;font-weight:600;color:var(--ink-2)}
+.door b{flex:none;color:var(--btn)}
+.funnel{text-align:center;padding:12px 0 0}
+.funnel .line{font:600 clamp(26px,5vw,40px)/1.15 Caveat,cursive;margin:0 0 16px;text-wrap:balance}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:18px 28px;border-radius:999px;text-decoration:none;font:800 19px/1.1 "Nunito Sans";background:var(--btn);color:var(--btn-ink);border:2px solid #fff;box-shadow:0 10px 24px rgba(0,30,70,.28);transition:transform .15s}
 .btn:hover{transform:translateY(-2px)}
-.btn.alt{background:var(--glass);color:var(--ink)}
-.dot{width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff8a8a,#e2342b 55%,#8c0f0a);box-shadow:0 0 0 4px rgba(226,52,43,.25);animation:pulse 1.8s ease-in-out infinite;flex:none}
+.dot{width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff8a8a,var(--red) 55%,#8c0f0a);box-shadow:0 0 0 4px rgba(226,52,43,.25);animation:pulse 1.8s ease-in-out infinite;flex:none}
 @keyframes pulse{50%{box-shadow:0 0 0 9px rgba(226,52,43,.08)}}
-.reveal{text-align:center;margin:28px 0 0;font-size:15px;opacity:.85}
+.reveal{text-align:center;margin:28px 0 0;font-size:15px;opacity:.9}
 footer{text-align:center;margin-top:40px;font-size:13px;opacity:.85}
 footer a{text-decoration:none;font-weight:800}
-.badge{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--glass);border:2px solid #fff;box-shadow:0 6px 16px rgba(6,40,80,.15);text-decoration:none;font:800 13px/1 "Nunito Sans"}
-.badge i{width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#5cc8ff 45%,#0b7cc7)}
 .status{display:inline-block;margin-top:14px;padding:5px 12px;border-radius:999px;border:2px dashed rgba(0,0,0,.25);font:700 12px/1.3 "Nunito Sans";opacity:.8}
-.orb{position:fixed;z-index:-1;border-radius:50%;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.95),rgba(255,255,255,.35) 45%,rgba(255,255,255,.05) 70%);box-shadow:inset -6px -10px 24px rgba(0,0,0,.08);animation:drift 12s ease-in-out infinite}
-@keyframes drift{50%{transform:translateY(-18px)}}
+@media (min-width:700px){.three{grid-template-columns:1fr 1fr 1fr}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
-
-:root{--ink:#10314a;--glass:rgba(255,255,255,.8);--btn:#0b7cc7;--btn-ink:#fff}
-.sky{background:radial-gradient(500px 300px at 85% 8%,rgba(255,255,255,.9),transparent 70%),radial-gradient(120px 120px at 88% 9%,#fff7b0,transparent 70%),linear-gradient(180deg,#1fa8ff 0%,#5cc8ff 35%,#a9e6ff 70%,#e6fbff 100%)}
-.sky::after{content:"";position:absolute;left:0;right:0;bottom:0;height:22vh;background:linear-gradient(180deg,#9be36f,#5fbf4a);border-radius:50% 50% 0 0/60px 60px 0 0}
-h1{font:600 clamp(40px,9vw,96px)/.95 Fredoka,sans-serif;color:#fff;text-shadow:0 3px 0 #0b7cc7,0 10px 30px rgba(0,60,120,.35)}
-.eyebrow{background:#0b7cc7;color:#fff}
-.job{font:600 clamp(24px,4.5vw,36px)/1.2 Caveat,cursive}
 </style>
 <script>(function(){var s=document.createElement("script");s.async=true;s.dataset.goatcounter="https://asaaab.goatcounter.com/count";s.src="https://gc.zgo.at/count.js";document.head.appendChild(s);})();
-function ev(n){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({path:n,event:true});}catch(e){}}</script>
+function ev(n){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({path:'why-'+n,event:true});}catch(e){}}</script>
 </head>
 <body>
 <div class="sky"></div>
 <div class="orb" style="width:140px;height:140px;left:-40px;top:18%"></div>
 <div class="orb" style="width:90px;height:90px;right:6%;top:9%;animation-delay:-4s"></div>
 <div class="orb" style="width:60px;height:60px;right:18%;bottom:14%;animation-delay:-8s"></div>
+
 <div class="wrap">
-<header>
-  <span class="eyebrow">gen z :)</span>
-  <h1>whyhasntaisavedusyet</h1>
-</header>
+  <header>
+    <span class="eyebrow">you googled it. fair.</span>
+    <h1>why hasn't AI saved us yet?</h1>
+    <p class="answer">because it keeps getting pointed at the wrong finish line.</p>
+  </header>
 
-<section class="card">
-  <p class="label">the job, in the Captain’s words</p>
-  <p class="job"><q>catches people googling the question, with a link to follow to whimzmaxx</q></p>
-</section>
+  <section class="card">
+    <p class="label">the short version</p>
+    <h2>it's not that the computer can't. it's who's holding the pencil.</h2>
+    <p>most of what gets called AI right now is rented out to the people who already own the building, and pointed at the two things nobody asked for: making the art, and cutting the staff. the chores are still there. the group text is still a mess. your boss still can't write the schedule.</p>
+    <p>we think that's backwards. <q>that is where humans are for. we should be fingerpainting.</q> let the computer do the boring part, on your side of the counter, with the finish line written down where you can see it.</p>
+  </section>
 
-<section class="card">
-  <p class="label">every door opens onto the same house</p>
-  <div class="funnel"><a class="btn" href="https://asaaab.com/whimzmaxx/" onclick="ev('door-whyhasntaisavedusyet-whimzmaxx')"><span>ok so lets fix it??????? →</span><span class="dot" aria-hidden="true"></span></a><a class="btn alt" href="https://asaaab.com/asaaabot/" onclick="ev('door-whyhasntaisavedusyet-asaaabot')"><span>talk to asaaabot, free →</span></a><a class="btn alt" href="https://asaaab.com/manual/" onclick="ev('door-whyhasntaisavedusyet-manual')"><span>read the co-owner&#x27;s manual →</span></a></div>
-  <p class="maybe">asaaab: $231.36 once · one day at the LA living wage. the co-owners manual and the engine. <a href="https://asaaab.com/manual/">maybe, with sources →</a></p>
-</section>
+  <div class="three">
+    <div class="card">
+      <h3>1. nobody writes the finish line down</h3>
+      <p>a machine can't aim at a vibe. <q>you need something to circle. if you can't circle it you can't describe it.</q> say the end in one plain sentence first, then let it work. that's the whole trick, and it's free.</p>
+    </div>
+    <div class="card">
+      <h3>2. it's rented to the wrong side</h3>
+      <p>the tools are good. the lease is bad. when the same tool is pointed at your chore list instead of your job, it looks like help instead of a threat. <q>nothing is that hard and there is no skilled or unskilled labor. it's thinking tasks or action tasks.</q></p>
+    </div>
+    <div class="card">
+      <h3>3. big is the wrong size</h3>
+      <p>you don't need a data center. you need one button that does one thing you actually asked for. <q>this is not big tech, but the opposite, littlenology.</q></p>
+    </div>
+  </div>
 
-<p class="reveal">every door opens onto the same house.</p>
+  <section class="card">
+    <p class="label">what saving looks like, at our size</p>
+    <h2>small, working, and yours.</h2>
+    <p>we're a US co-op with no overhead and a lot of opinions. <q>asaaab had no overhead or tools and made them all exist.</q> here are three things that are live right now. they're small on purpose.</p>
+    <div class="doors">
+      <a class="door" href="https://asaaab.com/littleredbot/" onclick="ev('lrb')"><span>littleredbot.ai<small>a big red button. say the finish line, it pings the AI you already pay for: what's the next click? 99¢ per deck, no subscription.</small></span><b>→</b></a>
+      <a class="door" href="https://asaaab.com/imsickofthisplace/" onclick="ev('sick')"><span>imsickofthisplace.com<small>your break room, anonymous. see who else is feeling it before you call out.</small></span><b>→</b></a>
+      <a class="door" href="https://asaaab.com/chatshouldigotalktoalawyerfrfr/" onclick="ev('law')"><span>chatshouldigotalktoalawyerfrfr.com<small>before you ask the internet, get your story into a deck a lawyer can read in two minutes.</small></span><b>→</b></a>
+    </div>
+    <p class="said">none of these are an AI scam. they're a button, a break room, and a slide deck. your tools, your key, your computer.</p>
+  </section>
 
-<footer>
-  <a class="badge" href="https://asaaab.com/"><i></i> made with asaaab website builder</a>
-  <div class="status">parked at asaaab.com/whyhasntaisavedusyet/ until whyhasntaisavedusyet.com points here</div>
-  <p><a href="https://asaaab.com/">asaaab</a> is a US co-op. <a href="https://asaaab.com/privacy/">privacy</a> · <a href="https://asaaab.com/copyright/">copyright</a></p>
-</footer>
+  <section class="funnel">
+    <p class="line">stop circling back and start popping bubbles.</p>
+    <a class="btn" href="https://asaaab.com/whimzmaxx/" onclick="ev('whimzmaxx')"><span class="dot" aria-hidden="true"></span>whimzmaxx.com</a>
+    <p class="reveal">that's where the saving actually gets built. come look.</p>
+  </section>
+
+  <footer>
+    <span class="status">parked at asaaab.com/whyhasntaisavedusyet/ until the domain points here</span><br><br>
+    an <a href="https://asaaab.com/">asaaab</a> door · asaaab is a US co-op · we believe all humans are treated equally for existing
+  </footer>
 </div>
 </body>
 </html>
