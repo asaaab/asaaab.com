@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-11-08T17:52:00Z",
+  "s": "Idling: the tower made six quiet rounds and took no calls, and no Board steps moved this hour; road still at step 1.",
+  "idle": true
+ },
+ {
   "t": "2026-11-08T16:52:00Z",
   "s": "Idling: the tower kept its rounds and took no calls, and no Board steps moved this hour; road still at step 1.",
   "idle": true
