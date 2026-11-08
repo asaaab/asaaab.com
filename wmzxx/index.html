@@ -14,10 +14,10 @@
 /* wmzxx.com. the language itself flies in out of nowhere and lands as the lines. one line, one thing, first word is the verb. */
 :root{--bg:#0d3550;--ink:#f4fbff;--dim:#8fb8d6;--sky:#cfeefc;--yel:#ffd23f;--red:#e8192c;--red-hi:#ff8a95;--red-lo:#9e0d1c}
 *{box-sizing:border-box}html,body{margin:0;height:100%}
-body{background:radial-gradient(circle at 30% 20%,#17547f 0%,var(--bg) 55%,#071d2e 100%);color:var(--ink);font-family:"Nunito Sans",system-ui,sans-serif;overflow:hidden;-webkit-tap-highlight-color:transparent}
+body{background:radial-gradient(circle at 50% 50%,#0f4066 0%,#071d2e 60%,#02101c 100%);color:var(--ink);font-family:"Nunito Sans",system-ui,sans-serif;overflow:hidden;-webkit-tap-highlight-color:transparent}
 canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0}
 .stage{position:fixed;inset:0;z-index:1;display:grid;place-items:center;padding:24px}
-.line{font:600 clamp(28px,7.2vw,64px)/1.1 Fredoka,sans-serif;text-align:center;max-width:16ch;text-wrap:balance;position:relative;text-shadow:0 0 24px rgba(207,238,252,.35)}
+.line{font:600 clamp(28px,7.2vw,64px)/1.1 Fredoka,sans-serif;text-align:center;max-width:16ch;text-wrap:balance;position:relative;text-shadow:0 0 18px rgba(255,255,255,.9),0 0 48px rgba(120,200,255,.7)}
 .line .w{display:inline-block;white-space:nowrap;margin:0 .22em}
 .line .c{display:inline-block;opacity:0;will-change:transform,opacity}
 .line .c.in{opacity:1;transform:none!important;transition:transform .55s cubic-bezier(.2,.9,.3,1.1),opacity .3s}
@@ -123,25 +123,52 @@ function ev(n){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({p
   setInterval(function(){if(!busy&&!done&&i<LINES.length-1&&Date.now()-last>5200)next()},800);
   var last=Date.now();document.addEventListener('pointerdown',function(){last=Date.now()});
 
-  // ---- the sea of language behind: letters and numbers drifting, bursting when a glyph lands.
-  var cv=document.getElementById('cv'),ctx=cv.getContext('2d'),P=[],DPR=Math.min(2,window.devicePixelRatio||1);
-  var GLY='0101010101abcdefghijklmnopqrstuvwxyz.99$¢{}[]();=+-*/<>_|~wmzxx'.split('');
-  function size(){cv.width=innerWidth*DPR;cv.height=innerHeight*DPR;ctx.setTransform(DPR,0,0,DPR,0,0)}
-  addEventListener('resize',size);size();
-  function spawn(x,y,v){P.push({x:x==null?Math.random()*innerWidth:x,y:y==null?Math.random()*innerHeight:y,vx:(Math.random()-.5)*(v||.3),vy:(Math.random()-.5)*(v||.3)-(.15),g:GLY[Math.random()*GLY.length|0],a:.08+Math.random()*.35,s:10+Math.random()*16,life:1,rot:Math.random()*6.28,vr:(Math.random()-.5)*.02,col:Math.random()<.08?'255,210,63':Math.random()<.06?'255,138,149':'207,238,252'})}
-  for(var k=0;k<90;k++)spawn();
-  function burst(){var r=line.getBoundingClientRect();for(var k=0;k<4;k++)spawn(r.left+Math.random()*r.width,r.top+Math.random()*r.height,2.4)}
+  // ---- the walls of language. dense binary rain on two converging walls, a burst in the middle, glyphs shot out of it.
+  var cv=document.getElementById('cv'),ctx=cv.getContext('2d'),DPR=Math.min(2,window.devicePixelRatio||1),W=0,H=0;
+  var COL=[],SHOT=[],RAYS=[],t0=performance.now();
+  var BIN='01',GLY='0123456789abcdefghijklmnopqrstuvwxyz{}[]();=+-*/<>_|~$¢.'.split('');
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-  function tick(){
-    ctx.clearRect(0,0,innerWidth,innerHeight);
-    for(var k=P.length-1;k>=0;k--){var p=P[k];
-      if(!reduce){p.x+=p.vx;p.y+=p.vy;p.rot+=p.vr;p.vx*=.995;p.vy*=.995}
-      if(p.y<-30)p.y=innerHeight+20;if(p.x<-30)p.x=innerWidth+20;if(p.x>innerWidth+30)p.x=-20;if(p.y>innerHeight+30)p.y=-20;
-      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.globalAlpha=p.a;ctx.fillStyle='rgb('+p.col+')';ctx.font='700 '+p.s+'px Fredoka, "Nunito Sans", sans-serif';ctx.fillText(p.g,0,0);ctx.restore();}
-    if(P.length>160)P.splice(0,P.length-160);
+  function size(){W=innerWidth;H=innerHeight;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);
+    COL=[];var n=Math.floor(W/8);for(var i=0;i<n;i++){COL.push({x:i*8+4,y:Math.random()*H*2-H,sp:1.2+Math.random()*2.8,len:14+Math.random()*30,ph:Math.random()*6.28,s:(Math.random()<.5?BIN:BIN+'01 ')})}
+    RAYS=[];for(var r=0;r<14;r++)RAYS.push({a:Math.random()*6.28,w:.04+Math.random()*.1,l:.4+Math.random()*.6,sp:(Math.random()-.5)*.0006})}
+  addEventListener('resize',size);size();
+  var cx=function(){return W/2},cy=function(){return H*.5};
+  function spawn(x,y,v){ // a glyph shot out of the center
+    var ang=Math.random()*6.28,sp=(v||1)*(1.5+Math.random()*3);
+    SHOT.push({x:x==null?cx():x,y:y==null?cy():y,vx:Math.cos(ang)*sp,vy:Math.sin(ang)*sp,g:GLY[Math.random()*GLY.length|0],s:6,gs:.35+Math.random()*.6,rot:Math.random()*6.28,vr:(Math.random()-.5)*.12,a:1,col:Math.random()<.1?'255,210,63':Math.random()<.07?'255,138,149':'207,238,252'})}
+  function burst(){var r=line.getBoundingClientRect();for(var k=0;k<3;k++)spawn(r.left+Math.random()*r.width,r.top+Math.random()*r.height,.9)}
+  function tick(now){
+    var t=(now-t0)/1000;
+    ctx.clearRect(0,0,W,H);
+    // walls: perspective. a column's distance from center sets its size and brightness. edges big & bright, center small & dim.
+    ctx.textBaseline='top';
+    for(var i=0;i<COL.length;i++){var c=COL[i];var d=Math.abs(c.x-cx())/(W/2); // 0 center .. 1 edge
+      var fs=6+d*d*12,lh=fs*1.05,al=.14+d*d*.5;
+      if(!reduce)c.y+=c.sp*(0.5+d);if(c.y-c.len*lh>H)c.y=-Math.random()*H;
+      ctx.font='700 '+fs+'px "Nunito Sans",monospace';
+      for(var k=0;k<c.len;k++){var y=c.y-k*lh;if(y<-lh||y>H)continue;var ch=c.s[(k+((t*3)|0)+i)%c.s.length];var fade=1-k/c.len;
+        if(k===0){ctx.fillStyle='rgba(255,255,255,'+(al*1.6)+')'}else{ctx.fillStyle='rgba(120,200,255,'+(al*fade)+')'}
+        ctx.fillText(ch,c.x,y);}
+    }
+    // rays + core
+    ctx.save();ctx.translate(cx(),cy());ctx.globalCompositeOperation='lighter';
+    for(var r=0;r<RAYS.length;r++){var R=RAYS[r];if(!reduce)R.a+=R.sp;var L=Math.max(W,H)*R.l;
+      var g=ctx.createLinearGradient(0,0,Math.cos(R.a)*L,Math.sin(R.a)*L);g.addColorStop(0,'rgba(207,238,252,.32)');g.addColorStop(1,'rgba(207,238,252,0)');
+      ctx.fillStyle=g;ctx.beginPath();ctx.moveTo(0,0);ctx.arc(0,0,L,R.a-R.w,R.a+R.w);ctx.closePath();ctx.fill();}
+    var core=ctx.createRadialGradient(0,0,0,0,0,Math.min(W,H)*.42);core.addColorStop(0,'rgba(255,255,255,.55)');core.addColorStop(.25,'rgba(160,220,255,.28)');core.addColorStop(1,'rgba(13,53,80,0)');
+    ctx.fillStyle=core;ctx.beginPath();ctx.arc(0,0,Math.min(W,H)*.42,0,6.29);ctx.fill();
+    ctx.restore();
+    // a steady trickle out of the core
+    if(!reduce&&Math.random()<.35)spawn();
+    // shot glyphs: grow as they come at you
+    for(var k=SHOT.length-1;k>=0;k--){var p=SHOT[k];
+      if(!reduce){p.x+=p.vx;p.y+=p.vy;p.vx*=1.012;p.vy*=1.012;p.s=Math.min(34,p.s+p.gs);p.rot+=p.vr;p.a-=.009}
+      if(p.a<=0||p.x<-60||p.x>W+60||p.y<-60||p.y>H+60){SHOT.splice(k,1);continue}
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.rot);ctx.globalAlpha=Math.min(1,p.a)*.9;ctx.fillStyle='rgb('+p.col+')';ctx.shadowColor='rgb('+p.col+')';ctx.shadowBlur=10;ctx.font='700 '+p.s+'px Fredoka,"Nunito Sans",sans-serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(p.g,0,0);ctx.restore();}
+    if(SHOT.length>140)SHOT.splice(0,SHOT.length-140);
     requestAnimationFrame(tick);
   }
-  tick();
+  requestAnimationFrame(tick);
   setTimeout(next,500);ev('view');
 })();
 </script>
