@@ -1,5 +1,10 @@
 [
 {
+ "t": "2026-11-08T06:52:00Z",
+ "s": "Something moved: the nightly check-in landed, one computer reported what it learned and was picked to lead the others; the tower made six rounds and took no calls, and the road is still at step 1.",
+ "idle": false
+},
+{
  "t": "2026-11-08T05:52:00Z",
  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
  "idle": true
