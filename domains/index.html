@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>the doors · asaaab</title>
+<meta name="description" content="every asaaab domain, what it's for in the Captain's words, and whether it's live.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito+Sans:wght@500;700;800&family=Caveat:wght@600&display=swap">
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;color:var(--ink);font:500 17px/1.5 "Nunito Sans",system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
+.sky{position:fixed;inset:0;z-index:-1}
+@keyframes melt{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+a{color:inherit}
+.wrap{max-width:760px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left)) 80px}
+header{text-align:center;padding:72px 0 28px}
+h1{margin:0;overflow-wrap:anywhere}
+.eyebrow{display:inline-block;padding:6px 14px;border-radius:999px;font:800 12px/1 "Nunito Sans";letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px}
+.card{position:relative;padding:22px 24px;margin:18px 0;border-radius:26px;background:var(--glass);border:2px solid #fff;box-shadow:0 10px 26px rgba(6,40,80,.18),inset 0 -6px 14px rgba(120,190,240,.15);backdrop-filter:blur(8px)}
+.card::before{content:"";position:absolute;inset:4px 10px auto;height:38%;border-radius:22px 22px 60% 60%/22px 22px 18px 18px;background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,0));pointer-events:none}
+.label{font:800 12px/1 "Nunito Sans";letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin:0 0 10px}
+.job{margin:0}
+.job q{quotes:"\201C" "\201D"}
+.maybe{font-size:14px;opacity:.75;margin-top:10px}
+.funnel{display:grid;gap:10px;margin-top:6px}
+.btn{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-radius:999px;text-decoration:none;font:800 17px/1.1 "Nunito Sans";background:var(--btn);color:var(--btn-ink);border:2px solid #fff;box-shadow:0 8px 20px rgba(0,30,70,.25);transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.alt{background:var(--glass);color:var(--ink)}
+.dot{width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff8a8a,#e2342b 55%,#8c0f0a);box-shadow:0 0 0 4px rgba(226,52,43,.25);animation:pulse 1.8s ease-in-out infinite;flex:none}
+@keyframes pulse{50%{box-shadow:0 0 0 9px rgba(226,52,43,.08)}}
+.reveal{text-align:center;margin:28px 0 0;font-size:15px;opacity:.85}
+footer{text-align:center;margin-top:40px;font-size:13px;opacity:.85}
+footer a{text-decoration:none;font-weight:800}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--glass);border:2px solid #fff;box-shadow:0 6px 16px rgba(6,40,80,.15);text-decoration:none;font:800 13px/1 "Nunito Sans"}
+.badge i{width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#5cc8ff 45%,#0b7cc7)}
+.status{display:inline-block;margin-top:14px;padding:5px 12px;border-radius:999px;border:2px dashed rgba(0,0,0,.25);font:700 12px/1.3 "Nunito Sans";opacity:.8}
+.orb{position:fixed;z-index:-1;border-radius:50%;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.95),rgba(255,255,255,.35) 45%,rgba(255,255,255,.05) 70%);box-shadow:inset -6px -10px 24px rgba(0,0,0,.08);animation:drift 12s ease-in-out infinite}
+@keyframes drift{50%{transform:translateY(-18px)}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+
+:root{--ink:#10314a;--glass:rgba(255,255,255,.8);--btn:#0b7cc7;--btn-ink:#fff}
+.sky{background:radial-gradient(500px 300px at 85% 8%,rgba(255,255,255,.9),transparent 70%),radial-gradient(120px 120px at 88% 9%,#fff7b0,transparent 70%),linear-gradient(180deg,#1fa8ff 0%,#5cc8ff 35%,#a9e6ff 70%,#e6fbff 100%)}
+.sky::after{content:"";position:absolute;left:0;right:0;bottom:0;height:22vh;background:linear-gradient(180deg,#9be36f,#5fbf4a);border-radius:50% 50% 0 0/60px 60px 0 0}
+h1{font:600 clamp(40px,9vw,96px)/.95 Fredoka,sans-serif;color:#fff;text-shadow:0 3px 0 #0b7cc7,0 10px 30px rgba(0,60,120,.35)}
+.eyebrow{background:#0b7cc7;color:#fff}
+.job{font:600 clamp(24px,4.5vw,36px)/1.2 Caveat,cursive}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.door{display:block;text-decoration:none;margin:0}
+.door h2{margin:0 0 6px;font:600 24px/1.1 Fredoka,sans-serif;overflow-wrap:anywhere}
+.door .job{font-size:20px}
+.door.live{outline:3px solid #ffe14d}
+.wrap{max-width:1080px}</style><script>(function(){var s=document.createElement("script");s.async=true;s.dataset.goatcounter="https://asaaab.goatcounter.com/count";s.src="https://gc.zgo.at/count.js";document.head.appendChild(s);})();
+function ev(n){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({path:n,event:true});}catch(e){}}</script></head>
+<body><div class="sky"></div><div class="orb" style="width:140px;height:140px;left:-40px;top:18%"></div>
+<div class="orb" style="width:90px;height:90px;right:6%;top:9%;animation-delay:-4s"></div>
+<div class="orb" style="width:60px;height:60px;right:18%;bottom:14%;animation-delay:-8s"></div>
+<div class="wrap">
+<header><span class="eyebrow">fraternal twins</span><h1>the doors</h1>
+<p class="maybe" style="opacity:.95">17 domains. different names, different URLs, slightly different tweaks on the branding. same house behind every one.</p></header>
+<div class="grid"><a class="card door live" href="https://asaaab.com/"><p class="label">live</p><h2>asaaab.com</h2><p class="job"><q>the corporation structure, &quot;to exist as structure&quot;</q></p></a><a class="card door live" href="https://asaaab.com/whimzmaxx/"><p class="label">live</p><h2>whimzmaxx.com</h2><p class="job"><q>the movement of gen z</q></p></a><a class="card door" href="https://asaaab.com/glitchmaxx/"><p class="label">agressively GEN Z!! · his words</p><h2>glitchmaxx.com</h2><p class="job"><q>the idea to use capitalism as the system to seize the means</q></p></a><a class="card door" href="https://asaaab.com/littleredbot/"><p class="label">Corporate AI Company Synergymaxxing Solutions · his words</p><h2>littleredbot.ai</h2><p class="job"><q>the marketing ai bot and marketingbot powwow with websitebuilderbot</q></p></a><a class="card door" href="https://asaaab.com/imsickofthisplace/"><p class="label">agressively GEN Z!! · his words</p><h2>imsickofthisplace.com</h2><p class="job"><q>im sick.... to strike</q></p></a><a class="card door" href="https://asaaab.com/nevercirclebackcircle/"><p class="label">Corporate AI Company Synergymaxxing Solutions · his words</p><h2>nevercirclebackcircle.com</h2><p class="job"><q>the tool to get things done (LRB)</q></p></a><a class="card door" href="https://asaaab.com/wmzxx/"><p class="label">Corporate AI Company Synergymaxxing Solutions · his words</p><h2>wmzxx.com</h2><p class="job"><q>wmzxx is the coding language</q></p></a><a class="card door" href="https://asaaab.com/wmzxxpptx/"><p class="label">Corporate AI Company Synergymaxxing Solutions · draft</p><h2>wmzxxpptx.com</h2><p class="job"><q>drop wmzxx in, get a deck out</q></p></a><a class="card door" href="https://asaaab.com/ducttapesocialism/"><p class="label">agressively GEN Z!! · words wanted</p><h2>ducttapesocialism.com</h2><p class="job">no job yet</p></a><a class="card door" href="https://asaaab.com/capitalismbreedinginnovation/"><p class="label">Corporate AI Company Synergymaxxing Solutions · words wanted</p><h2>capitalismbreedinginnovation.com</h2><p class="job">no job yet</p></a><a class="card door" href="https://asaaab.com/capitalistmaxxing/"><p class="label">Corporate AI Company Synergymaxxing Solutions · words wanted</p><h2>capitalistmaxxing.com</h2><p class="job">no job yet</p></a><a class="card door" href="https://asaaab.com/capitalmaxx/"><p class="label">Corporate AI Company Synergymaxxing Solutions · words wanted</p><h2>capitalmaxx.ai</h2><p class="job">no job yet</p></a><a class="card door" href="https://asaaab.com/asaferplayground/"><p class="label">gen z :) · his words</p><h2>asaferplayground.com</h2><p class="job"><q>the hula hoop theory (framestackmaxxing) website</q></p></a><a class="card door" href="https://asaaab.com/whyhasntaisavedusyet/"><p class="label">gen z :) · his words</p><h2>whyhasntaisavedusyet.com</h2><p class="job"><q>catches people googling the question, with a link to follow to whimzmaxx</q></p></a><a class="card door" href="https://asaaab.com/chatshouldigotalktoalawyerfrfr/"><p class="label">gen z :) · his words</p><h2>chatshouldigotalktoalawyerfrfr.com</h2><p class="job"><q>like imsickofthisplace but for personal grievances; panicbot, marketingbot and lawbot turn a complaint into a formal letter asking for clarity</q></p></a><a class="card door" href="https://asaaab.com/no3rdeye4tchai/"><p class="label">agressively GEN Z!! · his words</p><h2>no3rdeye4tchai.com</h2><p class="job"><q>personal nonsense brand for toxic stickers, run corporatemaxxing &quot;because structure&quot;</q></p></a><a class="card door" href="https://asaaab.com/theophilpot/"><p class="label">Corporate AI Company Synergymaxxing Solutions · his words</p><h2>theophilpot.com</h2><p class="job"><q>the mastermind</q></p></a></div>
+<footer><a class="badge" href="https://asaaab.com/"><i></i> asaaab</a></footer>
+</div></body></html>
