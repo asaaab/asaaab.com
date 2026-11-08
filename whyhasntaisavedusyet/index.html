@@ -51,7 +51,7 @@ function ev(n){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({p
 <canvas id="cv" aria-hidden="true"></canvas>
 <div class="n" id="n">1 / 7</div>
 <div class="stage"><div class="line" id="line" aria-live="polite"></div></div>
-<div class="hint" id="hint">tap anywhere</div>
+<div class="hint" id="hint">tap to skip</div>
 
 <div class="end" id="end">
   <div class="box">
@@ -104,19 +104,19 @@ function ev(n){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({p
     // fly in, scattered order
     var order=chars.slice().sort(function(){return Math.random()-.5});
     order.forEach(function(c,k){setTimeout(function(){c.classList.add('in');burst()},40+k*38)});
-    setTimeout(function(){busy=false},40+order.length*38+500);
+    setTimeout(function(){busy=false;last=Date.now()},40+order.length*38+500);
   }
   function next(){
     if(busy)return;
     if(i>=LINES.length-1){if(!done){done=true;end.classList.add('on');document.body.classList.add('done');hint.style.opacity=0;n.style.opacity=0;ev('end')}return}
     i++;n.textContent=(i+1)+' / '+LINES.length;show(LINES[i]);
-    if(i===0)hint.textContent='tap anywhere';else if(i===LINES.length-1)hint.textContent='tap once more';else hint.textContent='tap';
+    hint.textContent='tap to skip';
   }
   document.addEventListener('pointerdown',function(e){if(e.target.closest('a'))return;next()});
   document.addEventListener('keydown',function(e){if(e.key===' '||e.key==='Enter'||e.key==='ArrowRight'){e.preventDefault();next()}});
   document.getElementById('again').addEventListener('click',function(e){e.preventDefault();e.stopPropagation();end.classList.remove('on');document.body.classList.remove('done');hint.style.opacity=1;n.style.opacity=1;i=-1;done=false;busy=false;next()});
   // auto-advance slowly if they just watch
-  setInterval(function(){if(!busy&&!done&&i<LINES.length-1&&Date.now()-last>5200)next()},800);
+  setInterval(function(){if(!busy&&!done&&Date.now()-last>2600)next()},200);
   var last=Date.now();document.addEventListener('pointerdown',function(){last=Date.now()});
 
   // ---- the walls of language. dense binary rain on two converging walls, a burst in the middle, glyphs shot out of it.
