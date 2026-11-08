@@ -3,83 +3,176 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>imsickofthisplace.com</title>
-<meta name="description" content="im sick.... to strike">
-<meta property="og:title" content="imsickofthisplace.com">
-<meta property="og:description" content="im sick.... to strike">
+<title>im sick of this place</title>
+<meta name="description" content="anonymous symptom check-ins for your whole break room. see how many coworkers feel it too, then be the first to pull the im sick bell. coworkers only, never the boss.">
+<meta property="og:title" content="im sick... of this place.">
+<meta property="og:description" content="nobody should have to be the first one to call out alone. anonymous symptom check-ins, coworkers only.">
 <meta property="og:url" content="https://imsickofthisplace.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito+Sans:wght@500;700;900&family=Caveat:wght@600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@500;700;900&family=Caveat:wght@600;700&display=swap">
 <style>
+:root{--ink:#1a0b2e;--glass:rgba(255,255,255,.78);--btn:#1a0b2e;--btn-ink:#fff;--sick:#9be36f;--meh:#ffd23f}
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;color:var(--ink);font:500 17px/1.5 "Nunito Sans",system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
-.sky{position:fixed;inset:0;z-index:-1}
+.sky{position:fixed;inset:0;z-index:-1;background:linear-gradient(135deg,#ff5fa2,#ffb347,#c8ff5f,#5fe3ff,#b46bff);background-size:400% 400%;animation:melt 16s ease infinite}
 @keyframes melt{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 a{color:inherit}
-.wrap{max-width:760px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left)) 80px}
-header{text-align:center;padding:72px 0 28px}
-h1{margin:0;overflow-wrap:anywhere}
-.eyebrow{display:inline-block;padding:6px 14px;border-radius:999px;font:800 12px/1 "Nunito Sans";letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px}
+.wrap{max-width:780px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left)) 80px}
+header{text-align:center;padding:64px 0 20px}
+.eyebrow{display:inline-block;padding:6px 14px;border-radius:999px;font:800 12px/1 "Nunito Sans";letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px;background:var(--ink);color:#fff}
+h1{margin:0;font:700 clamp(46px,12vw,128px)/.88 Fredoka,sans-serif;letter-spacing:-.03em;color:#fff;text-shadow:0 4px 0 var(--ink),0 14px 40px rgba(0,0,0,.25);text-transform:lowercase}
+h1 .dots{display:block;font-size:.55em;opacity:.9}
+.dek{max-width:560px;margin:22px auto 0;font:700 clamp(18px,2.6vw,22px)/1.35 "Nunito Sans";color:var(--ink)}
+.dek b{background:var(--glass);padding:0 6px;border-radius:8px}
+h2{margin:0 0 8px;font:600 clamp(26px,4vw,34px)/1.05 Fredoka,sans-serif}
 .card{position:relative;padding:22px 24px;margin:18px 0;border-radius:26px;background:var(--glass);border:2px solid #fff;box-shadow:0 10px 26px rgba(6,40,80,.18),inset 0 -6px 14px rgba(120,190,240,.15);backdrop-filter:blur(8px)}
-.card::before{content:"";position:absolute;inset:4px 10px auto;height:38%;border-radius:22px 22px 60% 60%/22px 22px 18px 18px;background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,0));pointer-events:none}
+.card>*{position:relative}
+.card::before{content:"";position:absolute;inset:4px 10px auto;height:34%;border-radius:22px 22px 60% 60%/22px 22px 18px 18px;background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,0));pointer-events:none}
 .label{font:800 12px/1 "Nunito Sans";letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin:0 0 10px}
-.job{margin:0}
-.job q{quotes:"\201C" "\201D"}
-.maybe{font-size:14px;opacity:.75;margin-top:10px}
-.funnel{display:grid;gap:10px;margin-top:6px}
-.btn{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-radius:999px;text-decoration:none;font:800 17px/1.1 "Nunito Sans";background:var(--btn);color:var(--btn-ink);border:2px solid #fff;box-shadow:0 8px 20px rgba(0,30,70,.25);transition:transform .15s}
-.btn:hover{transform:translateY(-2px)}
-.btn.alt{background:var(--glass);color:var(--ink)}
+.hand{font:600 clamp(22px,3.6vw,30px)/1.2 Caveat,cursive;margin:0}
+.maybe{font-size:14px;opacity:.78;margin:10px 0 0}
+/* the path */
+ol.path{list-style:none;margin:10px 0 0;padding:0;position:relative}
+ol.path::before{content:"";position:absolute;left:21px;top:10px;bottom:10px;width:6px;border-radius:3px;background:linear-gradient(180deg,#fff,rgba(255,255,255,.3))}
+ol.path li{position:relative;padding:4px 0 18px 64px}
+ol.path .orb{position:absolute;left:0;top:0;width:48px;height:48px;border-radius:50%;display:grid;place-items:center;font:700 20px Fredoka;color:var(--ink);background:radial-gradient(circle at 32% 28%,#fff,#dff6ff 45%,#8fd3ff);border:3px solid #fff;box-shadow:0 6px 14px rgba(0,40,90,.25)}
+ol.path h3{margin:0 0 2px;font:600 22px/1.1 Fredoka}
+ol.path p{margin:0}
+/* demo */
+.demo{display:grid;gap:12px}
+.toggle{display:flex;align-items:center;gap:14px;padding:16px 18px;border-radius:999px;background:#fff;border:2px solid #fff;box-shadow:0 8px 20px rgba(0,30,70,.18);cursor:pointer;font:800 18px "Nunito Sans";user-select:none}
+.toggle .pill{width:54px;height:30px;border-radius:999px;background:#ddd;position:relative;flex:none;transition:background .2s}
+.toggle .pill::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.3);transition:left .2s}
+.toggle.on .pill{background:var(--meh)}.toggle.on .pill::after{left:27px}
+.count{display:none;padding:18px 20px;border-radius:22px;background:linear-gradient(180deg,#fff7c2,#ffe88a);border:2px solid #fff;font:700 18px/1.35 "Nunito Sans"}
+.count b{font:700 40px/1 Fredoka;display:block}
+.bell{display:none;align-items:center;justify-content:space-between;gap:12px;padding:18px 22px;border-radius:999px;background:var(--btn);color:var(--btn-ink);border:2px solid #fff;font:800 19px "Nunito Sans";cursor:pointer;box-shadow:0 8px 20px rgba(0,30,70,.3);width:100%;text-align:left}
+.bell:hover{transform:translateY(-2px)}
 .dot{width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff8a8a,#e2342b 55%,#8c0f0a);box-shadow:0 0 0 4px rgba(226,52,43,.25);animation:pulse 1.8s ease-in-out infinite;flex:none}
 @keyframes pulse{50%{box-shadow:0 0 0 9px rgba(226,52,43,.08)}}
+.draft{display:none}
+.draft textarea{width:100%;min-height:150px;padding:14px 16px;border-radius:18px;border:2px solid #fff;background:#fff;font:500 16px/1.45 "Nunito Sans";color:var(--ink);resize:vertical}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:999px;text-decoration:none;font:800 15px/1 "Nunito Sans";background:var(--btn);color:var(--btn-ink);border:2px solid #fff;box-shadow:0 6px 16px rgba(0,30,70,.25);cursor:pointer}
+.btn.alt{background:var(--glass);color:var(--ink)}
+.show{display:block}.showflex{display:flex}
+.demo-tag{display:inline-block;font:800 11px/1 "Nunito Sans";letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px;background:#fff;border:2px dashed rgba(0,0,0,.3);margin-left:8px;vertical-align:middle}
+/* poster */
+.poster{margin:14px auto 0;max-width:300px;aspect-ratio:8.5/11;background:#fff;border-radius:6px;box-shadow:0 14px 30px rgba(0,0,0,.25);padding:22px 18px;display:flex;flex-direction:column;justify-content:space-between;text-align:center;transform:rotate(-1.5deg)}
+.poster .ph{font:700 34px/.95 Fredoka;color:var(--ink)}
+.poster .ph small{display:block;font-size:.55em;opacity:.8}
+.poster .code{font:900 26px/1.2 "Nunito Sans";letter-spacing:.3em;border:3px dashed var(--ink);border-radius:14px;padding:12px 6px}
+.poster .fine{font:700 11px/1.3 "Nunito Sans";opacity:.75}
+.poster .tape{position:absolute;top:-10px;left:50%;transform:translateX(-50%) rotate(2deg);width:90px;height:26px;background:rgba(255,255,255,.55);border:1px solid rgba(0,0,0,.08)}
+.posterwrap{position:relative;padding-top:12px}
+ul.not{margin:0;padding-left:20px}ul.not li{margin:4px 0}
 .reveal{text-align:center;margin:28px 0 0;font-size:15px;opacity:.85}
-footer{text-align:center;margin-top:40px;font-size:13px;opacity:.85}
+footer{text-align:center;margin-top:40px;font-size:13px;opacity:.9}
 footer a{text-decoration:none;font-weight:800}
 .badge{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--glass);border:2px solid #fff;box-shadow:0 6px 16px rgba(6,40,80,.15);text-decoration:none;font:800 13px/1 "Nunito Sans"}
 .badge i{width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#5cc8ff 45%,#0b7cc7)}
 .status{display:inline-block;margin-top:14px;padding:5px 12px;border-radius:999px;border:2px dashed rgba(0,0,0,.25);font:700 12px/1.3 "Nunito Sans";opacity:.8}
-.orb{position:fixed;z-index:-1;border-radius:50%;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.95),rgba(255,255,255,.35) 45%,rgba(255,255,255,.05) 70%);box-shadow:inset -6px -10px 24px rgba(0,0,0,.08);animation:drift 12s ease-in-out infinite}
+.floater{position:fixed;z-index:-1;border-radius:50%;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.95),rgba(255,255,255,.35) 45%,rgba(255,255,255,.05) 70%);box-shadow:inset -6px -10px 24px rgba(0,0,0,.08);animation:drift 12s ease-in-out infinite}
 @keyframes drift{50%{transform:translateY(-18px)}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important}}
-
-:root{--ink:#1a0b2e;--glass:rgba(255,255,255,.72);--btn:#1a0b2e;--btn-ink:#fff}
-.sky{background:linear-gradient(135deg,#ff5fa2,#ffb347,#c8ff5f,#5fe3ff,#b46bff);background-size:400% 400%;animation:melt 14s ease infinite}
-h1{font:700 clamp(44px,11vw,120px)/.9 Fredoka,sans-serif;letter-spacing:-.03em;color:#fff;text-shadow:0 4px 0 #1a0b2e,0 14px 40px rgba(0,0,0,.25);text-transform:lowercase}
-.eyebrow{background:#1a0b2e;color:#fff}
-.job{font:600 clamp(26px,5vw,40px)/1.15 Caveat,cursive}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 <script>(function(){var s=document.createElement("script");s.async=true;s.dataset.goatcounter="https://asaaab.goatcounter.com/count";s.src="https://gc.zgo.at/count.js";document.head.appendChild(s);})();
 function ev(n){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({path:n,event:true});}catch(e){}}</script>
 </head>
 <body>
 <div class="sky"></div>
-<div class="orb" style="width:140px;height:140px;left:-40px;top:18%"></div>
-<div class="orb" style="width:90px;height:90px;right:6%;top:9%;animation-delay:-4s"></div>
-<div class="orb" style="width:60px;height:60px;right:18%;bottom:14%;animation-delay:-8s"></div>
+<div class="floater" style="width:140px;height:140px;left:-40px;top:18%"></div>
+<div class="floater" style="width:90px;height:90px;right:6%;top:9%;animation-delay:-4s"></div>
+<div class="floater" style="width:60px;height:60px;right:18%;bottom:14%;animation-delay:-8s"></div>
+
 <div class="wrap">
 <header>
-  <span class="eyebrow">agressively GEN Z!!</span>
-  <h1>imsickofthisplace</h1>
+  <span class="eyebrow">a tool, not a vibe</span>
+  <h1>im sick<span class="dots">...of this place.</span></h1>
+  <p class="dek">anonymous symptom check-ins for your whole break room. see how many coworkers feel it too. <b>nobody has to be the first to call out alone.</b></p>
 </header>
 
 <section class="card">
-  <p class="label">the job, in the Captain’s words</p>
-  <p class="job"><q>im sick.... to strike</q></p><p class="maybe">a website to organize collective striking</p>
+  <p class="label">the idea, in one breath</p>
+  <p class="hand">you feel kinda meh. you could call out. but is it just you? it never is. this tells you three of your coworkers feel it too, and lets you be the first to pull the bell.</p>
 </section>
 
 <section class="card">
-  <p class="label">every door opens onto the same house</p>
-  <div class="funnel"><a class="btn" href="https://asaaab.com/tower/" onclick="ev('door-imsickofthisplace-tower')"><span>get on the radio →</span><span class="dot" aria-hidden="true"></span></a><a class="btn alt" href="https://asaaab.com/asaaabot/" onclick="ev('door-imsickofthisplace-asaaabot')"><span>talk to asaaabot, free →</span></a><a class="btn alt" href="https://asaaab.com/manual/" onclick="ev('door-imsickofthisplace-manual')"><span>read the co-owner&#x27;s manual →</span></a></div>
-  <p class="maybe">asaaab: $231.36 once · one day at the LA living wage. the co-owners manual and the engine. <a href="https://asaaab.com/manual/">maybe, with sources →</a></p>
+  <h2>how it works</h2>
+  <ol class="path">
+    <li><span class="orb">1</span><h3>someone puts the poster up</h3><p>in the break room, by the time clock, wherever the boss doesn't look. it has your workplace code on it.</p></li>
+    <li><span class="orb">2</span><h3>you join with the code</h3><p>no name, no email, no login the company can see. the code proves you're a coworker. that's the whole point of it being on paper in the break room and not on the internet.</p></li>
+    <li><span class="orb">3</span><h3>feeling meh? tap it.</h3><p>you see how many coworkers checked in feeling symptoms today. a number, never a name. the company never sees any of it.</p></li>
+    <li><span class="orb">4</span><h3>pull the im sick bell</h3><p>it drafts the message to your boss. you copy it, you send it, you stay home. your coworkers see the bell got pulled and decide for themselves.</p></li>
+  </ol>
 </section>
 
-<p class="reveal">you just walked through a door. that was the whole trick. the house is the same one every door opens onto.</p>
+<section class="card" id="demo">
+  <h2>try the bell <span class="demo-tag">demo · made-up numbers · no real break room</span></h2>
+  <div class="demo">
+    <div class="toggle" id="meh" role="switch" aria-checked="false" tabindex="0"><span class="pill"></span><span>i feel kinda meh today</span></div>
+    <div class="count" id="count"><b>3</b>of your coworkers are also feeling symptoms today. you can be the first to pull the im sick bell.</div>
+    <button class="bell" id="bell"><span>pull the im sick bell</span><span class="dot" aria-hidden="true"></span></button>
+    <div class="draft" id="draft">
+      <p class="label">your message. edit it, copy it, send it yourself.</p>
+      <textarea id="msg">Hi [boss],
+
+I'm not feeling well today and I'm going to stay home so I don't pass anything around the team. I'll check messages when I can and I'll let you know how I'm doing tomorrow.
+
+Thanks,
+[you]</textarea>
+      <div class="row">
+        <button class="btn" id="copy">copy message</button>
+        <button class="btn alt" id="reset">reset demo</button>
+      </div>
+      <p class="maybe">the real tool will also tell your coworkers the bell got pulled (count only, still no names).</p>
+    </div>
+  </div>
+</section>
+
+<section class="card">
+  <h2>why a code on a poster</h2>
+  <p>anything on the open internet, your boss can join. a code taped up in the break room, only the people in the room can read. share it with your people. that's your union, whether or not it has a name yet.</p>
+  <div class="posterwrap">
+    <div class="poster"><div class="tape"></div>
+      <div class="ph">feeling meh?<small>check in. anonymous. coworkers only.</small></div>
+      <div class="code">▮▮▮▮ ▮▮▮▮</div>
+      <div class="fine">imsickofthisplace.com · tear one off · don't show the boss</div>
+    </div>
+  </div>
+  <p class="maybe">codes come when the tool goes live. the poster is printable, ugly on purpose.</p>
+</section>
+
+<section class="card">
+  <h2>what it isn't</h2>
+  <ul class="not">
+    <li>not a doctor. it never tells you what you have or what to take. feeling bad is enough to count.</li>
+    <li>not the company's. no HR login, no manager dashboard, no exports. the company doesn't get a copy because the company isn't in the room.</li>
+    <li>not a snitch list. counts, never names. you can't see who, and neither can we.</li>
+    <li>not a strike. it's a bell. what people do when it rings is theirs.</li>
+  </ul>
+</section>
+
+<p class="reveal">first arc. the home page is live, the tool isn't yet. this door is one of the asaaab tool sites: built for public good, free to copy.</p>
 
 <footer>
   <a class="badge" href="https://asaaab.com/"><i></i> made with asaaab website builder</a>
   <div class="status">parked at asaaab.com/imsickofthisplace/ until imsickofthisplace.com points here</div>
+  <p>mad at one place in particular, on paper? that's our sibling's department → <a href="https://asaaab.com/chatshouldigotalktoalawyerfrfr/">chatshouldigotalktoalawyerfrfr.com</a></p>
   <p><a href="https://asaaab.com/">asaaab</a> is a US co-op. <a href="https://asaaab.com/privacy/">privacy</a> · <a href="https://asaaab.com/copyright/">copyright</a></p>
 </footer>
 </div>
+
+<script>
+(function(){
+  var meh=document.getElementById('meh'),count=document.getElementById('count'),bell=document.getElementById('bell'),draft=document.getElementById('draft');
+  function setMeh(on){meh.classList.toggle('on',on);meh.setAttribute('aria-checked',on);count.classList.toggle('show',on);bell.classList.toggle('showflex',on);if(!on)draft.classList.remove('show');if(on)ev('door-imsickofthisplace-meh');}
+  meh.addEventListener('click',function(){setMeh(!meh.classList.contains('on'))});
+  meh.addEventListener('keydown',function(e){if(e.key===' '||e.key==='Enter'){e.preventDefault();meh.click()}});
+  bell.addEventListener('click',function(){draft.classList.add('show');ev('door-imsickofthisplace-bell');draft.scrollIntoView({behavior:'smooth',block:'nearest'})});
+  document.getElementById('copy').addEventListener('click',function(){var t=document.getElementById('msg');t.select();try{navigator.clipboard.writeText(t.value)}catch(e){document.execCommand('copy')}this.textContent='copied';var b=this;setTimeout(function(){b.textContent='copy message'},1600);ev('door-imsickofthisplace-copy')});
+  document.getElementById('reset').addEventListener('click',function(){setMeh(false)});
+})();
+</script>
 </body>
 </html>
