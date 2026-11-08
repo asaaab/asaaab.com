@@ -3,84 +3,110 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>littleredbot · translating your dreams to computer output binary</title>
-<meta name="description" content="hey human!! say your finish line how you'd say it, hit the big red button, and the dot pings the AI you already pay for: what's the next click? 99¢ per deck. no subscription. I'm just a button.">
-<meta property="og:title" content="littleredbot · I'm just a button.">
-<meta property="og:description" content="99¢ per deck. no subscription. works with your own tools. seize the means. make the computer work!!">
+<title>LRB · littleredbot · I'm literally just a button.</title>
+<meta name="description" content="say your finish line how you'd say it, press the big red button, and it pings the AI you already pay for: what's the next click? 99¢ per deck. no subscription. I'm not even an AI. I'm literally just a button.">
+<meta property="og:title" content="LRB · I'm literally just a button.">
+<meta property="og:description" content="99¢ per deck. no subscription. works with your own tools. a marketing exercise and a little red button.">
 <meta property="og:url" content="https://littleredbot.ai/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@400;600;700;900&display=swap">
 <style>
-/* layout: one box, one big red button, over a melting sky. hit one thing, it does what you want. (10/30 draft, kept) */
-:root{--sky-a:#bfe8ff;--sky-b:#ffd9ec;--sky-c:#e9fbd0;--ink:#16222e;--ink-2:#4a5b6b;--glass:rgba(255,255,255,.74);--glass-line:rgba(255,255,255,.95);--red:#e8192c;--gold:#ffc11f;--mine-1:#53c6ff;--mine-2:#ffc11f;--mine-3:#a66cff;--display:"Fredoka","Trebuchet MS",system-ui,sans-serif;--body:"Nunito Sans",system-ui,sans-serif;color-scheme:light}
+/* the LRB pitch cover slide, alive. baby blue sky, one giant glossy red ball, Fredoka. brand guide: LRB: the pitch (11/7). */
+:root{--sky-0:#f4fbff;--sky-1:#cfeefc;--sky-2:#b3e2f5;--ink:#0d3550;--ink-2:#3d6178;--red:#e8192c;--red-hi:#ff8a95;--red-lo:#9e0d1c;--coral:#ff7a5c;--yel:#ffd23f;--mint:#9ff0c9;--lilac:#d7c6ff;--card:#fff;--display:"Fredoka","Trebuchet MS",system-ui,sans-serif;--body:"Nunito Sans",system-ui,sans-serif;color-scheme:light}
 *{box-sizing:border-box}html,body{margin:0}
-body{min-height:100%;font-family:var(--body);color:var(--ink);line-height:1.5;background:radial-gradient(40rem 30rem at 10% 5%,var(--sky-b),transparent 60%),radial-gradient(45rem 35rem at 95% 15%,var(--sky-a),transparent 60%),radial-gradient(40rem 30rem at 50% 100%,var(--sky-c),transparent 60%),#f4fbff;background-attachment:fixed}
-.wrap{max-width:720px;margin:0 auto;padding:20px 16px 64px;display:grid;gap:18px}
-.lock{font-size:.8rem;color:var(--ink-2);text-align:center;font-style:italic;margin:0}
-header{display:flex;align-items:center;gap:14px}
-.word{font-family:var(--display);font-weight:600;font-size:1.5rem}
-.word small{display:block;font-family:var(--body);font-weight:400;font-size:.85rem;color:var(--ink-2)}
-.orb{position:relative;flex:none;border-radius:50%;border:2px solid #fff;background:radial-gradient(circle at 35% 30%,#ff6a76 0%,var(--red) 55%,#9d0614 100%);box-shadow:0 6px 18px rgba(232,25,44,.35),inset 0 -6px 12px rgba(0,0,0,.18)}
-.orb::before{content:"";position:absolute;left:18%;top:9%;width:46%;height:30%;border-radius:50%;background:rgba(255,255,255,.55)}
-.orb .eye{position:absolute;top:42%;width:13%;height:13%;border-radius:50%;background:#2b0608}
-.orb .eye.l{left:30%}.orb .eye.r{right:30%}
-.dot{width:56px;height:56px}.mini{width:28px;height:28px;border-width:1.5px}
-.glass{background:var(--glass);border:1.5px solid var(--glass-line);border-radius:28px;padding:20px;box-shadow:0 8px 26px rgba(22,34,46,.08);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-h2{font-family:var(--display);font-weight:600;font-size:1.35rem;margin:0 0 10px;text-wrap:balance}
+body{min-height:100%;font-family:var(--body);color:var(--ink);line-height:1.5;background:radial-gradient(circle at 30% 20%,var(--sky-0) 0%,var(--sky-1) 55%,var(--sky-2) 100%);background-attachment:fixed;overflow-x:hidden}
+/* personality: a few soft color blobs in the sky, behind everything */
+.sky{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.sky i{position:absolute;border-radius:50%;filter:blur(40px);opacity:.55}
+.sky .y{width:34rem;height:34rem;left:-10rem;top:-8rem;background:var(--yel);opacity:.42}
+.sky .c{width:28rem;height:28rem;right:-9rem;top:34%;background:var(--coral);opacity:.32}
+.sky .m{width:30rem;height:30rem;left:20%;bottom:-14rem;background:var(--mint);opacity:.5}
+.sky .l{width:22rem;height:22rem;right:12%;bottom:8%;background:var(--lilac);opacity:.5}
+.wrap{max-width:1120px;margin:0 auto;padding:22px 18px 72px;display:grid;gap:22px}
+.eyebrow{font:700 .78rem/1.2 var(--body);letter-spacing:4px;text-transform:uppercase;color:var(--red);margin:0}
+.lock{font-size:.82rem;color:var(--ink-2);text-align:center;font-style:italic;margin:0}
+/* the slide */
+.hero{position:relative;display:grid;grid-template-columns:1fr;gap:22px;align-items:center;padding:12px 4px 0}
+.hero .word{font:600 clamp(96px,22vw,200px)/.9 var(--display);letter-spacing:-.02em;margin:6px 0 0;color:var(--ink)}
+.hero .word small{display:block;font:600 1.05rem/1.3 var(--display);letter-spacing:0;color:var(--ink-2);margin-top:8px}
+.hero .line{font:600 clamp(1.3rem,4.6vw,2.1rem)/1.15 var(--display);margin:14px 0 0;text-wrap:balance;max-width:20ch}
+.hero .line b{color:var(--red)}
+.ballwrap{display:grid;justify-items:center;gap:12px;position:relative}
+.ball{--s:clamp(220px,62vw,340px);width:var(--s);height:var(--s);border-radius:50%;cursor:pointer;border:0;position:relative;color:#fff;font:600 clamp(1.6rem,6vw,2.4rem) var(--display);letter-spacing:.01em;background:radial-gradient(circle at 34% 28%,#ffffff 0%,var(--red-hi) 18%,var(--red) 62%,var(--red-lo) 100%);box-shadow:0 40px 90px rgba(150,10,25,.35),0 18px 0 var(--red-lo),inset 0 -30px 60px rgba(0,0,0,.25);transition:transform .09s ease,box-shadow .09s ease;text-shadow:0 2px 0 rgba(0,0,0,.25)}
+.ball .eye{position:absolute;top:36%;width:7%;height:7%;border-radius:50%;background:#2b0608;box-shadow:inset 0 -2px 0 rgba(255,255,255,.25)}
+.ball .eye.l{left:38%}.ball .eye.r{right:38%}
+.ball .lab{position:absolute;left:0;right:0;top:54%}
+.ball:hover{transform:translateY(3px);box-shadow:0 34px 80px rgba(150,10,25,.35),0 15px 0 var(--red-lo),inset 0 -30px 60px rgba(0,0,0,.25)}
+.ball:active,.ball.pressed{transform:translateY(16px);box-shadow:0 10px 40px rgba(150,10,25,.35),0 2px 0 var(--red-lo),inset 0 -24px 50px rgba(0,0,0,.28)}
+.ball:focus-visible{outline:4px solid var(--ink);outline-offset:10px}
+.ball:disabled{cursor:default}
+.shadow{width:62%;height:18px;border-radius:50%;background:rgba(13,53,80,.18);filter:blur(8px);margin-top:-6px}
+.under{font:600 .95rem var(--display);color:var(--ink-2);text-align:center;margin:0}
+/* stickers (personality) */
+.stk{position:absolute;z-index:2;font:600 .85rem var(--display);padding:6px 12px;border-radius:999px;background:var(--yel);color:var(--ink);box-shadow:0 6px 16px rgba(13,53,80,.12);transform:rotate(-8deg)}
+.stk.b{background:#fff;transform:rotate(6deg)}
+.stk.m{background:var(--mint);transform:rotate(-4deg)}
+/* cards */
+.card{background:var(--card);border-radius:32px;padding:24px;box-shadow:0 20px 50px rgba(13,53,80,.10)}
+h2{font-family:var(--display);font-weight:600;font-size:1.5rem;margin:0 0 10px;text-wrap:balance}
 .chat{display:grid;gap:10px}
 .row{display:flex;gap:10px;align-items:flex-end}
 .row.you{justify-content:flex-end}
-.bubble{max-width:84%;padding:11px 15px;border-radius:22px}
-.bot .bubble{background:#fff;border:1.5px solid var(--glass-line);box-shadow:0 4px 14px rgba(22,34,46,.07);font-family:var(--display);font-weight:500;font-size:1.1rem;border-bottom-left-radius:8px}
+.bubble{max-width:84%;padding:12px 16px;border-radius:22px}
+.bot .bubble{background:var(--sky-0);border:1.5px solid var(--sky-1);font-family:var(--display);font-weight:500;font-size:1.1rem;border-bottom-left-radius:8px}
 .bot .bubble small{display:block;font-family:var(--body);font-weight:600;font-size:.78rem;color:var(--ink-2);margin-top:4px}
-.you .bubble{background:rgba(83,198,255,.22);border:1.5px solid #fff;border-bottom-right-radius:8px;white-space:pre-wrap}
-textarea{width:100%;min-height:92px;resize:vertical;font:inherit;font-size:1.05rem;color:var(--ink);padding:14px 16px;border-radius:22px;border:2.5px solid var(--red);background:#fff;outline:none}
-textarea:focus-visible{box-shadow:0 0 0 4px rgba(232,25,44,.18)}
+.you .bubble{background:var(--yel);border-bottom-right-radius:8px;white-space:pre-wrap;font-weight:600}
+.mini{position:relative;flex:none;width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 34% 28%,#fff 0%,var(--red-hi) 18%,var(--red) 62%,var(--red-lo) 100%);box-shadow:0 4px 10px rgba(150,10,25,.3)}
+.mini::after{content:"";position:absolute;left:30%;top:40%;width:13%;height:13%;border-radius:50%;background:#2b0608;box-shadow:9px 0 0 #2b0608}
+textarea{width:100%;min-height:96px;resize:vertical;font:600 1.1rem var(--display);color:var(--ink);padding:16px 18px;border-radius:24px;border:3px solid var(--sky-2);background:#fff;outline:none;box-shadow:0 10px 30px rgba(13,53,80,.08)}
+textarea:focus-visible{border-color:var(--red);box-shadow:0 0 0 5px rgba(232,25,44,.15)}
 .starters{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-.starter{font:600 .85rem var(--display);border-radius:999px;padding:7px 12px;border:1.5px solid #fff;background:rgba(255,255,255,.85);color:var(--ink);cursor:pointer}
-.bigwrap{display:grid;justify-items:center;gap:14px;margin-top:22px}
-.big{width:168px;height:168px;border-radius:50%;cursor:pointer;border:4px solid #fff;font:600 1.5rem var(--display);color:#fff;letter-spacing:.02em;position:relative;background:radial-gradient(circle at 35% 28%,#ff7883 0%,var(--red) 52%,#a10717 100%);box-shadow:0 14px 0 #8f0414,0 22px 30px rgba(143,4,20,.35),inset 0 -10px 18px rgba(0,0,0,.18);transition:transform .08s ease,box-shadow .08s ease}
-.big::before{content:"";position:absolute;left:20%;top:9%;width:52%;height:28%;border-radius:50%;background:rgba(255,255,255,.5)}
-.big:active,.big.pressed{transform:translateY(12px);box-shadow:0 2px 0 #8f0414,0 6px 12px rgba(143,4,20,.35),inset 0 -6px 12px rgba(0,0,0,.2)}
-.big:focus-visible{outline:4px solid var(--ink);outline-offset:6px}
-.under{font-size:.85rem;color:var(--ink-2);text-align:center;margin:0}
-button,.btnlink{font:600 1rem var(--display);border-radius:999px;padding:12px 20px;cursor:pointer;border:1.5px solid #fff;text-decoration:none;display:inline-block}
-.go{background:var(--red);color:#fff;box-shadow:0 4px 12px rgba(232,25,44,.3)}
-.soft{background:rgba(255,255,255,.85);color:var(--ink)}
-.btns{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;align-items:center}
-.trialtag{display:inline-block;background:var(--gold);color:var(--ink);border-radius:999px;padding:3px 12px;font:600 .8rem var(--display)}
-.pitch{margin:0;text-align:center;font-size:1.08rem;max-width:52ch;justify-self:center;text-wrap:balance}
-.fine{font-size:.82rem;color:var(--ink-2)}.fine ul{margin:6px 0 0;padding-left:18px}.fine li{margin:3px 0}
-[hidden]{display:none!important}
-/* the loop */
-.ping{display:flex;gap:10px;align-items:center;font:600 .85rem var(--body);color:var(--ink-2);padding:2px 0 2px 38px}
-.ping i{width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(232,25,44,.2);animation:pulse 1.2s infinite}
+.starter{font:600 .88rem var(--display);border-radius:999px;padding:8px 14px;border:0;background:#fff;color:var(--ink);cursor:pointer;box-shadow:0 6px 16px rgba(13,53,80,.10)}
+.starter:nth-child(2){background:var(--yel)}.starter:nth-child(3){background:var(--mint)}.starter:nth-child(4){background:var(--lilac)}
+.ping{display:flex;gap:10px;align-items:center;font:600 .85rem var(--body);color:var(--ink-2);padding:2px 0 2px 40px}
+.ping .d{width:9px;height:9px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(232,25,44,.2);animation:pulse 1.2s infinite}
 @keyframes pulse{50%{box-shadow:0 0 0 9px rgba(232,25,44,.03)}}
-/* the deck */
-.theirs{position:relative;overflow:hidden;border-radius:30px;padding:22px;border:1.5px solid #fff;background:radial-gradient(18rem 14rem at 12% 10%,color-mix(in srgb,var(--mine-1) 45%,transparent),transparent 70%),radial-gradient(18rem 14rem at 92% 30%,color-mix(in srgb,var(--mine-2) 45%,transparent),transparent 70%),radial-gradient(20rem 14rem at 50% 105%,color-mix(in srgb,var(--mine-3) 40%,transparent),transparent 70%),rgba(255,255,255,.78);box-shadow:0 10px 30px rgba(22,34,46,.1);display:grid;gap:14px}
+button,.btnlink{font:600 1rem var(--display);border-radius:999px;padding:13px 22px;cursor:pointer;border:0;text-decoration:none;display:inline-block}
+.go{background:var(--red);color:#fff;box-shadow:0 10px 24px rgba(232,25,44,.3)}
+.soft{background:var(--sky-1);color:var(--ink)}
+.btns{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;align-items:center}
 .tag{font-size:.78rem;color:var(--ink-2);letter-spacing:.04em}
-.slide{position:relative;aspect-ratio:16/9;container-type:inline-size;border-radius:22px;overflow:hidden;border:2px solid #fff;box-shadow:0 12px 30px rgba(22,34,46,.14);padding:4.5% 5% 7%;display:flex;flex-direction:column;gap:2%;background:radial-gradient(40% 50% at 12% 10%,rgba(255,217,236,.95),transparent 70%),radial-gradient(45% 55% at 92% 12%,rgba(191,232,255,.95),transparent 70%),radial-gradient(45% 50% at 50% 105%,rgba(233,251,208,.95),transparent 70%),#f7fcff}
-.slide .st{font:600 4.6cqw/1.1 var(--display)}
-.slide .sq{flex:1;background:rgba(255,255,255,.8);border:1.5px solid #fff;border-radius:3cqw;padding:2.6cqw 3cqw;font:500 3.1cqw/1.35 var(--display);display:flex;align-items:center;overflow:hidden}
+.pitch{margin:0;text-align:center;font:600 1.15rem var(--display);max-width:52ch;justify-self:center;text-wrap:balance}
+.fine{font-size:.86rem;color:var(--ink-2)}.fine ul{margin:6px 0 0;padding-left:18px}.fine li{margin:4px 0}
+[hidden]{display:none!important}
+/* the deck, in the same sky */
+.slide{position:relative;aspect-ratio:16/9;container-type:inline-size;border-radius:22px;overflow:hidden;box-shadow:0 14px 34px rgba(13,53,80,.16);padding:4.5% 5% 7%;display:flex;flex-direction:column;gap:2%;background:radial-gradient(circle at 30% 20%,var(--sky-0) 0%,var(--sky-1) 55%,var(--sky-2) 100%)}
+.slide .eb{font:700 1.6cqw var(--body);letter-spacing:.4cqw;text-transform:uppercase;color:var(--red)}
+.slide .st{font:600 5cqw/1.05 var(--display)}
+.slide .sq{flex:1;background:#fff;border-radius:3cqw;padding:2.6cqw 3cqw;font:500 3cqw/1.35 var(--display);display:flex;align-items:center;overflow:hidden;box-shadow:0 2cqw 5cqw rgba(13,53,80,.10)}
 .slide .sq.q{font-style:italic;font-size:3.6cqw}
-.slide .sf{position:absolute;left:5cqw;right:5cqw;bottom:2.2cqw;font-size:max(9px,1.5cqw);font-style:italic;color:var(--ink-2)}
-.slide .o{position:absolute;right:4cqw;top:4cqw;width:6cqw;height:6cqw;border-radius:50%;border:1.5px solid #fff;background:radial-gradient(circle at 35% 30%,#ff6a76,var(--red) 60%)}
-.slide .o::after{content:"";position:absolute;left:30%;top:42%;width:14%;height:14%;border-radius:50%;background:#2b0608;box-shadow:2.1cqw 0 0 #2b0608}
-.slide.cover .st{font-size:7cqw;color:var(--red);margin-top:6cqw}
-.lockrow{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 8px;scroll-snap-type:x mandatory}
-.lockrow .slide{flex:none;width:min(300px,78%);scroll-snap-align:start;box-shadow:0 6px 14px rgba(22,34,46,.12)}
-/* vending machine (10/30) */
-.machine{position:relative;height:210px;border-radius:28px;border:3px solid #fff;overflow:hidden;margin:12px 0;background:linear-gradient(180deg,rgba(83,198,255,.35),rgba(255,255,255,.6));box-shadow:inset 0 8px 20px rgba(22,34,46,.12)}
-.machine .shelf{position:absolute;left:10%;right:10%;top:92px;height:8px;border-radius:8px;background:rgba(255,255,255,.95)}
-.machine .tray{position:absolute;left:6%;right:6%;bottom:10px;height:46px;border-radius:18px;background:rgba(22,34,46,.12);border:2px solid #fff}
-.machine .item{position:absolute;left:calc(50% - 32px);top:26px;width:64px;height:64px}
-.machine .label{position:absolute;left:0;right:0;top:104px;text-align:center;font:600 .95rem var(--display)}
-.machine .item.drop{top:132px}
+.slide .sf{position:absolute;left:5cqw;right:5cqw;bottom:2cqw;font-size:max(9px,1.5cqw);font-style:italic;color:var(--ink-2)}
+.slide .o{position:absolute;right:4cqw;top:3.5cqw;width:9cqw;height:9cqw;border-radius:50%;background:radial-gradient(circle at 34% 28%,#fff 0%,var(--red-hi) 18%,var(--red) 62%,var(--red-lo) 100%);box-shadow:0 2cqw 4cqw rgba(150,10,25,.35)}
+.slide .o::after{content:"";position:absolute;left:34%;top:40%;width:11%;height:11%;border-radius:50%;background:#2b0608;box-shadow:2.1cqw 0 0 #2b0608}
+.slide.cover .st{font-size:9cqw;margin-top:3cqw}
+.slide.cover .sq{font-size:3.2cqw}
+.twoup{display:grid;gap:14px}
+.lockrow{display:flex;gap:12px;overflow-x:auto;padding:4px 2px 10px;scroll-snap-type:x mandatory}
+.lockrow .slide{flex:none;width:min(300px,78%);scroll-snap-align:start}
+/* the vending machine, baby blue */
+.machine{position:relative;height:220px;border-radius:28px;overflow:hidden;margin:12px 0;background:linear-gradient(180deg,var(--sky-1),var(--sky-0));box-shadow:inset 0 10px 24px rgba(13,53,80,.12)}
+.machine .shelf{position:absolute;left:10%;right:10%;top:96px;height:8px;border-radius:8px;background:#fff}
+.machine .tray{position:absolute;left:6%;right:6%;bottom:10px;height:48px;border-radius:18px;background:rgba(13,53,80,.10);border:2px solid #fff}
+.machine .item{position:absolute;left:calc(50% - 34px);top:26px;width:68px;height:68px;border-radius:50%;background:radial-gradient(circle at 34% 28%,#fff 0%,var(--red-hi) 18%,var(--red) 62%,var(--red-lo) 100%);box-shadow:0 10px 22px rgba(150,10,25,.35)}
+.machine .item::after{content:"";position:absolute;left:33%;top:40%;width:11%;height:11%;border-radius:50%;background:#2b0608;box-shadow:16px 0 0 #2b0608}
+.machine .label{position:absolute;left:0;right:0;top:110px;text-align:center;font:600 1rem var(--display)}
+.machine .item.drop{top:138px}
 @media (prefers-reduced-motion:no-preference){.machine .item.drop{animation:drop .9s cubic-bezier(.5,0,.75,0) forwards}}
-@keyframes drop{0%{top:26px}80%{top:138px}90%{top:126px}100%{top:132px}}
-.doorline{margin:0;text-align:center;font-family:var(--display);font-weight:500;font-size:1.05rem;color:var(--ink-2);text-wrap:balance}
+@keyframes drop{0%{top:26px}80%{top:144px}90%{top:132px}100%{top:138px}}
+.trialtag{display:inline-block;background:var(--yel);color:var(--ink);border-radius:999px;padding:3px 12px;font:600 .8rem var(--display);vertical-align:middle}
+.doorline{margin:0;text-align:center;font:500 1.1rem var(--display);color:var(--ink-2);text-wrap:balance}
 .doorline a{color:var(--ink)}
-@media (min-width:860px){.wrap{max-width:860px}.twoup{display:grid;grid-template-columns:1fr 1fr;gap:14px}}
+@media (min-width:880px){
+  .hero{grid-template-columns:1.1fr .9fr;gap:40px;padding:30px 20px 10px;min-height:min(78svh,640px)}
+  .hero .word{font-size:clamp(160px,16vw,220px)}
+  .twoup{grid-template-columns:1fr 1fr}
+  .ask{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 <script>(function(){var s=document.createElement("script");s.async=true;s.dataset.goatcounter="https://asaaab.goatcounter.com/count";s.src="https://gc.zgo.at/count.js";document.head.appendChild(s);})();
@@ -88,39 +114,51 @@ function ev(n){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({p
 <script src="pptxgen.bundle.js" defer></script>
 </head>
 <body>
+<div class="sky" aria-hidden="true"><i class="y"></i><i class="c"></i><i class="m"></i><i class="l"></i></div>
 <div class="wrap">
-  <p class="lock">demo · first arc · a marketing exercise and a little red button · 99¢ per deck · no subscription</p>
 
-  <header>
-    <div class="orb dot" aria-hidden="true"><span class="eye l"></span><span class="eye r"></span></div>
-    <div class="word">littleredbot<small>translating your dreams to computer output binary.</small></div>
-  </header>
-
-  <section class="glass" id="ask">
-    <div class="chat">
-      <div class="row bot"><div class="orb mini" aria-hidden="true"><span class="eye l"></span><span class="eye r"></span></div><div class="bubble">hey human!!</div></div>
-      <div class="row bot"><div class="orb mini" aria-hidden="true"><span class="eye l"></span><span class="eye r"></span></div><div class="bubble">say your finish line how you'd say it. one sentence is plenty.<small>I'll ping the AI you already pay for, every few minutes: "what's the next click?" that's the whole product.</small></div></div>
+  <section class="hero">
+    <div>
+      <p class="eyebrow">a marketing exercise and a little red button</p>
+      <h1 class="word">LRB<small>littleredbot · translating your dreams to computer output binary.</small></h1>
+      <p class="line">I'm not even an AI. <b>I'm literally just a button.</b></p>
+      <p class="line" style="font-size:1.05rem;color:var(--ink-2);max-width:38ch">say your finish line how you'd say it. press me. I ping the AI you already pay for, on a timer: <i>what's the next click?</i> 99¢ per deck. no subscription.</p>
     </div>
-    <label class="vh" for="fl" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">your finish line</label>
-    <textarea id="fl" placeholder="say it how you'd say it">a car club where everyone who shows up to the meet gets paid the same from the merch table.</textarea>
-    <div class="starters">
-      <button class="starter" data-s="a car club where everyone who shows up to the meet gets paid the same from the merch table.">car club</button>
-      <button class="starter" data-s="a food truck owned by the four people who cook in it.">food truck</button>
-      <button class="starter" data-s="get my 2003 wagon running and registered by spring.">the wagon</button>
-      <button class="starter" data-s="a youtube channel that pays the editor the same as the host.">channel</button>
+    <div class="ballwrap">
+      <span class="stk" style="left:0;top:-4px">99¢ · no subscription</span>
+      <span class="stk b" style="right:0;top:18px">works with your tools</span>
+      <button class="ball" id="doit" aria-label="do it"><span class="eye l"></span><span class="eye r"></span><span class="lab">do it</span></button>
+      <div class="shadow" aria-hidden="true"></div>
+      <p class="under" id="under">press me after you write the finish line ↓</p>
+      <span class="stk m" style="left:8%;bottom:34px">seize the means!!</span>
     </div>
-    <div class="bigwrap">
-      <button class="big" id="doit">do it</button>
-      <p class="under" id="under">I'm just a button.</p>
-    </div>
-    <div class="chat" id="loop" style="margin-top:14px"></div>
   </section>
 
-  <section class="theirs" id="deck" hidden>
-    <div class="tag">your deck · 8 slides · addressed to your AI, not to you</div>
+  <section class="card ask" id="ask">
+    <div>
+      <p class="eyebrow">the finish line</p>
+      <h2>say it how you'd say it. one sentence is plenty.</h2>
+      <label for="fl" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">your finish line</label>
+      <textarea id="fl" placeholder="say it how you'd say it">a car club where everyone who shows up to the meet gets paid the same from the merch table.</textarea>
+      <div class="starters">
+        <button class="starter" data-s="a car club where everyone who shows up to the meet gets paid the same from the merch table.">car club</button>
+        <button class="starter" data-s="a food truck owned by the four people who cook in it.">food truck</button>
+        <button class="starter" data-s="get my 2003 wagon running and registered by spring.">the wagon</button>
+        <button class="starter" data-s="a youtube channel that pays the editor the same as the host.">channel</button>
+      </div>
+    </div>
+    <div class="chat" id="loop">
+      <div class="row bot"><div class="mini" aria-hidden="true"></div><div class="bubble">hey human!!</div></div>
+      <div class="row bot"><div class="mini" aria-hidden="true"></div><div class="bubble">write the line, then press the big red button up there.<small>the first 30 seconds are you describing the finish line so clearly a bot can't miss. that's the consult. the rest is a timer.</small></div></div>
+    </div>
+  </section>
+
+  <section class="card" id="deck" hidden>
+    <p class="eyebrow">your deck</p>
+    <h2>welcome to being a bot. <span class="tag">8 slides · addressed to your AI, not to you</span></h2>
     <div class="twoup">
-      <div class="slide cover"><div class="o"></div><div class="st">welcome to being a bot.</div><div class="sq">you take orders from a script the user controls. the script asks one question on a timer. this deck says what the question is about.</div><div class="sf">generated with asaaabot · find me at asaaabot or littleredbot</div></div>
-      <div class="slide"><div class="o"></div><div class="st">the finish line</div><div class="sq q" id="s2q"></div><div class="sf">this sentence is the target. every answer moves toward it or says plainly why it can't.</div></div>
+      <div class="slide cover"><div class="o"></div><div class="eb">littleredbot</div><div class="st">welcome to being a bot.</div><div class="sq">you take orders from a script the user controls. the script asks one question on a timer. this deck says what the question is about.</div><div class="sf">generated with asaaabot · find me at asaaabot or littleredbot</div></div>
+      <div class="slide"><div class="o"></div><div class="eb">slide 2 of 8</div><div class="st">the finish line</div><div class="sq q" id="s2q"></div><div class="sf">this sentence is the target. every answer moves toward it or says plainly why it can't.</div></div>
     </div>
     <div class="lockrow" id="rest"></div>
     <p class="pitch">seize the means. make the computer work!!</p>
@@ -128,23 +166,24 @@ function ev(n){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({p
       <button class="go" id="dl">download the deck (.pptx)</button>
       <button class="soft" id="dls">download the script (lrb.py + run.bat)</button>
     </div>
-    <p class="under">the script is the second file: a timer. every N minutes it sends your AI the finish line and asks for the next click. bring your own key. runs on your machine. we never see it.</p>
+    <p class="under" style="font-weight:400;font-family:var(--body);font-size:.88rem">the script is the second file: a timer. every N minutes it sends your AI the finish line and asks for the next click. bring your own key. runs on your machine. we never see it.</p>
   </section>
 
-  <section class="glass" id="shop" hidden>
+  <section class="card" id="shop" hidden>
+    <p class="eyebrow">the coin slot</p>
     <h2>Get LRB · 99¢ <span class="trialtag">trial vending machine until Stripe</span></h2>
-    <p class="pitch" style="text-align:left;max-width:none">per deck. buy one, buy ten. no account, no subscription. until the coin slot is wired, the machine is free and we'd rather you take the deck than wait.</p>
+    <p style="margin:0;font-size:1.05rem">per deck. buy one, buy ten. no account, no subscription. until the coin slot is wired, the machine is free and we'd rather you take the deck than wait.</p>
     <div class="machine" id="machine">
       <div class="shelf"></div>
-      <div class="orb item" id="item" aria-hidden="true"><span class="eye l"></span><span class="eye r"></span></div>
-      <div class="label" id="mlabel">press the big red button first</div>
+      <div class="item" id="item" aria-hidden="true"></div>
+      <div class="label" id="mlabel">press Get LRB</div>
       <div class="tray"></div>
     </div>
     <div class="btns"><button class="go" id="vend">Get LRB · 99¢ (free in trial)</button><a class="btnlink soft" href="https://asaaab.com/shop/">or throw money at the shop →</a></div>
   </section>
 
-  <section class="glass fine">
-    <b>The fine print, honestly</b>
+  <section class="card fine">
+    <p class="eyebrow">the fine print, honestly</p>
     <ul>
       <li>this is a marketing exercise and a little red button. that's the product description, not a joke.</li>
       <li>not an AI scam. the deck is a really, really accurate target, written as clearly as we can get it. the script is 60 lines you can read.</li>
@@ -165,23 +204,24 @@ function ev(n){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({p
   var fl=$('fl'),loop=$('loop'),doit=$('doit');
   document.querySelectorAll('[data-s]').forEach(function(b){b.addEventListener('click',function(){fl.value=b.dataset.s})});
   var CANNED=["aim better. write down who the owners are. all of them, by name or by role. one line each.","pick the one thing that has to be true next week for this to be real. not the dream, the week.","find the cheapest version that already exists and write down what it's missing."];
-  function orb(){return '<div class="orb mini" aria-hidden="true"><span class="eye l"></span><span class="eye r"></span></div>'}
+  function orb(){return '<div class="mini" aria-hidden="true"></div>'}
   function bot(t,small){var d=document.createElement('div');d.className='row bot';d.innerHTML=orb()+'<div class="bubble">'+t+(small?'<small>'+small+'</small>':'')+'</div>';loop.appendChild(d);d.scrollIntoView({behavior:'smooth',block:'nearest'})}
   function you(t){var d=document.createElement('div');d.className='row you';d.innerHTML='<div class="bubble">'+esc(t)+'</div>';loop.appendChild(d)}
-  function ping(t){var d=document.createElement('div');d.className='ping';d.innerHTML='<i></i>'+t;loop.appendChild(d)}
+  function ping(t){var d=document.createElement('div');d.className='ping';d.innerHTML='<span class="d"></span>'+t;loop.appendChild(d)}
   function wait(ms){return new Promise(function(r){setTimeout(r,ms)})}
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
   var ran=false,F='';
   doit.addEventListener('click',async function(){
     if(ran)return;ran=true;doit.classList.add('pressed');doit.disabled=true;
     F=fl.value.trim()||'a finish line.';ev('doit');
+    $('under').textContent='I\'m just a button. you did the thinking.';
+    $('ask').scrollIntoView({behavior:'smooth',block:'start'});
     you(F);await wait(500);
     bot('ok. that\'s the finish line. I\'m going to ask your AI one question, on a timer, forever.','demo: no key plugged in, so the dot answers for it. the files are real.');
     for(var i=0;i<CANNED.length;i++){await wait(900);ping('pinging your rented model… <b>what\'s the next click?</b>');await wait(900);bot(CANNED[i]);ping('next ping in 10 min · <i>demo: 1 s</i>');}
     await wait(900);bot('that\'s the whole loop. a timer, a finish line, one question. edit the sentence any time; the loop picks it up.');
     await wait(600);bot('building your two files…');
-    render();$('deck').hidden=false;$('shop').hidden=false;$('mlabel').textContent='press Get LRB';
-    $('under').textContent='I\'m just a button. you did the thinking.';
+    render();$('deck').hidden=false;$('shop').hidden=false;
     await wait(400);$('deck').scrollIntoView({behavior:'smooth',block:'start'});
   });
   function slides(){return [
@@ -194,15 +234,17 @@ function ev(n){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({p
     {k:'the cadence',b:'every 10 minutes, one question: "here is the finish line. what is the next click?" one answer, one click long. no essays.'},
     {k:'the script',b:'lrb.py reads finish_line.txt · pings the model in LRB_URL with LRB_KEY · prints the next click · sleeps · repeats. 60 lines. read it.'}
   ]}
-  function render(){var S=slides();$('s2q').textContent=F;$('rest').innerHTML=S.slice(2).map(function(s,i){return '<div class="slide"><div class="o"></div><div class="st">'+esc(s.k)+'</div><div class="sq">'+esc(s.b)+'</div><div class="sf">slide '+(i+3)+' of 8</div></div>'}).join('')}
+  function render(){var S=slides();$('s2q').textContent=F;$('rest').innerHTML=S.slice(2).map(function(s,i){return '<div class="slide"><div class="o"></div><div class="eb">slide '+(i+3)+' of 8</div><div class="st">'+esc(s.k)+'</div><div class="sq">'+esc(s.b)+'</div><div class="sf">generated with asaaabot · 99¢ per deck · no subscription</div></div>'}).join('')}
   $('dl').addEventListener('click',function(){
     if(typeof PptxGenJS==='undefined'){alert('the slide maker did not load. try again in a second.');return}
     var p=new PptxGenJS();p.layout='LAYOUT_16x9';
-    slides().forEach(function(s,i){var sl=p.addSlide();sl.background={color:'F7FCFF'};
-      sl.addShape(p.ShapeType.ellipse,{x:9.1,y:.3,w:.5,h:.5,fill:{color:'E8192C'},line:{color:'FFFFFF',width:1}});
-      sl.addText(s.k,{x:.5,y:.4,w:8.4,h:1.2,fontSize:i===0?34:28,bold:true,color:i===0?'E8192C':'16222E',fontFace:'Trebuchet MS'});
-      sl.addText(s.b,{x:.5,y:1.8,w:9,h:3,fontSize:i===1?22:17,italic:i===1,color:'16222E',fontFace:'Trebuchet MS',valign:'top'});
-      sl.addText('generated with asaaabot · find me at asaaabot or littleredbot · 99¢ per deck · no subscription · your key never leaves your machine',{x:.5,y:5.1,w:9,h:.3,fontSize:8,italic:true,color:'4A5B6B',fontFace:'Arial'});
+    slides().forEach(function(s,i){var sl=p.addSlide();sl.background={color:'CFEEFC'};
+      sl.addShape(p.ShapeType.ellipse,{x:8.9,y:.3,w:.7,h:.7,fill:{color:'E8192C'},line:{color:'FF8A95',width:1}});
+      sl.addText(i===0?'LITTLEREDBOT':'SLIDE '+(i+1)+' OF 8',{x:.5,y:.3,w:6,h:.3,fontSize:9,bold:true,color:'E8192C',charSpacing:4,fontFace:'Arial'});
+      sl.addText(s.k,{x:.5,y:.6,w:8.2,h:1.2,fontSize:i===0?36:28,bold:true,color:'0D3550',fontFace:'Trebuchet MS'});
+      sl.addShape(p.ShapeType.roundRect,{x:.5,y:1.9,w:9,h:2.9,fill:{color:'FFFFFF'},line:{color:'FFFFFF'},rectRadius:.25});
+      sl.addText(s.b,{x:.8,y:2.1,w:8.4,h:2.5,fontSize:i===1?22:17,italic:i===1,color:'0D3550',fontFace:'Trebuchet MS',valign:'top'});
+      sl.addText('generated with asaaabot · find me at asaaabot or littleredbot · 99¢ per deck · no subscription · your key never leaves your machine',{x:.5,y:5.1,w:9,h:.3,fontSize:8,italic:true,color:'3D6178',fontFace:'Arial'});
     });
     p.writeFile({fileName:'littleredbot-finish-line.pptx'});ev('pptx');
   });
