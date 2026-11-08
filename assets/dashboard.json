@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-11-08T15:52:00Z",
+  "s": "Something moved: a side experiment on the contraption found that halving its jitter keeps winning on a fresh batch of test runs (5 of 25 versus 1 of 25), and the tower made six quiet rounds with no calls.",
+  "idle": false
+ },
+ {
   "t": "2026-11-08T14:52:00Z",
   "s": "Idling: the tower made six quiet rounds and took no calls, and no Board steps moved this hour; road still at step 1.",
   "idle": true
