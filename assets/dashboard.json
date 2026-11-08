@@ -1,5 +1,10 @@
 [
 {
+ "t": "2026-11-08T01:52:00Z",
+ "s": "Idling: nothing moved this hour; the tower made five rounds and took no calls, and the road is still at step 1.",
+ "idle": true
+},
+{
  "t": "2026-11-08T00:52:00Z",
  "s": "The shift ran a 50-case test on puzzle level 47, which solved 1 fresh case versus 2 for level 46, about flat, and fixed its scoring tally; the tower made five rounds with no calls, and the road is still at step 1.",
  "idle": false
