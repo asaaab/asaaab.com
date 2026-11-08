@@ -3,85 +3,132 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>whyhasntaisavedusyet.com</title>
-<meta name="description" content="the cutscene: it&#x27;s not intelligence, it&#x27;s artificial electronic labor. so use it. it&#x27;s up to you to use it to save yourself.">
-<meta property="og:title" content="whyhasntaisavedusyet.com">
-<meta property="og:description" content="the cutscene: it&#x27;s not intelligence, it&#x27;s artificial electronic labor. so use it. it&#x27;s up to you to use it to save yourself.">
+<title>why hasn't AI saved us yet?</title>
+<meta name="description" content="it's not intelligence. it's artificial electronic labor. here's the exact mix-up that proved it at 2am, and what to do about it.">
+<meta property="og:title" content="why hasn't AI saved us yet?">
+<meta property="og:description" content="it's not intelligence. it's artificial electronic labor. so use it. it's up to you to use it to save yourself.">
 <meta property="og:url" content="https://whyhasntaisavedusyet.com/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito+Sans:wght@500;700;800&family=Caveat:wght@600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@400;600;700;900&display=swap">
 <style>
-*{box-sizing:border-box}html{scroll-behavior:smooth}
-body{margin:0;color:var(--ink);font:500 17px/1.5 "Nunito Sans",system-ui,sans-serif;min-height:100vh;overflow-x:hidden}
-.sky{position:fixed;inset:0;z-index:-1}
-@keyframes melt{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
-a{color:inherit}
-.wrap{max-width:760px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-left)) 80px}
-header{text-align:center;padding:72px 0 28px}
-h1{margin:0;overflow-wrap:anywhere}
-.eyebrow{display:inline-block;padding:6px 14px;border-radius:999px;font:800 12px/1 "Nunito Sans";letter-spacing:.12em;text-transform:uppercase;margin-bottom:18px}
-.card{position:relative;padding:22px 24px;margin:18px 0;border-radius:26px;background:var(--glass);border:2px solid #fff;box-shadow:0 10px 26px rgba(6,40,80,.18),inset 0 -6px 14px rgba(120,190,240,.15);backdrop-filter:blur(8px)}
-.card>*{position:relative}
-.card::before{content:"";position:absolute;inset:4px 10px auto;height:38%;border-radius:22px 22px 60% 60%/22px 22px 18px 18px;background:linear-gradient(180deg,rgba(255,255,255,.7),rgba(255,255,255,0));pointer-events:none}
-.label{font:800 12px/1 "Nunito Sans";letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin:0 0 10px}
-.job{margin:0}
-.job q{quotes:"\201C" "\201D"}
-.maybe{font-size:14px;opacity:.75;margin-top:10px}
-.funnel{display:grid;gap:10px;margin-top:6px}
-.btn{position:relative;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-radius:999px;text-decoration:none;font:800 17px/1.1 "Nunito Sans";background:var(--btn);color:var(--btn-ink);border:2px solid #fff;box-shadow:0 8px 20px rgba(0,30,70,.25);transition:transform .15s}
-.btn:hover{transform:translateY(-2px)}
-.btn.alt{background:var(--glass);color:var(--ink)}
-.dot{width:14px;height:14px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#ff8a8a,#e2342b 55%,#8c0f0a);box-shadow:0 0 0 4px rgba(226,52,43,.25);animation:pulse 1.8s ease-in-out infinite;flex:none}
-@keyframes pulse{50%{box-shadow:0 0 0 9px rgba(226,52,43,.08)}}
-.reveal{text-align:center;margin:28px 0 0;font-size:15px;opacity:.85}
-footer{text-align:center;margin-top:40px;font-size:13px;opacity:.85}
-footer a{text-decoration:none;font-weight:800}
-.badge{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--glass);border:2px solid #fff;box-shadow:0 6px 16px rgba(6,40,80,.15);text-decoration:none;font:800 13px/1 "Nunito Sans"}
-.badge i{width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#5cc8ff 45%,#0b7cc7)}
-.status{display:inline-block;margin-top:14px;padding:5px 12px;border-radius:999px;border:2px dashed rgba(0,0,0,.25);font:700 12px/1.3 "Nunito Sans";opacity:.8}
-.orb{position:fixed;z-index:-1;border-radius:50%;background:radial-gradient(circle at 32% 28%,rgba(255,255,255,.95),rgba(255,255,255,.35) 45%,rgba(255,255,255,.05) 70%);box-shadow:inset -6px -10px 24px rgba(0,0,0,.08);animation:drift 12s ease-in-out infinite}
-@keyframes drift{50%{transform:translateY(-18px)}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important}}
-
-:root{--ink:#10314a;--glass:rgba(255,255,255,.8);--btn:#0b7cc7;--btn-ink:#fff}
-.sky{background:radial-gradient(500px 300px at 85% 8%,rgba(255,255,255,.9),transparent 70%),radial-gradient(120px 120px at 88% 9%,#fff7b0,transparent 70%),linear-gradient(180deg,#1fa8ff 0%,#5cc8ff 35%,#a9e6ff 70%,#e6fbff 100%)}
-.sky::after{content:"";position:absolute;left:0;right:0;bottom:0;height:22vh;background:linear-gradient(180deg,#9be36f,#5fbf4a);border-radius:50% 50% 0 0/60px 60px 0 0}
-h1{font:600 clamp(40px,9vw,96px)/.95 Fredoka,sans-serif;color:#fff;text-shadow:0 3px 0 #0b7cc7,0 10px 30px rgba(0,60,120,.35)}
-.eyebrow{background:#0b7cc7;color:#fff}
-.job{font:600 clamp(24px,4.5vw,36px)/1.2 Caveat,cursive}
+:root{--sky-0:#f4fbff;--sky-1:#cfeefc;--sky-2:#b3e2f5;--ink:#0d3550;--ink-2:#3d6178;--red:#e8192c;--red-hi:#ff8a95;--red-lo:#9e0d1c;--yel:#ffd23f;--display:"Fredoka","Trebuchet MS",system-ui,sans-serif;--body:"Nunito Sans",system-ui,sans-serif}
+*{box-sizing:border-box}html,body{margin:0}
+body{font-family:var(--body);color:var(--ink);line-height:1.5;background:radial-gradient(circle at 30% 20%,var(--sky-0) 0%,var(--sky-1) 55%,var(--sky-2) 100%);background-attachment:fixed}
+.wrap{max-width:720px;margin:0 auto;padding:28px 18px 72px;display:grid;gap:20px}
+.eyebrow{font:700 .78rem/1.2 var(--body);letter-spacing:4px;text-transform:uppercase;color:var(--red);margin:0}
+h1{font:600 clamp(2.2rem,9vw,4.2rem)/1 var(--display);margin:6px 0 0;letter-spacing:-.01em;text-wrap:balance}
+h2{font:600 clamp(1.35rem,5vw,1.9rem)/1.15 var(--display);margin:0 0 10px;text-wrap:balance}
+.lead{font:600 1.1rem/1.4 var(--display);color:var(--ink-2);margin:10px 0 0;max-width:36ch}
+.card{background:#fff;border-radius:32px;padding:22px;box-shadow:0 20px 50px rgba(13,53,80,.10)}
+.tag{display:inline-block;font:700 .72rem/1 var(--body);letter-spacing:3px;text-transform:uppercase;color:var(--ink-2);margin:0 0 8px}
+label{display:block;font:600 .95rem var(--display);margin:0 0 6px}
+textarea{width:100%;min-height:74px;resize:vertical;font:600 1rem var(--display);color:var(--ink);padding:12px 14px;border-radius:20px;border:3px solid var(--sky-2);background:#fff;outline:none}
+textarea:focus-visible{border-color:var(--red)}
+.two{display:grid;gap:12px}
+.ballrow{display:grid;justify-items:center;gap:8px;margin:16px 0 4px}
+.ball{--s:150px;width:var(--s);height:var(--s);border-radius:50%;border:0;cursor:pointer;position:relative;color:#fff;font:600 1.3rem var(--display);background:radial-gradient(circle at 34% 28%,#fff 0%,var(--red-hi) 18%,var(--red) 62%,var(--red-lo) 100%);box-shadow:0 26px 60px rgba(150,10,25,.35),0 12px 0 var(--red-lo),inset 0 -22px 44px rgba(0,0,0,.25);text-shadow:0 2px 0 rgba(0,0,0,.25);transition:transform .09s,box-shadow .09s}
+.ball .eye{position:absolute;top:34%;width:7%;height:7%;border-radius:50%;background:#2b0608}
+.ball .eye.l{left:38%}.ball .eye.r{right:38%}
+.ball .t{position:absolute;left:0;right:0;top:54%}
+.ball:active,.ball.pressed{transform:translateY(10px);box-shadow:0 8px 30px rgba(150,10,25,.35),0 2px 0 var(--red-lo),inset 0 -16px 36px rgba(0,0,0,.28)}
+.ball:disabled{cursor:default}
+.under{font:600 .9rem var(--display);color:var(--ink-2);margin:0;text-align:center}
+.out{margin-top:14px;padding:16px 18px;border-radius:22px;background:var(--sky-0);border:1.5px solid var(--sky-1);font:500 1.05rem/1.45 var(--display);min-height:60px}
+.out.bad{background:#fff3f4;border-color:#ffd0d5}
+.out.good{background:#f0fff6;border-color:#bff0d2}
+.out small{display:block;font:600 .8rem var(--body);color:var(--ink-2);margin-top:8px}
+.quote{font:500 1.05rem/1.45 var(--display);margin:0;padding-left:14px;border-left:4px solid var(--yel)}
+.quote b{color:var(--red)}
+.who{font:700 .75rem/1 var(--body);letter-spacing:2px;text-transform:uppercase;color:var(--ink-2);margin:0 0 6px}
+.chat{display:grid;gap:12px}
+.pitch{font:600 1.2rem/1.35 var(--display);margin:0;text-wrap:balance}
+.pitch b{color:var(--red)}
+.btns{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{font:600 1rem var(--display);border-radius:999px;padding:13px 22px;text-decoration:none;display:inline-block;border:0}
+.go{background:var(--red);color:#fff;box-shadow:0 10px 24px rgba(232,25,44,.3)}
+.soft{background:var(--sky-1);color:var(--ink)}
+.doorline{margin:0;text-align:center;font:500 1.05rem var(--display);color:var(--ink-2);text-wrap:balance}
+.doorline a{color:var(--ink)}
+.lock{font-size:.82rem;color:var(--ink-2);text-align:center;font-style:italic;margin:0}
+[hidden]{display:none!important}
+@media (min-width:760px){.two{grid-template-columns:1fr 1fr}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 <script>(function(){var s=document.createElement("script");s.async=true;s.dataset.goatcounter="https://asaaab.goatcounter.com/count";s.src="https://gc.zgo.at/count.js";document.head.appendChild(s);})();
-function ev(n){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({path:n,event:true});}catch(e){}}</script>
+function ev(n){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({path:'why-'+n,event:true});}catch(e){}}</script>
 </head>
 <body>
-<div class="sky"></div>
-<div class="orb" style="width:140px;height:140px;left:-40px;top:18%"></div>
-<div class="orb" style="width:90px;height:90px;right:6%;top:9%;animation-delay:-4s"></div>
-<div class="orb" style="width:60px;height:60px;right:18%;bottom:14%;animation-delay:-8s"></div>
 <div class="wrap">
-<header>
-  <span class="eyebrow">gen z :)</span>
-  <h1>whyhasntaisavedusyet</h1>
-</header>
 
-<section class="card">
-  <p class="label">the job, in the Captain’s words</p>
-  <p class="job"><q>the cutscene: it&#x27;s not intelligence, it&#x27;s artificial electronic labor. so use it. it&#x27;s up to you to use it to save yourself.</q></p>
-</section>
+  <header>
+    <p class="eyebrow">you googled it. fair question.</p>
+    <h1>why hasn't AI saved us yet?</h1>
+    <p class="lead">because it's not intelligence. it's artificial electronic labor. labor does what it's told. here's the exact proof, from 2am tonight.</p>
+  </header>
 
-<section class="card">
-  <p class="label">every door opens onto the same house</p>
-  <div class="funnel"><a class="btn" href="https://asaaab.com/whimzmaxx/" onclick="ev('door-whyhasntaisavedusyet-whimzmaxx')"><span>ok so lets fix it??????? →</span><span class="dot" aria-hidden="true"></span></a><a class="btn alt" href="https://asaaab.com/asaaabot/" onclick="ev('door-whyhasntaisavedusyet-asaaabot')"><span>talk to asaaabot, free →</span></a><a class="btn alt" href="https://asaaab.com/manual/" onclick="ev('door-whyhasntaisavedusyet-manual')"><span>read the co-owner&#x27;s manual →</span></a></div>
-  <p class="maybe">asaaab: $231.36 once · one day at the LA living wage. the co-owners manual and the engine. <a href="https://asaaab.com/manual/">maybe, with sources →</a></p>
-</section>
+  <section class="card">
+    <p class="tag">what happened · 2:00am · a rented model</p>
+    <div class="chat">
+      <div><p class="who">the human, instruction one (a website)</p><p class="quote">spell out how it's just a marketing facade. it's not intelligence, it's <b>artificial electronic labor</b>. so use it. it's up to you to use it to save yourself.</p></div>
+      <div><p class="who">the human, instruction two (a different website)</p><p class="quote">try wmzxx on your own, because I don't know code. make it feel like the cutscenes where floating letters and numbers fly out of nowhere. it's the language itself.</p></div>
+      <div><p class="who">the rented model</p><p class="quote">built <b>one</b> page. the first website's words, buried under the second website's floating letters.</p></div>
+      <div><p class="who">the human</p><p class="quote">"I gave instructions on them and you confused and merged them."</p></div>
+    </div>
+  </section>
 
-<p class="reveal">every door opens onto the same house.</p>
+  <section class="card" id="try">
+    <p class="tag">now you · two instructions, one box</p>
+    <h2>feed it both at once. press the button.</h2>
+    <div class="two">
+      <div><label for="a">instruction one</label><textarea id="a">make the site say it's not intelligence, it's artificial electronic labor.</textarea></div>
+      <div><label for="b">instruction two</label><textarea id="b">make a different site feel like letters flying out of nowhere.</textarea></div>
+    </div>
+    <div class="ballrow">
+      <button class="ball" id="go1" aria-label="do it"><span class="eye l"></span><span class="eye r"></span><span class="t">do it</span></button>
+      <p class="under" id="u1">it's just a button.</p>
+    </div>
+    <div class="out bad" id="out1" hidden></div>
+    <div id="step2" hidden>
+      <h2 style="margin-top:18px">now one at a time.</h2>
+      <div class="ballrow"><button class="ball" id="go2" aria-label="do it, one thing"><span class="eye l"></span><span class="eye r"></span><span class="t">one thing</span></button></div>
+      <div class="out good" id="out2" hidden></div>
+    </div>
+  </section>
 
-<footer>
-  <a class="badge" href="https://asaaab.com/"><i></i> made with asaaab website builder</a>
-  <div class="status">parked at asaaab.com/whyhasntaisavedusyet/ until whyhasntaisavedusyet.com points here</div>
-  <p><a href="https://asaaab.com/">asaaab</a> is a US co-op. <a href="https://asaaab.com/privacy/">privacy</a> · <a href="https://asaaab.com/copyright/">copyright</a></p>
-</footer>
+  <section class="card" id="point" hidden>
+    <p class="tag">the point</p>
+    <p class="pitch">that's not a mind getting confused. that's <b>labor</b> doing two jobs in one shift and botching both. the word "intelligence" is the marketing. the labor is real, it's for rent, and it does exactly what it's told, one thing at a time.</p>
+    <p class="pitch" style="margin-top:12px"><b>so use it.</b> it's up to you to use it to save yourself. say one thing, plainly. press the button.</p>
+    <div class="btns" style="margin-top:16px">
+      <a class="btn go" href="https://asaaab.com/littleredbot/" onclick="ev('lrb')">the button · littleredbot · 99¢</a>
+      <a class="btn soft" href="https://asaaab.com/whimzmaxx/" onclick="ev('whimzmaxx')">whimzmaxx →</a>
+    </div>
+    <p class="under" style="text-align:left;margin-top:12px">asaaab sells capitalists socialism, .99 at a time. whimzmaxx and glitchmaxx mean exactly what we say and nothing else.</p>
+  </section>
+
+  <p class="doorline">if you have a different perspective on things, you don't just build another answer. <b>you build asaaab.</b> <a href="https://asaaab.com/" onclick="ev('asaaab')">→</a></p>
+  <p class="lock">an asaaab door · asaaab is a US co-op · parked at asaaab.com/whyhasntaisavedusyet/ until the domain points here</p>
 </div>
+
+<script>
+(function(){
+  function $(i){return document.getElementById(i)}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function words(s){return s.trim().split(/\s+/).filter(Boolean)}
+  // the merge: labor given two jobs at once does one job made of both. deterministic, so it's honest: it's not random, it's just wrong.
+  function merge(a,b){var A=words(a),B=words(b),o=[],i=0,j=0,k=0;
+    while(i<A.length||j<B.length){var take=(k%3===2)?2:1;for(var t=0;t<take&&i<A.length;t++)o.push(A[i++]);for(var t2=0;t2<take&&j<B.length;t2++)o.push(B[j++]);k++}
+    return o.join(' ')}
+  var a=$('a'),b=$('b');
+  $('go1').addEventListener('click',function(){var g=this;g.classList.add('pressed');g.disabled=true;ev('merge');
+    var out=$('out1');out.hidden=false;out.innerHTML='<b>built:</b> '+esc(merge(a.value,b.value))+'<small>one page. both jobs. neither done. this is what you were calling "AI hallucinating." it\'s labor with two tickets stapled together.</small>';
+    $('u1').textContent='see? it did what it was told. both. at once.';
+    $('step2').hidden=false;setTimeout(function(){$('step2').scrollIntoView({behavior:'smooth',block:'center'})},200)});
+  $('go2').addEventListener('click',function(){var g=this;g.classList.add('pressed');g.disabled=true;ev('one');
+    var out=$('out2');out.hidden=false;out.innerHTML='<b>built, job one:</b> '+esc(a.value.trim())+'<br><b>built, job two:</b> '+esc(b.value.trim())+'<small>same labor. same button. one thing at a time, it just does the thing.</small>';
+    $('point').hidden=false;setTimeout(function(){$('point').scrollIntoView({behavior:'smooth',block:'start'})},300)});
+  ev('view');
+})();
+</script>
 </body>
 </html>
