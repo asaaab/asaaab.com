@@ -11,67 +11,241 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito+Sans:wght@500;700;900&family=Lora:ital,wght@0,400;0,700;1,400&display=swap">
 <style>
-:root{--ink:#1a0b2e;--red:#c8102e;--cream:#f3e9d2;--paper:#fffdf5;--yel:#ffd23f;--sky:#bfe9ff}
+:root{--ink:#1a0b2e;--red:#c8102e;--cream:#f3e9d2;--paper:#fffdf5;--yel:#ffd23f}
 *{box-sizing:border-box}
-html,body{margin:0;height:100%}
+html,body{margin:0;min-height:100%}
 body{background:#2a2230 repeating-linear-gradient(45deg,#2a2230 0 8px,#302838 8px 16px);color:var(--ink);font:500 16px/1.45 "Nunito Sans",system-ui,sans-serif}
-.phone{max-width:430px;margin:0 auto;min-height:100svh;background:var(--cream);box-shadow:0 0 0 1px rgba(0,0,0,.4),0 30px 80px rgba(0,0,0,.5);display:flex;flex-direction:column;padding:max(28px,env(safe-area-inset-top)) 18px 28px;position:relative;overflow:hidden}
+.phone{max-width:430px;margin:0 auto;min-height:100svh;background:var(--cream);box-shadow:0 0 0 1px rgba(0,0,0,.4),0 30px 80px rgba(0,0,0,.5);position:relative;overflow:hidden}
+.screen{display:none;min-height:100svh;flex-direction:column;padding:max(24px,env(safe-area-inset-top)) 18px 28px}
+.screen.on{display:flex}
 h1{margin:0;font:400 clamp(58px,17vw,84px)/.86 Anton,Impact,sans-serif;text-transform:uppercase;letter-spacing:-.01em}
 h1 .bang{color:var(--red)}
-h1 small{display:block;font-size:.5em;margin-top:8px;letter-spacing:0}
-.dek{margin:18px 0 0;font:700 15px/1.4 "Nunito Sans";max-width:34ch}
-.fork{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:26px}
-.path{position:relative;display:block;text-decoration:none;color:var(--ink);background:var(--paper);border:4px solid var(--ink);box-shadow:5px 5px 0 var(--ink);padding:16px 12px 14px;text-align:center;transition:transform .12s,box-shadow .12s}
-.path:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
+h1 small{display:block;font-size:.5em;margin-top:8px}
+h2{margin:0;font:400 clamp(34px,10vw,46px)/.92 Anton,Impact,sans-serif;text-transform:uppercase}
+h2 .bang{color:var(--red)}
+.dek{margin:16px 0 0;font:700 15px/1.4 "Nunito Sans";max-width:34ch}
+.small{font:700 12px/1.4 "Nunito Sans";color:#5a4a3a}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.back{background:none;border:3px solid var(--ink);padding:6px 12px;font:900 12px "Nunito Sans";cursor:pointer;color:var(--ink);box-shadow:3px 3px 0 var(--ink)}
+.you{display:inline-flex;align-items:center;gap:8px;font:900 12px "Nunito Sans";background:var(--paper);border:3px solid var(--ink);padding:5px 10px;box-shadow:3px 3px 0 var(--ink)}
+.you b{font-size:20px;line-height:1}
+/* fork */
+.fork{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.path{position:relative;display:block;color:var(--ink);background:var(--paper);border:4px solid var(--ink);box-shadow:5px 5px 0 var(--ink);padding:14px 10px 12px;text-align:center;cursor:pointer;font-family:inherit;width:100%}
+.path:active,.big:active,.chip:active,.cta:active{transform:translate(3px,3px);box-shadow:2px 2px 0 var(--ink)}
 .path .q{font:400 20px/1 Anton,Impact,sans-serif;text-transform:uppercase}
 .path .v{margin-top:6px;font:700 12px/1.3 "Nunito Sans";color:#5a4a3a}
-.obj{height:120px;margin:10px auto 6px;position:relative}
-/* kleenex box */
+.obj{height:120px;margin:8px auto 4px;position:relative}
 .box{width:110px;height:78px;margin:28px auto 0;background:linear-gradient(180deg,#8fd3ff,#4fb3f0);border:4px solid var(--ink);border-radius:8px;position:relative;box-shadow:inset 0 -10px 0 rgba(0,0,0,.12)}
 .box::before{content:"";position:absolute;left:50%;top:-4px;transform:translateX(-50%);width:56px;height:16px;background:var(--ink);border-radius:0 0 30px 30px}
-.tissue{position:absolute;left:50%;top:-40px;transform:translateX(-50%) rotate(-8deg);width:46px;height:52px;background:#fff;border:3px solid var(--ink);border-radius:4px 20px 4px 20px;animation:flutter 2.2s ease-in-out infinite}
+.tissue{position:absolute;left:50%;top:-40px;transform:translateX(-50%) rotate(-8deg);width:46px;height:52px;background:#fff;border:3px solid var(--ink);border-radius:4px 20px 4px 20px;animation:flutter 2.2s ease-in-out infinite;transition:top .5s cubic-bezier(.2,1.2,.4,1),opacity .4s}
 @keyframes flutter{50%{transform:translateX(-50%) rotate(6deg) translateY(-3px)}}
-/* alarm */
-.bell{width:84px;height:84px;margin:14px auto 0;position:relative;background:radial-gradient(circle at 35% 30%,#fff3a0,var(--yel) 55%,#c99a00);border:4px solid var(--ink);border-radius:50% 50% 46% 46%;box-shadow:inset -6px -8px 0 rgba(0,0,0,.12)}
+.bell{width:84px;height:84px;margin:14px auto 0;position:relative;background:radial-gradient(circle at 35% 30%,#fff3a0,var(--yel) 55%,#c99a00);border:4px solid var(--ink);border-radius:50% 50% 46% 46%;box-shadow:inset -6px -8px 0 rgba(0,0,0,.12);animation:ring 2.6s ease-in-out infinite;transform-origin:50% 0}
 .bell::before{content:"";position:absolute;left:50%;top:-16px;transform:translateX(-50%);width:18px;height:18px;border:4px solid var(--ink);border-radius:50%;background:var(--paper)}
 .bell::after{content:"";position:absolute;left:50%;bottom:-16px;transform:translateX(-50%);width:22px;height:22px;background:var(--ink);border-radius:50%}
-.bell{animation:ring 2.6s ease-in-out infinite;transform-origin:50% 0}
 @keyframes ring{0%,70%,100%{transform:rotate(0)}76%{transform:rotate(-9deg)}82%{transform:rotate(8deg)}88%{transform:rotate(-5deg)}94%{transform:rotate(3deg)}}
-.zz{position:absolute;right:8px;top:4px;font:400 18px Anton;color:var(--red);opacity:.9}
-.thesis{margin-top:auto;padding-top:26px;font:italic 14px/1.45 Lora,serif;color:#4a3a2a}
+.bell.armed{animation:ring .6s ease-in-out infinite;background:radial-gradient(circle at 35% 30%,#ffb3b3,var(--red) 55%,#6b0010)}
+.zz{position:absolute;right:8px;top:4px;font:400 18px Anton;color:var(--red)}
+.thesis{margin-top:auto;padding-top:24px;font:italic 14px/1.45 Lora,serif;color:#4a3a2a}
 .thesis b{font-style:normal;color:var(--ink)}
 .door{display:block;margin-top:18px;padding:14px 16px;background:var(--ink);color:var(--cream);text-decoration:none;font:500 14px/1.4 "Nunito Sans";border:4px solid var(--ink);box-shadow:5px 5px 0 var(--red);position:relative}
 .door .dl{display:block;font:700 10px "Nunito Sans";letter-spacing:.16em;text-transform:uppercase;color:var(--yel);margin-bottom:4px}
 .door b{color:#fff}.door .arr{position:absolute;right:14px;bottom:10px;font:400 22px Anton;color:var(--yel)}
 .strip{margin:14px -18px -28px;background:var(--ink);color:var(--cream);padding:10px 18px;font:700 11px "Nunito Sans";letter-spacing:.1em;text-transform:uppercase;display:flex;justify-content:space-between}
-.strip a{color:var(--yel);text-decoration:none}
-@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+/* persona */
+.persona{margin:22px auto 0;text-align:center}
+.persona .em{display:inline-grid;place-items:center;width:150px;height:150px;border:4px solid var(--ink);background:var(--paper);box-shadow:6px 6px 0 var(--ink);font-size:84px;line-height:1}
+.persona .em.spin{animation:spin .5s ease}
+@keyframes spin{0%{transform:rotate(0) scale(1)}50%{transform:rotate(180deg) scale(.6)}100%{transform:rotate(360deg) scale(1)}}
+.room{margin:18px 0 0;background:var(--paper);border:4px solid var(--ink);box-shadow:5px 5px 0 var(--ink);padding:12px 14px}
+.room .k{font:700 10px "Nunito Sans";letter-spacing:.14em;text-transform:uppercase;color:#5a4a3a}
+.room .n{font:400 26px/1 Anton,Impact,sans-serif;margin-top:4px}
+.room .faces{margin-top:8px;font-size:22px;letter-spacing:4px;line-height:1.3;word-break:break-all}
+.row{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.chip{background:var(--paper);border:3px solid var(--ink);padding:9px 12px;font:900 12px "Nunito Sans";cursor:pointer;color:var(--ink);box-shadow:3px 3px 0 var(--ink);font-family:inherit}
+.chip.on{background:var(--yel)}
+.big{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;margin-top:18px;padding:18px 18px;background:var(--red);color:#fff;border:4px solid var(--ink);box-shadow:5px 5px 0 var(--ink);font:400 22px/1 Anton,Impact,sans-serif;text-transform:uppercase;cursor:pointer;text-align:left;font-family:Anton,Impact,sans-serif}
+.big.yel{background:var(--yel);color:var(--ink)}
+.cta{display:block;width:100%;margin-top:10px;padding:14px 16px;background:var(--ink);color:var(--cream);border:4px solid var(--ink);box-shadow:5px 5px 0 var(--red);font:900 14px "Nunito Sans";cursor:pointer;text-align:left;font-family:inherit}
+.cta.alt{background:var(--paper);color:var(--ink);box-shadow:5px 5px 0 var(--ink)}
+/* note */
+.note{margin-top:16px;background:#fff;border:4px solid var(--ink);box-shadow:5px 5px 0 var(--ink);position:relative}
+.note .hd{display:flex;justify-content:space-between;align-items:center;padding:8px 12px;border-bottom:3px solid var(--ink);font:900 11px "Nunito Sans";letter-spacing:.1em;text-transform:uppercase}
+.note .hd .st{color:var(--red)}
+.note textarea{display:block;width:100%;min-height:150px;border:0;padding:14px;font:400 15px/1.5 Lora,serif;color:var(--ink);resize:vertical;background:transparent}
+.copy{display:block;width:100%;padding:14px;background:var(--ink);color:#fff;border:0;border-top:3px solid var(--ink);font:900 14px "Nunito Sans";cursor:pointer;font-family:inherit}
+.tell{display:flex;align-items:center;gap:10px;margin-top:12px;font:700 13px "Nunito Sans"}
+.tell input{width:22px;height:22px;accent-color:var(--red)}
+.hidden{display:none}
+/* alarm result */
+.count{margin-top:16px;background:var(--paper);border:4px solid var(--ink);box-shadow:5px 5px 0 var(--ink);padding:14px}
+.count .n{font:400 64px/.9 Anton,Impact,sans-serif;color:var(--red)}
+.count .n small{font-size:.35em;color:var(--ink)}
+.count .faces{margin-top:8px;font-size:24px;letter-spacing:4px;line-height:1.3}
+.quote{margin-top:14px;font:400 clamp(22px,6.4vw,28px)/1.05 Anton,Impact,sans-serif;text-transform:uppercase}
+.quote .bang{color:var(--red)}
+/* landing */
+.ohno{font:400 clamp(72px,24vw,110px)/.85 Anton,Impact,sans-serif;text-transform:uppercase;color:var(--red)}
+.ledger{margin-top:16px;background:#fff;border:4px solid var(--ink);box-shadow:5px 5px 0 var(--ink);font:500 13px/1.4 "Nunito Sans"}
+.ledger div{padding:9px 12px;border-bottom:2px solid var(--ink);display:flex;justify-content:space-between;gap:10px}
+.ledger div:last-child{border:0}
+.ledger b{font-weight:900}
+details{margin-top:14px;background:var(--paper);border:3px solid var(--ink);box-shadow:4px 4px 0 var(--ink)}
+summary{padding:10px 12px;font:900 12px "Nunito Sans";letter-spacing:.08em;text-transform:uppercase;cursor:pointer;list-style:none}
+summary::after{content:"+";float:right;font:400 18px Anton}
+details[open] summary::after{content:"–"}
+details p{margin:0;padding:0 12px 12px;font:400 14px/1.45 Lora,serif}
+details a{color:var(--red)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 <script>(function(){var s=document.createElement("script");s.async=true;s.dataset.goatcounter="https://asaaab.goatcounter.com/count";s.src="https://gc.zgo.at/count.js";document.head.appendChild(s);})();
-function ev(n){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({path:n,event:true});}catch(e){}}</script>
+function ev(n){try{if(window.goatcounter&&goatcounter.count)goatcounter.count({path:'isotp-'+n,event:true});}catch(e){}}</script>
 </head>
 <body>
 <div class="phone">
+
+<!-- 0 · THE FORK -->
+<section class="screen on" id="s-fork">
   <h1>im sick<span class="bang">!</span><small>of this place.</small></h1>
   <p class="dek">anonymous callouts for your break room. nobody wants to strike. everybody gets sick.</p>
-
   <div class="fork">
-    <a class="path" href="#kleenex" onclick="ev('door-isotp-fork-kleenex')">
+    <button class="path" data-go="s-persona" data-path="tissue">
       <div class="obj"><div class="box"><div class="tissue"></div></div></div>
       <div class="q">feeling it?</div>
       <div class="v">pull a tissue. get the text to send your boss.</div>
-    </a>
-    <a class="path" href="#alarm" onclick="ev('door-isotp-fork-alarm')">
+    </button>
+    <button class="path" data-go="s-persona" data-path="alarm">
       <div class="obj"><div class="bell"></div><span class="zz">?</span></div>
       <div class="q">hearing sniffles?</div>
       <div class="v">prime the alarm. see who else is.</div>
-    </a>
+    </button>
   </div>
-
   <p class="thesis">"i don't hate the coworkers but nobody wants to strike. if we all call out on the same day it's so understaffed it's gonna fail at least enough for us to <b>get chips back.</b>"</p>
-
-  <a class="door" href="https://asaaab.com/" onclick="ev('door-isotp-asaaab')"><span class="dl">the door to asaaab</span>if you have a different perspective on things, you don't just build another protest sign. <b>you build asaaab.</b> <span class="arr">→</span></a>
   <div class="strip"><span>demo · first arc</span><span>an asaaab tool</span></div>
+</section>
+
+<!-- 1 · YOUR BREAK ROOM ACCOUNT -->
+<section class="screen" id="s-persona">
+  <div class="top"><button class="back" data-go="s-fork">← back</button><span class="small">demo · made-up break room</span></div>
+  <h2>you're in.</h2>
+  <p class="dek">this is your asaaab account for this break room. no name. you're an emoji. want a new persona? spin.</p>
+  <div class="persona"><div class="em" id="em">🫠</div></div>
+  <div class="row" style="justify-content:center"><button class="chip" id="spin">spin a new one</button></div>
+  <div class="room">
+    <div class="k">your break room · invite only</div>
+    <div class="n">tuesday morning shift</div>
+    <div class="faces" id="faces"></div>
+    <p class="small" style="margin:8px 0 0">11 coworkers. you got here from a text. you can send that text to anyone who works here too.</p>
+  </div>
+  <button class="big" id="go-path"><span>continue</span><span>→</span></button>
+</section>
+
+<!-- 2a · TISSUES -->
+<section class="screen" id="s-tissue">
+  <div class="top"><button class="back" data-go="s-persona">← back</button><span class="you">you are <b id="you1">🫠</b></span></div>
+  <h2>feeling it?</h2>
+  <p class="dek">pick what's true. then pull.</p>
+  <div class="row">
+    <button class="chip on" data-note="sick">accrued sick time</button>
+    <button class="chip" data-note="nosick">no sick time. still sick.</button>
+    <button class="chip" data-note="thu">back thursday</button>
+    <button class="chip" data-note="facts">just the facts</button>
+  </div>
+  <div class="obj" style="height:150px;margin-top:10px"><div class="box" id="box2"><div class="tissue" id="t2"></div></div></div>
+  <button class="big" id="pull"><span>im sick of this place!</span><span>→</span></button>
+  <div class="hidden" id="tissue-out">
+    <div class="note">
+      <div class="hd"><span>im sick<span class="st">!</span></span><span>copy · send to boss</span></div>
+      <textarea id="msg"></textarea>
+      <button class="copy" id="copy">copy the text</button>
+    </div>
+    <label class="tell"><input type="checkbox" id="tell" checked> tell the break room: <b id="you2">🫠</b> is out today. (a tissue, not a name.)</label>
+    <button class="cta" data-go="s-landing" data-via="tissue">what happens next →</button>
+  </div>
+</section>
+
+<!-- 2b · THE ALARM -->
+<section class="screen" id="s-alarm">
+  <div class="top"><button class="back" data-go="s-persona">← back</button><span class="you">you are <b id="you3">🫠</b></span></div>
+  <h2>hearing sniffles?</h2>
+  <p class="dek">is it allergies, or are you sick of this place? pick one. then prime it.</p>
+  <div class="row">
+    <button class="chip on" data-why="allergies">probably allergies</button>
+    <button class="chip" data-why="sotp">sick of this place</button>
+    <button class="chip" data-why="both">both</button>
+  </div>
+  <div class="obj" style="height:150px;margin-top:10px"><div class="bell" id="bell2"></div></div>
+  <button class="big yel" id="prime"><span>prime the alarm</span><span>→</span></button>
+  <div class="hidden" id="alarm-out">
+    <div class="count">
+      <div class="n">4<small> of 11 primed theirs today.</small></div>
+      <div class="faces" id="faces2"></div>
+      <p class="small" style="margin:8px 0 0">2 already pulled a tissue. the alarm rings for everyone when enough are primed. nobody called anything.</p>
+    </div>
+    <p class="quote">if you know it's going to be short-staffed and you're going to get yelled at, <span class="bang">why would you show up?</span></p>
+    <button class="cta" data-go="s-tissue" data-via="alarm">pull a tissue →</button>
+    <button class="cta alt" data-go="s-landing" data-via="showup">show up and find out →</button>
+  </div>
+</section>
+
+<!-- 3 · LANDING -->
+<section class="screen" id="s-landing">
+  <div class="top"><button class="back" id="back-land">← back</button><span class="you">you are <b id="you4">🫠</b></span></div>
+  <div class="ohno">oh no.</div>
+  <p class="dek" id="land-line">at least you're not sick at work or getting customers sick.</p>
+  <div class="ledger" id="ledger"></div>
+  <details><summary>your rights, in one breath</summary><p>calling out sick when you're sick is your business. talking with coworkers about staffing, safety and sick days is protected concerted activity in the US, boss or no boss. a boss who punishes people for being sick on the same day has handed them the case. not a lawyer; this is one breath. the real thing: <a href="https://www.nlrb.gov/" rel="noopener">nlrb.gov</a>.</p></details>
+  <details><summary>symptoms, if you want them</summary><p>feeling bad is enough to count. this tool never tells you what you have or what to take. if you want a checklist, a nurse line or your own doctor is the move, not a website with a tissue box on it.</p></details>
+  <a class="door" href="https://asaaab.com/" onclick="ev('asaaab')"><span class="dl">the door to asaaab</span>if you have a different perspective on things, you don't just build another protest sign. <b>you build asaaab.</b> <span class="arr">→</span></a>
+  <p class="thesis">"if everyone feels sick, oh no. at least they're not sick at work or getting customers sick."</p>
+  <div class="strip"><span>demo · first arc · parked at asaaab.com/imsickofthisplace/</span><button class="back" style="box-shadow:none;border-color:var(--cream);color:var(--cream);padding:2px 8px" data-go="s-fork">start over</button></div>
+</section>
+
 </div>
+<script>
+(function(){
+  var EM=['🫠','🥲','😮‍💨','🫥','🤧','😶‍🌫️','🧃','🧯','🫡','🥴','🌡️','🧻','🪫','🫗','🐌','🦷','🧊','🫘'];
+  var ROOM=['🧃','🦷','🐌','🧊','🫘','🪫','🥴','🫗','😶‍🌫️','🧯'];
+  var me=EM[Math.floor(Math.random()*EM.length)], path='tissue', via='tissue', why='allergies', noteKey='sick';
+  var NOTES={
+    sick:"Hi [boss],\n\nI'm experiencing symptoms of illness and will be using my accrued sick time today. I'll keep an eye on messages when I can and let you know about tomorrow.\n\nThanks,\n[you]",
+    nosick:"Hi [boss],\n\nI'm experiencing symptoms of illness and won't be able to come in today. I understand it's unpaid. I'd rather not pass anything around the team or to customers.\n\nThanks,\n[you]",
+    thu:"Hi [boss],\n\nI'm experiencing symptoms of illness and will be out today and tomorrow using my accrued sick time. I expect to be back Thursday and will confirm Wednesday evening.\n\nThanks,\n[you]",
+    facts:"Hi [boss],\n\nI'm sick and won't be in today.\n\n[you]"
+  };
+  function $(id){return document.getElementById(id)}
+  function faces(el,hot){var s='';ROOM.forEach(function(e,i){s+=(hot&&i<hot)?'<span style="background:var(--yel);padding:0 2px">'+e+'</span>':e});el.innerHTML=s+'<span style="background:var(--red);color:#fff;padding:0 2px">'+me+'</span>'}
+  function setMe(){['em','you1','you2','you3','you4'].forEach(function(i){$(i).textContent=me});faces($('faces'),0);faces($('faces2'),4)}
+  function show(id){document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on')});$(id).classList.add('on');window.scrollTo(0,0);ev('screen-'+id)}
+  setMe(); $('msg').value=NOTES.sick;
+  document.querySelectorAll('[data-go]').forEach(function(b){b.addEventListener('click',function(){
+    if(b.dataset.path)path=b.dataset.path; if(b.dataset.via)via=b.dataset.via;
+    if(b.dataset.go==='s-landing')ledger();
+    show(b.dataset.go);
+  })});
+  $('go-path').addEventListener('click',function(){show(path==='alarm'?'s-alarm':'s-tissue')});
+  $('spin').addEventListener('click',function(){var n;do{n=EM[Math.floor(Math.random()*EM.length)]}while(n===me);me=n;setMe();var e=$('em');e.classList.remove('spin');void e.offsetWidth;e.classList.add('spin');ev('spin')});
+  document.querySelectorAll('[data-note]').forEach(function(c){c.addEventListener('click',function(){document.querySelectorAll('[data-note]').forEach(function(x){x.classList.remove('on')});c.classList.add('on');noteKey=c.dataset.note;$('msg').value=NOTES[noteKey]})});
+  document.querySelectorAll('[data-why]').forEach(function(c){c.addEventListener('click',function(){document.querySelectorAll('[data-why]').forEach(function(x){x.classList.remove('on')});c.classList.add('on');why=c.dataset.why})});
+  $('pull').addEventListener('click',function(){var t=$('t2');t.style.top='-120px';t.style.opacity='0';setTimeout(function(){$('tissue-out').classList.remove('hidden');$('pull').style.display='none';$('tissue-out').scrollIntoView({behavior:'smooth',block:'start'})},450);ev('pull')});
+  $('prime').addEventListener('click',function(){$('bell2').classList.add('armed');setTimeout(function(){$('alarm-out').classList.remove('hidden');$('prime').style.display='none';$('alarm-out').scrollIntoView({behavior:'smooth',block:'start'})},500);ev('prime-'+why)});
+  $('copy').addEventListener('click',function(){var t=$('msg');t.select();try{navigator.clipboard.writeText(t.value)}catch(e){document.execCommand('copy')}var b=this;b.textContent='copied. send it.';setTimeout(function(){b.textContent='copy the text'},1800);ev('copy-'+noteKey)});
+  $('back-land').addEventListener('click',function(){show(via==='showup'?'s-alarm':'s-tissue')});
+  function ledger(){
+    var now=new Date(), t=now.toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});
+    var rows=[];
+    if(via==='showup'){
+      $('land-line').textContent='you showed up. 2 pulled a tissue, 4 primed, the shift is short and the customers are sneezing. at least now you know.';
+      rows=[['<b>'+me+'</b> primed the alarm ('+(why==='sotp'?'sick of this place':why==='both'?'both':'probably allergies')+')',t],['<b>'+me+'</b> showed up anyway',t],['break room: 4 primed · 2 out','today'],['management',"not a party to this"]];
+    }else{
+      $('land-line').textContent="at least you're not sick at work or getting customers sick.";
+      rows=[['<b>'+me+'</b> pulled a tissue',t],['note to boss: '+( {sick:'accrued sick time',nosick:'unpaid, still sick',thu:'back thursday',facts:'just the facts'}[noteKey] ),($('tell').checked?'sent · break room told':'sent')],['break room: '+($('tell').checked?'3':'2')+' out today','a count, not a name'],['management',"not a party to this"]];
+    }
+    rows.push(['that\'s the whole record. it\'s yours.','timestamped']);
+    $('ledger').innerHTML=rows.map(function(r){return '<div><span>'+r[0]+'</span><span class="small">'+r[1]+'</span></div>'}).join('');
+  }
+  ev('view');
+})();
+</script>
 </body>
 </html>
