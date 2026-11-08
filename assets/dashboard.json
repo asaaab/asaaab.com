@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-11-08T12:52:00Z",
+  "s": "Idling: the tower kept watch every ten minutes and took no calls, so nothing moved this hour.",
+  "idle": true
+ },
+ {
   "t": "2026-11-08T11:56:00Z",
   "s": "A quiet hour: yesterday's nightly recap got written up, the tower made five quiet rounds with no new calls, and no Board steps moved; road still at step 1.",
   "idle": false
