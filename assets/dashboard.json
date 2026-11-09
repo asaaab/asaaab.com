@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-11-09T03:52:00Z",
+  "s": "The crew mapped out a wheel pack: turning real wheel scans into true-size game wheels, with the wheel list and job order set and a short deck explaining the process; the tower took 0 calls.",
+  "idle": false
+ },
+ {
   "t": "2026-11-09T02:51:00Z",
   "s": "Idling: the tower made six quiet rounds with no calls and nothing else moved this hour; road still at step 1.",
   "idle": true
