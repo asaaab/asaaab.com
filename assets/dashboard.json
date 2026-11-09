@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-11-09T17:53:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.",
+  "idle": true
+ },
+ {
   "t": "2026-11-09T16:53:00Z",
   "s": "The crew ran one more round of the ball-machine puzzle test, landing 12 of 50 runs and learning only the ball needs slowing; the tower checked in six times and took no calls.",
   "idle": false
