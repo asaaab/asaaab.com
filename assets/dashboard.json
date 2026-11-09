@@ -1,5 +1,10 @@
 [
  {
+  "t": "2026-11-09T15:53:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.",
+  "idle": true
+ },
+ {
   "t": "2026-11-09T14:53:00Z",
   "s": "The crew polished the wheel turbine design five times this hour, from blade shape to a check against a real photo, then ran all five designs through the shop with a deck and PDF; the tower checked in five times with zero calls.",
   "idle": false
