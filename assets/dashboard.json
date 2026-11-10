@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-10T10:57:00Z", "s": "Idling: nothing moved this hour; the tower checked in five times and took no calls.", "idle": true},
   {"t": "2026-11-10T09:53:04Z", "s": "A small step: the tower checked in six times and took two calls, passing one job along to the tower machine and updating the list of what got built.", "idle": false},
   {"t": "2026-11-10T08:53:24Z", "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.", "idle": true},
   {"t": "2026-11-10T07:53:08Z", "s": "A quiet but useful hour: the tower checked in six times and took one call, and the shop's handbook now says its base files live on the tower only, not in the repo.", "idle": false},
