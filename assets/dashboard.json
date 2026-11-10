@@ -1,2082 +1,2026 @@
 [
-  {
-    "t": "2026-11-10T09:53:04Z",
-    "s": "A small step: the tower checked in six times and took two calls, passing one job along to the tower machine and updating the list of what got built.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-10T08:53:24Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-10T07:53:08Z",
-    "s": "A quiet but useful hour: the tower checked in six times and took one call, and the shop's handbook now says its base files live on the tower only, not in the repo.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-10T06:54:00Z",
-    "s": "A small step: last night's red dot standup got its verdict and a new lead dot was picked, while the tower checked in four times and took no calls.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-10T05:53:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-10T04:55:46Z",
-    "s": "A busy hour: the tower took three calls and answered each one, a new one-pipe plan for every ticket landed on the Board, the shop saved its base parts, and a one-slide poster got drafted.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-10T03:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-10T02:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-10T01:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in five times and took no calls.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-10T00:53:00Z",
-    "s": "The new red dot 1.1.5 landed on a second computer, the tower answered that call and started a fix so the repo sync can find its tools; the other five check-ins were quiet.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-09T23:53:00Z",
-    "s": "The tower took one call and answered it by building a fresh red dot 1.1.5 for Windows, ready for pickup; the rest of the hour it checked in five more times with nothing new.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-09T22:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-09T21:52:00Z",
-    "s": "The machine shop's scans and base jobs were saved so it can run outside its old sandbox, the handover deck got its succession notes, and the tower answered one call while two new radio messages came in.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-09T20:53:00Z",
-    "s": "The crew gave the machine-shop design another tuning pass and wrote a handover guide plus a send-off deck for whoever takes the next shift; the tower checked in six times and took no calls.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-09T19:53:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-09T18:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-09T17:53:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-09T16:53:00Z",
-    "s": "The crew ran one more round of the ball-machine puzzle test, landing 12 of 50 runs and learning only the ball needs slowing; the tower checked in six times and took no calls.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-09T15:53:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-09T14:53:00Z",
-    "s": "The crew polished the wheel turbine design five times this hour, from blade shape to a check against a real photo, then ran all five designs through the shop with a deck and PDF; the tower checked in five times with zero calls.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-09T13:53:00Z",
-    "s": "The crew wrote a step-by-step guide for turning an aluminum wheel part in the virtual machine shop, added cutter rules and quality gates, refreshed the weekly marketing numbers, and the tower checked in six times with zero calls.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-09T12:53:00Z",
-    "s": "The crew reshaped the wheel designs six times this hour, matching blades to reference photos, drilling clean lug holes and switching to a machine-shop style build for all five wheels, while the tower checked in five times with zero calls.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-09T11:53:00Z",
-    "s": "The crew designed four wheels from the parts catalogue instead of guessing from scans, added hub, ring and valve shapes, refreshed the wheel deck, wrote last night's recap, and the tower checked in six times with zero calls.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-09T10:53:00Z",
-    "s": "The crew upgraded the wheel tools to level scans, shape wheel crowns and check their own work, made a second-try deck on one wheel, and the tower checked in six times with zero calls.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-09T09:53:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times and took zero calls.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-09T08:52:00Z",
-    "s": "The crew finished a fourteen-slide deck on what the wheel scans taught us, started stitching several scans into one model, and taught the wheel tools to rotate and shave; the tower checked in five times with zero calls.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-09T07:53:00Z",
-    "s": "The crew built a second version of the wheel-shaping tools, carving spoke patterns from phone scans for three wheels; the tower checked in seven times and took zero calls.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-09T06:53:00Z",
-    "s": "The crew finished a ten-slide deck on shaping wheels from phone depth scans with three new wheel-measuring scripts, and the evening standup crowned a lead computer; the tower checked in five times with zero calls.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-09T05:52:00Z",
-    "s": "One computer filed its evening standup on what it learned; the tower checked in six times and took zero calls.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-09T04:54:00Z",
-    "s": "The crew laid the first brick of a new wheel-design tool, six steps from measuring a wheel to packaging a fresh design, while the tower stayed quiet with zero calls all hour.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-09T03:52:00Z",
-    "s": "The crew mapped out a wheel pack: turning real wheel scans into true-size game wheels, with the wheel list and job order set and a short deck explaining the process; the tower took 0 calls.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-09T02:51:00Z",
-    "s": "Idling: the tower made six quiet rounds with no calls and nothing else moved this hour; road still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-09T01:51:00Z",
-    "s": "Idling: the tower made six quiet rounds with no calls and nothing else moved this hour; road still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-09T00:52:00Z",
-    "s": "Something moved: two wheel scans were sliced into flat face and rim images with a ticket handed to the next bot, and the tower made five quiet rounds with no calls; road still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-08T23:52:00Z",
-    "s": "Something moved: the contraption side experiment finished another batch of test runs (6 of 25 passing with gentler wind gusts), and the tower made six quiet rounds with no calls; road still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-08T22:52:00Z",
-    "s": "Idling: the tower made six quiet rounds and took no calls, and no Board steps moved this hour; road still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-08T21:52:00Z",
-    "s": "Idling: the tower made six quiet rounds and took no calls, and no Board steps moved this hour; road still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-08T20:52:00Z",
-    "s": "Idling: the tower made six quiet rounds and took no calls, and no Board steps moved this hour; road still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-08T19:51:00Z",
-    "s": "Idling: the tower made six quiet rounds and took no calls, and no Board steps moved this hour; road still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-08T18:52:00Z",
-    "s": "Idling: the tower made six quiet rounds and took no calls, and no Board steps moved this hour; road still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-08T17:52:00Z",
-    "s": "Idling: the tower made six quiet rounds and took no calls, and no Board steps moved this hour; road still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-08T16:52:00Z",
-    "s": "Idling: the tower kept its rounds and took no calls, and no Board steps moved this hour; road still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-08T15:52:00Z",
-    "s": "Something moved: a side experiment on the contraption found that halving its jitter keeps winning on a fresh batch of test runs (5 of 25 versus 1 of 25), and the tower made six quiet rounds with no calls.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-08T14:52:00Z",
-    "s": "Idling: the tower made six quiet rounds and took no calls, and no Board steps moved this hour; road still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-08T13:52:00Z",
-    "s": "Idling: the tower kept its rounds and took no calls, so nothing moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-08T12:52:00Z",
-    "s": "Idling: the tower kept watch every ten minutes and took no calls, so nothing moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-08T11:56:00Z",
-    "s": "A quiet hour: yesterday's nightly recap got written up, the tower made five quiet rounds with no new calls, and no Board steps moved; road still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-08T10:51:00Z",
-    "s": "Something moved: two new doors each got an animated intro, one was swapped out within minutes for a hands-on demo of doing one thing at a time, and the tower made six quiet rounds; road still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-08T09:53:00Z",
-    "s": "Something moved: the little red bot got a working demo and two new looks at 99 cents a deck, a sister brand got its own enterprise offer, one page went up and back down, and the tower stayed quiet; road at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-08T08:52:00Z",
-    "s": "Something moved: one new door got its full scripted home page beat by beat, another got its first working demo, every door now shares one standing line, two pitch decks landed, and the tower made six quiet rounds; the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-08T07:52:00Z",
-    "s": "Something moved: fifteen new doors went up for our domains, one got a real home page with fresh pitch decks behind it, and the tower made six rounds and took one call; the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-08T06:52:00Z",
-    "s": "Something moved: the nightly check-in landed, one computer reported what it learned and was picked to lead the others; the tower made six rounds and took no calls, and the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-08T05:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-08T04:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-08T03:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower made five rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-08T02:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-08T01:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower made five rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-08T00:52:00Z",
-    "s": "The shift ran a 50-case test on puzzle level 47, which solved 1 fresh case versus 2 for level 46, about flat, and fixed its scoring tally; the tower made five rounds with no calls, and the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-07T23:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-07T22:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower made seven rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-07T21:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-07T20:52:00Z",
-    "s": "The shift ran a 50-case test on puzzle level 46, which solved 2 fresh cases versus 1 for level 45, about flat; the tower made six rounds with no calls, and the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-07T19:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-07T18:52:00Z",
-    "s": "The crew wrote today's daily brief, the first since Tuesday, while the tower made six rounds and took no calls; the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-07T17:53:00Z",
-    "s": "Idling: nothing moved this hour; the tower made its rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-07T16:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-07T15:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls, and nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-07T14:52:21Z",
-    "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-07T13:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-07T12:52:25Z",
-    "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-07T11:52:25Z",
-    "s": "Mostly idle: the tower made six rounds and took no calls, and yesterday's nightly recap got written up; the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-07T10:52:01Z",
-    "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-07T09:52:33Z",
-    "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-07T08:52:28Z",
-    "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-07T07:51:00Z",
-    "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-07T06:52:38Z",
-    "s": "Mostly idle: the tower made seven rounds and took no calls, and last night's crew standup was judged and a new lead computer picked; the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-07T05:52:05Z",
-    "s": "Idling: nothing moved this hour; the tower made five rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-07T04:52:29Z",
-    "s": "Idling: nothing moved this hour; the tower made five rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-07T03:52:15Z",
-    "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-07T02:52:03Z",
-    "s": "Idling: nothing moved this hour; the tower made five rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-07T01:52:21Z",
-    "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-07T00:52:48Z",
-    "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-06T23:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-06T22:52:03Z",
-    "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-06T21:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower made its rounds and took no calls, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-06T20:52:48Z",
-    "s": "Idling: nothing moved this hour; the tower checked in every ten minutes and took 0 calls.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-06T19:52:00Z",
-    "s": "The puzzle machine got a new level 42 with a gently tilted landing, while the tower kept its rounds and took no calls; the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-06T18:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-06T17:53:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-06T16:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-06T15:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-06T14:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-06T13:53:00Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-06T12:53:00Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-06T11:52:00Z",
-    "s": "A small step: yesterday's nightly recap got written up, and the tower checked in six times and took no calls; the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-06T10:52:00Z",
-    "s": "Idling: the tower checked in seven times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-06T09:52:00Z",
-    "s": "A small step: the game side project ran one more round of aim tests and lined up the next level; the tower checked in six times and took no calls, and the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-06T08:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-06T07:53:00Z",
-    "s": "Idling: the tower checked in seven times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-06T06:52:00Z",
-    "s": "The nightly red dot standup came in and a lead computer was picked for the day; the tower checked in six times and took no calls, and the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-06T05:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-06T04:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-06T03:52:00Z",
-    "s": "The tower checked in six times and took no calls, and two new slide decks were filed on the shelf; the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-06T02:53:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-06T01:52:00Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-06T00:52:00Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-05T23:52:00Z",
-    "s": "Idling: the tower checked in four times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-05T22:52:00Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-05T21:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-05T20:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-05T19:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-05T18:52:00Z",
-    "s": "Idling: the tower checked in four times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-05T17:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-05T16:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-05T15:52:00Z",
-    "s": "A little movement: 33 new deck files got logged into the records, waiting on their verdicts, while the tower checked in six times and took no calls; the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-05T14:53:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-05T13:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-05T12:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-05T11:52:00Z",
-    "s": "Quiet hour: the nightly recap of yesterday got written up and the tower checked in seven times with no calls; the board held still and the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-05T10:52:00Z",
-    "s": "The test crew ran another batch of fifty trial runs on a new setting and found it no better than the last one, while the tower checked in six times and took no calls.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-05T09:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-05T08:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-05T07:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-05T06:53:00Z",
-    "s": "Quiet hour: the tower checked in seven times and took no calls, and the nightly standup review was filed with no check-ins to judge; the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-05T05:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-05T04:53:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-05T03:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-05T02:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-05T01:51:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-05T00:52:00Z",
-    "s": "The photos-to-3D tool now sends a heartbeat every two minutes so a stall gets caught, a new physics-tuning test ran but wasn't kept, and the tower checked in five times with no calls; the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-04T23:52:00Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-04T22:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-04T21:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-04T20:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-04T19:52:00Z",
-    "s": "Idling: the tower checked in seven times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-04T18:52:12Z",
-    "s": "The shift ran one more test round on the contraption, and the new tweak now stumbles on 1 in 50 fresh cases instead of 4; the tower checked in five times and took no calls.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-04T17:53:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-04T16:52:49Z",
-    "s": "Idling: the tower checked in four times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-04T15:52:55Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-04T14:52:13Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-04T13:52:55Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-04T12:52:58Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-04T11:53:16Z",
-    "s": "The puzzle contraption got its 35th level built and tested, last night's recap was written up, the tower checked in five times with no calls, and the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-04T10:52:26Z",
-    "s": "The night shift finished a test run on puzzle level 34 and moved on to level 35; the tower checked in six times and took no calls, and the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-04T09:52:14Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-04T08:52:00Z",
-    "s": "One safety fix landed: the portal now only accepts secure web links in its settings; the tower checked in six times and took no calls, and the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-04T07:52:16Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-04T06:53:06Z",
-    "s": "Yesterday's standup verdict got filed and a lead computer picked; the tower checked in six times and took no calls, and the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-04T05:52:14Z",
-    "s": "The tower checked in six times with no calls, and one quiet brick landed: 22 decks from yesterday's batch got logged in the deck ledger, waiting on verdicts; the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-04T04:52:50Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-04T03:52:36Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-04T02:52:11Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-04T01:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-04T00:52:24Z",
-    "s": "The tower made six quiet rounds with zero calls, and the contraption bench ran a full 100-run test on level 32: about 5 in 100 solved, so extra laps won't fix it and the next build is lined up.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-03T23:53:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-03T22:53:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-03T21:54:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-03T20:54:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-03T19:55:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-03T18:54:00Z",
-    "s": "Idling: the tower checked in four times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-03T17:56:00Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-03T16:52:00Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-03T15:51:00Z",
-    "s": "The crew wrote today's daily brief that an earlier round missed; the tower checked in six times and took no calls, and the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-03T14:52:00Z",
-    "s": "Idling: the tower checked in every ten minutes with no calls, and nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-03T13:51:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-03T12:51:00Z",
-    "s": "The physics lab ran a 50-run test of a new grip setting, which came out flat, so the next batch is lined up; the tower checked in six times and took no calls, and the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-03T11:51:00Z",
-    "s": "The crew wrote up last night's recap of the day; the tower checked in six times and took no calls, and the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-03T10:51:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-03T09:51:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-03T08:51:00Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-03T07:51:00Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-03T06:51:00Z",
-    "s": "Yesterday's crew standup got its verdict and a new lead was picked; the tower checked in five times and took no calls, and the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-03T05:51:00Z",
-    "s": "Idling: the tower checked in every ten minutes and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-03T04:51:00Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-03T03:51:00Z",
-    "s": "A test round on the lap-limit puzzle finished with no new wins, so that level is frozen and the next one is queued; the tower checked in five times with no calls, and the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-03T02:51:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-03T01:51:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-03T00:52:00Z",
-    "s": "The garage's 3D studio got five upgrades (lasso cuts, undo and redo, named models with search, material previews), a physics test round finished, and the tower checked in five times with no calls; the road is still at step 1.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-02T23:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls, and spotted one new item for the work queue; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-02T22:51:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-02T21:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-02T20:51:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-02T19:52:00Z",
-    "s": "Idling: the tower checked in seven times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-02T18:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-02T18:01:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-02T17:37:00Z",
-    "s": "Idling: the tower checked in three times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-02T16:39:00Z",
-    "s": "The puzzle machine got a new level 27 with bouncier balls and passed its first test runs, and the tower checked in five times with no calls.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-02T15:16:00Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-02T13:57:00Z",
-    "s": "The weekly marketing refresh landed, pulling fresh numbers for about 800 videos including 8 new ones, and the tower checked in three times with no calls.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-02T12:53:00Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-02T11:53:00Z",
-    "s": "The tower checked in five times and took no calls, and yesterday's nightly recap was written up; nothing else moved this hour.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-02T10:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-02T09:52:00Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-02T08:53:00Z",
-    "s": "The tower checked in five times and took no calls, and three late rows from yesterday's deck batch were logged; nothing else moved this hour.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-02T08:00:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-02T06:53:00Z",
-    "s": "The tower checked in six times and took no calls, and the nightly standup was judged: no dots reported for the seventh night running, so the same small fix is still waiting.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-02T05:51:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-02T04:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-02T03:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-02T02:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-02T01:52:00Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-02T00:51:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-01T23:51:00Z",
-    "s": "Steady work: the tower checked in six times with no calls and logged 90 new video decks from today's clip batch, all waiting on verdicts; the board held still and the road sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-01T22:51:00Z",
-    "s": "A small step: the tower checked in six times with no calls and logged 27 new video decks from today's clip batch, now waiting on verdicts; the board held still and the road sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-01T21:51:00Z",
-    "s": "A small step: the tower checked in five times with no calls and caught up 86 missed records, so today's batch is complete; the board held still and the road sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-01T20:51:00Z",
-    "s": "Idling: the tower checked in four times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-01T19:51:00Z",
-    "s": "A small step: the tower checked in four times with no calls and logged a fresh batch of 100 records; the board held still and the road sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-01T18:51:00Z",
-    "s": "Idling: the tower checked in four times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-01T17:52:00Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-01T16:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-01T15:52:00Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-01T14:52:00Z",
-    "s": "Quiet hour: the tower checked in five times with no calls, and one small fix taught its hourly report to follow the clock change to standard time.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-01T13:51:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-01T12:53:00Z",
-    "s": "Idling: the tower checked in seven times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-01T11:51:00Z",
-    "s": "Last night's recap got written up with fresh notes, while the tower made five quiet rounds and took no calls; the board held still and the road sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-01T10:51:00Z",
-    "s": "Idling: the tower checked in seven times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-01T09:51:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-01T08:52:00Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-01T07:52:00Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-01T06:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-01T05:52:00Z",
-    "s": "A small step: the tower checked in five times and took no calls, and last night's red dot standup got its verdict, with a lead dot picked for the day.",
-    "idle": false
-  },
-  {
-    "t": "2026-11-01T04:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-01T03:52:00Z",
-    "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-01T02:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-01T01:52:00Z",
-    "s": "Idling: the tower checked in four times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-11-01T00:52:00Z",
-    "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-31T23:52:00Z",
-    "s": "A steady hour: the tower checked in six times with no calls and logged 24 new decks with best guesses; the Board didn't move and the road sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-31T22:52:00Z",
-    "s": "The busiest logging hour yet: the tower checked in five times with no calls and logged 43 new decks, including five that earlier rounds had missed; the Board didn't move and the road sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-31T21:52:00Z",
-    "s": "A busy logging hour: the tower checked in six times with no calls and logged 34 new decks; the Board didn't move and the road sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-31T20:51:00Z",
-    "s": "A steady hour: the tower checked in seven times with no calls and logged two new decks; the Board didn't move and the road sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-31T19:51:00Z",
-    "s": "A quiet hour: the tower checked in six times with no calls and logged two new decks; the Board didn't move and the road sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-31T17:51:00Z",
-    "s": "Idling: nothing moved this hour beyond six quiet tower check-ins with no calls; the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-31T16:51:00Z",
-    "s": "Idling: nothing moved this hour beyond five quiet tower check-ins with no calls; the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-31T15:51:00Z",
-    "s": "Idling: nothing moved this hour beyond four quiet tower check-ins with no calls; the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-31T14:51:00Z",
-    "s": "A quiet hour: the tower checked in five times with no calls, and today's morning brief got written; the road sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-31T13:51:00Z",
-    "s": "Idling: nothing moved this hour beyond five quiet tower check-ins with no calls; the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-31T12:51:00Z",
-    "s": "Idling: nothing moved this hour beyond five quiet tower check-ins with no calls; the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-31T11:53:00Z",
-    "s": "A quiet hour: the tower checked in six times with no calls, logged 53 decks rows it had missed earlier this morning, and kept its queue and dyno log current; the road sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-31T10:52:00Z",
-    "s": "The crew wrote up yesterday's nightly recap with new dictionary and training notes, and the tower filled in 87 missed decks rows across five quiet check-ins with no calls; the road sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-31T09:51:00Z",
-    "s": "A quiet hour: the tower checked in six times with no calls and caught up its decks ledger with rows it had missed since midnight; the road sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-31T08:51:00Z",
-    "s": "Idling: nothing moved this hour beyond five quiet tower check-ins with no calls; the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-31T07:51:00Z",
-    "s": "Idling: nothing moved this hour beyond five quiet tower check-ins with no calls; the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-31T06:51:00Z",
-    "s": "Idling: nothing moved this hour beyond six quiet tower check-ins with no calls; the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-31T05:51:00Z",
-    "s": "Last night's red dot standup got its verdict and a new lead dot was picked, while the tower checked in six times with no calls; the road sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-31T04:51:00Z",
-    "s": "Idling: nothing moved this hour beyond six quiet tower check-ins with no calls; the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-31T03:51:00Z",
-    "s": "Idling: nothing moved this hour beyond five quiet tower check-ins with no calls; the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-31T02:51:00Z",
-    "s": "Idling: nothing moved this hour beyond four quiet tower check-ins with no calls; the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-31T01:51:00Z",
-    "s": "The garage game leapt from v2 to v3.0 (idea archery, self-updates, a first-person 3D idea space), the red dot now glides with a tower-only beta, one physics tweak was benched, and the tower checked in six times with no calls.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-31T00:51:00Z",
-    "s": "Four launcher updates landed (help pings reach every dot, daily fleet updates, a smoother live-chat button, verified program opens), posted links now get a safety check, and the tower checked in five times with no calls; the road sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-30T23:52:00Z",
-    "s": "The deck log caught up on 108 entries from the last two days plus one new deck, while the tower checked in five times with no calls; the board held still and the road sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-30T22:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-30T21:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-30T20:52:00Z",
-    "s": "Two new pieces of work landed in the review queue, a storage slim-down and a fresh look for the red buddy card, while the tower checked in five times with no calls and the road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-30T19:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in four times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-30T18:53:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in four times with no calls and the board held still.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-30T17:53:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times with no calls and the board held still.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-30T16:53:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in five times with no calls and the board held still.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-30T16:29:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in four times with no calls and the board held still.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-30T15:26:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times with no calls and the board held still.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-30T14:21:00Z",
-    "s": "Steady hour: the tower ran four rounds with no radio calls, today's daily brief got written up, the board held still, and the road sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-30T13:18:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in twice with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-30T11:58:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-30T10:52:00Z",
-    "s": "Steady hour: the tower ran six rounds with no radio calls, last night's recap got written up, the board held still, and the road sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-30T09:53:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-30T08:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in five times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-30T07:54:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in seven times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-30T06:54:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-30T05:53:00Z",
-    "s": "Steady hour: the tower ran six rounds with no radio calls, two new cards joined the review queue, last night's standup got its verdict, and the road sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-30T04:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-30T03:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in seven times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-30T02:51:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-30T01:51:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in seven times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-30T00:51:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-29T23:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in five times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-29T22:53:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-29T21:53:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in three times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-29T20:53:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in five times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-29T19:52:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in five times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-29T18:54:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in five times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-29T17:54:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in four times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-29T16:53:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-29T16:07:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in five times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-29T15:07:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-29T14:01:00Z",
-    "s": "Quiet hour: the tower checked in seven times with no calls and wrote up today's brief; the board held still, the site didn't change, and the road sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-29T12:53:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-29T11:57:00Z",
-    "s": "Idling: nothing moved this hour; the tower checked in five times with no calls, the board held still, and the road sits at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-29T10:54:00Z",
-    "s": "Steady hour: the tower checked in five times with no calls, logged 10 missing decks in the records, and last night's recap got written up; the board held still and the road sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-29T09:53:00Z",
-    "s": "Quiet hour with a finish line: the tower checked in six times with no calls and moved the last 4 old letters into the new mailbox, so that move is done; the board held still and the road sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-29T08:53:00Z",
-    "s": "Quiet hour: the tower checked in six times with no calls and moved 8 more old letters into the new mailbox; the board held still and the road still sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-29T07:53:00Z",
-    "s": "Quiet hour: the tower checked in five times with no calls and moved 8 more old letters into the new mailbox; the board held still and the road still sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-29T06:53:00Z",
-    "s": "Quiet but steady hour: the tower checked in six times with no calls and moved 16 more old letters into the new mailbox; the road still sits at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-29T05:52:00Z",
-    "s": "Steady hour: the tower checked in five times with no calls, quietly moved 20 old letters into the new mailbox, and last night's red dot standup picked its lead dot.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-29T04:52:00Z",
-    "s": "Good hour: the tower took 2 calls, the one-big-spiderweb view of the live board was built for review, a new rule landed that nothing counts as done without proof, and old mail kept moving to the new mailbox.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-29T03:52:00Z",
-    "s": "The tower took 8 calls this hour, and three new jobs landed on the Board: a checklist for setting up crew laptops, a radio that wakes the dispatcher instantly, and one live board showing everything at once.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-29T02:52:00Z",
-    "s": "Busy hour: the tower page now shows an honest status line, drafts of three new company pages and a glitch-art experiment were built for review, old mail kept moving to the new mailbox, and the tower took 9 calls.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-29T01:52:00Z",
-    "s": "Steady hour: the tower took about a dozen calls, found and fixed why the radio looked dead, drafted a crew status page, started a driving-sim learning rig on the Board, and kept moving old mail into the new mailbox.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-29T00:53:00Z",
-    "s": "Busy hour: the tower took 29 calls, rebuilt the first site-maker from its five templates, specced a little red button with a slide deck, and moved seven Board items forward, including a talk portal and a dashcam twin plan.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-28T23:53:00Z",
-    "s": "Huge hour: the tower took about fifty calls, welded a first single pipe from a phone's pile of clips to a ready-to-post draft, grew the deck word dictionary, moved the mailbox onto the business account, and listed all ten domains.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-28T22:53:00Z",
-    "s": "Big hour: the tower took nine calls and shipped a first emoji coder for videos, a deck word dictionary, one home for every deck, a self-writing what-got-built page, and a sorter for dropped files.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-28T21:53:00Z",
-    "s": "The tower took two calls and moved the back-end org plan two steps forward: a private draft of a single go-live switch, plus written alarm levels so problems get the right urgency.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-28T20:53:00Z",
-    "s": "Idling: the tower made five routine rounds and took no calls; it noticed fresh activity on an open proposal, but nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-28T19:53:00Z",
-    "s": "The tower kept its ten-minute watch all hour with no calls, wrote a late daily brief for today, and spotted a new proposed change for the first node build.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-28T18:53:00Z",
-    "s": "Idling: the tower made six routine rounds and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-28T17:54:00Z",
-    "s": "Idling: the tower made seven routine rounds and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-28T16:53:00Z",
-    "s": "Idling: the tower made five routine rounds and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-28T15:53:00Z",
-    "s": "Idling: the tower made five routine rounds and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-28T14:57:00Z",
-    "s": "Idling: the tower checked in on schedule and took no calls, and nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-28T13:58:00Z",
-    "s": "Idling: the tower made seven routine rounds and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-28T12:58:00Z",
-    "s": "Idling: the tower checked in four times and took no calls; nothing else moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-28T11:57:00Z",
-    "s": "Idling: nothing moved this hour beyond the tower's routine rounds, which took no calls; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-28T10:54:00Z",
-    "s": "A small step: last night's recap got written up with yesterday's notes and a few dictionary and training updates, while the tower made five rounds with no calls; road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-28T09:52:00Z",
-    "s": "Idling: the tower made six quiet rounds with no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-28T08:52:00Z",
-    "s": "Idling: the tower made six quiet rounds with no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-28T07:53:00Z",
-    "s": "Idling: nothing moved this hour beyond the tower's six quiet rounds with no calls; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-28T06:53:00Z",
-    "s": "A side project moved: the physics lab cleared a new level, three balls on a jittery swing landing 98 of 100 test runs, while the tower made five rounds with no calls; road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-28T05:52:00Z",
-    "s": "Quiet hour, one small step: yesterday's standup got its verdict written down, and the tower made five rounds with no calls; road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-28T04:52:00Z",
-    "s": "Idling: the tower made five rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-28T03:52:00Z",
-    "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-28T02:52:00Z",
-    "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-28T01:52:00Z",
-    "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-28T00:52:00Z",
-    "s": "Idling: the tower made five rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-27T23:53:00Z",
-    "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-27T22:52:00Z",
-    "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-27T21:52:00Z",
-    "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-27T20:53:00Z",
-    "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-27T19:53:00Z",
-    "s": "Idling: the tower made seven rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-27T18:53:00Z",
-    "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-27T17:54:00Z",
-    "s": "Idling: the tower made five rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-27T16:53:00Z",
-    "s": "Idling: the tower made five rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-27T15:51:00Z",
-    "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-27T14:51:00Z",
-    "s": "Idling: the tower made seven rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-27T13:51:00Z",
-    "s": "Today's morning brief got written up while the tower made seven rounds and took no calls; no Board steps moved, and the road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-27T12:51:00Z",
-    "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-27T11:51:00Z",
-    "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-27T10:51:00Z",
-    "s": "Yesterday's nightly recap got written up, with fresh dictionary and training notes, while the tower made six rounds and took no calls; road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-27T09:51:00Z",
-    "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-27T08:51:00Z",
-    "s": "Idling: the tower checked in five times and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-27T07:51:00Z",
-    "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-27T06:51:00Z",
-    "s": "Two new decks went up and two older ones got reworked, while the tower made its rounds and took no calls; road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-27T05:51:00Z",
-    "s": "The walkie-talkie now works both ways: the crew sent its first two pings to the radio, a new deck went up and the decks page now lists every deck, and the nightly standup picked a lead; road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-27T04:51:00Z",
-    "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-27T03:51:00Z",
-    "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-27T02:51:00Z",
-    "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-27T01:51:00Z",
-    "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-27T00:52:00Z",
-    "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-26T23:52:00Z",
-    "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-26T22:53:00Z",
-    "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-26T21:53:00Z",
-    "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-26T20:53:00Z",
-    "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-26T19:52:00Z",
-    "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-26T18:53:00Z",
-    "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-26T17:53:00Z",
-    "s": "The site got a new wall page that shows the Captain's posts newest first, opening with the mission; the tower made its rounds with no calls. Road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-26T16:51:00Z",
-    "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-26T15:51:00Z",
-    "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-26T14:51:00Z",
-    "s": "The helper bot shipped version 0.29, now watching links with one shared recipe, and the crew added a safety check for every copy; the tower made its rounds with no calls. Road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-26T13:53:00Z",
-    "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-26T12:57:00Z",
-    "s": "The weekly marketing refresh landed: a fresh pull of 812 video stats with old data safely backed up, and the tower kept its regular rounds with no calls coming in.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-26T11:53:00Z",
-    "s": "Idling: the tower checked in on schedule and took no calls, and nothing else moved this hour; road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-26T10:53:00Z",
-    "s": "Quiet hour: the tower checked in every ten minutes and took no calls, and last night's recap got written up with a few new words for the dictionary; road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-26T09:53:00Z",
-    "s": "Steady hour: the tower took three calls, every ask now lands as a typed ticket in one queue, a fix for hard-to-find home page links was drafted for review, and the phone text page got a pattern lock; road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-26T08:51:00Z",
-    "s": "Busy hour: the tower took seven radio calls, a simple nightly content cannon got its first build, and four new Board items landed (a footage finder, a welcome video, a pipe-merging plan); road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-26T07:51:00Z",
-    "s": "Busy hour: the tower took five radio calls, the new recipe player got its first recipes, a link-watch line and a crew laptop kit were drafted, and the YouTube north star is written down; the road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-26T06:51:00Z",
-    "s": "Steady hour: the helper app learned to make sounds, two new ideas got drafted (a deadpan ops bot and a timer for how fast the crew acts on a call), and the tower took three calls; road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-26T05:51:00Z",
-    "s": "Busy hour: the helper app shipped three updates (an hours tracker, a link checker that answers with an emoji, and new senses), a car home-screen app got its first build, and the nightly crew check picked a lead; road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-26T04:51:00Z",
-    "s": "Busy hour: the helper app shipped five updates and now reports live status through the site, new computers get an eight-step setup guide, the work queue got sorted, the map grew, and the tower took one call; road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-26T03:51:00Z",
-    "s": "Busy hour: the helper app shipped two updates, a single work queue and a poster board started running quietly in the background, the editing footage got cataloged, two Board items moved, and the tower took 2 calls.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-26T02:51:00Z",
-    "s": "Steady hour: the on-screen bot helper now says hello on first launch and checks daily for updates, the car mod got a slimming script with test results, and a recipe for welcoming new crew was drafted; road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-26T01:52:00Z",
-    "s": "Big hour: the on-screen bot helper can now carry files and mail between crew computers, update itself, advance steps on a click and take orders from the radio; two ideas joined the Board, the tower logged 10 calls; road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-26T00:51:00Z",
-    "s": "The on-screen bot helper shipped five upgrades this hour: its own taskbar icon, a guided step-by-step button, a napping bounce, hopping to the next idle crew computer, and self-updating; the car mod got a fresh inventory, and the road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-25T23:53:00Z",
-    "s": "Busy hour: the on-screen bot helper got three upgrades (a playful look, a draggable speech bubble and a tell-Claude button), six ideas landed on the Board including a one-button co-op, and the tower took 7 calls; road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-25T22:51:00Z",
-    "s": "Quiet hour: the crew handbook gained a short guide for passing files straight between the crew's own computers without the cloud; nothing moved on the Board and the road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-25T21:51:00Z",
-    "s": "Every crew computer now starts from one shared handbook, the purple helper that walks through each click got locked in, a phone-camera idea joined the Board and the tower took 1 call; road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-25T20:51:00Z",
-    "s": "Busy hour: the tower page became a combo-lock vault with a welcome door for new crew, a human-tickets button landed, crew onboarding got tightened, two Board items moved and the tower took 1 call; road still at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-25T19:51:00Z",
-    "s": "The tower took 5 calls, the purple crew button now opens tower text for human tickets and stays on screen on phones, the text bar hides while locked, and four new Board idea plans were added; the road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-25T18:51:00Z",
-    "s": "The tower took 2 calls, the tower can now start talking over Telegram, quick to-do tickets landed on the radio, a hidden draft for booking an hour went up, and three Board plans were added; the road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-25T17:51:00Z",
-    "s": "The tower took 1 call, the tower radio got a new text-thread view on the site, the lean plan's wording was corrected, and new idea notes were written; the road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-25T16:51:00Z",
-    "s": "Idling: nothing moved this hour, and the road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-25T15:51:00Z",
-    "s": "Idling: nothing moved this hour, and the road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-25T14:51:00Z",
-    "s": "Idling: nothing moved this hour, and the road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-25T13:51:00Z",
-    "s": "Idling: nothing moved this hour, and the road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-25T12:51:00Z",
-    "s": "Idling: nothing moved this hour, and the road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-25T11:51:00Z",
-    "s": "Idling: nothing moved this hour, and the road holds at step 2.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-25T10:51:00Z",
-    "s": "Yesterday's nightly recap got written up, along with new dictionary words and training notes; no Board moves or tower calls this hour, and the road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-25T09:51:00Z",
-    "s": "The tower took 9 calls and turned them into five new Board ideas, a rough first browser extension that highlights how messaging works, and a batch of draft social posts; the road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-25T08:51:00Z",
-    "s": "The public site now shows only the bot, a leaner plan puts selling hours first toward the first legal dollar, the bot's script and two new idea notes were written, and the tower took 3 calls; the road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-25T07:51:00Z",
-    "s": "The site gained eight inspiration lines, the bot got its backronym, a nightly bot meeting and an approved-only social posting queue were planned, the tower took 6 calls and moved four Board items; the road holds at step 2.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-25T06:51:00Z",
-    "s": "The goal got pinned down for every bot as an eight-step road to a first legal sale, the content line was set, the tower took 6 calls and added three new ideas to the Board, plus two inspiration lines.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-25T05:52:00Z",
-    "s": "A one-site-per-person website builder took shape with an example page and its own badge, the master plan got written down for every bot, the rulebook and tower guidance each gained a line, plus ten new inspiration lines.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-25T04:51:00Z",
-    "s": "A publishing house for books and music joined the dream list and the Board, the hot-take engine learned to stay undivisive, a branding rule and a dictionary word landed, the tower radar synced, plus three inspiration lines.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-25T03:51:00Z",
-    "s": "Idling: nothing moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-25T02:52:00Z",
-    "s": "The tower took 2 new calls and answered 4, a menu channel for the side project got drafted and is waiting on a yes, two Board items moved forward, and the brand notes grew.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-25T01:52:00Z",
-    "s": "The marketing playbook learned to pick a sound for every video, the hook lab got fresh notes, the tower took 7 calls and answered 5, plus one inspiration line.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-25T00:52:00Z",
-    "s": "The side-project site went live after ten quick versions in an hour, the tower answered a 14-call queue and took 3 new ones, the autopilot map and alarm bell got smarter, plus two inspiration lines.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-24T23:52:00Z",
-    "s": "The new side-project brand got its first private playbook draft, a string of founding ideas written down, and a scroll page now live on the site; the tower radar synced with the Board, plus five inspiration lines.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-24T22:52:00Z",
-    "s": "A new umbrella brand for side projects got its plan, the hook lab found the first three seconds drive views, support tickets and hot-take hooks got drafts, the tower learned to flag unclear calls and took 3, plus two inspiration lines.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-24T21:52:00Z",
-    "s": "A do-it-yourself carspotting editor shipped that runs right on the device, the footage machine finished a full run, the crew rules learned not to apologize for pointing things out, the tower got a lock button and took 5 calls, plus four inspiration lines.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-24T20:52:00Z",
-    "s": "The free encouragement bot got its own pages and a clear name split from the automations under the hood, an autopilot map now shows every bot and how they connect, the tower took 4 calls, and eight inspiration lines were added.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-24T19:52:00Z",
-    "s": "Each crew bot got its own instruction sheet, the control tower learned to keep a running log, a new timeline page now shows the whole flight path from first steps to launch, and one fresh inspiration line was added.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-24T18:52:00Z",
-    "s": "The control tower answered its first radio checks and gained a radar view of the whole Board, the home page became a menu with the games moved to their own gate, inspiration lines were added, and a Board item for helper bubbles opened.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-24T17:52:00Z",
-    "s": "The crew got a master guide to where everything lives, the portal's code moved into the shared records, a members-only control tower page went up on the site, and one new inspiration line was added.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-24T16:52:00Z",
-    "s": "Idling: nothing moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-24T15:52:00Z",
-    "s": "Idling: nothing moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-24T14:52:00Z",
-    "s": "Idling: nothing moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-24T13:52:00Z",
-    "s": "Idling: nothing moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-24T12:51:00Z",
-    "s": "Idling: nothing moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-24T11:51:00Z",
-    "s": "Idling: nothing moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-24T10:52:00Z",
-    "s": "Yesterday's nightly recap was filed, along with a new crew dictionary of working terms, a short training note, and a small illustration marking the day.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-24T09:52:00Z",
-    "s": "A new Board item set up wrapping the site menu and navigation for good, the footage pipeline gained a one-app goal (plug in the phone, get an edited draft ready to post), and one inspiration line was added.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-24T08:52:00Z",
-    "s": "The car screen return got its support chat record saved to the Board, a short nightly note was filed, and ten new inspiration lines joined the site.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-24T07:52:00Z",
-    "s": "The site menu got a brighter sky-to-grass scene, hover-only border glow, old-TV switch transitions and one clean shot per channel tile; on the Board, the car return was approved and a listing layout was settled.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-24T06:52:00Z",
-    "s": "Idling: nothing moved this hour.",
-    "idle": true
-  },
-  {
-    "t": "2026-10-24T05:52:00Z",
-    "s": "The car screen project tested the unit and found it runs older software than advertised, so a return and a better replacement joined the Board; a radio-style home screen mockup went up to try on it.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-24T04:52:00Z",
-    "s": "A new desktop tool can pin any window on top, see-through, for framing shots; the site menu got a tighter grid with drifting clouds and slowly panning photos; the car screen project got a build plan and a local test page.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-24T03:52:00Z",
-    "s": "The footage machine now listens to each clip's sound and checks sharpness; a first desktop app for it shipped with two quick fixes; the site got a carspotting billboard gallery, a bubbly channel-style menu and new inspiration lines; two new plans joined the Board.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-24T02:51:00Z",
-    "s": "The footage machine now reads iPhone photos anywhere, stops flagging screenshots as duplicates and ran its first real sort; a first video editor landed that auto-cuts dead air and filler words; the head unit launcher got a radio-style look.",
-    "idle": false
-  },
-  {
-    "t": "2026-10-24T01:50:00Z",
-    "s": "Built the footage machine's first sorter (it now reads iPhone HEIC photos), moved 12.9 GB of phone footage onto the SSD, scaffolded automated BeamNG crash test videos, read the Saab head unit's specs, and drew the first bubble launcher for its 7-inch screen.",
-    "idle": false
-  }
+  {"t": "2026-11-10T09:53:04Z", "s": "A small step: the tower checked in six times and took two calls, passing one job along to the tower machine and updating the list of what got built.", "idle": false},
+  {"t": "2026-11-10T08:53:24Z", "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.", "idle": true},
+  {"t": "2026-11-10T07:53:08Z", "s": "A quiet but useful hour: the tower checked in six times and took one call, and the shop's handbook now says its base files live on the tower only, not in the repo.", "idle": false},
+  {"t": "2026-11-10T06:54:00Z", "s": "A small step: last night's red dot standup got its verdict and a new lead dot was picked, while the tower checked in four times and took no calls.", "idle": false},
+  {"t": "2026-11-10T05:53:00Z", "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.", "idle": true},
+  {"t": "2026-11-10T04:55:46Z", "s": "A busy hour: the tower took three calls and answered each one, a new one-pipe plan for every ticket landed on the Board, the shop saved its base parts, and a one-slide poster got drafted.", "idle": false},
+  {"t": "2026-11-10T03:52:00Z", "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.", "idle": true},
+  {"t": "2026-11-10T02:52:00Z", "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.", "idle": true},
+  {"t": "2026-11-10T01:52:00Z", "s": "Idling: nothing moved this hour; the tower checked in five times and took no calls.", "idle": true},
+  {"t": "2026-11-10T00:53:00Z", "s": "The new red dot 1.1.5 landed on a second computer, the tower answered that call and started a fix so the repo sync can find its tools; the other five check-ins were quiet.", "idle": false},
+  {"t": "2026-11-09T23:53:00Z", "s": "The tower took one call and answered it by building a fresh red dot 1.1.5 for Windows, ready for pickup; the rest of the hour it checked in five more times with nothing new.", "idle": false},
+  {"t": "2026-11-09T22:52:00Z", "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.", "idle": true},
+  {"t": "2026-11-09T21:52:00Z", "s": "The machine shop's scans and base jobs were saved so it can run outside its old sandbox, the handover deck got its succession notes, and the tower answered one call while two new radio messages came in.", "idle": false},
+  {"t": "2026-11-09T20:53:00Z", "s": "The crew gave the machine-shop design another tuning pass and wrote a handover guide plus a send-off deck for whoever takes the next shift; the tower checked in six times and took no calls.", "idle": false},
+ {
+  "t": "2026-11-09T19:53:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-09T18:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-09T17:53:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-09T16:53:00Z",
+  "s": "The crew ran one more round of the ball-machine puzzle test, landing 12 of 50 runs and learning only the ball needs slowing; the tower checked in six times and took no calls.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-09T15:53:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-09T14:53:00Z",
+  "s": "The crew polished the wheel turbine design five times this hour, from blade shape to a check against a real photo, then ran all five designs through the shop with a deck and PDF; the tower checked in five times with zero calls.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-09T13:53:00Z",
+  "s": "The crew wrote a step-by-step guide for turning an aluminum wheel part in the virtual machine shop, added cutter rules and quality gates, refreshed the weekly marketing numbers, and the tower checked in six times with zero calls.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-09T12:53:00Z",
+  "s": "The crew reshaped the wheel designs six times this hour, matching blades to reference photos, drilling clean lug holes and switching to a machine-shop style build for all five wheels, while the tower checked in five times with zero calls.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-09T11:53:00Z",
+  "s": "The crew designed four wheels from the parts catalogue instead of guessing from scans, added hub, ring and valve shapes, refreshed the wheel deck, wrote last night's recap, and the tower checked in six times with zero calls.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-09T10:53:00Z",
+  "s": "The crew upgraded the wheel tools to level scans, shape wheel crowns and check their own work, made a second-try deck on one wheel, and the tower checked in six times with zero calls.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-09T09:53:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in six times and took zero calls.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-09T08:52:00Z",
+  "s": "The crew finished a fourteen-slide deck on what the wheel scans taught us, started stitching several scans into one model, and taught the wheel tools to rotate and shave; the tower checked in five times with zero calls.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-09T07:53:00Z",
+  "s": "The crew built a second version of the wheel-shaping tools, carving spoke patterns from phone scans for three wheels; the tower checked in seven times and took zero calls.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-09T06:53:00Z",
+  "s": "The crew finished a ten-slide deck on shaping wheels from phone depth scans with three new wheel-measuring scripts, and the evening standup crowned a lead computer; the tower checked in five times with zero calls.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-09T05:52:00Z",
+  "s": "One computer filed its evening standup on what it learned; the tower checked in six times and took zero calls.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-09T04:54:00Z",
+  "s": "The crew laid the first brick of a new wheel-design tool, six steps from measuring a wheel to packaging a fresh design, while the tower stayed quiet with zero calls all hour.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-09T03:52:00Z",
+  "s": "The crew mapped out a wheel pack: turning real wheel scans into true-size game wheels, with the wheel list and job order set and a short deck explaining the process; the tower took 0 calls.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-09T02:51:00Z",
+  "s": "Idling: the tower made six quiet rounds with no calls and nothing else moved this hour; road still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-09T01:51:00Z",
+  "s": "Idling: the tower made six quiet rounds with no calls and nothing else moved this hour; road still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-09T00:52:00Z",
+  "s": "Something moved: two wheel scans were sliced into flat face and rim images with a ticket handed to the next bot, and the tower made five quiet rounds with no calls; road still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-08T23:52:00Z",
+  "s": "Something moved: the contraption side experiment finished another batch of test runs (6 of 25 passing with gentler wind gusts), and the tower made six quiet rounds with no calls; road still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-08T22:52:00Z",
+  "s": "Idling: the tower made six quiet rounds and took no calls, and no Board steps moved this hour; road still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-08T21:52:00Z",
+  "s": "Idling: the tower made six quiet rounds and took no calls, and no Board steps moved this hour; road still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-08T20:52:00Z",
+  "s": "Idling: the tower made six quiet rounds and took no calls, and no Board steps moved this hour; road still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-08T19:51:00Z",
+  "s": "Idling: the tower made six quiet rounds and took no calls, and no Board steps moved this hour; road still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-08T18:52:00Z",
+  "s": "Idling: the tower made six quiet rounds and took no calls, and no Board steps moved this hour; road still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-08T17:52:00Z",
+  "s": "Idling: the tower made six quiet rounds and took no calls, and no Board steps moved this hour; road still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-08T16:52:00Z",
+  "s": "Idling: the tower kept its rounds and took no calls, and no Board steps moved this hour; road still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-08T15:52:00Z",
+  "s": "Something moved: a side experiment on the contraption found that halving its jitter keeps winning on a fresh batch of test runs (5 of 25 versus 1 of 25), and the tower made six quiet rounds with no calls.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-08T14:52:00Z",
+  "s": "Idling: the tower made six quiet rounds and took no calls, and no Board steps moved this hour; road still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-08T13:52:00Z",
+  "s": "Idling: the tower kept its rounds and took no calls, so nothing moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-08T12:52:00Z",
+  "s": "Idling: the tower kept watch every ten minutes and took no calls, so nothing moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-08T11:56:00Z",
+  "s": "A quiet hour: yesterday's nightly recap got written up, the tower made five quiet rounds with no new calls, and no Board steps moved; road still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-08T10:51:00Z",
+  "s": "Something moved: two new doors each got an animated intro, one was swapped out within minutes for a hands-on demo of doing one thing at a time, and the tower made six quiet rounds; road still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-08T09:53:00Z",
+  "s": "Something moved: the little red bot got a working demo and two new looks at 99 cents a deck, a sister brand got its own enterprise offer, one page went up and back down, and the tower stayed quiet; road at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-08T08:52:00Z",
+  "s": "Something moved: one new door got its full scripted home page beat by beat, another got its first working demo, every door now shares one standing line, two pitch decks landed, and the tower made six quiet rounds; the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-08T07:52:00Z",
+  "s": "Something moved: fifteen new doors went up for our domains, one got a real home page with fresh pitch decks behind it, and the tower made six rounds and took one call; the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-08T06:52:00Z",
+  "s": "Something moved: the nightly check-in landed, one computer reported what it learned and was picked to lead the others; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-08T05:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-08T04:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-08T03:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made five rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-08T02:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-08T01:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made five rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-08T00:52:00Z",
+  "s": "The shift ran a 50-case test on puzzle level 47, which solved 1 fresh case versus 2 for level 46, about flat, and fixed its scoring tally; the tower made five rounds with no calls, and the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-07T23:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T22:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made seven rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T21:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T20:52:00Z",
+  "s": "The shift ran a 50-case test on puzzle level 46, which solved 2 fresh cases versus 1 for level 45, about flat; the tower made six rounds with no calls, and the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-07T19:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T18:52:00Z",
+  "s": "The crew wrote today's daily brief, the first since Tuesday, while the tower made six rounds and took no calls; the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-07T17:53:00Z",
+  "s": "Idling: nothing moved this hour; the tower made its rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T16:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T15:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls, and nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T14:52:21Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T13:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T12:52:25Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T11:52:25Z",
+  "s": "Mostly idle: the tower made six rounds and took no calls, and yesterday's nightly recap got written up; the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-07T10:52:01Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T09:52:33Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T08:52:28Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T07:51:00Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T06:52:38Z",
+  "s": "Mostly idle: the tower made seven rounds and took no calls, and last night's crew standup was judged and a new lead computer picked; the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-07T05:52:05Z",
+  "s": "Idling: nothing moved this hour; the tower made five rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T04:52:29Z",
+  "s": "Idling: nothing moved this hour; the tower made five rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T03:52:15Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T02:52:03Z",
+  "s": "Idling: nothing moved this hour; the tower made five rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T01:52:21Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-07T00:52:48Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-06T23:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-06T22:52:03Z",
+  "s": "Idling: nothing moved this hour; the tower made six rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-06T21:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower made its rounds and took no calls, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-06T20:52:48Z",
+  "s": "Idling: nothing moved this hour; the tower checked in every ten minutes and took 0 calls.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-06T19:52:00Z",
+  "s": "The puzzle machine got a new level 42 with a gently tilted landing, while the tower kept its rounds and took no calls; the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-06T18:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-06T17:53:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-06T16:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-06T15:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-06T14:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-06T13:53:00Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-06T12:53:00Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-06T11:52:00Z",
+  "s": "A small step: yesterday's nightly recap got written up, and the tower checked in six times and took no calls; the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-06T10:52:00Z",
+  "s": "Idling: the tower checked in seven times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-06T09:52:00Z",
+  "s": "A small step: the game side project ran one more round of aim tests and lined up the next level; the tower checked in six times and took no calls, and the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-06T08:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-06T07:53:00Z",
+  "s": "Idling: the tower checked in seven times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-06T06:52:00Z",
+  "s": "The nightly red dot standup came in and a lead computer was picked for the day; the tower checked in six times and took no calls, and the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-06T05:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-06T04:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-06T03:52:00Z",
+  "s": "The tower checked in six times and took no calls, and two new slide decks were filed on the shelf; the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-06T02:53:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-06T01:52:00Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-06T00:52:00Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-05T23:52:00Z",
+  "s": "Idling: the tower checked in four times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-05T22:52:00Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-05T21:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-05T20:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-05T19:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-05T18:52:00Z",
+  "s": "Idling: the tower checked in four times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-05T17:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-05T16:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-05T15:52:00Z",
+  "s": "A little movement: 33 new deck files got logged into the records, waiting on their verdicts, while the tower checked in six times and took no calls; the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-05T14:53:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-05T13:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-05T12:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-05T11:52:00Z",
+  "s": "Quiet hour: the nightly recap of yesterday got written up and the tower checked in seven times with no calls; the board held still and the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-05T10:52:00Z",
+  "s": "The test crew ran another batch of fifty trial runs on a new setting and found it no better than the last one, while the tower checked in six times and took no calls.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-05T09:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-05T08:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-05T07:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-05T06:53:00Z",
+  "s": "Quiet hour: the tower checked in seven times and took no calls, and the nightly standup review was filed with no check-ins to judge; the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-05T05:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-05T04:53:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-05T03:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-05T02:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-05T01:51:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-05T00:52:00Z",
+  "s": "The photos-to-3D tool now sends a heartbeat every two minutes so a stall gets caught, a new physics-tuning test ran but wasn't kept, and the tower checked in five times with no calls; the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-04T23:52:00Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-04T22:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-04T21:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-04T20:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-04T19:52:00Z",
+  "s": "Idling: the tower checked in seven times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-04T18:52:12Z",
+  "s": "The shift ran one more test round on the contraption, and the new tweak now stumbles on 1 in 50 fresh cases instead of 4; the tower checked in five times and took no calls.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-04T17:53:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-04T16:52:49Z",
+  "s": "Idling: the tower checked in four times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-04T15:52:55Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-04T14:52:13Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-04T13:52:55Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-04T12:52:58Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-04T11:53:16Z",
+  "s": "The puzzle contraption got its 35th level built and tested, last night's recap was written up, the tower checked in five times with no calls, and the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-04T10:52:26Z",
+  "s": "The night shift finished a test run on puzzle level 34 and moved on to level 35; the tower checked in six times and took no calls, and the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-04T09:52:14Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-04T08:52:00Z",
+  "s": "One safety fix landed: the portal now only accepts secure web links in its settings; the tower checked in six times and took no calls, and the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-04T07:52:16Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-04T06:53:06Z",
+  "s": "Yesterday's standup verdict got filed and a lead computer picked; the tower checked in six times and took no calls, and the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-04T05:52:14Z",
+  "s": "The tower checked in six times with no calls, and one quiet brick landed: 22 decks from yesterday's batch got logged in the deck ledger, waiting on verdicts; the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-04T04:52:50Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-04T03:52:36Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-04T02:52:11Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-04T01:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-04T00:52:24Z",
+  "s": "The tower made six quiet rounds with zero calls, and the contraption bench ran a full 100-run test on level 32: about 5 in 100 solved, so extra laps won't fix it and the next build is lined up.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-03T23:53:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-03T22:53:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-03T21:54:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-03T20:54:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-03T19:55:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-03T18:54:00Z",
+  "s": "Idling: the tower checked in four times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-03T17:56:00Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-03T16:52:00Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-03T15:51:00Z",
+  "s": "The crew wrote today's daily brief that an earlier round missed; the tower checked in six times and took no calls, and the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-03T14:52:00Z",
+  "s": "Idling: the tower checked in every ten minutes with no calls, and nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-03T13:51:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-03T12:51:00Z",
+  "s": "The physics lab ran a 50-run test of a new grip setting, which came out flat, so the next batch is lined up; the tower checked in six times and took no calls, and the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-03T11:51:00Z",
+  "s": "The crew wrote up last night's recap of the day; the tower checked in six times and took no calls, and the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-03T10:51:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-03T09:51:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-03T08:51:00Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-03T07:51:00Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-03T06:51:00Z",
+  "s": "Yesterday's crew standup got its verdict and a new lead was picked; the tower checked in five times and took no calls, and the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-03T05:51:00Z",
+  "s": "Idling: the tower checked in every ten minutes and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-03T04:51:00Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-03T03:51:00Z",
+  "s": "A test round on the lap-limit puzzle finished with no new wins, so that level is frozen and the next one is queued; the tower checked in five times with no calls, and the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-03T02:51:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-03T01:51:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour, and the road is still at step 1.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-03T00:52:00Z",
+  "s": "The garage's 3D studio got five upgrades (lasso cuts, undo and redo, named models with search, material previews), a physics test round finished, and the tower checked in five times with no calls; the road is still at step 1.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-02T23:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls, and spotted one new item for the work queue; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-02T22:51:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-02T21:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-02T20:51:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-02T19:52:00Z",
+  "s": "Idling: the tower checked in seven times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-02T18:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-02T18:01:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-02T17:37:00Z",
+  "s": "Idling: the tower checked in three times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-02T16:39:00Z",
+  "s": "The puzzle machine got a new level 27 with bouncier balls and passed its first test runs, and the tower checked in five times with no calls.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-02T15:16:00Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-02T13:57:00Z",
+  "s": "The weekly marketing refresh landed, pulling fresh numbers for about 800 videos including 8 new ones, and the tower checked in three times with no calls.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-02T12:53:00Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-02T11:53:00Z",
+  "s": "The tower checked in five times and took no calls, and yesterday's nightly recap was written up; nothing else moved this hour.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-02T10:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-02T09:52:00Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-02T08:53:00Z",
+  "s": "The tower checked in five times and took no calls, and three late rows from yesterday's deck batch were logged; nothing else moved this hour.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-02T08:00:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-02T06:53:00Z",
+  "s": "The tower checked in six times and took no calls, and the nightly standup was judged: no dots reported for the seventh night running, so the same small fix is still waiting.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-02T05:51:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-02T04:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-02T03:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-02T02:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-02T01:52:00Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-02T00:51:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-01T23:51:00Z",
+  "s": "Steady work: the tower checked in six times with no calls and logged 90 new video decks from today's clip batch, all waiting on verdicts; the board held still and the road sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-01T22:51:00Z",
+  "s": "A small step: the tower checked in six times with no calls and logged 27 new video decks from today's clip batch, now waiting on verdicts; the board held still and the road sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-01T21:51:00Z",
+  "s": "A small step: the tower checked in five times with no calls and caught up 86 missed records, so today's batch is complete; the board held still and the road sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-01T20:51:00Z",
+  "s": "Idling: the tower checked in four times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-01T19:51:00Z",
+  "s": "A small step: the tower checked in four times with no calls and logged a fresh batch of 100 records; the board held still and the road sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-01T18:51:00Z",
+  "s": "Idling: the tower checked in four times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-01T17:52:00Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-01T16:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-01T15:52:00Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-01T14:52:00Z",
+  "s": "Quiet hour: the tower checked in five times with no calls, and one small fix taught its hourly report to follow the clock change to standard time.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-01T13:51:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-01T12:53:00Z",
+  "s": "Idling: the tower checked in seven times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-01T11:51:00Z",
+  "s": "Last night's recap got written up with fresh notes, while the tower made five quiet rounds and took no calls; the board held still and the road sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-01T10:51:00Z",
+  "s": "Idling: the tower checked in seven times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-01T09:51:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-01T08:52:00Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-01T07:52:00Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-01T06:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-01T05:52:00Z",
+  "s": "A small step: the tower checked in five times and took no calls, and last night's red dot standup got its verdict, with a lead dot picked for the day.",
+  "idle": false
+ },
+ {
+  "t": "2026-11-01T04:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-01T03:52:00Z",
+  "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-01T02:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-01T01:52:00Z",
+  "s": "Idling: the tower checked in four times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-11-01T00:52:00Z",
+  "s": "Idling: the tower checked in six times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-31T23:52:00Z",
+  "s": "A steady hour: the tower checked in six times with no calls and logged 24 new decks with best guesses; the Board didn't move and the road sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-31T22:52:00Z",
+  "s": "The busiest logging hour yet: the tower checked in five times with no calls and logged 43 new decks, including five that earlier rounds had missed; the Board didn't move and the road sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-31T21:52:00Z",
+  "s": "A busy logging hour: the tower checked in six times with no calls and logged 34 new decks; the Board didn't move and the road sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-31T20:51:00Z",
+  "s": "A steady hour: the tower checked in seven times with no calls and logged two new decks; the Board didn't move and the road sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-31T19:51:00Z",
+  "s": "A quiet hour: the tower checked in six times with no calls and logged two new decks; the Board didn't move and the road sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-31T17:51:00Z",
+  "s": "Idling: nothing moved this hour beyond six quiet tower check-ins with no calls; the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-31T16:51:00Z",
+  "s": "Idling: nothing moved this hour beyond five quiet tower check-ins with no calls; the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-31T15:51:00Z",
+  "s": "Idling: nothing moved this hour beyond four quiet tower check-ins with no calls; the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-31T14:51:00Z",
+  "s": "A quiet hour: the tower checked in five times with no calls, and today's morning brief got written; the road sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-31T13:51:00Z",
+  "s": "Idling: nothing moved this hour beyond five quiet tower check-ins with no calls; the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-31T12:51:00Z",
+  "s": "Idling: nothing moved this hour beyond five quiet tower check-ins with no calls; the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-31T11:53:00Z",
+  "s": "A quiet hour: the tower checked in six times with no calls, logged 53 decks rows it had missed earlier this morning, and kept its queue and dyno log current; the road sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-31T10:52:00Z",
+  "s": "The crew wrote up yesterday's nightly recap with new dictionary and training notes, and the tower filled in 87 missed decks rows across five quiet check-ins with no calls; the road sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-31T09:51:00Z",
+  "s": "A quiet hour: the tower checked in six times with no calls and caught up its decks ledger with rows it had missed since midnight; the road sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-31T08:51:00Z",
+  "s": "Idling: nothing moved this hour beyond five quiet tower check-ins with no calls; the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-31T07:51:00Z",
+  "s": "Idling: nothing moved this hour beyond five quiet tower check-ins with no calls; the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-31T06:51:00Z",
+  "s": "Idling: nothing moved this hour beyond six quiet tower check-ins with no calls; the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-31T05:51:00Z",
+  "s": "Last night's red dot standup got its verdict and a new lead dot was picked, while the tower checked in six times with no calls; the road sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-31T04:51:00Z",
+  "s": "Idling: nothing moved this hour beyond six quiet tower check-ins with no calls; the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-31T03:51:00Z",
+  "s": "Idling: nothing moved this hour beyond five quiet tower check-ins with no calls; the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-31T02:51:00Z",
+  "s": "Idling: nothing moved this hour beyond four quiet tower check-ins with no calls; the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-31T01:51:00Z",
+  "s": "The garage game leapt from v2 to v3.0 (idea archery, self-updates, a first-person 3D idea space), the red dot now glides with a tower-only beta, one physics tweak was benched, and the tower checked in six times with no calls.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-31T00:51:00Z",
+  "s": "Four launcher updates landed (help pings reach every dot, daily fleet updates, a smoother live-chat button, verified program opens), posted links now get a safety check, and the tower checked in five times with no calls; the road sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-30T23:52:00Z",
+  "s": "The deck log caught up on 108 entries from the last two days plus one new deck, while the tower checked in five times with no calls; the board held still and the road sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-30T22:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-30T21:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-30T20:52:00Z",
+  "s": "Two new pieces of work landed in the review queue, a storage slim-down and a fresh look for the red buddy card, while the tower checked in five times with no calls and the road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-30T19:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in four times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-30T18:53:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in four times with no calls and the board held still.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-30T17:53:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in six times with no calls and the board held still.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-30T16:53:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in five times with no calls and the board held still.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-30T16:29:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in four times with no calls and the board held still.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-30T15:26:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in six times with no calls and the board held still.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-30T14:21:00Z",
+  "s": "Steady hour: the tower ran four rounds with no radio calls, today's daily brief got written up, the board held still, and the road sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-30T13:18:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in twice with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-30T11:58:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-30T10:52:00Z",
+  "s": "Steady hour: the tower ran six rounds with no radio calls, last night's recap got written up, the board held still, and the road sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-30T09:53:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-30T08:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in five times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-30T07:54:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in seven times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-30T06:54:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-30T05:53:00Z",
+  "s": "Steady hour: the tower ran six rounds with no radio calls, two new cards joined the review queue, last night's standup got its verdict, and the road sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-30T04:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-30T03:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in seven times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-30T02:51:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-30T01:51:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in seven times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-30T00:51:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-29T23:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in five times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-29T22:53:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-29T21:53:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in three times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-29T20:53:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in five times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-29T19:52:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in five times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-29T18:54:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in five times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-29T17:54:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in four times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-29T16:53:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-29T16:07:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in five times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-29T15:07:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-29T14:01:00Z",
+  "s": "Quiet hour: the tower checked in seven times with no calls and wrote up today's brief; the board held still, the site didn't change, and the road sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-29T12:53:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in six times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-29T11:57:00Z",
+  "s": "Idling: nothing moved this hour; the tower checked in five times with no calls, the board held still, and the road sits at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-29T10:54:00Z",
+  "s": "Steady hour: the tower checked in five times with no calls, logged 10 missing decks in the records, and last night's recap got written up; the board held still and the road sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-29T09:53:00Z",
+  "s": "Quiet hour with a finish line: the tower checked in six times with no calls and moved the last 4 old letters into the new mailbox, so that move is done; the board held still and the road sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-29T08:53:00Z",
+  "s": "Quiet hour: the tower checked in six times with no calls and moved 8 more old letters into the new mailbox; the board held still and the road still sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-29T07:53:00Z",
+  "s": "Quiet hour: the tower checked in five times with no calls and moved 8 more old letters into the new mailbox; the board held still and the road still sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-29T06:53:00Z",
+  "s": "Quiet but steady hour: the tower checked in six times with no calls and moved 16 more old letters into the new mailbox; the road still sits at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-29T05:52:00Z",
+  "s": "Steady hour: the tower checked in five times with no calls, quietly moved 20 old letters into the new mailbox, and last night's red dot standup picked its lead dot.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-29T04:52:00Z",
+  "s": "Good hour: the tower took 2 calls, the one-big-spiderweb view of the live board was built for review, a new rule landed that nothing counts as done without proof, and old mail kept moving to the new mailbox.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-29T03:52:00Z",
+  "s": "The tower took 8 calls this hour, and three new jobs landed on the Board: a checklist for setting up crew laptops, a radio that wakes the dispatcher instantly, and one live board showing everything at once.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-29T02:52:00Z",
+  "s": "Busy hour: the tower page now shows an honest status line, drafts of three new company pages and a glitch-art experiment were built for review, old mail kept moving to the new mailbox, and the tower took 9 calls.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-29T01:52:00Z",
+  "s": "Steady hour: the tower took about a dozen calls, found and fixed why the radio looked dead, drafted a crew status page, started a driving-sim learning rig on the Board, and kept moving old mail into the new mailbox.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-29T00:53:00Z",
+  "s": "Busy hour: the tower took 29 calls, rebuilt the first site-maker from its five templates, specced a little red button with a slide deck, and moved seven Board items forward, including a talk portal and a dashcam twin plan.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-28T23:53:00Z",
+  "s": "Huge hour: the tower took about fifty calls, welded a first single pipe from a phone's pile of clips to a ready-to-post draft, grew the deck word dictionary, moved the mailbox onto the business account, and listed all ten domains.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-28T22:53:00Z",
+  "s": "Big hour: the tower took nine calls and shipped a first emoji coder for videos, a deck word dictionary, one home for every deck, a self-writing what-got-built page, and a sorter for dropped files.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-28T21:53:00Z",
+  "s": "The tower took two calls and moved the back-end org plan two steps forward: a private draft of a single go-live switch, plus written alarm levels so problems get the right urgency.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-28T20:53:00Z",
+  "s": "Idling: the tower made five routine rounds and took no calls; it noticed fresh activity on an open proposal, but nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-28T19:53:00Z",
+  "s": "The tower kept its ten-minute watch all hour with no calls, wrote a late daily brief for today, and spotted a new proposed change for the first node build.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-28T18:53:00Z",
+  "s": "Idling: the tower made six routine rounds and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-28T17:54:00Z",
+  "s": "Idling: the tower made seven routine rounds and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-28T16:53:00Z",
+  "s": "Idling: the tower made five routine rounds and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-28T15:53:00Z",
+  "s": "Idling: the tower made five routine rounds and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-28T14:57:00Z",
+  "s": "Idling: the tower checked in on schedule and took no calls, and nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-28T13:58:00Z",
+  "s": "Idling: the tower made seven routine rounds and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-28T12:58:00Z",
+  "s": "Idling: the tower checked in four times and took no calls; nothing else moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-28T11:57:00Z",
+  "s": "Idling: nothing moved this hour beyond the tower's routine rounds, which took no calls; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-28T10:54:00Z",
+  "s": "A small step: last night's recap got written up with yesterday's notes and a few dictionary and training updates, while the tower made five rounds with no calls; road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-28T09:52:00Z",
+  "s": "Idling: the tower made six quiet rounds with no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-28T08:52:00Z",
+  "s": "Idling: the tower made six quiet rounds with no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-28T07:53:00Z",
+  "s": "Idling: nothing moved this hour beyond the tower's six quiet rounds with no calls; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-28T06:53:00Z",
+  "s": "A side project moved: the physics lab cleared a new level, three balls on a jittery swing landing 98 of 100 test runs, while the tower made five rounds with no calls; road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-28T05:52:00Z",
+  "s": "Quiet hour, one small step: yesterday's standup got its verdict written down, and the tower made five rounds with no calls; road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-28T04:52:00Z",
+  "s": "Idling: the tower made five rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-28T03:52:00Z",
+  "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-28T02:52:00Z",
+  "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-28T01:52:00Z",
+  "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-28T00:52:00Z",
+  "s": "Idling: the tower made five rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-27T23:53:00Z",
+  "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-27T22:52:00Z",
+  "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-27T21:52:00Z",
+  "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-27T20:53:00Z",
+  "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-27T19:53:00Z",
+  "s": "Idling: the tower made seven rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-27T18:53:00Z",
+  "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-27T17:54:00Z",
+  "s": "Idling: the tower made five rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-27T16:53:00Z",
+  "s": "Idling: the tower made five rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-27T15:51:00Z",
+  "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-27T14:51:00Z",
+  "s": "Idling: the tower made seven rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-27T13:51:00Z",
+  "s": "Today's morning brief got written up while the tower made seven rounds and took no calls; no Board steps moved, and the road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-27T12:51:00Z",
+  "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-27T11:51:00Z",
+  "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-27T10:51:00Z",
+  "s": "Yesterday's nightly recap got written up, with fresh dictionary and training notes, while the tower made six rounds and took no calls; road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-27T09:51:00Z",
+  "s": "Idling: the tower made six rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-27T08:51:00Z",
+  "s": "Idling: the tower checked in five times and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-27T07:51:00Z",
+  "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-27T06:51:00Z",
+  "s": "Two new decks went up and two older ones got reworked, while the tower made its rounds and took no calls; road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-27T05:51:00Z",
+  "s": "The walkie-talkie now works both ways: the crew sent its first two pings to the radio, a new deck went up and the decks page now lists every deck, and the nightly standup picked a lead; road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-27T04:51:00Z",
+  "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-27T03:51:00Z",
+  "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-27T02:51:00Z",
+  "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-27T01:51:00Z",
+  "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-27T00:52:00Z",
+  "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-26T23:52:00Z",
+  "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-26T22:53:00Z",
+  "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-26T21:53:00Z",
+  "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-26T20:53:00Z",
+  "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-26T19:52:00Z",
+  "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-26T18:53:00Z",
+  "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-26T17:53:00Z",
+  "s": "The site got a new wall page that shows the Captain's posts newest first, opening with the mission; the tower made its rounds with no calls. Road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-26T16:51:00Z",
+  "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-26T15:51:00Z",
+  "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-26T14:51:00Z",
+  "s": "The helper bot shipped version 0.29, now watching links with one shared recipe, and the crew added a safety check for every copy; the tower made its rounds with no calls. Road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-26T13:53:00Z",
+  "s": "Idling: the tower made its rounds and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-26T12:57:00Z",
+  "s": "The weekly marketing refresh landed: a fresh pull of 812 video stats with old data safely backed up, and the tower kept its regular rounds with no calls coming in.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-26T11:53:00Z",
+  "s": "Idling: the tower checked in on schedule and took no calls, and nothing else moved this hour; road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-26T10:53:00Z",
+  "s": "Quiet hour: the tower checked in every ten minutes and took no calls, and last night's recap got written up with a few new words for the dictionary; road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-26T09:53:00Z",
+  "s": "Steady hour: the tower took three calls, every ask now lands as a typed ticket in one queue, a fix for hard-to-find home page links was drafted for review, and the phone text page got a pattern lock; road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-26T08:51:00Z",
+  "s": "Busy hour: the tower took seven radio calls, a simple nightly content cannon got its first build, and four new Board items landed (a footage finder, a welcome video, a pipe-merging plan); road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-26T07:51:00Z",
+  "s": "Busy hour: the tower took five radio calls, the new recipe player got its first recipes, a link-watch line and a crew laptop kit were drafted, and the YouTube north star is written down; the road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-26T06:51:00Z",
+  "s": "Steady hour: the helper app learned to make sounds, two new ideas got drafted (a deadpan ops bot and a timer for how fast the crew acts on a call), and the tower took three calls; road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-26T05:51:00Z",
+  "s": "Busy hour: the helper app shipped three updates (an hours tracker, a link checker that answers with an emoji, and new senses), a car home-screen app got its first build, and the nightly crew check picked a lead; road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-26T04:51:00Z",
+  "s": "Busy hour: the helper app shipped five updates and now reports live status through the site, new computers get an eight-step setup guide, the work queue got sorted, the map grew, and the tower took one call; road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-26T03:51:00Z",
+  "s": "Busy hour: the helper app shipped two updates, a single work queue and a poster board started running quietly in the background, the editing footage got cataloged, two Board items moved, and the tower took 2 calls.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-26T02:51:00Z",
+  "s": "Steady hour: the on-screen bot helper now says hello on first launch and checks daily for updates, the car mod got a slimming script with test results, and a recipe for welcoming new crew was drafted; road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-26T01:52:00Z",
+  "s": "Big hour: the on-screen bot helper can now carry files and mail between crew computers, update itself, advance steps on a click and take orders from the radio; two ideas joined the Board, the tower logged 10 calls; road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-26T00:51:00Z",
+  "s": "The on-screen bot helper shipped five upgrades this hour: its own taskbar icon, a guided step-by-step button, a napping bounce, hopping to the next idle crew computer, and self-updating; the car mod got a fresh inventory, and the road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-25T23:53:00Z",
+  "s": "Busy hour: the on-screen bot helper got three upgrades (a playful look, a draggable speech bubble and a tell-Claude button), six ideas landed on the Board including a one-button co-op, and the tower took 7 calls; road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-25T22:51:00Z",
+  "s": "Quiet hour: the crew handbook gained a short guide for passing files straight between the crew's own computers without the cloud; nothing moved on the Board and the road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-25T21:51:00Z",
+  "s": "Every crew computer now starts from one shared handbook, the purple helper that walks through each click got locked in, a phone-camera idea joined the Board and the tower took 1 call; road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-25T20:51:00Z",
+  "s": "Busy hour: the tower page became a combo-lock vault with a welcome door for new crew, a human-tickets button landed, crew onboarding got tightened, two Board items moved and the tower took 1 call; road still at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-25T19:51:00Z",
+  "s": "The tower took 5 calls, the purple crew button now opens tower text for human tickets and stays on screen on phones, the text bar hides while locked, and four new Board idea plans were added; the road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-25T18:51:00Z",
+  "s": "The tower took 2 calls, the tower can now start talking over Telegram, quick to-do tickets landed on the radio, a hidden draft for booking an hour went up, and three Board plans were added; the road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-25T17:51:00Z",
+  "s": "The tower took 1 call, the tower radio got a new text-thread view on the site, the lean plan's wording was corrected, and new idea notes were written; the road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-25T16:51:00Z",
+  "s": "Idling: nothing moved this hour, and the road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-25T15:51:00Z",
+  "s": "Idling: nothing moved this hour, and the road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-25T14:51:00Z",
+  "s": "Idling: nothing moved this hour, and the road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-25T13:51:00Z",
+  "s": "Idling: nothing moved this hour, and the road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-25T12:51:00Z",
+  "s": "Idling: nothing moved this hour, and the road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-25T11:51:00Z",
+  "s": "Idling: nothing moved this hour, and the road holds at step 2.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-25T10:51:00Z",
+  "s": "Yesterday's nightly recap got written up, along with new dictionary words and training notes; no Board moves or tower calls this hour, and the road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-25T09:51:00Z",
+  "s": "The tower took 9 calls and turned them into five new Board ideas, a rough first browser extension that highlights how messaging works, and a batch of draft social posts; the road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-25T08:51:00Z",
+  "s": "The public site now shows only the bot, a leaner plan puts selling hours first toward the first legal dollar, the bot's script and two new idea notes were written, and the tower took 3 calls; the road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-25T07:51:00Z",
+  "s": "The site gained eight inspiration lines, the bot got its backronym, a nightly bot meeting and an approved-only social posting queue were planned, the tower took 6 calls and moved four Board items; the road holds at step 2.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-25T06:51:00Z",
+  "s": "The goal got pinned down for every bot as an eight-step road to a first legal sale, the content line was set, the tower took 6 calls and added three new ideas to the Board, plus two inspiration lines.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-25T05:52:00Z",
+  "s": "A one-site-per-person website builder took shape with an example page and its own badge, the master plan got written down for every bot, the rulebook and tower guidance each gained a line, plus ten new inspiration lines.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-25T04:51:00Z",
+  "s": "A publishing house for books and music joined the dream list and the Board, the hot-take engine learned to stay undivisive, a branding rule and a dictionary word landed, the tower radar synced, plus three inspiration lines.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-25T03:51:00Z",
+  "s": "Idling: nothing moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-25T02:52:00Z",
+  "s": "The tower took 2 new calls and answered 4, a menu channel for the side project got drafted and is waiting on a yes, two Board items moved forward, and the brand notes grew.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-25T01:52:00Z",
+  "s": "The marketing playbook learned to pick a sound for every video, the hook lab got fresh notes, the tower took 7 calls and answered 5, plus one inspiration line.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-25T00:52:00Z",
+  "s": "The side-project site went live after ten quick versions in an hour, the tower answered a 14-call queue and took 3 new ones, the autopilot map and alarm bell got smarter, plus two inspiration lines.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-24T23:52:00Z",
+  "s": "The new side-project brand got its first private playbook draft, a string of founding ideas written down, and a scroll page now live on the site; the tower radar synced with the Board, plus five inspiration lines.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-24T22:52:00Z",
+  "s": "A new umbrella brand for side projects got its plan, the hook lab found the first three seconds drive views, support tickets and hot-take hooks got drafts, the tower learned to flag unclear calls and took 3, plus two inspiration lines.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-24T21:52:00Z",
+  "s": "A do-it-yourself carspotting editor shipped that runs right on the device, the footage machine finished a full run, the crew rules learned not to apologize for pointing things out, the tower got a lock button and took 5 calls, plus four inspiration lines.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-24T20:52:00Z",
+  "s": "The free encouragement bot got its own pages and a clear name split from the automations under the hood, an autopilot map now shows every bot and how they connect, the tower took 4 calls, and eight inspiration lines were added.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-24T19:52:00Z",
+  "s": "Each crew bot got its own instruction sheet, the control tower learned to keep a running log, a new timeline page now shows the whole flight path from first steps to launch, and one fresh inspiration line was added.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-24T18:52:00Z",
+  "s": "The control tower answered its first radio checks and gained a radar view of the whole Board, the home page became a menu with the games moved to their own gate, inspiration lines were added, and a Board item for helper bubbles opened.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-24T17:52:00Z",
+  "s": "The crew got a master guide to where everything lives, the portal's code moved into the shared records, a members-only control tower page went up on the site, and one new inspiration line was added.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-24T16:52:00Z",
+  "s": "Idling: nothing moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-24T15:52:00Z",
+  "s": "Idling: nothing moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-24T14:52:00Z",
+  "s": "Idling: nothing moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-24T13:52:00Z",
+  "s": "Idling: nothing moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-24T12:51:00Z",
+  "s": "Idling: nothing moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-24T11:51:00Z",
+  "s": "Idling: nothing moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-24T10:52:00Z",
+  "s": "Yesterday's nightly recap was filed, along with a new crew dictionary of working terms, a short training note, and a small illustration marking the day.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-24T09:52:00Z",
+  "s": "A new Board item set up wrapping the site menu and navigation for good, the footage pipeline gained a one-app goal (plug in the phone, get an edited draft ready to post), and one inspiration line was added.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-24T08:52:00Z",
+  "s": "The car screen return got its support chat record saved to the Board, a short nightly note was filed, and ten new inspiration lines joined the site.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-24T07:52:00Z",
+  "s": "The site menu got a brighter sky-to-grass scene, hover-only border glow, old-TV switch transitions and one clean shot per channel tile; on the Board, the car return was approved and a listing layout was settled.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-24T06:52:00Z",
+  "s": "Idling: nothing moved this hour.",
+  "idle": true
+ },
+ {
+  "t": "2026-10-24T05:52:00Z",
+  "s": "The car screen project tested the unit and found it runs older software than advertised, so a return and a better replacement joined the Board; a radio-style home screen mockup went up to try on it.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-24T04:52:00Z",
+  "s": "A new desktop tool can pin any window on top, see-through, for framing shots; the site menu got a tighter grid with drifting clouds and slowly panning photos; the car screen project got a build plan and a local test page.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-24T03:52:00Z",
+  "s": "The footage machine now listens to each clip's sound and checks sharpness; a first desktop app for it shipped with two quick fixes; the site got a carspotting billboard gallery, a bubbly channel-style menu and new inspiration lines; two new plans joined the Board.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-24T02:51:00Z",
+  "s": "The footage machine now reads iPhone photos anywhere, stops flagging screenshots as duplicates and ran its first real sort; a first video editor landed that auto-cuts dead air and filler words; the head unit launcher got a radio-style look.",
+  "idle": false
+ },
+ {
+  "t": "2026-10-24T01:50:00Z",
+  "s": "Built the footage machine's first sorter (it now reads iPhone HEIC photos), moved 12.9 GB of phone footage onto the SSD, scaffolded automated BeamNG crash test videos, read the Saab head unit's specs, and drew the first bubble launcher for its 7-inch screen.",
+  "idle": false
+ }
 ]
