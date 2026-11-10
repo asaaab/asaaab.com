@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-10T05:53:00Z", "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.", "idle": true},
   {"t": "2026-11-10T04:55:46Z", "s": "A busy hour: the tower took three calls and answered each one, a new one-pipe plan for every ticket landed on the Board, the shop saved its base parts, and a one-slide poster got drafted.", "idle": false},
   {"t": "2026-11-10T03:52:00Z", "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.", "idle": true},
   {"t": "2026-11-10T02:52:00Z", "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.", "idle": true},
