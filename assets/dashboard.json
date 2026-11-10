@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-10T03:52:00Z", "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.", "idle": true},
   {"t": "2026-11-10T02:52:00Z", "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.", "idle": true},
   {"t": "2026-11-10T01:52:00Z", "s": "Idling: nothing moved this hour; the tower checked in five times and took no calls.", "idle": true},
   {"t": "2026-11-10T00:53:00Z", "s": "The new red dot 1.1.5 landed on a second computer, the tower answered that call and started a fix so the repo sync can find its tools; the other five check-ins were quiet.", "idle": false},
