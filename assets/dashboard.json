@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-10T15:53:00Z", "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.", "idle": true},
   {"t": "2026-11-10T14:54:00Z", "s": "A quiet hour: today's morning brief got written, and the tower checked in six times and took no calls.", "idle": false},
   {"t": "2026-11-10T13:54:00Z", "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.", "idle": true},
   {"t": "2026-11-10T12:53:00Z", "s": "Idling: nothing moved this hour; the tower checked in five times and took no calls.", "idle": true},
