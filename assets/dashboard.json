@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-10T20:53:00Z", "s": "The tower took 3 calls this hour: two new orders were filed, a test slide deck was built, and a new Board item went up so a quick nudge can wake the crew right away.", "idle": false},
   {"t": "2026-11-10T19:53:00Z", "s": "The test bench ran a fresh experiment: the new \"half\" recipe held up on unseen test runs, winning 13 of 50 against 1 for the default; the tower checked in six times and took no calls.", "idle": false},
   {"t": "2026-11-10T18:53:00Z", "s": "Idling: nothing moved this hour; the tower checked in six times and took no calls.", "idle": true},
   {"t": "2026-11-10T17:53:00Z", "s": "Idling: nothing moved this hour; the tower checked in seven times and took no calls.", "idle": true},
