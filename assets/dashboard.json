@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-11T17:53:00Z", "s": "Idling: nothing moved this hour; the tower checked in six times and took 0 calls, still step 1 on the road.", "idle": true},
   {"t": "2026-11-11T16:53:00Z", "s": "Idling: nothing moved this hour; the tower checked in six times and took 0 calls, still step 1 on the road.", "idle": true},
   {"t": "2026-11-11T15:53:00Z", "s": "Idling: nothing moved this hour; the tower checked in six times and took 0 calls, and we're still on step 1 on the road.", "idle": true},
   {"t": "2026-11-11T14:53:00Z", "s": "Good hour: the tower took 5 calls, the closet bot got a permanent seat on a new seat list, a one-road plan for every bot's mailbox hit the Board, and the structure map ticked a step; still step 1 on the road.", "idle": false},
