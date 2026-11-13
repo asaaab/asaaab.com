@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-13T22:52:00Z", "s": "Idling: the tower made six routine rounds and took no calls, and nothing else moved this hour; still step 1.", "idle": true},
   {"t": "2026-11-13T21:58:00Z", "s": "Idling: the tower made six routine rounds and took no calls, and nothing else moved this hour; still step 1.", "idle": true},
   {"t": "2026-11-13T20:52:00Z", "s": "A quiet hour: the tower made six rounds and took no calls, one delivery receipt came in over the radio and was logged, and nothing on the Board moved; still step 1.", "idle": false},
   {"t": "2026-11-13T19:53:00Z", "s": "A quieter hour: the tower took one call, answered two crew letters with checked receipts, and tightened one crew rule; no Board steps moved, still step 1.", "idle": false},
