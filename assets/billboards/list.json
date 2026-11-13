@@ -1,0 +1,17 @@
+[
+ {
+  "id": "framestack-garbled",
+  "src": "/assets/billboards/framestack-garbled.jpg",
+  "door": "/framestack/"
+ },
+ {
+  "id": "crash-rates",
+  "src": "/assets/billboards/crash-rates.jpg",
+  "door": null
+ },
+ {
+  "id": "nevercirclebackcircle",
+  "src": "/assets/billboards/nevercirclebackcircle.jpg",
+  "door": "/nevercirclebackcircle/"
+ }
+]
