@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-13T10:00:00Z", "s": "Idling: the tower checked in five times and took no calls; nothing else moved this hour, still step 1.", "idle": true},
   {"t": "2026-11-13T08:55:00Z", "s": "The tower made five rounds and took five calls; a new talk-and-watch dream landed on the Board, a bundle of every holiday deck went to the tower computer, and the dictionary learned two words; still step 1.", "idle": false},
   {"t": "2026-11-13T07:55:00Z", "s": "The tower made six rounds and took five calls; a new deck version got logged with its PDF twin, a music job went to the tower computer, and two fix lists now wait for an OK; still step 1.", "idle": false},
   {"t": "2026-11-13T06:53:00Z", "s": "The tower made six rounds and took seven calls; the website builder's first customer got their decks, a new word-forming dream landed on the Board, and the red dots picked yesterday's lead; still step 1.", "idle": false},
