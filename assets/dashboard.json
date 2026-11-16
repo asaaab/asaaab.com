@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-16T03:52:00Z", "s": "Idling: the tower ran six rounds and took no calls, and nothing on the Board moved this hour; still step 1.", "idle": true},
   {"t": "2026-11-16T02:52:00Z", "s": "The tower ran six rounds and took 1 call, filing one new lesson in the crew notes; the Board did not move this hour, so still step 1.", "idle": false},
   {"t": "2026-11-16T01:55:00Z", "s": "The tower ran six rounds and took 1 call: a new dream item opened for talking to one voice while a second assistant works on screen, and the Chromebook item grew to 19 steps with 6 done; still step 1.", "idle": false},
   {"t": "2026-11-16T00:53:00Z", "s": "The tower ran seven rounds and took 3 calls: a first draft of a voice-tone tool got built and tested, and the Chromebook item on the Board grew to 17 steps with 5 done; still step 1.", "idle": false},
