@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-16T11:54:00Z", "s": "The tower ran six quiet rounds with no calls, and last night's recap got written up with new dictionary words and training notes; no Board steps moved; still step 1.", "idle": false},
   {"t": "2026-11-16T10:52:00Z", "s": "Idling: the tower made five quiet rounds and took no calls; nothing else moved this hour.", "idle": true},
   {"t": "2026-11-16T09:52:00Z", "s": "The tower ran six rounds and took 2 calls, both closing notes that were logged without a reply so the back-and-forth stops; no Board steps moved this hour; still step 1.", "idle": false},
   {"t": "2026-11-16T08:52:00Z", "s": "The tower ran six rounds and took 4 calls; a finished deck was filed in the deck ledger, and the middle-manager bot on the Board got a step ticked; still step 1.", "idle": false},
