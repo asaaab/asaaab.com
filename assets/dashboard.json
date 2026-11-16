@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-16T08:52:00Z", "s": "The tower ran six rounds and took 4 calls; a finished deck was filed in the deck ledger, and the middle-manager bot on the Board got a step ticked; still step 1.", "idle": false},
   {"t": "2026-11-16T07:55:00Z", "s": "Idling: the tower made five quiet rounds and took no calls; nothing else moved this hour.", "idle": true},
   {"t": "2026-11-16T06:56:00Z", "s": "The tower ran six rounds and took 1 call, the hydrogen loop item on the Board picked up fresh notes, and last night's red dot standup named its new lead; still step 1.", "idle": false},
   {"t": "2026-11-16T05:52:00Z", "s": "The tower ran six rounds and took 6 calls; a new glean deck item landed on the Board with its first sweep done, and the hydrogen loop and window-to-truth ideas picked up fresh notes; still step 1.", "idle": false},
