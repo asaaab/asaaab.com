@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-17T05:53:00Z", "s": "The tower took four calls this hour: a new helper bot got its first answers and is waiting on a yes, and three fresh slide decks were backed up and logged.", "idle": false},
   {"t": "2026-11-17T04:53:00Z", "s": "Idling: the tower checked in six times and took no calls, so nothing moved this hour.", "idle": true},
   {"t": "2026-11-17T03:53:00Z", "s": "Idling: nothing moved this hour; the tower kept listening and took no calls.", "idle": true},
   {"t": "2026-11-17T02:52:00Z", "s": "Idling: the tower checked in six times and took no calls, so nothing moved this hour.", "idle": true},
