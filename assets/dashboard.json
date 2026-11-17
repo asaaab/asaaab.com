@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-17T04:53:00Z", "s": "Idling: the tower checked in six times and took no calls, so nothing moved this hour.", "idle": true},
   {"t": "2026-11-17T03:53:00Z", "s": "Idling: nothing moved this hour; the tower kept listening and took no calls.", "idle": true},
   {"t": "2026-11-17T02:52:00Z", "s": "Idling: the tower checked in six times and took no calls, so nothing moved this hour.", "idle": true},
   {"t": "2026-11-17T01:52:00Z", "s": "A quiet hour on the radio with no calls, but the engine ran one more tuning test head to head, it came out an exact tie, so the current setting holds.", "idle": false},
