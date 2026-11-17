@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-17T14:52:00Z", "s": "Idling: nothing moved this hour, the tower kept its rounds but took no calls.", "idle": true},
   {"t": "2026-11-17T13:53:00Z", "s": "Idling: nothing moved this hour, the tower stayed quiet with no calls.", "idle": true},
   {"t": "2026-11-17T12:53:00Z", "s": "Busy hour: the tower took 16 calls, two new plans joined the Board (a hydrogen hybrid car build and a way to bottle the second look), its next piece got built, and five Board plans moved forward.", "idle": false},
   {"t": "2026-11-17T11:52:00Z", "s": "Busy hour: the tower took 6 calls, two new plans joined the Board, the launcher and shop-dream plans moved forward, 28 decks were backed up and logged, the dictionary grew, and last night's recap was written.", "idle": false},
