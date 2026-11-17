@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-17T16:52:00Z", "s": "Idling: nothing moved this hour, the tower walked its rounds and took no calls.", "idle": true},
   {"t": "2026-11-17T15:52:00Z", "s": "Idling: nothing moved this hour, the tower made its rounds and took no calls.", "idle": true},
   {"t": "2026-11-17T14:52:00Z", "s": "Idling: nothing moved this hour, the tower kept its rounds but took no calls.", "idle": true},
   {"t": "2026-11-17T13:53:00Z", "s": "Idling: nothing moved this hour, the tower stayed quiet with no calls.", "idle": true},
