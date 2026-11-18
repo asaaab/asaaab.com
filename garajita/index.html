@@ -1,0 +1,190 @@
+<!doctype html>
+<!-- Garajita app v0 (first brick: four-digit PIN + the door rolls up + an empty wall).
+     Order: walkie-talkie TICKET 1UY-O5vJ5UFUhnDV4pBGAH72vGyvJlRFT1mi10L4lEKE; ADD-ON 1 1hP1aXvPlExlU497OfASpMHlRXkjY-NL7o1_mwNN_FXs
+     (sideways = pattern lock, flipped = Casita). Draft by TOWER :01, 2026-11-18. Private. Stage 4 coder.
+     No PIN, pattern, code or password is written in this file: he sets his own on first launch on that device;
+     only a SHA-256 hash is kept there (localStorage). It is a gesture, not a security lock.
+     Never shows a house, street or neighborhood: the door, the wall and the floor only. -->
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>garajita</title>
+<style>
+:root{--wall:#d8cdb8;--wallDark:#c4b79e;--door:#efe6d2;--doorEdge:#d6cab1;--raise:#e6dcc5;--trim:#bfb39a;--ui:#3b342a;--glass:rgba(255,255,255,.28)}
+body.mom{--door:#f7f7f4;--doorEdge:#dcdcd6;--raise:#eeeeea;--trim:#cfcfc8}
+body.casita{--wall:#f2b8c6;--wallDark:#e59bb0;--door:#fff1e6;--doorEdge:#f0cdb9;--raise:#ffe4d3;--trim:#c9627f;--ui:#5a1f33;--glass:rgba(255,230,240,.35)}
+html,body{margin:0;height:100%;overflow:hidden;font-family:system-ui,"Segoe UI",sans-serif;color:var(--ui);touch-action:none;user-select:none;-webkit-user-select:none}
+/* the stucco wall around the opening */
+#stage{position:fixed;inset:0;background:var(--wall);
+ background-image:radial-gradient(rgba(0,0,0,.05) 1px,transparent 1.4px),radial-gradient(rgba(255,255,255,.12) 1px,transparent 1.6px);
+ background-size:7px 7px,11px 11px;background-position:0 0,3px 5px}
+#opening{position:absolute;left:8vw;right:8vw;top:12vh;bottom:0;perspective:900px;perspective-origin:50% 0%;overflow:hidden;
+ box-shadow:0 0 0 1.4vmin var(--trim)}
+body.casita #opening{left:16vw;right:16vw;top:22vh;border-radius:30vmin 30vmin 0 0}
+body.casita #roof{display:block}
+#roof{display:none;position:absolute;left:6vw;right:6vw;top:3vh;height:16vh;background:var(--trim);clip-path:polygon(50% 0,100% 100%,0 100%)}
+/* behind the door: an empty garage wall (boxes come later) */
+#inside{position:absolute;inset:0;background:linear-gradient(#cfc9bf 0 78%,#9e978c 78% 100%)}
+#inside:after{content:"";position:absolute;left:0;right:0;top:78%;height:.6vh;background:rgba(0,0,0,.18)}
+#door{position:absolute;inset:0;transform-style:preserve-3d}
+.panel{position:absolute;left:0;right:0;height:25%;transform-origin:50% 0;background:var(--door);
+ border-bottom:.5vh solid var(--doorEdge);box-sizing:border-box;display:grid;gap:1.2vmin;padding:1.6vmin 1.8vmin;backface-visibility:visible}
+.panel i{background:var(--raise);box-shadow:inset .3vmin .3vmin 0 rgba(255,255,255,.7),inset -.3vmin -.3vmin 0 rgba(0,0,0,.08)}
+.panel.win i{background:linear-gradient(160deg,#a9c3cf,#6f8f9e);box-shadow:inset 0 0 0 .5vmin var(--door)}
+/* the PIN pad: frosted glass layered on top (framestackmaxxing) */
+#pin{position:absolute;left:50%;top:54%;transform:translate(-50%,-50%);padding:2.4vmin 3vmin;border-radius:2.4vmin;
+ background:var(--glass);backdrop-filter:blur(14px) saturate(1.2);-webkit-backdrop-filter:blur(14px);box-shadow:0 1vmin 4vmin rgba(0,0,0,.18);
+ transition:opacity .6s;text-align:center;z-index:4}
+#msg{font-size:max(14px,2.2vmin);margin:0 0 1.4vmin;min-height:1.3em}
+#dots{display:flex;gap:1.6vmin;justify-content:center;margin-bottom:2vmin}
+#dots b{width:2.2vmin;height:2.2vmin;min-width:12px;min-height:12px;border-radius:50%;border:.3vmin solid var(--ui)}
+#dots b.on{background:var(--ui)}
+#keys{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4vmin}
+#keys button{font:inherit;font-size:max(20px,3.6vmin);width:max(56px,10vmin);height:max(56px,10vmin);border-radius:50%;border:0;
+ background:rgba(255,255,255,.55);color:var(--ui);cursor:pointer}
+#keys button.focus{outline:.5vmin solid var(--ui)}
+#keys button:active{background:rgba(255,255,255,.9)}
+/* sideways: the Android pattern lock (phone companion skin) */
+#pattern{display:none;position:fixed;inset:0;background:#0b0b0f;color:#e8e8ee;flex-direction:column;align-items:center;justify-content:center;z-index:6;transition:opacity 1s}
+#pattern h1{font-weight:300;letter-spacing:.2em;font-size:20px;margin:0 0 18px;color:#9ad}
+#pad{width:min(80vw,60vh);height:min(80vw,60vh);touch-action:none}
+#pmsg{margin-top:14px;color:#9ad}
+body.sideways #pattern{display:flex}
+body.sideways #stage{display:none}
+#tag{position:fixed;right:1vmin;bottom:1vmin;font-size:11px;opacity:.45;z-index:9}
+#rooms{position:fixed;left:0;right:0;bottom:12%;display:none;gap:24px;justify-content:center;flex-wrap:wrap;z-index:20}
+#rooms a{display:block;min-width:200px;padding:28px 22px;background:#b8865a;color:#fff8ec;font:700 20px system-ui,sans-serif;text-align:center;text-decoration:none;border-radius:6px;box-shadow:0 8px 0 #7a5530,0 12px 24px rgba(0,0,0,.35)}
+#rooms a:hover,#rooms a:focus{transform:translateY(-3px)}
+</style></head><body>
+<div id="stage"><div id="roof"></div>
+ <div id="opening"><div id="inside"></div><div id="door"></div></div>
+ <div id="pin"><p id="msg"></p><div id="dots"><b></b><b></b><b></b><b></b></div><div id="keys"></div></div>
+</div>
+<div id="pattern"><h1>garajita</h1><canvas id="pad" width="300" height="300"></canvas><div id="pmsg"></div></div>
+<div id="rooms"></div>
+<div id="tag"></div>
+<script>
+// ---------- skins: swappable like real door styles. Add a row, not code. ----------
+const DOORS={
+  his:{cls:'',rows:[['raise',8],['raise',8],['raise',8],['raise',8]]},            // almond/cream double-wide, 4 sections, short raised panels, no windows
+  mom:{cls:'mom',rows:[['win',4],['raise',4],['raise',4],['raise',4]]}            // white carriage style, four-pane window row on top
+};
+// ---------- rooms (ADD-ON 2): the door is just the door; each box on the wall opens a page anywhere on the internet. Add a row, not code. ----------
+// ?to=<url> skips the wall and goes straight there once the door is up. Swap a url when a room moves.
+const ROOMS=[
+  {name:'WMZXX radio',url:'https://asaaab.com/wmzxx/radio/'},   // live once the radio copy-this-code is deployed (waits on his ok)
+  {name:'the booth (voiceover + karaoke)',url:'booth.html'}     // same folder; one page, two modes
+];
+function showRooms(){
+  const to=Q.get('to');if(to){location.href=to;return}
+  const r=document.getElementById('rooms');r.innerHTML='';
+  ROOMS.forEach(x=>{const a=document.createElement('a');a.href=x.url;a.textContent=x.name;r.appendChild(a)});
+  r.style.display='flex';
+}
+const OPEN_SECONDS=9;   // his door takes about 9 s
+const Q=new URLSearchParams(location.search);
+let doorName=Q.get('door')||localStorage.getItem('garajita.door')||'his';
+
+// ---------- posture: laptop = garage, sideways = pattern lock, flipped = Casita ----------
+// A browser can read landscape vs portrait, but not that the Surface Book screen is attached backwards.
+// v0 guess (option a): landscape with no fine pointer (no trackpad/mouse) = flipped. ?skin=garage|pattern|casita overrides.
+function posture(){
+  const forced=Q.get('skin');if(forced)return forced;
+  if(matchMedia('(orientation: portrait)').matches)return 'pattern';
+  if(!matchMedia('(any-pointer: fine)').matches&&matchMedia('(any-pointer: coarse)').matches&&innerWidth>900)return 'casita';
+  return 'garage';
+}
+let skin='';
+function applySkin(){
+  const s=posture();if(s===skin)return;skin=s;
+  document.body.className=(s==='pattern'?'sideways':s==='casita'?'casita':'')+' '+(DOORS[doorName]||DOORS.his).cls;
+  document.getElementById('tag').textContent='garajita v0 · '+s+' · door: '+doorName+(Q.get('skin')?' (forced)':' (guess)');
+  buildDoor();resetDoor();
+}
+addEventListener('resize',applySkin);
+if(screen.orientation)screen.orientation.addEventListener('change',applySkin);
+
+// ---------- the door ----------
+const door=document.getElementById('door');let panels=[];
+function buildDoor(){
+  const d=DOORS[doorName]||DOORS.his;door.innerHTML='';panels=[];
+  d.rows.forEach((r,i)=>{const p=document.createElement('div');p.className='panel'+(r[0]==='win'?' win':'');
+    p.style.gridTemplateColumns='repeat('+r[1]+',1fr)';for(let k=0;k<r[1];k++)p.appendChild(document.createElement('i'));
+    door.appendChild(p);panels.push(p)});
+}
+function setDoor(t){ // t: 0 closed .. 1 open. All four panels roll up together like a train.
+  const H=door.clientHeight,h=H/4;
+  panels.forEach((p,i)=>{
+    const y=i*h-t*H;                       // where this panel's top edge would be
+    if(y>=0){p.style.transform='translateY('+y+'px)';p.style.opacity=1}
+    else{ // past the header: it foreshortens until it is a flat plane on the ceiling track
+      const a=Math.min(90,(-y/h)*90);p.style.transform='translateY(0) rotateX('+(-a)+'deg)';p.style.opacity=a>=89?0:1-a/140}
+  });
+}
+function resetDoor(){setDoor(0)}
+let ac;function motor(sec){ // a stand-in hum; his screen recording has the real opener sound (swap it in later)
+  try{ac=ac||new AudioContext();const o=ac.createOscillator(),g=ac.createGain(),f=ac.createBiquadFilter();
+  o.type='sawtooth';o.frequency.value=58;f.type='lowpass';f.frequency.value=320;g.gain.setValueAtTime(0,ac.currentTime);
+  g.gain.linearRampToValueAtTime(.07,ac.currentTime+.4);g.gain.setValueAtTime(.07,ac.currentTime+sec-.6);g.gain.linearRampToValueAtTime(0,ac.currentTime+sec);
+  o.connect(f).connect(g).connect(ac.destination);o.start();o.stop(ac.currentTime+sec+.1)}catch(e){}
+}
+function openDoor(){
+  const pin=document.getElementById('pin');pin.style.opacity=0;setTimeout(()=>pin.style.display='none',600);
+  const sec=+(Q.get('seconds')||OPEN_SECONDS);motor(sec);const t0=performance.now();
+  (function f(now){const t=Math.min(1,(now-t0)/(sec*1000));setDoor(t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2);if(t<1)requestAnimationFrame(f);else{document.body.dataset.open='1';showRooms()}})(t0);
+}
+
+// ---------- the PIN: first launch he types a new one twice; only a hash stays on this device ----------
+async function hash(tag,v){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('garajita:'+tag+':'+v));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+const PKEY='garajita.pinHash',msg=document.getElementById('msg'),dotEls=[...document.querySelectorAll('#dots b')];
+let entry='',pending=null;
+function say(t){msg.textContent=t}
+function showDots(){dotEls.forEach((d,i)=>d.classList.toggle('on',i<entry.length))}
+async function press(k){
+  if(document.body.dataset.open)return;
+  if(k==='⌫'){entry=entry.slice(0,-1);showDots();return}
+  if(!/^\d$/.test(k)||entry.length>=4)return;
+  entry+=k;showDots();if(entry.length<4)return;
+  const h=await hash('pin',entry);entry='';setTimeout(showDots,180);const saved=localStorage.getItem(PKEY);
+  if(!saved){ if(!pending){pending=h;say('again to set it')} else if(pending===h){localStorage.setItem(PKEY,h);pending=null;say('set');openDoor()} else {pending=null;say('no match. new PIN')} }
+  else if(saved===h){say('');openDoor()} else {say('nope')}
+}
+const keysEl=document.getElementById('keys'),KEYS=['1','2','3','4','5','6','7','8','9','','0','⌫'];let keyBtns=[];
+KEYS.forEach(k=>{const b=document.createElement('button');b.textContent=k;if(!k)b.style.visibility='hidden';
+  b.addEventListener('pointerdown',e=>{e.preventDefault();press(k)});keysEl.appendChild(b);keyBtns.push(b)});
+say(localStorage.getItem(PKEY)?'':'new PIN');
+addEventListener('keydown',e=>{if(/^\d$/.test(e.key))press(e.key);else if(e.key==='Backspace')press('⌫');
+  else if(e.key==='d'||e.key==='D'){doorName=doorName==='his'?'mom':'his';localStorage.setItem('garajita.door',doorName);skin='';applySkin()}
+  else if(e.key==='r'||e.key==='R'){delete document.body.dataset.open;const p=document.getElementById('pin');p.style.display='';p.style.opacity=1;document.getElementById('rooms').style.display='none';resetDoor()}});
+
+// ---------- Xbox controller: d-pad moves, A presses, B deletes ----------
+let focus=4,last={};
+function gp(){const pads=navigator.getGamepads?navigator.getGamepads():[];const g=[...pads].find(Boolean);
+  if(g){const b=i=>g.buttons[i]&&g.buttons[i].pressed,edge=i=>{const v=b(i),was=last[i];last[i]=v;return v&&!was};
+    let r=Math.floor(focus/3),c=focus%3;
+    if(edge(12))r=(r+3)%4;if(edge(13))r=(r+1)%4;if(edge(14))c=(c+2)%3;if(edge(15))c=(c+1)%3;
+    focus=r*3+c;if(!KEYS[focus])focus=10;keyBtns.forEach((k,i)=>k.classList.toggle('focus',i===focus));
+    if(edge(0))press(KEYS[focus]);if(edge(1))press('⌫')}
+  requestAnimationFrame(gp)}
+addEventListener('gamepadconnected',()=>requestAnimationFrame(gp));
+
+// ---------- sideways: Android pattern lock (same pattern as the easel app: draw twice to set, hash only) ----------
+const pad=document.getElementById('pad'),pc=pad.getContext('2d'),pmsg=document.getElementById('pmsg');
+const pd=[];for(let r=0;r<3;r++)for(let c=0;c<3;c++)pd.push({x:50+c*100,y:50+r*100});
+let path=[],down=false,ppending=null;const TKEY='garajita.patternHash';
+function padDraw(){pc.clearRect(0,0,300,300);pc.strokeStyle='#9ad';pc.lineWidth=6;pc.beginPath();
+  path.forEach((i,n)=>{const d=pd[i];n?pc.lineTo(d.x,d.y):pc.moveTo(d.x,d.y)});pc.stroke();
+  pd.forEach((d,i)=>{pc.beginPath();pc.arc(d.x,d.y,path.includes(i)?14:9,0,7);pc.fillStyle=path.includes(i)?'#9ad':'#556';pc.fill()})}
+function hit(e){const b=pad.getBoundingClientRect(),x=(e.clientX-b.left)*300/b.width,y=(e.clientY-b.top)*300/b.height;
+  pd.forEach((d,i)=>{if(Math.hypot(d.x-x,d.y-y)<30&&!path.includes(i))path.push(i)});padDraw()}
+pad.addEventListener('pointerdown',e=>{down=true;path=[];hit(e)});pad.addEventListener('pointermove',e=>{if(down)hit(e)});
+addEventListener('pointerup',async()=>{if(!down)return;down=false;
+  if(path.length<4){pmsg.textContent='connect at least 4 dots';path=[];padDraw();return}
+  const h=await hash('pattern',path.join('-')),saved=localStorage.getItem(TKEY);
+  if(!saved){if(!ppending){ppending=h;pmsg.textContent='again to set it'}else if(ppending===h){localStorage.setItem(TKEY,h);ppending=null;unlockPattern()}else{ppending=null;pmsg.textContent='no match. draw a new one'}}
+  else if(saved===h)unlockPattern();else pmsg.textContent='nope';
+  path=[];padDraw()});
+function unlockPattern(){pmsg.textContent='unlocked';document.body.dataset.open='1';motor(1.2);showRooms()}
+pmsg.textContent=localStorage.getItem(TKEY)?'draw your pattern':'first launch: draw a new pattern';padDraw();
+
+applySkin();
+</script></body></html>
