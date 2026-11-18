@@ -1,0 +1,121 @@
+<!doctype html>
+<!-- talkiewalkie v0: hold the button, talk, let go: it lands on the tower radio as a ticket.
+     Captain 11/18 ~7:45am PT, typed: "this is website app juist hallucinate a walkie talkie at asaaab.com/talkiewalkie".
+     Built by LRB (Claude Code on theosdesktop). Sends to https://pit.asaaab.com/tower/radio (the same pipe as tower text),
+     which writes tower/radio/<time>-<label>.json in pit-crew-data. No code or password is written in this file:
+     he types his radio code once on his phone; it stays in that phone's localStorage only. -->
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111">
+<title>talkiewalkie</title>
+<style>
+:root{--bg:#111214;--panel:#1c1d21;--ink:#f2f2f2;--dim:#9a9aa3;--red:#e53935;--green:#2ecc40;--amber:#ffb300}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:system-ui,"Segoe UI",sans-serif;-webkit-user-select:none;user-select:none}
+main{max-width:480px;margin:0 auto;min-height:100%;display:flex;flex-direction:column;padding:16px 16px calc(16px + env(safe-area-inset-bottom));gap:14px}
+.top{display:flex;justify-content:space-between;align-items:center}
+.top h1{font-size:18px;margin:0;letter-spacing:.08em}
+.led{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--dim)}
+.led b{width:12px;height:12px;border-radius:50%;background:#444;display:inline-block;box-shadow:0 0 0 2px #000 inset}
+.led.on b{background:var(--red);box-shadow:0 0 12px var(--red)}
+.led.ok b{background:var(--green);box-shadow:0 0 10px var(--green)}
+.grille{height:70px;border-radius:14px;background:repeating-linear-gradient(90deg,#26272c 0 6px,#18191c 6px 12px)}
+.screen{background:#0b1f12;color:#7dff9b;font:15px ui-monospace,Consolas,monospace;border-radius:10px;padding:12px;min-height:96px;white-space:pre-wrap;word-break:break-word;-webkit-user-select:text;user-select:text}
+.screen.empty{color:#3f7a50}
+#ptt{flex:1;min-height:200px;border:none;border-radius:28px;background:radial-gradient(circle at 50% 40%,#3a3b42,#222327);color:var(--ink);font-size:22px;font-weight:700;letter-spacing:.1em;box-shadow:0 8px 0 #0a0a0b,0 10px 24px rgba(0,0,0,.6);touch-action:none}
+#ptt.down{background:radial-gradient(circle at 50% 40%,#ff5a55,#b71c1c);transform:translateY(6px);box-shadow:0 2px 0 #0a0a0b}
+.row{display:flex;gap:10px}
+.row button,.row input{flex:1;font:inherit;padding:12px;border-radius:12px;border:1px solid #333;background:var(--panel);color:var(--ink)}
+.row button.go{background:var(--red);border-color:var(--red);font-weight:700}
+textarea{width:100%;min-height:60px;font:15px system-ui;padding:10px;border-radius:12px;border:1px solid #333;background:var(--panel);color:var(--ink);-webkit-user-select:text;user-select:text}
+.log{font-size:12px;color:var(--dim);display:flex;flex-direction:column;gap:4px}
+.log div b{color:var(--ink)}
+.small{font-size:12px;color:var(--dim)}
+#setup{display:none;flex-direction:column;gap:10px}
+</style></head>
+<body><main>
+<div class="top"><h1>TALKIEWALKIE</h1><div class="led" id="led"><b></b><span id="ledt">standby</span></div></div>
+<div class="grille" aria-hidden="true"></div>
+
+<section id="setup">
+  <div class="small">First time on this phone: type your tower radio code. It stays on this phone only.</div>
+  <div class="row"><input id="code" type="password" autocomplete="off" placeholder="radio code"><button class="go" id="save">save</button></div>
+</section>
+
+<div class="screen empty" id="screen">hold the big button and talk.
+let go = it goes to the tower.</div>
+<textarea id="edit" placeholder="or type here" style="display:none"></textarea>
+
+<button id="ptt">HOLD TO TALK</button>
+
+<div class="row">
+  <button id="type">type</button>
+  <button class="go" id="send">send</button>
+</div>
+<div class="row"><button id="auto"></button><button id="forget">change code</button></div>
+<div class="log" id="log"></div>
+<div class="small" id="note"></div>
+</main>
+<script>
+(function(){
+var API="https://pit.asaaab.com/tower/radio";
+function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}catch(e){return null}}
+var $=function(id){return document.getElementById(id)};
+var screen=$("screen"),led=$("led"),ledt=$("ledt"),edit=$("edit"),ptt=$("ptt");
+var auto=ls("tw.auto")!=="0", text="", interim="";
+function setLed(c,t){led.className="led "+(c||"");ledt.textContent=t}
+function show(t){screen.textContent=t||"hold the big button and talk.\nlet go = it goes to the tower.";screen.className="screen"+(t?"":" empty")}
+function paintAuto(){$("auto").textContent=auto?"auto-send: on":"auto-send: off"}
+paintAuto();
+function needCode(){$("setup").style.display=ls("tw.code")?"none":"flex"}
+needCode();
+$("save").onclick=function(){var c=$("code").value.trim();if(!c)return;ls("tw.code",c);$("code").value="";needCode();setLed("ok","code saved")};
+$("forget").onclick=function(){ls("tw.code",null);needCode()};
+$("auto").onclick=function(){auto=!auto;ls("tw.auto",auto?"1":"0");paintAuto()};
+$("type").onclick=function(){var on=edit.style.display==="none";edit.style.display=on?"block":"none";if(on){edit.value=text;edit.focus()}};
+edit.oninput=function(){text=edit.value;show(text)};
+
+function log(line,ok){var d=document.createElement("div");d.innerHTML="<b>"+(ok?"✓":"✗")+"</b> "+new Date().toLocaleTimeString()+" · ";d.appendChild(document.createTextNode(line));$("log").prepend(d)}
+
+function send(){
+  var t=(text||"").trim(); if(!t){setLed("","nothing to send");return}
+  var code=ls("tw.code"); if(!code){needCode();setLed("","needs your code");return}
+  setLed("on","sending…");
+  fetch(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({code:code,text:"WALKIE: "+t})})
+   .then(function(r){return r.json().then(function(j){return{ok:r.ok,j:j}})})
+   .then(function(x){
+     if(x.ok&&x.j.ok){setLed("ok","tower heard you");log(t.slice(0,80),true);text="";edit.value="";show("")}
+     else{setLed("","not sent: "+(x.j.error||"error"));log((x.j.error||"error")+": "+t.slice(0,60),false);if(/code/i.test(x.j.error||""))needCode()}
+   })
+   .catch(function(e){setLed("","no signal: "+e.message);log("no signal, kept on screen: "+t.slice(0,60),false)});
+}
+$("send").onclick=send;
+
+// push to talk: the phone's own speech-to-text (Chrome / Safari). No audio leaves the phone except through the phone's own recognizer.
+var SR=window.SpeechRecognition||window.webkitSpeechRecognition, rec=null, held=false;
+if(!SR){$("note").textContent="This browser has no speech-to-text. Use type + send.";ptt.textContent="NO MIC HERE · TYPE";}
+function start(e){
+  if(e)e.preventDefault(); if(!SR||held)return; held=true; ptt.classList.add("down"); setLed("on","talking");
+  if(navigator.vibrate)navigator.vibrate(30);
+  rec=new SR(); rec.lang="en-US"; rec.continuous=true; rec.interimResults=true;
+  var base=text?text+" ":""; interim="";
+  rec.onresult=function(ev){var fin="",tmp="";for(var i=0;i<ev.results.length;i++){var r=ev.results[i];if(r.isFinal)fin+=r[0].transcript;else tmp+=r[0].transcript}text=(base+fin).trim();interim=tmp;show((text+" "+tmp).trim())};
+  rec.onerror=function(ev){setLed("","mic: "+ev.error)};
+  rec.onend=function(){if(interim){text=(text+" "+interim).trim();interim=""}show(text);if(!held&&auto&&text)send();else if(!held)setLed("","standby")};
+  try{rec.start()}catch(err){setLed("","mic: "+err.message)}
+}
+function stop(e){
+  if(e)e.preventDefault(); if(!held)return; held=false; ptt.classList.remove("down");
+  if(navigator.vibrate)navigator.vibrate([20,40,20]);
+  setLed("on","over…"); try{rec&&rec.stop()}catch(err){}
+}
+ptt.addEventListener("pointerdown",start);
+ptt.addEventListener("pointerup",stop);
+ptt.addEventListener("pointerleave",stop);
+ptt.addEventListener("pointercancel",stop);
+ptt.addEventListener("contextmenu",function(e){e.preventDefault()});
+document.addEventListener("keydown",function(e){if(e.code==="Space"&&e.target.tagName!=="TEXTAREA"&&e.target.tagName!=="INPUT"&&!e.repeat)start(e)});
+document.addEventListener("keyup",function(e){if(e.code==="Space"&&e.target.tagName!=="TEXTAREA"&&e.target.tagName!=="INPUT")stop(e)});
+})();
+</script>
+</body></html>
