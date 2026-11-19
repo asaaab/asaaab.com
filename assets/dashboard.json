@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-19T22:53:00Z", "s": "Idling: the tower made its rounds and took no calls, every check stayed green, and nothing else moved this hour.", "idle": true},
   {"t": "2026-11-19T21:52:00Z", "s": "Idling: the tower made its rounds and took no calls, every check stayed green, and nothing else moved this hour.", "idle": true},
   {"t": "2026-11-19T20:54:00Z", "s": "Idling: the tower made its rounds and took no calls, every check stayed green, and nothing else moved this hour.", "idle": true},
   {"t": "2026-11-19T19:53:00Z", "s": "The tower took one call and answered it, the photo backup job got a first draft copy script and its next step lined up, and one more test batch ran on the physics experiment.", "idle": false},
