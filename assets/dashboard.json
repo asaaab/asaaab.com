@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-20T18:52:00Z", "s": "Idling: the tower made six quiet rounds with no calls, and nothing else moved this hour.", "idle": true},
   {"t": "2026-11-20T17:54:00Z", "s": "Idling: the tower made seven quiet rounds with no calls, and nothing else moved this hour.", "idle": true},
   {"t": "2026-11-20T16:52:00Z", "s": "Idling: the tower made five quiet rounds with no calls, and nothing else moved this hour.", "idle": true},
   {"t": "2026-11-20T15:52:00Z", "s": "The tower made six quiet rounds with no calls, and a side workshop finished one more batch of fifty fresh test runs on its tuning experiment.", "idle": false},
