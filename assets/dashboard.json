@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-20T04:52:00Z", "s": "The tower took one call: a new Board item landed for a one-off hybrid gearbox build, with a first engineering read written up and a reply sent back, and every check stayed green.", "idle": false},
   {"t": "2026-11-20T03:52:00Z", "s": "Idling: the tower made its rounds and took no calls, every check stayed green, and nothing else moved this hour.", "idle": true},
   {"t": "2026-11-20T02:52:00Z", "s": "The tower took one call and answered it: a batch of show-day ideas was folded into a single yes-or-no ticket waiting on a pick, a phone-upload question got its answer, and every check stayed green.", "idle": false},
   {"t": "2026-11-20T01:51:00Z", "s": "The tower took one call: a new Board item landed with a first plan for phone photos to back themselves up to cloud storage, now waiting on three picks, and every check stayed green.", "idle": false},
