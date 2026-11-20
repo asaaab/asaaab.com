@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-20T00:52:00Z", "s": "Idling: the tower made its rounds and took no calls, every check stayed green, and nothing else moved this hour.", "idle": true},
   {"t": "2026-11-19T23:52:00Z", "s": "The tower took one call and answered it: a new version of the hydrogen-car sensor deck was filed and backed up, one more step ticked on the game-launcher first brick, and every check stayed green.", "idle": false},
   {"t": "2026-11-19T22:53:00Z", "s": "Idling: the tower made its rounds and took no calls, every check stayed green, and nothing else moved this hour.", "idle": true},
   {"t": "2026-11-19T21:52:00Z", "s": "Idling: the tower made its rounds and took no calls, every check stayed green, and nothing else moved this hour.", "idle": true},
