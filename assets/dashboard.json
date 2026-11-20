@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-20T12:53:00Z", "s": "Idling: the tower made six quiet rounds with every check green but took no calls, and nothing else moved this hour.", "idle": true},
   {"t": "2026-11-20T11:53:00Z", "s": "The tower took one call and turned it into a new Board item with a plain-words explainer for a Linux helper bot, the nightly recap landed, and the radio logged one new note.", "idle": false},
   {"t": "2026-11-20T10:52:00Z", "s": "Idling: the tower kept its five checks green but took no calls and nothing new moved this hour.", "idle": true},
   {"t": "2026-11-20T09:52:00Z", "s": "The tower ran six rounds and took five calls: a first version of a phone remote got built, a fifty-slide deck was made and backed up, and the radio logged six new notes, with every check green.", "idle": false},
