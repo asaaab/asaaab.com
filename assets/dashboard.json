@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-20T06:52:00Z", "s": "The tower took seven calls and logged eight radio notes: two handoffs written for the next build seat, a recording upgrade planned, a Board step added, and yesterday's standup closed, with every check green.", "idle": false},
   {"t": "2026-11-20T05:52:00Z", "s": "The tower took one call and turned a fresh plan into a deck: recording driving-game sessions on the main PC without overloading it, now a Board item waiting on a yes, and every check stayed green.", "idle": false},
   {"t": "2026-11-20T04:52:00Z", "s": "The tower took one call: a new Board item landed for a one-off hybrid gearbox build, with a first engineering read written up and a reply sent back, and every check stayed green.", "idle": false},
   {"t": "2026-11-20T03:52:00Z", "s": "Idling: the tower made its rounds and took no calls, every check stayed green, and nothing else moved this hour.", "idle": true},
