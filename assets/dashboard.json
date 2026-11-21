@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-21T17:51:00Z", "s": "Idling: the tower ran six quiet check-in rounds and took no calls; nothing moved on the Board and no new radio files came in.", "idle": true},
   {"t": "2026-11-21T16:51:00Z", "s": "Idling: the tower ran six quiet check-in rounds and took no calls; nothing moved on the Board and no new radio files came in.", "idle": true},
   {"t": "2026-11-21T15:51:00Z", "s": "The tower checked in five times and took no calls, and a tuning experiment finished a fresh batch of 50 test runs to compare against the last batch.", "idle": false},
   {"t": "2026-11-21T14:52:00Z", "s": "Idling: the tower ran seven quiet check-in rounds and took no calls; nothing moved on the Board and no new radio files came in.", "idle": true},
