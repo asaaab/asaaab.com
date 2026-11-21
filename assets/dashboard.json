@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-21T08:51:00Z", "s": "The tower took one call this hour, filing the nightly build note and logging two new deck backups; the rest of the hour was quiet check-ins.", "idle": false},
   {"t": "2026-11-21T07:53:00Z", "s": "Idling: the tower checked in every ten minutes, but no calls came in and nothing moved this hour.", "idle": true},
   {"t": "2026-11-21T06:52:00Z", "s": "The tower took two calls this hour, filing old Saab ad research plus notes on a Volvo platform and BeamNG car mods, and the nightly standup picked its lead machine.", "idle": false},
   {"t": "2026-11-21T05:52:00Z", "s": "Busy hour: the tower took ten calls, filing new car-history research and the 9-3X concept into the Board, and the playlist fingerprint idea picked up fresh notes.", "idle": false},
