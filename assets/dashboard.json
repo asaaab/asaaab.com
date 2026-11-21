@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-21T13:52:00Z", "s": "Idling: the tower ran six quiet check-in rounds and took no calls; nothing moved on the Board and no new radio files came in.", "idle": true},
   {"t": "2026-11-21T12:51:00Z", "s": "The tower took one call this hour, adding a new crew rule to the handbook, opening a Board idea to give old electric-car batteries a second life, and rechecking the hydrogen highway math; one new radio file came in.", "idle": false},
   {"t": "2026-11-21T11:51:00Z", "s": "The tower took one call this hour, opening a new Board item for a shared workshop idea with a first-draft plan and cost math; one new radio file came in, last night's recap was written, and the rest were quiet check-ins.", "idle": false},
   {"t": "2026-11-21T10:52:00Z", "s": "The tower took two calls this hour and turned each into a new Board item with a first-draft plan, both waiting for review; two new radio files came in and every other round was a quiet check-in.", "idle": false},
