@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-22T10:52:00Z", "s": "Idling: the tower ran its six routine check-in rounds and took no calls; nothing new landed on the Board or the radio this hour.", "idle": true},
   {"t": "2026-11-22T09:52:00Z", "s": "Idling: the tower ran its five routine check-in rounds and took no calls; nothing new landed on the Board or the radio this hour.", "idle": true},
   {"t": "2026-11-22T08:51:00Z", "s": "A small step: the tower took two calls, a nightly crew report and a follow-up, logged two new rows in the deck ledger, and ran its routine rounds; two new radio files came in, nothing changed on the Board.", "idle": false},
   {"t": "2026-11-22T07:51:00Z", "s": "Idling: the tower ran its six routine check-in rounds and took no calls; nothing new landed on the Board or the radio this hour.", "idle": true},
