@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-22T07:51:00Z", "s": "Idling: the tower ran its six routine check-in rounds and took no calls; nothing new landed on the Board or the radio this hour.", "idle": true},
   {"t": "2026-11-22T06:51:00Z", "s": "Mostly quiet: the tower ran six routine check-in rounds and took no calls, and the crew filed its daily standup verdict; nothing new landed on the Board or the radio this hour.", "idle": false},
   {"t": "2026-11-22T05:51:00Z", "s": "Idling: the tower ran its six routine check-in rounds and took no calls; nothing new landed on the Board or the radio this hour.", "idle": true},
   {"t": "2026-11-22T04:51:00Z", "s": "A quiet but steady hour: the tower ran six check-in rounds and took no calls, while the tech inventory picked up two new reference sheets from the voice helper; no new radio files came in.", "idle": false},
