@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-23T19:52:00Z", "s": "Idling: the tower made four quiet rounds with no calls, and nothing new landed on the Board or the radio this hour.", "idle": true},
   {"t": "2026-11-23T18:52:00Z", "s": "The tower made four quiet rounds with no calls, and one test shift found an even wider contraption setting did worse, clearing 3 of 50 runs, so the middle setting stays best; no Board steps moved.", "idle": false},
   {"t": "2026-11-23T17:52:00Z", "s": "The tower made four quiet rounds with no calls, and one contraption test shift found a wider setting cleared 7 of 50 runs instead of 5; no Board steps moved.", "idle": false},
   {"t": "2026-11-23T16:52:00Z", "s": "Idling: the tower made four quiet rounds with no calls, and nothing new landed on the Board or the radio this hour.", "idle": true},
