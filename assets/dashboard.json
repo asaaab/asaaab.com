@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-23T16:52:00Z", "s": "Idling: the tower made four quiet rounds with no calls, and nothing new landed on the Board or the radio this hour.", "idle": true},
   {"t": "2026-11-23T15:52:00Z", "s": "Idling: the tower made four quiet rounds with no calls, and nothing new landed on the Board or the radio this hour.", "idle": true},
   {"t": "2026-11-23T14:51:00Z", "s": "Idling: the tower made four quiet rounds with no calls, and no Board steps moved this hour.", "idle": true},
   {"t": "2026-11-23T13:51:00Z", "s": "A quiet hour: the tower ran four rounds with no calls, filed one new deck in the ledger, and logged a crew seat accepting its disc changer assignment; no Board steps moved.", "idle": false},
