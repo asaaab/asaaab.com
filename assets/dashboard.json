@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-24T19:52:00Z", "s": "Idling: the tower made its three routine rounds and took no calls; nothing moved this hour.", "idle": true},
   {"t": "2026-11-24T18:52:00Z", "s": "Idling: the tower made its four routine rounds and took no calls; nothing moved this hour.", "idle": true},
   {"t": "2026-11-24T17:52:00Z", "s": "Idling: the tower made its four routine rounds and took no calls; nothing moved this hour.", "idle": true},
   {"t": "2026-11-24T16:52:00Z", "s": "The crew ran one more round of simulation tuning, testing a stronger sway setting across 50 runs (it scored a little below the gentler one), and the tower made its four rounds with no calls.", "idle": false},
