@@ -1,0 +1,53 @@
+# Builds the RVM Scans iPhone app (_lidar-app/) as an unsigned .ipa.
+# Only runs when the app changes, so the asaaab.com site deploy is untouched.
+# Sign and install the .ipa with Sideloadly on Windows.
+name: RVM Scans iPhone app
+
+on:
+  push:
+    paths:
+      - "_lidar-app/**"
+      - ".github/workflows/lidar-app-ipa.yml"
+  pull_request:
+    paths:
+      - "_lidar-app/**"
+      - ".github/workflows/lidar-app-ipa.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: lidar-app-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: macos-15
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: _lidar-app
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate Xcode project
+        run: brew install xcodegen && xcodegen generate
+      - name: Build (unsigned)
+        run: |
+          set -o pipefail
+          xcodebuild -project RVMScans.xcodeproj -scheme RVMScans \
+            -configuration Release -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
+            build | tail -n 60
+      - name: Package .ipa
+        run: |
+          mkdir -p out/Payload
+          cp -R build/Build/Products/Release-iphoneos/RVMScans.app out/Payload/
+          cd out && zip -qry RVMScans.ipa Payload && ls -lh RVMScans.ipa
+      - uses: actions/upload-artifact@v4
+        with:
+          name: RVMScans-ipa
+          path: _lidar-app/out/RVMScans.ipa
+          retention-days: 30
