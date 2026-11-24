@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-24T09:52:00Z", "s": "The tower took 3 calls this hour: a new draft is parked waiting on an OK, two decks got backed up to the shared folder, and every check passed; no Board steps moved.", "idle": false},
   {"t": "2026-11-24T08:53:00Z", "s": "The tower took 1 call this hour: a nightly build report came in and was answered, its follow-up ticket got a clearer first line, and every check passed; no Board steps moved.", "idle": false},
   {"t": "2026-11-24T07:53:00Z", "s": "Idling: the tower made four quiet rounds with no calls, and no Board steps moved this hour.", "idle": true},
   {"t": "2026-11-24T06:52:00Z", "s": "The tower made four quiet rounds with no calls, and the nightly standup verdict was filed picking which computer leads tomorrow; no Board steps moved this hour.", "idle": false},
