@@ -3,6 +3,9 @@
 - think about who you are
 - move your mind
 
+## Updates
+- 2026-11-25: [Radio Free NRG](https://radiofreenrg.com) is on the dial
+
 ## Inspired by
 - The asaaab theme song, by Cole 2K
 - Fifth Gear
