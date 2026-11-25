@@ -1,4 +1,5 @@
 [
+  {"t": "2026-11-25T03:52:00Z", "s": "Idling: the tower made its four routine rounds and took no calls; nothing else moved this hour.", "idle": true},
   {"t": "2026-11-25T02:52:00Z", "s": "Quiet hour: the tower made four routine rounds and took no calls, while one side experiment tried a new recipe on 50 fresh test cases and came out a hair behind the old one.", "idle": false},
   {"t": "2026-11-25T01:52:00Z", "s": "The tower ran four rounds and took one call, which became a new Board plan for a scan-to-simulator RC truck, with its first step (the full chain map) already done and a parts list started.", "idle": false},
   {"t": "2026-11-25T00:52:00Z", "s": "Idling: the tower made its four routine rounds and took no calls; nothing moved this hour.", "idle": true},
