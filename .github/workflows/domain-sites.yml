@@ -1,0 +1,56 @@
+# Publishes each asaaab.com folder as its own GitHub Pages site on its own domain,
+# so e.g. whimzmaxx.com shows whimzmaxx.com in the address bar.
+# asaaab.com stays the one place you edit: push here, every domain updates.
+# Needs one secret: DOMAIN_SITES_TOKEN (classic token, "repo" scope).
+name: Domain sites
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+concurrency: domain-sites
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Sync folders to domain repos
+        env:
+          GH_TOKEN: ${{ secrets.DOMAIN_SITES_TOKEN }}
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          set -u
+          if [ -z "$GH_TOKEN" ]; then echo "::error::Add the DOMAIN_SITES_TOKEN secret first"; exit 1; fi
+          git config --global user.name "asaaab domain sites"
+          git config --global user.email "actions@users.noreply.github.com"
+          fail=0
+          for domain in $(jq -r 'keys[]' domains.json); do
+            folder=$(jq -r --arg d "$domain" '.[$d]' domains.json)
+            [ -d "$folder" ] || { echo "skip $domain: no folder $folder yet"; continue; }
+            echo "::group::$domain <- $folder"
+            if ! gh api "repos/$OWNER/$domain" --silent 2>/dev/null; then
+              gh api user/repos -f name="$domain" -f description="$domain (published from asaaab.com/$folder)" \
+                -F has_issues=false -F has_wiki=false -F has_projects=false --silent || { fail=1; echo "::endgroup::"; continue; }
+            fi
+            out=$(mktemp -d)
+            git clone -q "https://x-access-token:${GH_TOKEN}@github.com/$OWNER/$domain.git" "$out" 2>/dev/null || git -C "$out" init -q -b main
+            git -C "$out" checkout -q -B main
+            find "$out" -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
+            cp -R "$folder"/. "$out"/
+            # links written as /<folder>/... become /... on the domain
+            grep -rlI --include='*.html' --include='*.js' --include='*.css' "/$folder/" "$out" | xargs -r sed -i "s#\([\"'(]\)/$folder/#\1/#g"
+            echo "$domain" > "$out/CNAME"
+            touch "$out/.nojekyll"
+            git -C "$out" add -A
+            if ! git -C "$out" diff --cached --quiet; then
+              git -C "$out" commit -q -m "Sync from asaaab.com/$folder @ ${GITHUB_SHA::7}"
+              git -C "$out" push -q "https://x-access-token:${GH_TOKEN}@github.com/$OWNER/$domain.git" main || fail=1
+            fi
+            if ! gh api "repos/$OWNER/$domain/pages" --silent 2>/dev/null; then
+              gh api -X POST "repos/$OWNER/$domain/pages" -f 'source[branch]=main' -f 'source[path]=/' --silent || fail=1
+            fi
+            gh api -X PUT "repos/$OWNER/$domain/pages" -f cname="$domain" --silent || true
+            # HTTPS can only be enforced once GitHub has issued the certificate (after DNS points here)
+            gh api -X PUT "repos/$OWNER/$domain/pages" -F https_enforced=true --silent 2>/dev/null || echo "HTTPS not ready yet for $domain"
+            echo "::endgroup::"
+          done
+          exit $fail
