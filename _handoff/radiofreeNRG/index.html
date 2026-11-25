@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>radio free NRG</title>
+<meta name="description" content="listen to the humble groan of hydrogen getting fracked">
+<meta property="og:title" content="radio free NRG">
+<meta property="og:description" content="listen to the humble groan of hydrogen getting fracked">
+<meta property="og:url" content="https://radiofreenrg.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;800;900&family=DM+Mono&display=swap">
+<style>
+*{box-sizing:border-box}
+:root{--ink:#0c3550;--soft:#3b6682;--glass:rgba(255,255,255,.74);--red:#e2302f;--red2:#a3141a;--gold1:#ffe08a;--gold2:#e08a00}
+body{margin:0;color:var(--ink);font:500 17px/1.5 "Nunito Sans",system-ui,sans-serif;min-height:100vh;overflow-x:hidden;background:#a9e3ff}
+.sky{position:fixed;inset:0;z-index:-2;background:linear-gradient(180deg,#5cc4ff 0%,#a9e3ff 52%,#e8fbff 78%,#c9f1b0 100%)}
+.hill{position:fixed;z-index:-1;border-radius:50%;opacity:.85}
+a{color:inherit}
+.wrap{max-width:820px;margin:0 auto;padding:0 max(16px,env(safe-area-inset-right)) 80px max(16px,env(safe-area-inset-left))}
+header{text-align:center;padding:56px 0 14px}
+.eyebrow{display:inline-block;padding:6px 14px;border-radius:999px;background:var(--ink);color:#fff;font:800 12px/1 "Nunito Sans";letter-spacing:.14em;text-transform:uppercase;margin-bottom:16px}
+h1{margin:0;font:900 clamp(44px,11vw,96px)/.95 "Nunito Sans",sans-serif;letter-spacing:-.03em;color:#fff;text-shadow:0 4px 0 #0b7cc7,0 10px 24px rgba(6,40,80,.35)}
+h1 b{color:#ffe08a;text-shadow:0 4px 0 var(--gold2),0 10px 24px rgba(6,40,80,.35)}
+.tag{margin:14px auto 0;max-width:40ch;font:600 17px/1.4 "Nunito Sans"}
+.card{position:relative;padding:22px 22px;margin:18px 0;border-radius:28px;background:var(--glass);border:2px solid #fff;box-shadow:0 10px 26px rgba(6,40,80,.18);backdrop-filter:blur(8px)}
+.label{font:800 12px/1 "Nunito Sans";letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin:0 0 12px}
+.q{margin:0;font-style:italic}
+.mono{font:500 13px/1.5 "DM Mono",monospace;color:var(--soft)}
+/* player */
+.player{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.play{width:80px;height:80px;flex:none;border-radius:50%;border:3px solid #fff;cursor:pointer;background:radial-gradient(circle at 35% 28%,#ffb3ad,#ff5a50 30%,var(--red) 60%,var(--red2));box-shadow:inset 0 8px 14px rgba(255,255,255,.4),0 8px 20px rgba(120,10,10,.3);display:grid;place-items:center}
+.play:disabled{cursor:default;filter:grayscale(.75) brightness(1.08)}
+.play svg{width:32px;height:32px;fill:#fff}
+.now{flex:1;min-width:200px}.now b{display:block;font:800 20px/1.2 "Nunito Sans"}
+.state{display:inline-flex;align-items:center;gap:8px;margin-top:6px;font:500 13px/1 "DM Mono",monospace;text-transform:uppercase;letter-spacing:.08em}
+.state i{width:11px;height:11px;border-radius:50%;background:#9fb3c2}
+.state.on i{background:var(--red);box-shadow:0 0 0 4px rgba(226,48,47,.25);animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 9px rgba(226,48,47,.08)}}
+/* board */
+.bingo{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;max-width:520px;margin:0 auto}
+.bingo .h{text-align:center;font:900 22px/1 "Nunito Sans";color:#0b7cc7;padding-bottom:4px}
+.orb{all:unset;aspect-ratio:1;border-radius:50%;cursor:pointer;display:grid;place-items:center;font:500 10px/1 "DM Mono",monospace;color:rgba(12,53,80,.75);
+  background:radial-gradient(circle at 34% 28%,#fff 0,rgba(255,255,255,.7) 22%,rgba(190,228,255,.6) 60%,rgba(120,190,240,.55));box-shadow:inset -4px -8px 14px rgba(0,60,120,.15),0 4px 10px rgba(6,40,80,.15);transition:transform .15s}
+.orb:hover,.orb:focus-visible{transform:scale(1.08)}
+.orb:focus-visible{outline:3px solid #0b7cc7;outline-offset:3px}
+.orb.gold{background:radial-gradient(circle at 34% 28%,#fff8d6 0,var(--gold1) 30%,var(--gold2));color:#5a3300}
+.orb.daubed{background:radial-gradient(circle at 34% 28%,#ffd0cc 0,#ff6a60 30%,var(--red) 62%,var(--red2));color:#fff}
+.orb.free{background:radial-gradient(circle at 34% 28%,#fff 0,#b6ef8a 35%,#5fc934);color:#16450a;font-weight:800}
+.orb.sel{outline:3px solid var(--ink);outline-offset:3px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:center;margin:14px 0 0;font-size:14px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:14px;height:14px;border-radius:50%;display:inline-block}
+.detail{margin-top:14px;padding:12px 14px;border-radius:18px;background:rgba(255,255,255,.8);border:1.5px solid #fff;min-height:3em;overflow-wrap:anywhere}
+.homes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.home{padding:14px 16px;border-radius:22px;background:rgba(255,255,255,.7);border:1.5px solid #fff}
+.home b{display:block;font:900 16px/1.2 "Nunito Sans";letter-spacing:.04em}
+.home .n{font:900 34px/1.1 "Nunito Sans";color:#0b7cc7}
+.home p{margin:4px 0 0;font-size:14px;color:var(--soft)}
+.tank{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.gauge{flex:1;min-width:220px;height:24px;border-radius:999px;border:2px solid #fff;background:rgba(255,255,255,.55);overflow:hidden;box-shadow:inset 0 3px 6px rgba(12,53,80,.15)}
+.gauge i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(180deg,#ff8a80,var(--red) 60%,var(--red2));transition:width .6s}
+.big{font:900 28px/1 "Nunito Sans"}
+.chain{display:inline-flex;align-items:center;gap:8px;font:800 14px/1.2 "Nunito Sans"}
+.chain i{width:12px;height:12px;border-radius:50%;background:#9fb3c2}
+.chain.ok i{background:#2fa84f;box-shadow:0 0 0 4px rgba(47,168,79,.2)}
+.chain.bad i{background:var(--red)}
+.hour{list-style:none;padding:0;margin:0;display:grid;gap:8px}
+.hour li{display:flex;gap:12px;padding:10px 14px;border-radius:16px;background:rgba(255,255,255,.7);border:1.5px solid #fff;font-size:15px}
+.hour span:first-child{font:500 13px/1.6 "DM Mono",monospace;color:var(--soft);min-width:7.5em}
+footer{text-align:center;margin-top:36px;font-size:13px}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:var(--glass);border:2px solid #fff;text-decoration:none;font:800 13px/1 "Nunito Sans"}
+.badge i{width:10px;height:10px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#5cc8ff 45%,#0b7cc7)}
+footer p{margin:12px 0 0}
+@media (max-width:420px){.orb{font-size:8px}.bingo{gap:6px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+/* public-radio homepage pattern, RVM look */
+.top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding:14px 0}
+.top .l{justify-self:start}.top .r{justify-self:end}
+.pill{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;border:2px solid #fff;font:900 14px/1 "Nunito Sans";letter-spacing:.06em;text-transform:uppercase;box-shadow:0 6px 14px rgba(6,40,80,.2)}
+.pill.gold{background:linear-gradient(180deg,var(--gold1),var(--gold2));color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.4)}
+.pill.red{background:radial-gradient(circle at 50% 18%,#ffb3ad,#ff5a50 30%,var(--red) 60%,var(--red2));color:#fff}
+.pill[aria-disabled=true]{filter:grayscale(.6);opacity:.8;cursor:default}
+.logo{font:900 clamp(22px,5vw,34px)/1 "Nunito Sans";letter-spacing:-.02em;color:#fff;text-shadow:0 3px 0 #0b7cc7,0 8px 18px rgba(6,40,80,.3);text-decoration:none;white-space:nowrap}
+.logo b{color:var(--gold1);text-shadow:0 3px 0 var(--gold2),0 8px 18px rgba(6,40,80,.3)}
+nav.row{display:flex;gap:6px 22px;flex-wrap:wrap;justify-content:center;padding:8px 0 4px;font:800 13px/1 "Nunito Sans";letter-spacing:.1em;text-transform:uppercase}
+nav.row a{text-decoration:none;padding:6px 0;border-bottom:2px solid transparent}nav.row a:hover{border-color:var(--ink)}
+.brief{display:grid;grid-template-columns:auto repeat(5,1fr);gap:0;margin:14px 0;border-radius:22px;background:var(--glass);border:2px solid #fff;overflow:hidden}
+.brief .k{display:grid;place-items:center;padding:12px 14px;background:var(--ink);color:#fff;font:900 12px/1.1 "Nunito Sans";letter-spacing:.12em;text-transform:uppercase;text-align:center}
+.brief div.i{padding:12px 14px;border-left:1px solid rgba(12,53,80,.12);font:800 14px/1.3 "Nunito Sans"}
+.brief time{display:block;margin-top:6px;font:500 11px/1 "DM Mono",monospace;color:var(--soft)}
+.heroRow{display:grid;grid-template-columns:1.6fr 1fr;gap:16px;align-items:stretch}
+.hero{margin:0}
+.live{display:flex;flex-direction:column;gap:12px}
+.liveart{aspect-ratio:1.6;border-radius:20px;border:2px solid #fff;background:radial-gradient(circle at 30% 35%,#ffd0cc 0,#ff6a60 14%,var(--red) 26%,transparent 27%),radial-gradient(circle at 68% 62%,#cfeaff 0,#5cc4ff 12%,#0b7cc7 22%,transparent 23%),linear-gradient(180deg,#14324c,#0c2236);position:relative;overflow:hidden}
+.liveart span{position:absolute;left:12px;bottom:10px;font:900 13px/1 "Nunito Sans";letter-spacing:.12em;color:#fff;text-transform:uppercase}
+.badge-on{display:inline-block;padding:4px 9px;border-radius:999px;background:var(--red);color:#fff;font:900 11px/1 "Nunito Sans";letter-spacing:.1em}
+.badge-off{display:inline-block;padding:4px 9px;border-radius:999px;background:#9fb3c2;color:#fff;font:900 11px/1 "Nunito Sans";letter-spacing:.1em}
+.next{font-size:14px;color:var(--soft)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.story{margin:0;display:flex;flex-direction:column;gap:8px}
+.story .art{aspect-ratio:1.7;border-radius:18px;border:2px solid #fff;box-shadow:inset 0 0 20px rgba(0,40,80,.12)}
+.story .cat{font:800 12px/1 "Nunito Sans";letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.story h3{margin:0;font:900 20px/1.2 "Nunito Sans"}
+.story p{margin:0;font-size:15px}
+.dock{position:fixed;left:50%;bottom:12px;transform:translateX(-50%);z-index:5;width:min(820px,calc(100vw - 24px));display:flex;align-items:center;gap:12px;padding:8px 12px 8px 8px;border-radius:999px;background:linear-gradient(180deg,#1d4f7a,#0c3550);color:#fff;border:2px solid #fff;box-shadow:0 12px 30px rgba(6,40,80,.4)}
+.dock .play{width:48px;height:48px;border-width:2px}.dock .play svg{width:22px;height:22px}
+.dock b{font:900 14px/1.1 "Nunito Sans";letter-spacing:.04em}
+.dock .s{font:500 12px/1.2 "DM Mono",monospace;opacity:.85}
+.dock .wave{flex:1;height:26px;min-width:40px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.55) 0 2px,transparent 2px 6px);mask:linear-gradient(180deg,transparent 0 30%,#000 30% 70%,transparent 70%);opacity:.6}
+.dock.on .wave{animation:wave 1s linear infinite;mask:none;opacity:.8;background:repeating-linear-gradient(90deg,rgba(255,255,255,.8) 0 2px,transparent 2px 6px);clip-path:polygon(0 40%,10% 20%,20% 55%,30% 10%,40% 60%,50% 25%,60% 70%,70% 15%,80% 50%,90% 30%,100% 45%,100% 100%,0 100%)}
+@keyframes wave{to{background-position:24px 0}}
+.dock input{width:90px;accent-color:#5cc4ff}
+body{padding-bottom:90px}
+@media (max-width:760px){.brief{grid-template-columns:1fr 1fr}.brief .k{grid-column:1/-1}.brief div.i{border-left:0;border-top:1px solid rgba(12,53,80,.12)}.heroRow{grid-template-columns:1fr}.top{grid-template-columns:auto 1fr auto}.dock input{display:none}}
+@media (max-width:420px){.pill{padding:9px 12px;font-size:12px}.dock .s{display:none}}
+
+.livepill{display:inline-flex;align-items:center;gap:8px;padding:6px 12px 6px 6px;border-radius:999px;background:rgba(255,255,255,.75);border:2px solid #fff;font:800 13px/1 "Nunito Sans";margin:0 auto}
+.livepill .badge-on,.livepill .badge-off{font-size:10px}
+.alert{display:flex;align-items:center;gap:12px;margin:10px 0 0;padding:10px 14px;border-radius:16px;background:linear-gradient(180deg,var(--gold1),#ffc94d);border:2px solid #fff;font:700 14px/1.35 "Nunito Sans"}
+.alert b{font-weight:900;letter-spacing:.1em;text-transform:uppercase;font-size:12px}
+.alert button{all:unset;cursor:pointer;margin-left:auto;font:900 18px/1 system-ui;padding:2px 6px}
+.upnext{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px}
+.show{display:flex;gap:12px;align-items:flex-start;padding:12px;border-radius:20px;background:rgba(255,255,255,.7);border:1.5px solid #fff}
+.show.now{background:#fff;box-shadow:0 0 0 3px var(--red)}
+.show .disc{width:52px;height:52px;flex:none;border-radius:50%;border:2px solid #fff;box-shadow:0 4px 10px rgba(6,40,80,.2)}
+.show time{display:block;font:500 12px/1.3 "DM Mono",monospace;color:var(--soft)}
+.show b{display:block;font:900 15px/1.2 "Nunito Sans";margin:2px 0}
+.show p{margin:0;font-size:13px;color:var(--soft)}
+
+/* lead pattern: clean header, full-bleed hero carousel, bottom player bar, host-bot bubble */
+.hdr{padding:0;text-align:left;position:sticky;top:0;z-index:6;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:2px solid #fff;box-shadow:0 4px 14px rgba(6,40,80,.12)}
+.hdr .in{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:18px;padding:10px max(16px,env(safe-area-inset-right)) 10px max(16px,env(safe-area-inset-left))}
+.hdr .logo{color:var(--ink);text-shadow:none;font-size:24px}.hdr .logo b{color:var(--red);text-shadow:none}
+.hdr nav{display:flex;gap:22px;margin-left:auto;font:800 15px/1 "Nunito Sans"}
+.hdr nav a{text-decoration:none}.hdr nav a:hover{text-decoration:underline}
+.carousel{position:relative;height:min(64vh,520px);min-height:380px;overflow:hidden;border-bottom:2px solid #fff}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity .6s;display:flex;align-items:center;padding:0 clamp(16px,7vw,110px)}
+.slide.on{opacity:1}
+.slide .panel{max-width:600px;padding:26px 28px;border-radius:24px;background:rgba(10,30,48,.78);color:#fff;backdrop-filter:blur(6px)}
+.slide h2{margin:0 0 12px;font:900 clamp(28px,5vw,46px)/1.05 "Nunito Sans";letter-spacing:-.02em}
+.slide p{margin:0 0 18px;font-size:17px}
+.slide .pill{background:linear-gradient(180deg,#ffb3ad,#ff6a60);color:#3a0606;text-transform:none;letter-spacing:0;font-size:16px}
+.arrow{all:unset;cursor:pointer;position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;background:rgba(10,30,48,.55);color:#fff;display:grid;place-items:center;font:900 22px/1 system-ui;z-index:2}
+.arrow.l{left:14px}.arrow.r{right:14px}
+.titles{position:absolute;left:0;right:0;bottom:0;display:flex;gap:28px;overflow-x:auto;padding:14px clamp(16px,7vw,110px);background:linear-gradient(0deg,rgba(10,30,48,.7),transparent);z-index:2;scrollbar-width:none}
+.titles button{all:unset;cursor:pointer;white-space:nowrap;color:rgba(255,255,255,.75);font:800 15px/1 "Nunito Sans";padding-bottom:4px;border-bottom:2px solid transparent}
+.titles button.on{color:#fff;border-color:#fff}
+.bar{position:fixed;left:0;right:0;bottom:0;z-index:7;display:flex;align-items:center;gap:14px;padding:10px max(16px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));background:#fff;border-top:2px solid #e3eef7;box-shadow:0 -6px 20px rgba(6,40,80,.12)}
+.bar .play{width:60px;height:60px}
+.bar .art{width:60px;height:60px;flex:none;border-radius:12px;background:radial-gradient(circle at 32% 36%,#ff8a80 0,var(--red) 22%,transparent 23%),radial-gradient(circle at 70% 64%,#8fdcff 0,#0b7cc7 18%,transparent 19%),linear-gradient(160deg,#14324c,#0c2236);border:2px solid #fff;box-shadow:0 3px 8px rgba(6,40,80,.25)}
+.bar .meta{min-width:0;flex:1}
+.bar .lr{font:900 13px/1 "Nunito Sans";letter-spacing:.06em;color:var(--red)}
+.bar .lr i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--red);margin-right:6px;vertical-align:1px}
+.bar .show{font:600 12px/1.3 "Nunito Sans";letter-spacing:.06em;text-transform:uppercase;color:var(--soft);margin:3px 0 0;padding:0;background:none;border:0;display:block}
+.bar .track{font:800 18px/1.2 "Nunito Sans";white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bar .links{display:flex;gap:18px;align-items:center;font:800 13px/1 "Nunito Sans";letter-spacing:.06em;text-transform:uppercase}
+.bar .links a{text-decoration:none}
+.bar input{width:110px;accent-color:var(--red)}
+.streams{position:fixed;right:16px;bottom:96px;z-index:8;width:min(320px,calc(100vw - 32px));padding:14px;border-radius:20px;background:#fff;box-shadow:0 12px 30px rgba(6,40,80,.3)}
+.streams a{display:block;padding:8px 6px;border-radius:10px;text-decoration:none;font-weight:800}.streams a:hover{background:#eef7ff}
+.streams small{display:block;font-weight:500;color:var(--soft)}
+.host{position:fixed;right:16px;bottom:96px;z-index:7;width:min(320px,calc(100vw - 32px));display:grid;gap:10px}
+.host .msg{padding:14px 16px;border-radius:20px;background:#fff;box-shadow:0 10px 26px rgba(6,40,80,.25)}
+.host .who{display:flex;align-items:center;gap:10px;font:900 15px/1 "Nunito Sans"}
+.host .who i{width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 35% 28%,#fff 0,#ff8a80 18%,var(--red) 52%,var(--red2));flex:none}
+.host .who time{font:500 12px/1 "DM Mono",monospace;color:var(--soft)}
+.host .who button{all:unset;cursor:pointer;margin-left:auto;font:900 18px/1 system-ui;color:var(--soft)}
+.host .msg p{margin:8px 0 0;font-size:15px}
+.host .chat{all:unset;text-align:center;padding:12px;border-radius:999px;background:#ffd8d4;font:800 15px/1 "Nunito Sans";color:var(--ink);opacity:.8}
+body{padding-bottom:100px}
+@media (max-width:760px){.hdr nav{display:none}.bar .links{display:none}.bar input{display:none}.bar .art{display:none}.host{display:none}.streams{bottom:92px}}
+@media (prefers-reduced-motion:reduce){.slide{transition:none}}
+</style>
+</head>
+<body>
+<div class="sky"></div>
+<div class="hill" style="left:-90px;bottom:-170px;width:560px;height:300px;background:radial-gradient(ellipse at 50% 30%,#b6ef8a,#6fcb45 70%)"></div>
+<div class="hill" style="right:-150px;bottom:-200px;width:760px;height:320px;background:radial-gradient(ellipse at 50% 30%,#a6e87a,#5bb83a 70%)"></div>
+
+<header class="hdr"><div class="in">
+  <a class="logo" href="/">radio free <b>NRG</b></a>
+  <nav aria-label="main"><a href="#hour">Schedule</a><a href="#" id="streamsLink">Streams</a><a href="#board">The orb board</a><a href="#chain">The chain</a></nav>
+  <a class="pill gold" href="#" aria-disabled="true" title="the Electron Fund opens soon">pledge</a>
+</div></header>
+
+<section class="carousel" aria-roledescription="carousel" aria-label="stories" id="carousel">
+  <div class="slide on" data-t="On air" style="background:radial-gradient(circle at 70% 40%,#ffd0cc 0,#ff6a60 9%,#e2302f 15%,transparent 15.5%),radial-gradient(circle at 84% 70%,#fff8d6 0,#ffe08a 6%,#e08a00 10%,transparent 10.5%),radial-gradient(circle at 58% 76%,#cfeaff 0,#5cc4ff 5%,#0b7cc7 8%,transparent 8.5%),linear-gradient(180deg,#5cc4ff,#a9e3ff 55%,#c9f1b0)">
+    <div class="panel"><h2>listen to the humble groan of hydrogen getting fracked</h2><p>gulps of fresh air on the internet as we listen to the exhaust burble of the stemloops.</p><a class="pill" href="#onair">Tune in</a></div></div>
+  <div class="slide" style="background:radial-gradient(circle at 72% 45%,#ffd0cc 0,#e2302f 12%,transparent 12.5%),repeating-radial-gradient(circle at 72% 45%,transparent 0 60px,rgba(255,255,255,.25) 60px 62px),linear-gradient(180deg,#a9e3ff,#e8fbff)">
+    <div class="panel"><h2>In play: the bingo card</h2><p>Live and gold orbs. You daub, you push, it shuffles. Every gold one names its one thing.</p><a class="pill" href="#board">See the board</a></div></div>
+  <div class="slide" style="background:linear-gradient(135deg,transparent 55%,rgba(255,255,255,.35) 55% 56%,transparent 56%),radial-gradient(circle at 74% 48%,#cfeaff 0,#5cc4ff 9%,#0b7cc7 15%,transparent 15.5%),linear-gradient(180deg,#0c2236,#1d4f7a)">
+    <div class="panel"><h2>Cold storage: the 5W box</h2><p>Parked orbs, sealed with who, what, when, where, why. Frozen, not gone.</p><a class="pill" href="#board">Check the homes</a></div></div>
+  <div class="slide" style="background:radial-gradient(ellipse at 72% 82%,#f3c16b 0,#e08a00 18%,transparent 18.5%),radial-gradient(ellipse at 58% 40%,#5fc934 0,transparent 9%),radial-gradient(ellipse at 88% 36%,#5fc934 0,transparent 9%),linear-gradient(180deg,#a9e3ff,#c9f1b0)">
+    <div class="panel"><h2>The soup lake</h2><p>Through the internal forest, past the forest lake, into the self-cooking soup, held by coconut trees. Dropped orbs cook back into new asks. The receipt stays.</p><a class="pill" href="#board">Down to the lake</a></div></div>
+  <div class="slide" style="background:repeating-linear-gradient(90deg,rgba(255,255,255,.12) 0 2px,transparent 2px 40px),radial-gradient(circle at 74% 50%,#e9ffd6 0,#2fa84f 12%,transparent 12.5%),linear-gradient(180deg,#14324c,#0c2236)">
+    <div class="panel"><h2>Transparency through obfuscation</h2><p>Anyone can check the chain: every orb's fingerprint, in order, unbroken. What's inside stays private.</p><a class="pill" href="#chain">Check the chain</a></div></div>
+  <button class="arrow l" aria-label="Previous story" id="prev">‹</button><button class="arrow r" aria-label="Next story" id="nxt">›</button>
+  <div class="titles" id="titles"></div>
+</section>
+
+<div class="wrap">
+<div class="alert" role="status"><b>alert</b><span>The stream is warming up on the tower. The orb board is live now.</span><button aria-label="Dismiss alert" onclick="this.parentNode.remove()">×</button></div>
+<section class="brief" aria-label="in brief">
+  <span class="k">in<br>brief</span>
+  <div class="i">Radio wars: NRG red vs H₂O blue, our two little electrons<time>this week</time></div>
+  <div class="i">One strk = 1 g. Hours in, like hydrogen in a tank<time>11/18</time></div>
+  <div class="i">A flash photo can't catch the Mirai's tank data<time>11/18</time></div>
+  <div class="i">Dropped orbs cook back into new asks<time>11/18</time></div>
+  <div class="i">Hidden in plain traffic<time>always</time></div>
+</section>
+
+<div class="heroRow">
+  <section class="card hero" id="board" aria-labelledby="boardh">
+    <p class="label" id="boardh">the orb board · in play</p>
+    <div class="bingo" id="bingo"><div class="h">B</div><div class="h">I</div><div class="h">N</div><div class="h">G</div><div class="h">O</div></div>
+    <div class="legend">
+      <span><i style="background:var(--red)"></i>daubed</span>
+      <span><i style="background:var(--gold2)"></i>gold, waits on one thing</span>
+      <span><i style="background:#bfe4ff;border:1px solid #fff"></i>live</span>
+      <span><i style="background:#5fc934"></i>free</span>
+    </div>
+    <div class="detail mono" id="detail" aria-live="polite">Tap an orb. You'll see its fingerprint, not what's inside.</div>
+  </section>
+
+  <!-- STREAM: set data-stream to the tower's public stream URL (Liquidsoap / Icecast). Empty = off air. -->
+  <section class="card live" id="onair" data-stream="">
+    <div class="liveart"><span>news flash</span></div>
+    <div><span class="badge-off" id="onbadge">OFF AIR</span></div>
+    <div class="player">
+      <button class="play" id="play" aria-label="Play radio free NRG"><svg id="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+      <div class="now"><b id="title">The stemloops warm up soon</b><span class="state" id="state"><i></i><span id="statetxt">off air</span></span></div>
+    </div>
+    <p class="q" style="margin:0;font-size:15px">“gulps of fresh air on the internet as we listen to the exhaust burble of the stemloops. pro energy capture through turbochargers”</p>
+    <p class="next">Next: the first batch from the tower</p>
+    <audio id="audio" preload="none"></audio>
+  </section>
+</div>
+
+<section class="grid" style="margin-top:18px">
+  <article class="story card"><div class="art" style="background:radial-gradient(circle at 50% 55%,#ffd0cc 0,#ff6a60 18%,#e2302f 32%,transparent 33%),linear-gradient(180deg,#bfeeff,#f6fff0)"></div><span class="cat">in play</span><h3>You daub, you push, it shuffles</h3><p>Live and gold orbs on the bingo card. <b id="nplay">0</b> in play right now.</p></article>
+  <article class="story card"><div class="art" style="background:linear-gradient(135deg,transparent 40%,#fff 40% 44%,transparent 44%),radial-gradient(circle at 50% 50%,#cfeaff 0,#5cc4ff 22%,#0b7cc7 36%,transparent 37%),linear-gradient(180deg,#0c2236,#1d4f7a)"></div><span class="cat">cold storage</span><h3>The 5W box: frozen, not gone</h3><p>Parked orbs, sealed with who, what, when, where, why. <b id="ncold">0</b> sealed.</p></article>
+  <article class="story card"><div class="art" style="background:radial-gradient(ellipse at 50% 80%,#f3c16b 0,#e08a00 30%,transparent 31%),radial-gradient(ellipse at 15% 30%,#5fc934 0,transparent 12%),radial-gradient(ellipse at 85% 30%,#5fc934 0,transparent 12%),linear-gradient(180deg,#a9e3ff,#c9f1b0)"></div><span class="cat">the soup lake</span><h3>Anti-orbs, “disposal”</h3><p>Past the forest lake, into the self-cooking soup, held by coconut trees. The receipt stays. <b id="nsoup">0</b> cooking.</p></article>
+</section>
+
+<div class="heroRow" style="margin-top:2px">
+  <section class="card">
+    <p class="label">H₂ stored labor</p>
+    <div class="tank"><span class="big" id="grams">0 g</span><div class="gauge" role="img" id="gaugeimg" aria-label="stored labor"><i id="gauge"></i></div></div>
+    <p class="mono" style="margin:10px 0 0">Hours in, like hydrogen in a tank. One strk = 1 g. Here, one daubed orb counts as one strk.</p>
+  </section>
+  <section class="card" id="chain">
+    <p class="label">transparency through obfuscation</p>
+    <p style="margin:0 0 10px;font-size:15px">Anyone can check the chain. What's inside stays private. The fingerprint proves it existed without showing it.</p>
+    <span class="chain" id="chainbadge"><i></i><span id="chaintxt">checking the chain in your browser…</span></span>
+    <p class="mono" style="margin:10px 0 0">sha-256(previous + sealed contents + time) · <a href="orbs.json">orbs.json</a></p>
+  </section>
+</div>
+
+<section class="card" id="hour">
+  <p class="label">radio schedule · up next</p>
+  <div class="upnext" id="upnext"></div>
+  <p class="mono" style="margin:12px 0 0">Each station's hour is a clump to manage. Times are yours, from your clock.</p>
+</section>
+
+<footer>
+  <a class="badge" href="https://asaaab.com/"><i></i> made with asaaab website builder</a>
+  <p>sister station <a href="https://radiofreeh2oh.org/">radiofreeh2oh.org</a> · <a href="https://asaaab.com/manual/">the co-owner's manual</a></p>
+</footer>
+</div>
+
+<div class="host" id="host">
+  <div class="msg"><div class="who"><i></i>LRB<time id="hosttime"></time><button aria-label="Close" onclick="document.getElementById('host').remove()">×</button></div>
+  <p>The board is live. Tap an orb: you'll see its fingerprint, not what's inside.</p></div>
+  <span class="chat" aria-disabled="true">Live community chat opens soon</span>
+</div>
+<div class="streams" id="streams" hidden>
+  <a href="/">radio free NRG<small>news flash · you're here</small></a>
+  <a href="https://radiofreeh2oh.org/">radio free H₂O<small>steel drums</small></a>
+  <a href="https://asaaab.com/radio-89d454e5/">asaaab radio<small>on asaaab.com</small></a>
+</div>
+<div class="bar" id="dock" aria-label="player">
+  <button class="play" id="play2" aria-label="Play radio free NRG"><svg id="ico2" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>
+  <span class="art" aria-hidden="true"></span>
+  <div class="meta"><div class="lr"><i></i>LIVE RADIO</div><span class="show" id="barshow">news flash</span><div class="track" id="dockstate">off air</div></div>
+  <div class="links"><a href="#hour">Playlist</a><a href="#" id="moreStreams">More streams</a></div>
+  <input type="range" id="vol" min="0" max="1" step="0.01" value="0.9" aria-label="Volume">
+</div>
+<script>
+(function(){ // one player, three buttons
+  var card=document.getElementById('onair'),src=(card.dataset.stream||'').trim(),a=document.getElementById('audio');
+  var btns=[document.getElementById('play'),document.getElementById('play2')],icos=[document.getElementById('ico'),document.getElementById('ico2')];
+  var st=document.getElementById('state'),stt=document.getElementById('statetxt'),ds=document.getElementById('dockstate'),dock=document.getElementById('dock'),badge=document.getElementById('onbadge');
+  function set(on,t){st.classList.toggle('on',on);dock.classList.toggle('on',on);stt.textContent=t;ds.textContent=t;
+    badge.className=on?'badge-on':'badge-off';badge.textContent=on?'ON AIR':(src?'LIVE STREAM':'OFF AIR');
+    icos.forEach(function(i){i.innerHTML=on?'<path d="M7 6h4v12H7zM13 6h4v12h-4z"/>':'<path d="M8 5v14l11-7z"/>'});}
+  document.getElementById('vol').oninput=function(){a.volume=this.value};
+  function toggle(){ if(!src) return; if(!a.paused){a.pause();a.removeAttribute('src');a.load();set(false,'tap to listen');return;}
+    a.src=src+(src.indexOf('?')<0?'?':'&')+'t='+Date.now();set(false,'tuning…');
+    a.play().then(function(){set(true,'live')}).catch(function(){set(false,'off air right now')}); }
+  
+  if(!src){btns.forEach(function(b){b.disabled=true});set(false,'off air · stemloops warming up');return;}
+  document.getElementById('title').textContent='Live from the tower';set(false,'tap to listen');
+  btns.forEach(function(b){b.onclick=toggle});
+})();
+(function(){ // carousel
+  var slides=[...document.querySelectorAll('.slide')],tl=document.getElementById('titles'),i=0,t;
+  slides.forEach(function(sl,k){var b=document.createElement('button');b.textContent=sl.dataset.t||sl.querySelector('h2').textContent.split(':')[0];b.onclick=function(){go(k)};tl.append(b);});
+  function go(k){i=(k+slides.length)%slides.length;slides.forEach(function(s,j){s.classList.toggle('on',j===i);s.setAttribute('aria-hidden',j!==i)});
+    [...tl.children].forEach(function(b,j){b.classList.toggle('on',j===i)});clearTimeout(t);
+    if(!matchMedia('(prefers-reduced-motion: reduce)').matches)t=setTimeout(function(){go(i+1)},8000);}
+  document.getElementById('prev').onclick=function(){go(i-1)};document.getElementById('nxt').onclick=function(){go(i+1)};go(0);
+  var sp=document.getElementById('streams');[document.getElementById('streamsLink'),document.getElementById('moreStreams')].forEach(function(a){a.onclick=function(e){e.preventDefault();sp.hidden=!sp.hidden;var h=document.getElementById('host');if(h)h.hidden=!sp.hidden;}});
+  document.getElementById('hosttime').textContent=new Date().toLocaleTimeString([], {hour:'numeric',minute:'2-digit'});
+})();
+(function(){ // hourly clumps, his words, rotating
+  var shows=[
+    {t:"news flash",d:"central prompt inbox drop topic",c:"radial-gradient(circle at 35% 30%,#ffd0cc,#e2302f 60%,#a3141a)"},
+    {t:"lens flares",d:"each agent processes through their own lens",c:"radial-gradient(circle at 35% 30%,#fff8d6,#ffe08a 35%,#e08a00)"},
+    {t:"the batch",d:"ready to record batch from each perspective",c:"radial-gradient(circle at 35% 30%,#cfeaff,#5cc4ff 40%,#0b7cc7)"},
+    {t:"sound board",d:"reward the most compelling audio",c:"radial-gradient(circle at 35% 30%,#e9ffd6,#b6ef8a 40%,#5fc934)"}];
+  var box=document.getElementById('upnext'),now=new Date(),h0=now.getHours();
+  function fmt(h){var d=new Date(now);d.setHours(h,0,0,0);return d.toLocaleTimeString([], {hour:'numeric'});}
+  for(var k=0;k<4;k++){var h=h0+k,sh=shows[h%shows.length],el=document.createElement('div');el.className='show'+(k?'':' now');
+    el.innerHTML='<span class="disc" style="background:'+sh.c+'"></span><div><time>'+(k?'':'NOW · ')+fmt(h)+' – '+fmt(h+1)+'</time><b></b><p></p></div>';
+    el.querySelector('b').textContent=sh.t;el.querySelector('p').textContent=sh.d;box.append(el);}
+  var cur=shows[h0%shows.length];document.getElementById('barshow').textContent=cur.t+' · '+cur.d;
+  document.querySelector('.liveart span').textContent=cur.t;
+  document.querySelector('.next').textContent='Next: '+shows[(h0+1)%shows.length].t+' at '+fmt(h0+1);
+})();
+(async function(){ // board + chain
+  const hex=async s=>[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s)))].map(b=>b.toString(16).padStart(2,'0')).join('');
+  let data; try{ data=await (await fetch('orbs.json',{cache:'no-store'})).json(); }catch(e){ document.getElementById('chaintxt').textContent='board offline'; return; }
+  const orbs=data.orbs, board=document.getElementById('bingo'), det=document.getElementById('detail');
+  const n=h=>orbs.filter(o=>o.home===h).length;
+  document.getElementById('nplay').textContent=n('play'); document.getElementById('ncold').textContent=n('cold'); document.getElementById('nsoup').textContent=n('soup');
+  const g=orbs.filter(o=>o.state==='daubed'||o.state==='free').length;
+  document.getElementById('grams').textContent=g+' g'; document.getElementById('gauge').style.width=Math.min(100,g/orbs.length*100)+'%';
+  document.getElementById('gaugeimg').setAttribute('aria-label',g+' grams of stored labor out of '+orbs.length);
+  const words={daubed:'daubed',gold:'gold, waits on one thing',live:'live',free:'free space'};
+  orbs.filter(o=>o.home==='play').forEach(o=>{
+    const b=document.createElement('button'); b.className='orb '+o.state; b.textContent=o.state==='free'?'FREE':o.fp.slice(0,4);
+    b.setAttribute('aria-label','orb '+o.n+', '+words[o.state]);
+    b.onclick=()=>{board.querySelectorAll('.sel').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');
+      det.textContent='orb '+o.n+' · '+words[o.state]+' · '+new Date(o.at).toLocaleString()+' · fingerprint '+o.fp;};
+    board.append(b);
+  });
+  let prev='0'.repeat(64), ok=true;
+  for(const o of orbs){ if(o.prev!==prev||await hex(o.prev+o.content+o.at)!==o.fp){ok=false;break;} prev=o.fp; }
+  const c=document.getElementById('chainbadge'); c.classList.add(ok?'ok':'bad');
+  document.getElementById('chaintxt').textContent=ok?('chain unbroken · '+orbs.length+' orbs checked in your browser'):'chain broken: a fingerprint does not match';
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+{
+ "board": "bingo-v0",
+ "source": "asaaab-2026-11-18-bingo-v0 (Drive: cheapdex outputs for site source cores/radiofreeNRG.com)",
+ "rule": "fp = sha256(prev + content + at); content = sha256 of the private orb, never published",
+ "orbs": [
+  {
+   "n": 1,
+   "col": "B",
+   "home": "play",
+   "state": "daubed",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "f62928f9806aac452590db4cca2ee58a1f7612f347a882c45d5a9a910c2f3841",
+   "prev": "0000000000000000000000000000000000000000000000000000000000000000",
+   "fp": "b55e26a42706503f596c35a947963732281ad3f206e26323d1d455e8a80bb638"
+  },
+  {
+   "n": 2,
+   "col": "I",
+   "home": "play",
+   "state": "daubed",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "7fe130d4618b1bf171a3c9a8744f1fe6419623506182d793c0e616af1714af1b",
+   "prev": "b55e26a42706503f596c35a947963732281ad3f206e26323d1d455e8a80bb638",
+   "fp": "46b77f762f8d2371a454b58cc5031d593ffc0359c4555552828181594b29a5c1"
+  },
+  {
+   "n": 3,
+   "col": "N",
+   "home": "play",
+   "state": "daubed",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "77866ad03dc709a9b60a4a86978974d6ff80fdc493f8606b112dc2baa2c3eeba",
+   "prev": "46b77f762f8d2371a454b58cc5031d593ffc0359c4555552828181594b29a5c1",
+   "fp": "dddca6dcac224c0cf10abb0d51ead66bd7d6236a13d1b33f18418940e341e7db"
+  },
+  {
+   "n": 4,
+   "col": "G",
+   "home": "play",
+   "state": "live",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "90457ee712859e4e5616574c82d2897d2f7f2b252641ebe5e13fc2e3520cfe4b",
+   "prev": "dddca6dcac224c0cf10abb0d51ead66bd7d6236a13d1b33f18418940e341e7db",
+   "fp": "1866e081d4876725c2dba889f29100e556c6bae83384b03edfb6da0d1e128257"
+  },
+  {
+   "n": 5,
+   "col": "O",
+   "home": "play",
+   "state": "daubed",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "66d332983ddc6b25b0afedfe830a6404bf64d192a143b3659cf108c1d5a6ecea",
+   "prev": "1866e081d4876725c2dba889f29100e556c6bae83384b03edfb6da0d1e128257",
+   "fp": "2c055d57f1222c314c94edf678f04de3477ba1cb98864656beff2974f7f74fe6"
+  },
+  {
+   "n": 6,
+   "col": "B",
+   "home": "play",
+   "state": "daubed",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "cfe031702702d75b6c798331870a36558c07855174803599c5ad0b4b8cdeefd1",
+   "prev": "2c055d57f1222c314c94edf678f04de3477ba1cb98864656beff2974f7f74fe6",
+   "fp": "eceff610cc24feebfd8b4a82e954227a2c3ae68c91f410b75632a7e79b22d88c"
+  },
+  {
+   "n": 7,
+   "col": "I",
+   "home": "play",
+   "state": "daubed",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "03cc7f552a91a7086b0108e5ace1a19ecd7938518f298781f95917419530b44a",
+   "prev": "eceff610cc24feebfd8b4a82e954227a2c3ae68c91f410b75632a7e79b22d88c",
+   "fp": "23f2ed9a579584e3e586503e913402adabe0137139b0697cd1ffee0852684ed6"
+  },
+  {
+   "n": 8,
+   "col": "N",
+   "home": "play",
+   "state": "live",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "2327e385485da643782cdcb7dd99e2f2f0e15453d15106aae472dabad67aaea1",
+   "prev": "23f2ed9a579584e3e586503e913402adabe0137139b0697cd1ffee0852684ed6",
+   "fp": "6c251b624954bf5e7d17d3944c6886e4d542bf9b72d6ab14efe47531172a39eb"
+  },
+  {
+   "n": 9,
+   "col": "G",
+   "home": "play",
+   "state": "daubed",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "2142c7c2cff3a7a5b093c9e98ec90a7623b9732ac37b2a910f00a8ac639a6eb6",
+   "prev": "6c251b624954bf5e7d17d3944c6886e4d542bf9b72d6ab14efe47531172a39eb",
+   "fp": "5004ccaa8c7bf71502d1d3ae772deafbbedf67523fe1a9bd8a598c73bbff47a3"
+  },
+  {
+   "n": 10,
+   "col": "O",
+   "home": "play",
+   "state": "daubed",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "39446ce43a8836b3442af13a562271990f3cc47b347e0beca4715c3674f2ae46",
+   "prev": "5004ccaa8c7bf71502d1d3ae772deafbbedf67523fe1a9bd8a598c73bbff47a3",
+   "fp": "6c89c49b6787a4baf2526a48ecf8a3854a52d04b1bfdc6837febe6f505fa77b0"
+  },
+  {
+   "n": 11,
+   "col": "B",
+   "home": "play",
+   "state": "gold",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "91f7fbeb281182982071e11c5966be024f77b9038203554d3856fa7f3a5b9758",
+   "prev": "6c89c49b6787a4baf2526a48ecf8a3854a52d04b1bfdc6837febe6f505fa77b0",
+   "fp": "f4ec2578b56c164d2369737f902804bbb974714c10f5b2f901f8f6f079850d56"
+  },
+  {
+   "n": 12,
+   "col": "I",
+   "home": "play",
+   "state": "gold",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "0f04259a31b10485efb9f764c2263eea4bc69f86432073492d897ebae3d31c7f",
+   "prev": "f4ec2578b56c164d2369737f902804bbb974714c10f5b2f901f8f6f079850d56",
+   "fp": "a849a59301c45d3b38941e8471f13c48b47029385e66345a937409977c6c1820"
+  },
+  {
+   "n": 13,
+   "col": "N",
+   "home": "play",
+   "state": "free",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "fbce7b3415667cbd9a4d2f6304a418b0fcea4174f3e227647203827c50c3aac6",
+   "prev": "a849a59301c45d3b38941e8471f13c48b47029385e66345a937409977c6c1820",
+   "fp": "7375ef8ff57f378423046a3b113c0e20f7e0cd471e4ec0aa553479ffe573d6ee"
+  },
+  {
+   "n": 14,
+   "col": "G",
+   "home": "play",
+   "state": "gold",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "c004594b9b003f67061b39409824434559f771b1da42999dcc5d19d6eb8b5fc6",
+   "prev": "7375ef8ff57f378423046a3b113c0e20f7e0cd471e4ec0aa553479ffe573d6ee",
+   "fp": "599ae86f1929c11df68676b67e5c30648df7979ec601914a1c6148ecca2c4637"
+  },
+  {
+   "n": 15,
+   "col": "O",
+   "home": "play",
+   "state": "gold",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "9ab6b27484fee3e67c756ab5478fc4ab5df73ba8e5273f29537ee5d9fc03da62",
+   "prev": "599ae86f1929c11df68676b67e5c30648df7979ec601914a1c6148ecca2c4637",
+   "fp": "537e4502509d3184244a49abf6cdf65ec6a20cf5f3d6695706b0c1d63fa22cfd"
+  },
+  {
+   "n": 16,
+   "col": "B",
+   "home": "play",
+   "state": "gold",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "07fec0db3a5ee2c339acd8b2879c931c420a8ffe8378c14f77aae3d2c91501f7",
+   "prev": "537e4502509d3184244a49abf6cdf65ec6a20cf5f3d6695706b0c1d63fa22cfd",
+   "fp": "076f520c19795eee87fbb0842d6085da91f265a5ae28fc2d41ed311c0b0b5e45"
+  },
+  {
+   "n": 17,
+   "col": "I",
+   "home": "play",
+   "state": "gold",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "57514474b130365271a52308db87fa71d78855fbd39dfd70b504c8ac7e0e5538",
+   "prev": "076f520c19795eee87fbb0842d6085da91f265a5ae28fc2d41ed311c0b0b5e45",
+   "fp": "6625558a00ffe5d65f20e9bd82812ac79285abc22f08e0ca5d079fa0bf9bd227"
+  },
+  {
+   "n": 18,
+   "col": "N",
+   "home": "play",
+   "state": "gold",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "46f01831d618ab5d68f6ed53b269c67838d733978012b296b07f7693886bfb87",
+   "prev": "6625558a00ffe5d65f20e9bd82812ac79285abc22f08e0ca5d079fa0bf9bd227",
+   "fp": "4ee1274cfea71bf2392d497832d6707b98ea99c14943dc1334457785e2e482b6"
+  },
+  {
+   "n": 19,
+   "col": "G",
+   "home": "play",
+   "state": "gold",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "ce699e284529eabe14078c65bc05fb5ae4615e95558d093a83d1e69ee4a71ebe",
+   "prev": "4ee1274cfea71bf2392d497832d6707b98ea99c14943dc1334457785e2e482b6",
+   "fp": "a25e94cd38b756d19b727dc2d36058f9cbabe46f5d0b3ef427c222586c758574"
+  },
+  {
+   "n": 20,
+   "col": "O",
+   "home": "play",
+   "state": "gold",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "6bc1da4b058c3e6c8cdbf9f6542fd9bc84f5e7d05272bafcdce89b6353efc823",
+   "prev": "a25e94cd38b756d19b727dc2d36058f9cbabe46f5d0b3ef427c222586c758574",
+   "fp": "3f9f971ae3cdd3959bc3d71417482116c7b709897b1008dc74ec890fcc6cc8b8"
+  },
+  {
+   "n": 21,
+   "col": "B",
+   "home": "play",
+   "state": "gold",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "69f145cd2c246e2d697a22e5b3ec86ed954026993218f75ed3bf5fbe2f903872",
+   "prev": "3f9f971ae3cdd3959bc3d71417482116c7b709897b1008dc74ec890fcc6cc8b8",
+   "fp": "248f274d753856fcf554a23152cad1dc6afaca6cd1bf2c6945f3c8ebab39dd8b"
+  },
+  {
+   "n": 22,
+   "col": "I",
+   "home": "play",
+   "state": "daubed",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "1764e3f8e70d8ccb39f944c88026a9135ae536ecce1fba28cb43d6eda50f5ee6",
+   "prev": "248f274d753856fcf554a23152cad1dc6afaca6cd1bf2c6945f3c8ebab39dd8b",
+   "fp": "16ff75983600190623a95b21fd5810399aadce767e241e7201323b4fcedb8621"
+  },
+  {
+   "n": 23,
+   "col": "N",
+   "home": "play",
+   "state": "live",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "8c2772f3abdc5094c55e77b59cf7a1fc7ad31652be7b3cfe87f628f086bc1b88",
+   "prev": "16ff75983600190623a95b21fd5810399aadce767e241e7201323b4fcedb8621",
+   "fp": "0c16d2a21124d06216b478d2fc9580578e73fcca41712deafdacf9c9dc739b87"
+  },
+  {
+   "n": 24,
+   "col": "G",
+   "home": "play",
+   "state": "live",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "a6d753e7e6af11247d09fa338e50abe350094cf7be2440a50396a19ac281dbb3",
+   "prev": "0c16d2a21124d06216b478d2fc9580578e73fcca41712deafdacf9c9dc739b87",
+   "fp": "92a885a2d933e776673564c9687828d776530f9d6e63af95f6fe06712b524c9f"
+  },
+  {
+   "n": 25,
+   "col": "O",
+   "home": "play",
+   "state": "daubed",
+   "at": "2026-11-18T12:26:00-08:00",
+   "content": "ad7bcec4cad1aa7063d73a96965656ed50dbfe28c38d85b623659319bd6340b4",
+   "prev": "92a885a2d933e776673564c9687828d776530f9d6e63af95f6fe06712b524c9f",
+   "fp": "3e9228a4f792d7116c601ab32257614328de520ba767e4da28e60005cf3c2bcc"
+  }
+ ]
+}
