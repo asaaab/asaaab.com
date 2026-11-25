@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radio Free NRG · the Electron Fund</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono&family=Hind:wght@400;600&family=Varela+Round&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0c3550;--ink-soft:#3b6682;--rim:#fff}
+html,body{margin:0;min-height:100%}
+body{background:linear-gradient(180deg,#5cc4ff 0%,#a9e3ff 52%,#e8fbff 78%,#c9f1b0 100%);background-attachment:fixed;color:var(--ink);font-family:"Hind",system-ui,sans-serif}
+main{max-width:860px;margin:0 auto;padding:48px 16px 64px}
+.glass{display:block;background:rgba(255,255,255,.6);border:2px solid #fff;border-radius:32px;padding:28px 24px;box-shadow:0 10px 26px rgba(6,40,80,.18);backdrop-filter:blur(8px)}
+.listen{display:block;text-align:center;margin-top:22px;font-family:"DM Mono",monospace;font-size:13px;color:var(--ink)}
+</style></head><body><main>
+<section class="glass pledge" aria-labelledby="pledgeh" style="--c-ink: var(--ink, #0c3550);">
+  <style>
+    .pledge { font-family: var(--body, "Hind", system-ui, sans-serif); color: var(--ink, #0c3550); }
+    .pledge .mono { font-family: var(--mono, "DM Mono", ui-monospace, monospace); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-soft, #3b6682); }
+    .pledge h2 { font-family: var(--display, "Varela Round", system-ui, sans-serif); font-weight: 400; font-size: 26px; line-height: 1.15; margin: 4px 0 10px; }
+    .pledge p { margin: 0; }
+    .pledge .lede { font-size: 17px; max-width: 60ch; }
+    .pledge .meter { margin: 18px 0 6px; height: 22px; border-radius: 999px; border: 1.5px solid var(--rim, #fff); background: rgba(255,255,255,.55); overflow: hidden; box-shadow: inset 0 3px 6px rgba(12,53,80,.15); }
+    .pledge .meter i { display: block; height: 100%; width: var(--pct, 0%); border-radius: 999px; background: linear-gradient(180deg, #ffe08a, #e08a00); box-shadow: inset 0 5px 8px rgba(255,255,255,.5); }
+    .pledge .tiers { list-style: none; padding: 0; margin: 18px 0 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; }
+    .pledge .tier { background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(220,242,255,.72)); border: 1.5px solid var(--rim, #fff); border-radius: 26px; padding: 14px 16px; display: grid; gap: 4px; align-content: start; }
+    .pledge .tier b { font-family: var(--display, "Varela Round", sans-serif); font-weight: 400; font-size: 18px; }
+    .pledge .tier .amt { font-family: var(--mono, monospace); font-size: 14px; }
+    .pledge .tier p { font-size: 14px; color: var(--ink-soft, #3b6682); }
+    .pledge .go { display: inline-block; margin-top: 18px; font-family: var(--display, sans-serif); font-size: 16px; color: #fff; text-decoration: none; border: 2px solid var(--rim, #fff); border-radius: 999px; padding: 10px 24px; background: linear-gradient(180deg, #ffe08a, #e08a00); box-shadow: inset 0 6px 10px rgba(255,255,255,.5), 0 6px 14px rgba(160,90,0,.3); text-shadow: 0 1px 2px rgba(0,0,0,.45); }
+    .pledge .fine { margin-top: 14px; font-family: var(--mono, monospace); font-size: 12px; color: var(--ink-soft, #3b6682); }
+  </style>
+
+  <p class="mono">Notice No. 1 · the electron fund</p>
+  <h2 id="pledgeh">Keep the electrons flowing.</h2>
+  <p class="lede">This station has no ads and nothing to sell. It runs on listeners. If the crossing made you smile, chip in a few electrons a month and keep the lamps lit for everyone else at the gate.</p>
+
+  <div class="meter" role="img" aria-label="Monthly goal: GOAL_NOW of GOAL_TOTAL dollars" style="--pct: 0%;"><i></i></div>
+  <p class="mono">GOAL_NOW of GOAL_TOTAL a month · covers domains, hosting and the stream</p>
+
+  <ul class="tiers">
+    <li class="tier"><b>Electron</b><span class="amt">$1 / month</span><p>Your name in the monthly Electron Roll, read on air.</p></li>
+    <li class="tier"><b>Proton</b><span class="amt">$5 / month</span><p>Behind-the-board notes and new stingers before they air.</p></li>
+    <li class="tier"><b>Hydrogen</b><span class="amt">$10 / month</span><p>A shout-out or stinger request each month, and a vote on open hours.</p></li>
+    <li class="tier"><b>H₂</b><span class="amt">$25 / month</span><p>Your line in a station ID: “kept flowing by …”</p></li>
+    <li class="tier"><b>Fuel Cell</b><span class="amt">$100 / month</span><p>Underwrite one hour a month, with your message on the timetable.</p></li>
+  </ul>
+
+  <a class="go" href="PATREON_URL" rel="noopener">Pledge on Patreon</a>
+  <p class="fine">Pledges go through Patreon, which keeps a platform and processing fee. Cancel any time from your Patreon account. Listening stays free whether you pledge or not.</p>
+</section>
+
+<a class="listen" href="https://asaaab.com/radio-89d454e5/">▶ listen to the station</a>
+</main></body></html>
