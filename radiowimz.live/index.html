@@ -4,213 +4,324 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Radio Free Wim Z · live · asaaab</title>
-<meta name="description" content="Radio Free Wim Z. Free whimsy. Whim. Gen Z. Same show as Radio 93.X, sliiiiiiightly different. Live in your browser, no ads, nothing to buy.">
-<meta name="theme-color" content="#0e0d0c">
+<meta name="description" content="Radio Free Wim Z. Free whimsy. Whim. Gen Z. Same show as Radio 93.X, sliiiiiiightly different. The 24 hours are a map: the little white car sits on now. Live in your browser, no ads, nothing to buy.">
+<meta name="theme-color" content="#3f78c2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400&family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --night:#0e0d0c; --cabin:#171513; --leather:#1d1a17; --stitch:rgba(200,180,138,.16);
-    --champ:#c8b48a; --champ-hi:#efe2c2; --champ-lo:#7d6c4a; --mist:#9b958c; --ink:#e9e4da;
-    --sans:"Jost","Helvetica Neue",system-ui,sans-serif; --serif:"Cormorant Garamond",Georgia,serif;
+    --sky1:#3a6fbb; --sky2:#7fb1e3; --sky3:#d8eef9; --mist:#e9f6fc;
+    --lime:#c4e86b; --lime2:#a6d64a; --leaf:#5b9a2c; --forest:#2f6a1c;
+    --cream:#f6f1dc; --red:#e2262e; --ink:#33506d; --ink2:#5d7a96; --teal:#8fd6df;
+    --round:"Quicksand","Arial Rounded MT Bold","Helvetica Neue",system-ui,sans-serif;
   }
   *{box-sizing:border-box}
   html,body{margin:0;min-height:100%}
-  body{
-    font-family:var(--sans);font-weight:300;color:var(--ink);letter-spacing:.02em;
-    background:
-      radial-gradient(1100px 700px at 50% 38%, #24201c 0%, rgba(36,32,28,0) 70%),
-      repeating-linear-gradient(90deg, rgba(255,255,255,.012) 0 2px, rgba(0,0,0,0) 2px 5px),
-      var(--night);
-    -webkit-font-smoothing:antialiased;
+  body{font-family:var(--round);color:var(--ink);overflow-x:hidden;
+    background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 38%,var(--sky3) 70%,var(--mist) 100%);}
+  .wrap{max-width:1180px;margin:0 auto;padding:18px 18px 40px;position:relative}
+
+  /* clouds */
+  .clouds{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+  .cloud{position:absolute;width:260px;height:80px;border-radius:999px;background:#fff;opacity:.85;filter:blur(1px);
+    box-shadow:60px -26px 0 8px #fff, 130px -6px 0 -4px #fff, -40px 6px 0 -10px #fff;animation:drift 120s linear infinite}
+  .cloud.c2{top:62%;left:-20%;transform:scale(.7);animation-duration:160s;animation-delay:-60s;opacity:.7}
+  .cloud.c1{top:44%;left:-10%}
+  .cloud.c3{top:30%;left:-30%;transform:scale(.5);animation-duration:200s;animation-delay:-120s;opacity:.6}
+  @keyframes drift{from{margin-left:0}to{margin-left:140vw}}
+
+  /* top bar */
+  header{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none}
+  .badge{width:64px;height:64px;border-radius:50%;display:grid;place-items:center;
+    background:radial-gradient(circle at 35% 28%,#fff 0 10%,var(--lime) 34%,var(--lime2) 70%,#7fb52f 100%);
+    box-shadow:0 6px 14px rgba(20,60,110,.3),inset 0 -6px 10px rgba(60,110,20,.3);color:#fff;font-weight:700;font-size:15px;text-shadow:0 1px 2px rgba(40,90,10,.5)}
+  .word{font-weight:400;font-size:clamp(30px,5vw,50px);line-height:.9;letter-spacing:-.01em;text-shadow:0 2px 10px rgba(15,40,90,.55),0 0 2px rgba(15,40,90,.4)}
+  .word small{display:block;font-size:.42em;letter-spacing:.06em;opacity:.95;margin-top:6px}
+  nav{display:flex;gap:10px;flex-wrap:wrap}
+  .pill{all:unset;cursor:pointer;display:inline-flex;align-items:center;gap:10px;padding:11px 20px;border-radius:12px;
+    background:linear-gradient(180deg,#fff 0%,#f1f4f7 55%,#dfe5eb 100%);border:1px solid #c8d2dc;
+    box-shadow:0 3px 8px rgba(20,50,90,.25),inset 0 1px 0 #fff;color:var(--ink2);font-weight:500;font-size:14px;letter-spacing:.08em;text-transform:uppercase}
+  .pill:hover{background:linear-gradient(180deg,#fff,#e9f6fc 60%,#d2e9f4)}
+  .pill:focus-visible{outline:2px solid var(--teal);outline-offset:3px}
+  .pill::after{content:"";border-left:8px solid var(--ink2);border-top:6px solid transparent;border-bottom:6px solid transparent}
+  .on .pill.listen{color:var(--red)}
+  .on .pill.listen::after{border-left-color:var(--red)}
+
+  /* the island */
+  .stage{position:relative;z-index:1;width:100%;aspect-ratio:1100/640;margin-top:8px}
+  .stage svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+  .node{cursor:pointer}
+  .node:focus{outline:none}
+  .node:focus .disc,.node:hover .disc{fill:#f3fbff}
+  .callout{position:absolute;transform:translate(-50%,calc(-100% - 46px));pointer-events:none;
+    background:linear-gradient(180deg,#a9e4ea,var(--teal));color:#fff;border-radius:6px;padding:9px 16px;white-space:nowrap;
+    font-size:clamp(12px,1.6vw,17px);letter-spacing:.06em;text-transform:uppercase;box-shadow:0 4px 10px rgba(30,90,110,.25);transition:left .6s ease,top .6s ease}
+  .callout::after{content:"";position:absolute;left:50%;bottom:-14px;transform:translateX(-50%);
+    border-left:14px solid transparent;border-right:14px solid transparent;border-top:15px solid var(--teal)}
+  .callout b{font-weight:700}
+
+  /* the label band (soda-bottle label) */
+  .label{position:relative;z-index:2;margin:6px auto 0;max-width:980px;border-radius:24px;
+    background:linear-gradient(180deg,#d4f08a,var(--lime) 50%,var(--lime2));box-shadow:0 8px 20px rgba(60,110,30,.25),inset 0 1px 0 rgba(255,255,255,.7);
+    display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px;padding:14px 22px}
+  .label .name{font-weight:700;font-style:italic;font-size:clamp(20px,3vw,30px);color:var(--red);
+    text-shadow:2px 2px 0 #fff,-1px -1px 0 #fff,1px -1px 0 #fff,-1px 1px 0 #fff;letter-spacing:-.01em;line-height:1}
+  .label .now{color:#3c5a1a;font-size:15px;line-height:1.4}
+  .label .now b{display:block;font-size:19px;color:#24400c}
+  .air{display:flex;align-items:center;gap:8px;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#3c5a1a}
+  .air i{width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#c9d6bf 60%,#8fa082)}
+  .on .air i{background:radial-gradient(circle at 35% 30%,#fff,#ff6a6e 40%,var(--red))}
+  .on .air{color:var(--red)}
+
+  /* vibe chain */
+  .vibes{position:relative;z-index:2;max-width:980px;margin:22px auto 0;text-align:center}
+  .vibes h2{margin:0 0 10px;font-weight:500;font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink2)}
+  .chain{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;list-style:none;padding:0;margin:0}
+  .chain li{display:flex;align-items:center;gap:8px;padding:8px 14px 8px 8px;border-radius:999px;background:rgba(255,255,255,.72);
+    border:1px solid rgba(255,255,255,.95);box-shadow:0 3px 8px rgba(40,80,120,.12);font-size:15px;color:var(--ink)}
+  .chain li span{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:18px;
+    background:radial-gradient(circle at 35% 30%,#fff,#eaf6fb 60%,#cfe6f1)}
+  .bub{font-size:22px;vertical-align:middle}
+
+  .note{position:relative;z-index:2;max-width:760px;margin:26px auto 0;text-align:center;color:var(--ink2);font-size:15px;line-height:1.7}
+  details{position:relative;z-index:2;max-width:760px;margin:18px auto 0;background:var(--cream);border-radius:20px;padding:12px 20px;
+    box-shadow:0 4px 12px rgba(80,70,20,.12)}
+  summary{cursor:pointer;font-weight:500;letter-spacing:.1em;text-transform:uppercase;font-size:13px;color:var(--ink2)}
+  details ol{margin:12px 0 4px;padding-left:0;list-style:none;columns:2;column-gap:28px;font-size:14px}
+  details li{break-inside:avoid;margin:3px 0}
+  footer{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+    max-width:1100px;margin:30px auto 0;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2)}
+  footer a{color:var(--ink)}
+  .spk{all:unset;cursor:pointer;width:40px;height:34px}
+  @media (max-width:700px){
+    .label{grid-template-columns:1fr;text-align:center;justify-items:center}
+    details ol{columns:1}
+    nav .pill{padding:9px 14px;font-size:12px}
+    .callout{white-space:normal;max-width:56vw;text-align:center;font-size:11px;padding:7px 10px}
   }
-  main{max-width:980px;margin:0 auto;padding:44px 24px 56px;display:flex;flex-direction:column;align-items:center}
-
-  .mark{font-size:11px;letter-spacing:.42em;text-transform:uppercase;color:var(--mist);text-align:center}
-  .mark b{font-weight:400;color:var(--champ)}
-  h1{margin:18px 0 0;font-family:var(--serif);font-weight:300;font-size:clamp(34px,6vw,58px);line-height:1.08;text-align:center;color:var(--champ-hi)}
-  h1 i{font-style:italic;color:var(--champ)}
-  .lede{margin:14px 0 0;max-width:40ch;text-align:center;color:var(--mist);font-size:16px;line-height:1.6}
-
-  /* the instrument: clock + listen knob */
-  .instrument{position:relative;width:min(78vw,440px);aspect-ratio:1;margin:42px 0 8px}
-  .bezel{position:absolute;inset:0;border-radius:50%;
-    background:radial-gradient(circle at 50% 30%, #2a2622 0%, #141210 62%, #0b0a09 100%);
-    box-shadow:0 30px 60px rgba(0,0,0,.55), inset 0 1px 0 rgba(239,226,194,.18), inset 0 -18px 40px rgba(0,0,0,.5);}
-  .bezel::before{content:"";position:absolute;inset:10px;border-radius:50%;border:1px solid var(--stitch)}
-  .bezel::after{content:"";position:absolute;inset:16px;border-radius:50%;border:1px dashed rgba(200,180,138,.12)}
-  svg.face{position:absolute;inset:0;width:100%;height:100%}
-  .knob{position:absolute;left:50%;top:50%;width:30%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;border:0;cursor:pointer;
-    background:radial-gradient(circle at 42% 30%, #3a352f 0%, #1c1916 55%, #100e0c 100%);
-    box-shadow:0 10px 24px rgba(0,0,0,.6), inset 0 1px 0 rgba(239,226,194,.25), 0 0 0 1px rgba(200,180,138,.25);
-    color:var(--champ);font:300 11px/1.2 var(--sans);letter-spacing:.32em;text-transform:uppercase;transition:box-shadow .9s ease, color .9s ease}
-  .knob:focus-visible{outline:1px solid var(--champ);outline-offset:6px}
-  .knob span{display:block;padding-left:.32em}
-  .knob small{display:block;margin-top:6px;font-size:9px;letter-spacing:.24em;color:var(--mist)}
-  .on .knob{color:var(--champ-hi);box-shadow:0 10px 24px rgba(0,0,0,.6), inset 0 1px 0 rgba(239,226,194,.3), 0 0 0 1px rgba(200,180,138,.6), 0 0 38px rgba(200,180,138,.22)}
-
-  /* the readout: one quiet line, like a climate panel */
-  .readout{margin-top:26px;display:grid;grid-template-columns:repeat(3,auto);gap:0;border:1px solid rgba(200,180,138,.2);border-radius:999px;overflow:hidden}
-  .readout div{padding:12px 22px;text-align:center}
-  .readout div+div{border-left:1px solid rgba(200,180,138,.14)}
-  .readout dt{font-size:9px;letter-spacing:.34em;text-transform:uppercase;color:var(--mist)}
-  .readout dd{margin:4px 0 0;font-size:14px;color:var(--ink);white-space:nowrap}
-  .state{margin-top:18px;font-size:12px;letter-spacing:.18em;color:var(--mist);text-align:center;min-height:1.4em}
-  .on .state{color:var(--champ)}
-
-  /* the evening: the 24 hours as a thin line of lights */
-  .evening{margin-top:46px;width:100%}
-  .evening h2{font-family:var(--serif);font-weight:300;font-style:italic;font-size:22px;color:var(--champ);text-align:center;margin:0 0 16px}
-  .hours{display:grid;grid-template-columns:repeat(24,1fr);gap:4px}
-  .hours button{all:unset;cursor:pointer;height:34px;border-radius:999px;background:rgba(200,180,138,.08);position:relative}
-  .hours button:hover,.hours button:focus-visible{background:rgba(200,180,138,.22)}
-  .hours button.now{background:linear-gradient(180deg,var(--champ-hi),var(--champ-lo));box-shadow:0 0 18px rgba(200,180,138,.35)}
-  .hours button.pick{outline:1px solid var(--champ)}
-  .hourlabels{display:grid;grid-template-columns:repeat(24,1fr);gap:4px;margin-top:6px;font-size:9px;color:var(--mist);text-align:center;letter-spacing:.05em}
-  .pickline{margin-top:16px;text-align:center;font-size:14px;color:var(--ink);min-height:1.5em}
-  .pickline em{font-style:normal;color:var(--mist)}
-
-  .note{margin-top:46px;max-width:56ch;text-align:center;color:var(--mist);font-size:14px;line-height:1.7}
-  .note q{font-family:var(--serif);font-style:italic;font-size:17px;color:var(--champ-hi)}
-  footer{margin-top:40px;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:#6f6a62;text-align:center;line-height:2}
-  footer a{color:var(--mist)}
-  @media (max-width:640px){
-    .readout{grid-template-columns:1fr}
-    .readout div+div{border-left:0;border-top:1px solid rgba(200,180,138,.14)}
-    .readout{border-radius:28px}
-    .hourlabels span:nth-child(odd){visibility:hidden}
-  }
-  @media (prefers-reduced-motion:reduce){ .knob{transition:none} }
+  @media (prefers-reduced-motion:reduce){ .cloud{animation:none} .callout{transition:none} }
 </style>
 </head>
 <body>
-<main>
+<div class="clouds" aria-hidden="true"><div class="cloud c1"></div><div class="cloud c2"></div><div class="cloud c3"></div></div>
+<div class="wrap">
 
-  <p class="mark"><b>Radio Free Wim Z</b> &nbsp;·&nbsp; asaaab radio</p>
-  <h1>Free <i>whimsy.</i> Whim. Gen&nbsp;Z.</h1>
-  <p class="lede">Same show as Radio 93.X, “sliiiiiiightly different.” Settle in. Everyone listening hears the same second.</p>
+  <header>
+    <a class="brand" href="/radiowimz.live/" aria-label="Radio Free Wim Z">
+      <span class="badge" aria-hidden="true">wim z</span>
+      <span class="word">radio free<br>wim z<small>free whimsy · whim · gen z</small></span>
+    </a>
+    <nav aria-label="Station">
+      <button class="pill listen" id="listen" type="button" aria-pressed="false">Listen</button>
+      <button class="pill" id="nowbtn" type="button">Back to now</button>
+      <a class="pill" href="/radio93.x.live/">Radio 93.X</a>
+    </nav>
+  </header>
 
-  <div class="instrument" id="inst">
-    <div class="bezel" aria-hidden="true"></div>
-    <svg class="face" id="face" viewBox="0 0 400 400" aria-hidden="true"></svg>
-    <button class="knob" id="listen" type="button" aria-pressed="false"><span>Listen</span><small id="knobsub">press once</small></button>
+  <div class="stage" id="stage">
+    <svg id="map" viewBox="0 0 1100 640" role="img" aria-label="A floating grass island. A winding path runs through 24 white discs, one for each hour of the day, Pacific time. A little white car sits on the disc for this hour."></svg>
+    <div class="callout" id="callout" aria-live="polite"><b id="c-hour">--</b> · <span id="c-show">loading</span></div>
   </div>
 
-  <dl class="readout" aria-live="polite">
-    <div><dt>Hour</dt><dd id="r-hour">--</dd></div>
-    <div><dt>Program</dt><dd id="r-show">--</dd></div>
-    <div><dt>Energy</dt><dd id="r-energy">--</dd></div>
-  </dl>
-  <p class="state" id="state">Quiet cabin. Press Listen.</p>
-
-  <section class="evening" aria-labelledby="eveh">
-    <h2 id="eveh">The twenty-four hours</h2>
-    <div class="hours" id="hours" role="group" aria-label="The 24 hours, Pacific time"></div>
-    <div class="hourlabels" id="hourlabels" aria-hidden="true"></div>
-    <p class="pickline" id="pick">Tap an hour to see its program.</p>
+  <section class="label" aria-label="Now playing">
+    <div class="name">Radio Free Wim Z</div>
+    <div class="now"><b id="r-show">Same show as Radio 93.X</b><span id="r-line">“sliiiiiiightly different.” Everyone listening hears the same second.</span></div>
+    <div class="air"><i aria-hidden="true"></i><span id="air">Tap listen</span></div>
   </section>
 
-  <p class="note">No ads. Nothing to buy. The music is theme songs made by real people. Top and bottom of the hour, the stinger. <br><q>When you have a different perspective on things, you don’t just build another car, you build a radio station.</q></p>
+  <section class="vibes" aria-labelledby="vibeh">
+    <h2 id="vibeh"><span class="bub" aria-hidden="true">🫧</span> the vibe <span class="bub" aria-hidden="true">🫧</span></h2>
+    <ol class="chain">
+      <li><span>🫶</span>Harmony</li>
+      <li><span>🌎</span>Earth</li>
+      <li><span>💚</span>Green</li>
+      <li><span>😄</span>Optimism</li>
+      <li><span>🧬</span>Evolution</li>
+      <li><span>⭐</span>Star</li>
+      <li><span>🕊️</span>Hope</li>
+      <li><span>🌬️</span>Wind</li>
+      <li><span>🌞</span>Sun</li>
+      <li><span>🆓</span>Freedom</li>
+      <li><span>🔋</span>Energy</li>
+      <li><span>🎭</span>Performance</li>
+      <li><span>💡</span>Inspired</li>
+    </ol>
+  </section>
+
+  <p class="note">Every disc is one hour of the station. The little white car sits on now and drives on as the day does. Tap any disc to see what that hour plays. No ads, nothing to buy, music made by real people. Top and bottom of the hour, the stinger.</p>
+
+  <details>
+    <summary>The 24 hours, as words</summary>
+    <ol>
+      <li><b>12 am</b> · Midnight Drift · Low (85 - 95 BPM)</li>
+      <li><b>1 am</b> · Deep Space Chill · Low (88 - 98 BPM)</li>
+      <li><b>2 am</b> · Nocturnal Pulse · Low-Med (95 - 105 BPM)</li>
+      <li><b>3 am</b> · The Insomnia Club · Medium (100 - 110 BPM)</li>
+      <li><b>4 am</b> · Dawn Ascent · Low-Med (95 - 105 BPM)</li>
+      <li><b>5 am</b> · Early Riser Kickoff · Med-High (110 - 118 BPM)</li>
+      <li><b>6 am</b> · Sunrise Commute (Hr 1) · High (118 - 124 BPM)</li>
+      <li><b>7 am</b> · Prime Morning Rush (Hr 2) · Peak (122 - 128 BPM)</li>
+      <li><b>8 am</b> · Prime Morning Rush (Hr 3) · Peak (122 - 128 BPM)</li>
+      <li><b>9 am</b> · Morning Rollout · High (118 - 124 BPM)</li>
+      <li><b>10 am</b> · Workday Flow (Hr 1) · Medium (112 - 118 BPM)</li>
+      <li><b>11 am</b> · Workday Flow (Hr 2) · Medium (114 - 120 BPM)</li>
+      <li><b>12 pm</b> · Lunch Power Mix · Peak (125 - 130 BPM)</li>
+      <li><b>1 pm</b> · Afternoon Reset · Med-High (116 - 122 BPM)</li>
+      <li><b>2 pm</b> · The Midday Hustle · High (118 - 125 BPM)</li>
+      <li><b>3 pm</b> · Drive Time Warmup · High (120 - 126 BPM)</li>
+      <li><b>4 pm</b> · Sunset Commute (Hr 1) · Peak (124 - 130 BPM)</li>
+      <li><b>5 pm</b> · Heavy Traffic Rush (Hr 2) · Peak (126 - 132 BPM)</li>
+      <li><b>6 pm</b> · Evening Unwind · Med-High (115 - 122 BPM)</li>
+      <li><b>7 pm</b> · The Sunset Session · Medium (108 - 116 BPM)</li>
+      <li><b>8 pm</b> · Underground Showcase · Med-High (120 - 128 BPM)</li>
+      <li><b>9 pm</b> · Prime Time Club Mix · Peak (126 - 134 BPM)</li>
+      <li><b>10 pm</b> · The After-Party · High (122 - 128 BPM)</li>
+      <li><b>11 pm</b> · Midnight Wind-Down · Med-Low (100 - 110 BPM)</li>
+    </ol>
+  </details>
 
   <footer>
-    asaaab · Democratic People’s Republic of North America · all times Pacific<br>
-    <a href="/radio93.x.live/">Radio 93.X, at the crossing</a> · nothing to buy here
+    <button class="spk" id="spk" type="button" aria-label="Listen"><svg viewBox="0 0 40 34" width="40" height="34" aria-hidden="true"><path d="M4 12h7l9-8v26l-9-8H4z" fill="#33506d"/><path id="w1" d="M25 11a8 8 0 0 1 0 12" stroke="#33506d" stroke-width="2.5" fill="none" stroke-linecap="round"/><path id="w2" d="M29 7a13 13 0 0 1 0 20" stroke="#33506d" stroke-width="2.5" fill="none" stroke-linecap="round"/></svg></button>
+    <span>asaaab · Democratic People’s Republic of North America · all times Pacific · nothing to buy here</span>
   </footer>
-
 <noscript><p class="note">Radio Free Wim Z plays in your browser with JavaScript on. The timetable is plain data at <a href="/radio93.x.live/packet.json">packet.json</a>.</p></noscript>
-</main>
+</div>
 
 <script>
 (function(){
   const $=(id)=>document.getElementById(id);
-  const TZ="America/Los_Angeles";
+  const TZ="America/Los_Angeles", NS="http://www.w3.org/2000/svg";
   const reduce=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const NS="http://www.w3.org/2000/svg";
-  const sv=(t,a,p)=>{const n=document.createElementNS(NS,t);for(const k in a)n.setAttribute(k,a[k]);if(p)p.appendChild(n);return n;};
+  const sv=(t,a,p,txt)=>{const n=document.createElementNS(NS,t);for(const k in a)n.setAttribute(k,a[k]);if(txt!=null)n.textContent=txt;(p||M).appendChild(n);return n;};
+  const M=$("map"), VW=1100, VH=640;
 
-  /* ---- the clock face: champagne hands, sweeping second (the shared second) ---- */
-  const F=$("face"), C=200;
-  const d=sv("defs",{},F);
-  const g=sv("linearGradient",{id:"ch",x1:0,y1:0,x2:0,y2:1},d);
-  sv("stop",{offset:0,"stop-color":"#efe2c2"},g); sv("stop",{offset:1,"stop-color":"#7d6c4a"},g);
-  for(let i=0;i<60;i++){
-    const a=i*6*Math.PI/180, big=i%5===0, r1=big?162:170, r2=176;
-    sv("line",{x1:C+r1*Math.sin(a),y1:C-r1*Math.cos(a),x2:C+r2*Math.sin(a),y2:C-r2*Math.cos(a),
-      stroke:big?"#c8b48a":"rgba(200,180,138,.35)","stroke-width":big?2.2:1,"stroke-linecap":"round"},F);
-  }
-  const ring=sv("circle",{cx:C,cy:C,r:150,fill:"none",stroke:"#c8b48a","stroke-opacity":0,"stroke-width":1.2},F);
-  const hand=(len,w,col)=>sv("line",{x1:C,y1:C+len*0.16,x2:C,y2:C-len,stroke:col,"stroke-width":w,"stroke-linecap":"round"},F);
-  const hH=hand(92,5,"#d8c79f"), hM=hand(140,3,"#c8b48a"), hS=hand(158,1.2,"#efe2c2");
-  sv("circle",{cx:C,cy:C,r:5,fill:"#efe2c2"},F);
+  /* ---- the island: a flat 1000x700 field tilted into view ---- */
+  const proj=(x,y)=>[85+0.86*x+0.07*y, 150+0.58*y-0.05*x];
+  const defs=sv("defs",{});
+  const lg=(id,stops,a)=>{const g=sv("linearGradient",Object.assign({id,x1:0,y1:0,x2:0,y2:1},a||{}),defs);stops.forEach(([o,c])=>sv("stop",{offset:o,"stop-color":c},g));};
+  const rg=(id,stops,a)=>{const g=sv("radialGradient",Object.assign({id,cx:.4,cy:.3,r:.75},a||{}),defs);stops.forEach(([o,c])=>sv("stop",{offset:o,"stop-color":c},g));};
+  lg("grass",[[0,"#9bd35a"],[0.55,"#6db53a"],[1,"#4f9428"]],{x1:0,y1:0,x2:.3,y2:1});
+  lg("soil",[[0,"#6b8a3a"],[1,"#3f5a22"]]);
+  rg("canopy",[[0,"#9fd667"],[0.6,"#4e9a2e"],[1,"#2c6a19"]]);
+  rg("discg",[[0,"#ffffff"],[0.7,"#ffffff"],[1,"#e6eef3"]],{cx:.5,cy:.35,r:.7});
+  const P=(pts)=>pts.map(p=>proj(p[0],p[1]).map(v=>v.toFixed(1)).join(",")).join(" ");
+  // shadow under the island
+  sv("ellipse",{cx:560,cy:600,rx:470,ry:26,fill:"#2a5a8a",opacity:.18});
+  // soil edges (front and right)
+  const D=16;
+  const A=proj(0,700),B=proj(1000,700),C=proj(1000,0);
+  sv("polygon",{points:`${A[0]},${A[1]} ${B[0]},${B[1]} ${B[0]},${B[1]+D} ${A[0]},${A[1]+D}`,fill:"url(#soil)"});
+  sv("polygon",{points:`${C[0]},${C[1]} ${B[0]},${B[1]} ${B[0]},${B[1]+D} ${C[0]},${C[1]+D}`,fill:"#557a2c"});
+  // grass top
+  sv("polygon",{points:P([[0,0],[1000,0],[1000,700],[0,700]]),fill:"url(#grass)"});
+  // darker meadow patch
+  const blob=(cx,cy,r,fill,op)=>{const pts=[];for(let i=0;i<36;i++){const a=i/36*Math.PI*2;pts.push([cx+r*Math.cos(a)*(1+0.12*Math.sin(a*3)),cy+r*0.8*Math.sin(a)]);}sv("polygon",{points:P(pts),fill,opacity:op});};
+  blob(330,520,230,"#3f8a24",.28); blob(760,180,150,"#bfe58a",.25);
+  // the stream
+  const stream=[[700,700],[760,610],[860,560],[930,470],[1000,430]].map(p=>proj(p[0],p[1]));
+  const sp="M"+stream.map(p=>p.join(",")).join(" L");
+  sv("path",{d:sp,stroke:"#2f6f96",fill:"none","stroke-width":14,"stroke-linejoin":"round","stroke-linecap":"round"});
+  sv("path",{d:sp,stroke:"#6fb3d8",fill:"none","stroke-width":6,"stroke-linejoin":"round","stroke-linecap":"round",opacity:.8});
 
-  const parts=()=>{const o={};new Intl.DateTimeFormat("en-US",{timeZone:TZ,hour:"numeric",minute:"numeric",second:"numeric",hour12:false}).formatToParts(new Date()).forEach(p=>o[p.type]=p.value);return{h:(+o.hour)%24,m:+o.minute,s:+o.second};};
-  function hands(){
-    const t=parts(), ms=Date.now()%1000, s=t.s+(reduce?0:ms/1000);
-    hS.setAttribute("transform",`rotate(${s*6} ${C} ${C})`);
-    hM.setAttribute("transform",`rotate(${(t.m+s/60)*6} ${C} ${C})`);
-    hH.setAttribute("transform",`rotate(${((t.h%12)+t.m/60)*30} ${C} ${C})`);
-  }
+  // 24 hour discs on a winding path (4 rows of 6, snake order)
+  const flat=[];
+  const rowsY=[95,270,445,610];
+  for(let r=0;r<4;r++){for(let i=0;i<6;i++){const k=r*6+i, col=(r%2===0)?i:5-i;
+    const x=110+col*150+28*Math.sin(k*1.7), y=rowsY[r]+30*Math.sin(k*2.3+1);flat.push([x,y]);}}
+  const pts=flat.map(p=>proj(p[0],p[1]));
+  // smooth path (Catmull-Rom)
+  let d="M"+pts[0].join(",");
+  for(let i=0;i<pts.length-1;i++){const p0=pts[i-1]||pts[i],p1=pts[i],p2=pts[i+1],p3=pts[i+2]||p2;
+    const c1=[p1[0]+(p2[0]-p0[0])/6,p1[1]+(p2[1]-p0[1])/6],c2=[p2[0]-(p3[0]-p1[0])/6,p2[1]-(p3[1]-p1[1])/6];
+    d+=` C${c1.join(",")} ${c2.join(",")} ${p2.join(",")}`;}
+  sv("path",{d,stroke:"#fff",fill:"none","stroke-width":5,"stroke-dasharray":"2 9","stroke-linecap":"round",opacity:.75});
+  const pathEl=sv("path",{d,fill:"none",stroke:"none"});
 
-  /* ---- the packet: the same one Radio 93.X reads ---- */
-  let P=null, live=false, bed=null, an=null, buf=null, lastStg="", pick=null, lastHour=-1;
+  // trees and bushes, drawn back to front
+  const trees=[[30,40,1],[335,5,1],[635,5,.9],[975,40,1.15],[15,380,1.1],[990,330,.85],[335,190,.6],[635,365,.6],[485,535,.65]];
+  const bushes=[[930,620],[985,690],[335,700],[335,360],[640,700],[780,180]];
+  const things=[];
+  trees.forEach(([x,y,s])=>things.push({y:proj(x,y)[1],draw:()=>{const [X,Y]=proj(x,y),k=s*(0.75+Y/1100);
+    sv("ellipse",{cx:X+8*k,cy:Y+2,rx:22*k,ry:6*k,fill:"#2a5a18",opacity:.3});
+    sv("rect",{x:X-3*k,y:Y-34*k,width:6*k,height:36*k,rx:2,fill:"#6b4a2a"});
+    [[0,-58,24],[-16,-46,18],[16,-44,19],[0,-72,16]].forEach(([dx,dy,r])=>sv("circle",{cx:X+dx*k,cy:Y+dy*k,r:r*k,fill:"url(#canopy)"}));}}));
+  bushes.forEach(([x,y])=>things.push({y:proj(x,y)[1],draw:()=>{const [X,Y]=proj(x,y);sv("ellipse",{cx:X,cy:Y-6,rx:22,ry:12,fill:"#2f6a1c"});sv("ellipse",{cx:X-5,cy:Y-10,rx:12,ry:6,fill:"#4e8e2c",opacity:.8});}}));
+  const nodes=[];
+  pts.forEach((p,h)=>things.push({y:p[1],draw:()=>{
+    const g=sv("g",{class:"node",tabindex:0,role:"button","aria-label":"Hour "+h});
+    const k=0.8+p[1]/1300;
+    sv("ellipse",{cx:p[0],cy:p[1]+5,rx:30*k,ry:12*k,fill:"#b9c7cf"},g);
+    const disc=sv("ellipse",{class:"disc",cx:p[0],cy:p[1],rx:30*k,ry:12*k,fill:"url(#discg)"},g);
+    const glow=sv("ellipse",{cx:p[0],cy:p[1],rx:30*k+6,ry:12*k+4,fill:"none",stroke:"#e2262e","stroke-width":3,opacity:0},g);
+    g.addEventListener("click",()=>{peek=h;paint();});
+    g.addEventListener("keydown",(e)=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();peek=h;paint();}});
+    nodes[h]={g,disc,glow,p};
+  }}));
+  things.sort((a,b)=>a.y-b.y).forEach(t=>t.draw());
+
+  // the little white car (a generic hatch, drawn in code)
+  const car=sv("g",{id:"car"});
+  const cb=sv("g",{},car);
+  sv("ellipse",{cx:0,cy:2,rx:34,ry:7,fill:"#1f3d18",opacity:.28},cb);
+  sv("path",{d:"M-32,-6 Q-33,-17 -22,-19 L-12,-20 Q-4,-33 10,-33 L20,-32 Q30,-30 33,-18 Q36,-16 35,-7 Q34,-2 28,-2 L-28,-2 Q-33,-2 -32,-6 Z",fill:"#ffffff",stroke:"#c5d0d8","stroke-width":1.2},cb);
+  sv("path",{d:"M-9,-21 Q-2,-30 9,-30 L18,-29 Q25,-27 27,-20 Z",fill:"#5d7487"},cb);
+  sv("line",{x1:8,y1:-30,x2:6,y2:-20,stroke:"#fff","stroke-width":2},cb);
+  sv("rect",{x:-30,y:-14,width:8,height:3,rx:1.5,fill:"#ffe9a8"},cb);
+  sv("rect",{x:27,y:-14,width:6,height:3,rx:1.5,fill:"#ff6a6e"},cb);
+  [-19,21].forEach(x=>{sv("circle",{cx:x,cy:-3,r:7,fill:"#2b3640"},cb);sv("circle",{cx:x,cy:-3,r:3,fill:"#c9d3db"},cb);});
+
+  /* ---- time, packet, board ---- */
+  const parts=()=>{const o={};new Intl.DateTimeFormat("en-US",{timeZone:TZ,hour:"numeric",minute:"numeric",second:"numeric",hour12:false}).formatToParts(new Date()).forEach(x=>o[x.type]=x.value);return{h:(+o.hour)%24,m:+o.minute,s:+o.second};};
   const label=(h)=>(h%12===0?12:h%12)+(h<12?" am":" pm");
-  const hours=$("hours"), labels=$("hourlabels"), btns=[];
-  for(let h=0;h<24;h++){
-    const b=document.createElement("button"); b.type="button"; b.setAttribute("aria-label",label(h));
-    b.addEventListener("click",()=>{pick=(pick===h?null:h);paint();}); hours.appendChild(b); btns.push(b);
-    const l=document.createElement("span"); l.textContent=(h%12===0?12:h%12); labels.appendChild(l);
+  let PK=null, peek=null, live=false, bed=null, lastStg="", lastHour=-1, carAt=null;
+  const row=(h)=>PK&&PK.timetable.find(x=>x.h===h);
+  // car position: along the real path, between this hour's disc and the next, by the minute
+  const lens=[]; {const L=pathEl.getTotalLength(), S=[];for(let x=0;x<=L;x+=2){const q=pathEl.getPointAtLength(x);S.push([x,q.x,q.y]);}
+    let from=0;for(let h=0;h<24;h++){let best=from,bd=1e12;for(let i=from;i<S.length;i++){const dd=(S[i][1]-pts[h][0])**2+(S[i][2]-pts[h][1])**2;if(dd<bd){bd=dd;best=i;}}lens[h]=S[best][0];from=best;}}
+  function placeCar(){
+    const t=parts(), a=lens[t.h], b=t.h<23?lens[t.h+1]:lens[23], f=(t.m*60+t.s)/3600;
+    const s=a+(b-a)*(t.h<23?f:0), q=pathEl.getPointAtLength(s), q2=pathEl.getPointAtLength(Math.min(s+4,pathEl.getTotalLength()));
+    const flip=q2.x<q.x?-1:1, bob=live&&!reduce?Math.sin(Date.now()/180)*1.2:0;
+    car.setAttribute("transform",`translate(${q.x.toFixed(1)},${(q.y-6+bob).toFixed(1)}) scale(${flip*0.9},0.9)`);
   }
-  const row=(h)=>P&&P.timetable.find(x=>x.h===h);
   function paint(){
-    const t=parts(), r=row(t.h);
-    $("r-hour").textContent=label(t.h)+" PT";
-    $("r-show").textContent=r?r.daypart:"--";
-    $("r-energy").textContent=r?r.energy:"--";
-    btns.forEach((b,i)=>{b.classList.toggle("now",i===t.h);b.classList.toggle("pick",i===pick);});
-    if(pick==null){$("pick").textContent="Tap an hour to see its program.";}
-    else{const p=row(pick);$("pick").innerHTML="";const a=document.createElement("span");a.textContent=label(pick)+" · "+(p?p.daypart:"open hour")+" ";const e=document.createElement("em");e.textContent=p?"· "+p.vibe:"";$("pick").append(a,e);}
+    const t=parts(), h=peek==null?t.h:peek, r=row(h);
+    nodes.forEach((n,i)=>{n.glow.setAttribute("opacity",i===t.h?1:0);n.disc.setAttribute("fill",i===peek&&peek!==t.h?"#fff7d6":"url(#discg)");});
+    const p=nodes[h].p, st=$("stage");
+    const c=$("callout"), pct=p[0]/VW*100, edge=innerWidth<700?30:12; c.style.left=Math.min(100-edge,Math.max(edge,pct))+"%"; c.style.top=(p[1]/VH*100)+"%";
+    $("c-hour").textContent=(peek==null?"Now · ":"")+label(h);
+    $("c-show").textContent=r?r.daypart:"open hour";
+    const n=row(t.h);
+    if(n){$("r-show").textContent="Now: "+n.daypart; $("r-line").textContent=n.energy+" · "+n.vibe;}
   }
-  fetch("/radio93.x.live/packet.json",{cache:"no-store"}).then(r=>r.json()).then(p=>{P=p;paint();})
-    .catch(()=>{$("state").textContent="The packet didn’t arrive. Something is missing, and now we know.";});
+  $("nowbtn").addEventListener("click",()=>{peek=null;paint();});
+  fetch("/radio93.x.live/packet.json",{cache:"no-store"}).then(r=>r.json()).then(p=>{PK=p;paint();})
+    .catch(()=>{$("air").textContent="Packet missing";$("c-show").textContent="the packet didn’t arrive";});
 
-  /* ---- listening: same second as everyone, stinger at :00 and :30 ---- */
-  const bedAt=()=>(Date.now()/1000)%P.layers[0].seconds;
-  function setOn(on){
-    live=on; document.body.classList.toggle("on",on); $("listen").setAttribute("aria-pressed",on);
-    $("listen").firstChild.textContent=on?"Listening":"Listen"; $("knobsub").textContent=on?"press to rest":"press once";
-    $("state").textContent=on?"On air. You’re hearing Radio Free Wim Z, the same second as everyone else.":"Quiet cabin. Press Listen.";
-    if(!on) ring.setAttribute("stroke-opacity",0);
+  /* ---- listening: same show, same second, stinger at :00 and :30 ---- */
+  const bedAt=()=>(Date.now()/1000)%PK.layers[0].seconds;
+  function setOn(on){live=on;document.body.classList.toggle("on",on);$("listen").setAttribute("aria-pressed",on);
+    $("listen").textContent=on?"Listening":"Listen";$("air").textContent=on?"On air":"Tap listen";
+    $("spk").setAttribute("aria-label",on?"Stop":"Listen");["w1","w2"].forEach(id=>$(id).setAttribute("opacity",on?1:.25));}
+  function toggle(){
+    if(!PK) return;
+    if(!live){bed=bed||new Audio(PK.layers[0].src);bed.loop=true;bed.volume=1;bed.currentTime=bedAt();
+      bed.play().then(()=>setOn(true)).catch(()=>{$("air").textContent="Tap listen again";});}
+    else{bed.pause();setOn(false);}
   }
-  $("listen").addEventListener("click",()=>{
-    if(!P) return;
-    if(!live){
-      bed=bed||new Audio(P.layers[0].src); bed.loop=true; bed.volume=1; bed.currentTime=bedAt();
-      bed.play().then(()=>{
-        setOn(true);
-        try{ if(!an){const ac=new (window.AudioContext||window.webkitAudioContext)(); const src=ac.createMediaElementSource(bed); an=ac.createAnalyser(); an.fftSize=256; buf=new Uint8Array(an.frequencyBinCount); src.connect(an); an.connect(ac.destination);} }catch(e){ an=null; }
-      }).catch(()=>{$("state").textContent="Your browser held the sound back. Press Listen again.";});
-    } else { bed.pause(); setOn(false); }
-  });
-  function stinger(){
-    const s=new Audio(P.stager.src); s.currentTime=P.stager.from; bed.volume=.3; s.play().catch(()=>{});
-    setTimeout(()=>{s.pause(); if(bed) bed.volume=1;},P.stager.seconds*1000);
-  }
+  $("listen").addEventListener("click",toggle); $("spk").addEventListener("click",toggle);
+  function stinger(){const s=new Audio(PK.stager.src);s.currentTime=PK.stager.from;bed.volume=.3;s.play().catch(()=>{});
+    setTimeout(()=>{s.pause();if(bed)bed.volume=1;},PK.stager.seconds*1000);}
   setInterval(()=>{
     const t=parts(); if(t.h!==lastHour){lastHour=t.h;paint();}
-    if(!live||!P) return;
-    const L=P.layers[0].seconds, want=bedAt(), dd=Math.abs(bed.currentTime-want);
+    if(!live||!PK) return;
+    const L=PK.layers[0].seconds,want=bedAt(),dd=Math.abs(bed.currentTime-want);
     if(dd>0.6&&dd<L-0.6) bed.currentTime=want;
-    const key=t.h+":"+t.m;
-    if(P.stager.at_minutes.indexOf(t.m)>=0&&t.s<3&&key!==lastStg){lastStg=key;stinger();}
+    const key=t.h+":"+t.m; if(PK.stager.at_minutes.indexOf(t.m)>=0&&t.s<3&&key!==lastStg){lastStg=key;stinger();}
   },1000);
-
-  function frame(){
-    hands();
-    if(live&&an&&!reduce){ an.getByteFrequencyData(buf); let v=0; for(let i=0;i<buf.length;i++) v+=buf[i]; v=v/buf.length/255;
-      ring.setAttribute("r",(150+v*16).toFixed(1)); ring.setAttribute("stroke-opacity",(0.15+v*1.4).toFixed(2)); }
-    reduce?null:requestAnimationFrame(frame);
-  }
-  paint(); hands(); if(reduce) setInterval(hands,1000); else requestAnimationFrame(frame);
+  setOn(false); paint(); placeCar();
+  if(reduce) setInterval(placeCar,30000); else (function loop(){placeCar();requestAnimationFrame(loop);})();
 })();
 </script>
 </body>
