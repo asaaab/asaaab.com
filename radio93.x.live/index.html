@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Radio 93.X · live · Level Crossing No. 0 · asaaab</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600&family=Varela+Round&family=DM+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  /* The read: the public face of the station is a level crossing (xing). The X in 93.X is the crossbuck.
+     The inside line (93.X) meets the public road here and only here. Gate is down: nothing streams yet.
+     Look = legend v1 (sky, glass, stinger orbs, sonar scope). Bent on purpose toward "corpromaxxed":
+     a deadpan official notice in mono type, numbered articles, a crossing number and a milepost. */
+  --sky-hi: #6fc1f5;
+  --sky-lo: #e9f8ff;
+  --grass: #d8f5d0;
+  --ink: #0c3550;
+  --ink-soft: #3b6682;
+  --glass: rgba(255, 255, 255, 0.5);
+  --rim: rgba(255, 255, 255, 0.92);
+  --scope-1: #0d4b5c;
+  --scope-2: #08303c;
+  --scope-3: #041a22;
+  --mint: #7df9c8;
+  --sun: #ffc65a;
+  --red1: #ff8a8a;
+  --red2: #c8141f;
+  --display: "Varela Round", "Trebuchet MS", system-ui, sans-serif;
+  --body: "Hind", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono: "DM Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  font-family: var(--body); font-size: 16px; line-height: 1.5; color: var(--ink);
+  background:
+    radial-gradient(circle at 52% 4%, rgba(255,255,255,0.3) 0 70px, rgba(255,255,255,0.28) 71px 73px, rgba(255,255,255,0) 74px),
+    radial-gradient(circle at 93% 14%, rgba(255,255,255,0.55) 0 44px, rgba(255,255,255,0.3) 45px 47px, rgba(255,255,255,0) 110px),
+    radial-gradient(circle at 70% 44%, rgba(255,255,255,0.28) 0 90px, rgba(255,255,255,0.22) 91px 93px, rgba(255,255,255,0) 94px),
+    radial-gradient(circle at 16% 62%, rgba(255,255,255,0.22) 0 130px, rgba(255,255,255,0.2) 131px 133px, rgba(255,255,255,0) 134px),
+    radial-gradient(circle at 86% 84%, rgba(255,255,255,0.3) 0 60px, rgba(255,255,255,0.25) 61px 63px, rgba(255,255,255,0) 64px),
+    linear-gradient(180deg, var(--sky-hi) 0%, #aadcf9 34%, var(--sky-lo) 68%, var(--grass) 100%);
+  background-attachment: fixed;
+  padding: 20px 16px 56px; min-height: 100%;
+}
+.wrap { max-width: 1120px; margin: 0 auto; display: grid; gap: 26px; }
+h1, h2, h3 { font-family: var(--display); font-weight: 400; margin: 0; text-wrap: balance; }
+h2 { font-size: 26px; line-height: 1.15; }
+h3 { font-size: 18px; line-height: 1.2; }
+p { margin: 0; }
+a { color: #075f8f; text-underline-offset: 2px; }
+.mono { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+button:focus-visible, a:focus-visible { outline: 3px solid #fff; outline-offset: 3px; box-shadow: 0 0 0 6px var(--ink); }
+
+/* stinger orb: same recipe as legend v1 */
+.orbish {
+  border-radius: 50%; border: 2px solid var(--rim); position: relative;
+  background: radial-gradient(circle at 35% 26%, #fff 0, rgba(255,255,255,0.25) 26%, rgba(255,255,255,0) 30%), radial-gradient(circle at 50% 40%, var(--c1, #9fd8ff), var(--c2, #3a8fd0));
+  box-shadow: inset 0 -12px 22px rgba(0,0,0,0.2), inset 0 7px 14px rgba(255,255,255,0.55), 0 10px 22px rgba(12,53,80,0.28);
+  color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,0.6), 0 0 8px rgba(0,0,0,0.35);
+}
+.glass {
+  position: relative; background: var(--glass); border: 1.5px solid var(--rim); border-radius: 34px;
+  -webkit-backdrop-filter: blur(10px) saturate(1.3); backdrop-filter: blur(10px) saturate(1.3);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.95), inset 0 -14px 30px rgba(111,193,245,0.2), 0 18px 40px rgba(12,53,80,0.2);
+  padding: 24px 26px; min-width: 0; overflow: hidden;
+}
+.glass::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 46%; background: linear-gradient(rgba(255,255,255,0.55), rgba(255,255,255,0)); pointer-events: none; border-radius: 34px 34px 60% 60% / 34px 34px 22% 22%; }
+.glass > * { position: relative; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 16px; margin-bottom: 18px; }
+.sec-head p { color: var(--ink-soft); font-size: 15px; max-width: 60ch; }
+
+/* the corporate strip */
+.strip {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 18px;
+  background: radial-gradient(circle at 50% -60%, var(--scope-1), var(--scope-2) 60%, var(--scope-3)); color: #c9fff0;
+  border: 2px solid #bfeefe; border-radius: 999px; padding: 10px 14px 10px 10px;
+  box-shadow: inset 0 3px 10px rgba(0,0,0,0.5), 0 10px 24px rgba(12,53,80,0.3);
+}
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand .badge { width: 38px; height: 38px; display: grid; place-items: center; --c1: #ffe08a; --c2: #d27a00; font-family: var(--display); font-size: 17px; }
+.brand b { font-family: var(--display); font-weight: 400; font-size: 18px; color: #fff; }
+.brand span { color: var(--mint); }
+.readouts { display: flex; flex-wrap: wrap; gap: 6px 18px; color: var(--mint); text-shadow: 0 0 8px rgba(125,249,200,0.5); }
+.readouts output { font-variant-numeric: tabular-nums; color: #fff; }
+
+/* hero */
+.hero { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr); gap: 24px; align-items: center; }
+.mast { position: relative; width: 100%; max-width: 520px; justify-self: center; }
+.mast svg { width: 100%; height: auto; display: block; overflow: hidden; filter: drop-shadow(0 18px 26px rgba(12,53,80,0.3)); }
+.lamp-glow { opacity: 0.15; }
+.lamp-glow.a { animation: flashA 1.2s steps(1, end) infinite; }
+.lamp-glow.b { animation: flashB 1.2s steps(1, end) infinite; }
+.live .lamp-glow.a, .live .lamp-glow.b { animation: none; opacity: 0.12; }
+.live .status .dot { --c1: #b9f59a; --c2: #2c8a1c; }
+@keyframes flashA { 0% { opacity: 1; } 50% { opacity: 0.15; } }
+@keyframes flashB { 0% { opacity: 0.15; } 50% { opacity: 1; } }
+.title h1 { font-size: clamp(34px, 5.6vw, 60px); line-height: 1.02; letter-spacing: -0.01em; color: #fff; text-shadow: 0 2px 0 rgba(12,53,80,0.45), 0 8px 22px rgba(12,53,80,0.35); }
+.title h1 b { font-weight: 400; color: var(--sun); }
+.title .kicker { color: var(--ink); margin-bottom: 12px; }
+.title .lede { font-size: 18px; max-width: 46ch; margin-top: 14px; }
+.status {
+  margin-top: 18px; display: inline-flex; align-items: center; gap: 12px; max-width: 100%;
+  background: rgba(255,255,255,0.6); border: 1.5px solid var(--rim); border-radius: 999px; padding: 8px 18px 8px 8px;
+  box-shadow: inset 0 3px 6px rgba(255,255,255,0.9), 0 6px 14px rgba(12,53,80,0.14); font-size: 15px;
+}
+.status .dot { width: 26px; height: 26px; --c1: var(--red1); --c2: var(--red2); flex: none; }
+.row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 18px; }
+.pill {
+  font-family: var(--display); font-size: 15px; color: #fff; cursor: pointer;
+  border: 2px solid var(--rim); border-radius: 999px; padding: 10px 22px;
+  background: linear-gradient(180deg, #ffe08a, #e08a00);
+  box-shadow: inset 0 6px 10px rgba(255,255,255,0.5), 0 6px 14px rgba(160,90,0,0.3); text-shadow: 0 1px 2px rgba(0,0,0,0.45);
+}
+.pill.quiet { background: linear-gradient(180deg, #9fd8ff, #3a8fd0); box-shadow: inset 0 6px 10px rgba(255,255,255,0.5), 0 6px 14px rgba(0,60,120,0.25); }
+.hint { font-size: 14px; color: var(--ink-soft); }
+
+/* the notice */
+.notice .seal { display: flex; align-items: center; gap: 14px; }
+.notice .seal .o { width: 58px; height: 58px; flex: none; display: grid; place-items: center; font-family: var(--display); font-size: 26px; --c1: #ffffff; --c2: #9fc6df; color: var(--ink); text-shadow: none; }
+.notice .seal p { color: var(--ink-soft); }
+.articles { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.art { background: linear-gradient(180deg, rgba(255,255,255,0.94), rgba(220,242,255,0.72)); border: 1.5px solid var(--rim); border-radius: 30px; padding: 16px 18px 18px; display: grid; gap: 8px; align-content: start; box-shadow: inset 0 3px 6px rgba(255,255,255,0.9), 0 8px 18px rgba(12,53,80,0.14); }
+.art header { display: flex; align-items: center; gap: 12px; }
+.art .o { width: 40px; height: 40px; flex: none; display: grid; place-items: center; font-family: var(--display); font-size: 16px; }
+.art .mono { color: var(--ink-soft); }
+.art p { font-size: 15px; }
+.fine { margin-top: 16px; font-size: 13px; color: var(--ink-soft); font-family: var(--mono); letter-spacing: 0.02em; }
+
+/* the crossing from above: the scope */
+.above { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 24px; align-items: center; }
+.dial { position: relative; width: 100%; max-width: 540px; aspect-ratio: 1; justify-self: center; container-type: inline-size; }
+.dial svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; border-radius: 50%; box-shadow: 0 0 0 6px rgba(255,255,255,0.55), 0 24px 50px rgba(12,53,80,0.45), inset 0 0 60px rgba(0,0,0,0.6); }
+.blip {
+  position: absolute; width: 9.6%; aspect-ratio: 1; border-radius: 50%; transform: translate(-50%, -50%); padding: 0; cursor: pointer;
+  font-family: var(--display); font-size: 12px; font-size: clamp(9px, 2.5cqw, 14px);
+  display: grid; place-items: center; z-index: 2; transition: transform 0.25s;
+  box-shadow: inset 0 -5px 9px rgba(0,0,0,0.25), inset 0 3px 6px rgba(255,255,255,0.55), 0 0 calc(4px + var(--g, 0.2) * 20px) calc(var(--g, 0.2) * 6px) var(--c1, #9fd8ff);
+}
+.blip.open { background: rgba(125,249,200,0.07); border: 1.5px dashed rgba(125,249,200,0.6); color: rgba(201,255,240,0.85); text-shadow: none; box-shadow: 0 0 calc(var(--g, 0.2) * 16px) calc(var(--g, 0.2) * 3px) rgba(125,249,200,0.75); }
+.blip.now { transform: translate(-50%, -50%) scale(1.3); z-index: 4; outline: 3px solid var(--sun); outline-offset: 3px; }
+.blip.peek { transform: translate(-50%, -50%) scale(1.18); z-index: 3; outline: 3px solid var(--mint); outline-offset: 3px; }
+.hub {
+  position: absolute; left: 50%; top: 50%; width: 30%; aspect-ratio: 1; z-index: 3; transform: translate(-50%, -50%);
+  display: grid; place-content: center; justify-items: center; text-align: center; padding: 3%;
+  --c1: #ffffff; --c2: #c9d9e4; color: var(--ink); text-shadow: none;
+}
+.hub .x { font-family: var(--display); font-size: 30px; font-size: clamp(20px, 7cqw, 40px); line-height: 1; }
+.hub .x b { font-weight: 400; color: #d27a00; }
+.hub small { font-family: var(--mono); font-size: 10px; font-size: clamp(8px, 1.8cqw, 11px); letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); }
+.board {
+  background: radial-gradient(circle at 50% -20%, var(--scope-1), var(--scope-2) 60%, var(--scope-3)); border: 2px solid #bfeefe; border-radius: 30px; padding: 20px 22px; display: grid; gap: 12px;
+  box-shadow: inset 0 4px 14px rgba(0,0,0,0.55), 0 10px 22px rgba(12,53,80,0.25); color: #c9fff0;
+}
+.board .mono { color: var(--mint); text-shadow: 0 0 8px rgba(125,249,200,0.6); }
+.board h3 { font-size: clamp(24px, 3.6vw, 34px); color: #fff; }
+.board .line { font-size: 16px; }
+.facts { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 6px 14px; margin: 0; font-size: 15px; }
+.facts dt { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--mint); padding-top: 3px; }
+.facts dd { margin: 0; color: #e4fff6; overflow-wrap: anywhere; }
+.board .pill { justify-self: start; }
+.board .pill[hidden] { display: none; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 10px; font-size: 13px; margin-top: 14px; justify-content: center; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; border-radius: 999px; padding: 3px 12px 3px 6px; background: rgba(255,255,255,0.55); border: 1px solid var(--rim); color: var(--ink-soft); }
+.legend i { width: 14px; height: 14px; border-radius: 50%; background: radial-gradient(circle at 35% 28%, #fff 0 18%, var(--c) 55%); box-shadow: 0 1px 3px rgba(12,53,80,0.35); }
+.legend i.dash { background: transparent; border: 1.5px dashed var(--ink-soft); box-shadow: none; }
+
+/* road and track */
+.lines { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 2.2fr); gap: 18px; }
+.lane { border-radius: 30px; padding: 18px; display: grid; gap: 14px; align-content: start; }
+.lane.track { background: radial-gradient(circle at 50% -30%, var(--scope-1), var(--scope-3)); border: 2px solid #bfeefe; color: #c9fff0; box-shadow: inset 0 4px 14px rgba(0,0,0,0.55); }
+.lane.track .mono { color: var(--mint); }
+.lane.road { background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(220,242,255,0.65)); border: 1.5px solid var(--rim); box-shadow: inset 0 3px 6px rgba(255,255,255,0.9), 0 8px 18px rgba(12,53,80,0.12); }
+.lane.road .mono { color: var(--ink-soft); }
+.knobs { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); gap: 14px; }
+.stn { display: grid; gap: 6px; justify-items: center; text-align: center; align-content: start; }
+.knob { width: min(100%, 120px); aspect-ratio: 1; display: grid; place-items: center; font-family: var(--display); font-size: clamp(22px, 3.6vw, 32px); --c1: #9fd8ff; --c2: #3a8fd0; }
+.stn.inside .knob { --c1: #ffc65a; --c2: #d27a00; box-shadow: inset 0 -12px 22px rgba(0,0,0,0.2), inset 0 7px 14px rgba(255,255,255,0.55), 0 0 0 4px #fff, 0 0 0 8px var(--sun), 0 0 30px 8px rgba(255,198,90,0.6); }
+.stn p { font-size: 14px; }
+.lane.road .stn p { color: var(--ink-soft); }
+.fight { margin-top: 16px; font-size: 15px; color: var(--ink-soft); max-width: 78ch; }
+.ask { margin-top: 18px; display: flex; gap: 14px; align-items: center; }
+.ask .o { width: 44px; height: 44px; flex: none; --c1: #8be06a; --c2: #2c8a1c; }
+.ask p { font-family: var(--display); font-size: 19px; }
+
+footer { display: grid; gap: 10px; justify-items: center; text-align: center; padding-top: 6px; }
+footer .sign { font-family: var(--display); font-size: clamp(18px, 2.6vw, 24px); max-width: 40ch; color: var(--ink); }
+footer .sign small { display: block; font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin-top: 6px; }
+footer .fine { margin: 0; }
+
+@media (max-width: 900px) {
+  .hero, .above { grid-template-columns: minmax(0, 1fr); }
+  .articles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lines { grid-template-columns: minmax(0, 1fr); }
+  .mast { max-width: 440px; }
+}
+@media (max-width: 560px) {
+  .glass { padding: 20px 16px; border-radius: 26px; }
+  .articles { grid-template-columns: minmax(0, 1fr); }
+  .strip { border-radius: 28px; }
+  .knobs { gap: 8px; }
+  .stn p { font-size: 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lamp-glow.a, .lamp-glow.b { animation: none; }
+  .lamp-glow.a { opacity: 1; }
+  .blip { transition: none; }
+}
+@media print {
+  body { background: #e9f8ff; -webkit-print-color-adjust: exact; print-color-adjust: exact; padding: 0; }
+  .title h1 { color: var(--ink); text-shadow: none; }
+  .pill, #ring { display: none; }
+  .glass { box-shadow: none; -webkit-backdrop-filter: none; backdrop-filter: none; background: rgba(255,255,255,0.85); break-inside: avoid; }
+  .glass::before { display: none; }
+  .mast svg { filter: none; }
+  .orbish, .art, .lane, .board, .strip, .status, .dial svg { box-shadow: none !important; }
+  .lamp-glow { animation: none !important; }
+  .art, .lane { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<noscript><p style="margin:16px;padding:12px 18px;border-radius:999px;background:#fff">Radio 93.X plays in your browser with JavaScript on. The timetable is plain data at <a href="packet.json">packet.json</a>.</p></noscript>
+
+  <div class="strip" role="banner">
+    <div class="brand">
+      <div class="badge orbish" aria-hidden="true">a</div>
+      <div><b>asaaab</b> <span class="mono">· Democratic People’s Republic of North America · Department of Crossings</span></div>
+    </div>
+    <div class="readouts mono">
+      <span>Crossing <output id="xno">No. 0</output></span>
+      <span>Milepost <output id="mp">0.000</output></span>
+      <span>Local <output id="clock">--:--</output> PT</span>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="mast">
+      <svg id="mast" viewBox="0 0 540 560" role="img" aria-label="A glass railroad-style crossing signal. The crossbuck reads 93, X on one arm and Radio Crossing on the other. Two red lamps flash in turn while the striped gate arm is down. Lift the gate to tune in."></svg>
+    </div>
+    <div class="title">
+      <p class="mono kicker" id="kicker"></p>
+      <h1 id="h1"></h1>
+      <p class="lede" id="lede"></p>
+      <div class="status"><span class="dot orbish" aria-hidden="true"></span><span id="status"></span></div>
+      <div class="row">
+        <button class="pill" type="button" id="tune">Lift the gate · tune in</button>
+        <button class="pill" type="button" id="ring">Ring the crossing bell</button>
+        <span class="hint" id="ringhint"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="glass notice" aria-labelledby="noticeh">
+    <div class="sec-head">
+      <div class="seal"><div class="o orbish" aria-hidden="true">X</div><div><p class="mono" id="noticeno"></p><h2 id="noticeh"></h2></div></div>
+      <p id="noticeline"></p>
+    </div>
+    <ol class="articles" id="articles"></ol>
+    <p class="fine" id="noticefine"></p>
+  </section>
+
+  <section class="glass" aria-labelledby="aboveh">
+    <div class="sec-head">
+      <h2 id="aboveh"></h2>
+      <p id="aboveline"></p>
+    </div>
+    <div class="above">
+      <div>
+        <div class="dial" id="dial" aria-label="The crossing seen from above. The track runs top to bottom, the road left to right. The 24 hours sit around the edge, midnight at the top.">
+          <svg id="scope" viewBox="0 0 600 600" aria-hidden="true"></svg>
+          <div class="hub orbish" aria-hidden="true"><div class="x">93<b>.X</b></div><small>No. 0</small></div>
+        </div>
+        <div class="legend" id="legend"></div>
+      </div>
+      <div class="board" aria-live="polite">
+        <p class="mono" id="beye"></p>
+        <h3 id="bname"></h3>
+        <p class="line" id="bline"></p>
+        <dl class="facts">
+          <dt>Hour</dt><dd id="bhour"></dd>
+          <dt>Gate</dt><dd id="bgate"></dd>
+          <dt>Next</dt><dd id="bnext"></dd>
+        </dl>
+        <button class="pill quiet" type="button" id="back" hidden>Back to this hour</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="glass" aria-labelledby="linesh">
+    <div class="sec-head">
+      <h2 id="linesh"></h2>
+      <p id="linesline"></p>
+    </div>
+    <div class="lines">
+      <div class="lane track"><p class="mono" id="tracklbl"></p><div class="knobs" id="trackknobs"></div></div>
+      <div class="lane road"><p class="mono" id="roadlbl"></p><div class="knobs" id="roadknobs"></div></div>
+    </div>
+    <p class="fight" id="fight"></p>
+    <div class="ask"><span class="o orbish" aria-hidden="true"></span><p id="ask"></p></div>
+  </section>
+
+  <footer>
+    <p class="sign"><span id="sign"></span><small id="signby"></small></p>
+    <p class="fine" id="foot"></p>
+  </footer>
+
+</div>
+
+<script>
+/* ======================================================================
+   CROSSING: everything this page says lives here. Scripted once:
+   the code below only reads it. Edit words here, nowhere else.
+   Quotes marked his:true are the Captain's own words, verbatim.
+   ====================================================================== */
+const CROSSING = {
+  version: "live v0",
+  tz: "America/Los_Angeles",
+  crossingNo: "No. 0",
+  milepost: "0.000",
+
+  kicker: "Radio 93.X · Level Crossing No. 0",
+  h1: "The most exclusive <b>level crossing</b> this side of absolute zero.",
+  lede: "This is the one place the station’s inside line crosses the public road. Nothing is sold here. You stand at the gate, you look, you listen.",
+  status: "Gate down. Lift it and the station crosses: everyone at the gate hears the same second.",
+  statusLive: "Gate up. You’re hearing Radio 93.X live, the same second as everyone else at the crossing.",
+  ringHint: "It’s just the bell. Nothing is coming.",
+
+  noticeNo: "Notice No. 0 · posted at Milepost 0.000",
+  noticeTitle: "Notice of Level Crossing",
+  noticeLine: "Issued by asaaab, Democratic People’s Republic of North America, for everyone who wandered up to the gate. Read it while you wait. You will be waiting a bit.",
+  articles: [
+    { n: "I", title: "Nothing changes hands", text: "No ticket, no fare, no ads, no sign-up, no cookie banner. Nothing at this crossing is for sale and nobody here will try to sell you anything. Standing here is the whole agreement." },
+    { n: "II", title: "Exclusive, on purpose", text: "There is exactly one of this crossing. Everyone is allowed to stand at it. That is the exclusive part: one gate, open to the whole road." },
+    { n: "III", title: "The gate is down until you lift it", text: "Lift it and the station crosses here as live streamed radio, no ads. Nothing is stored or downloaded ahead: the page reads a small packet and plays the theme in time with the clock, so everyone at the gate hears the same second. Top and bottom of the hour, the stinger." },
+    { n: "IV", title: "Human cargo only", text: "24 hours, all human produced, crossfaded, on repeat. Absurdity radio. The music is theme songs made by real people." },
+    { n: "V", title: "Stop. Look. Listen.", text: "Nothing crosses mid-block. Everything that goes from the inside line to the public road waits for this gate, and crosses here." },
+    { n: "VI", title: "Milepost zero", text: "The line starts at this crossing, from absolute zero. It is the coldest, newest station on the dial, and it only gets warmer from here." }
+  ],
+  noticeFine: "Crossing temperature: 0.000001 K, this side. Posted speed: one hour at a time. Penalty for crossing mid-block: none, but please don’t.",
+
+  aboveTitle: "The crossing, from above",
+  aboveLine: "The track runs top to bottom, the road runs left to right, and they meet in the middle. Around the edge are the 24 hours. The sweep is the clock. Tap an hour to see what is on the timetable.",
+  board: { now: "On the timetable this hour", peek: "On the timetable", gateDown: "Down. Lift the gate to tune in.", gateUp: "Up. On the air.", nextAt: "at" },
+  // Pacific clock hour, 0 = midnight. Names and lines are the station's own.
+  teams: { x: ["#ffc65a", "#d27a00"], nrg: ["#ff6b6b", "#b3122a"], h2o: ["#5ab8ff", "#1257b3"], green: ["#8be06a", "#2c8a1c"], cheese: ["#f7d54a", "#b8860b"] },
+  lineup: {
+    0: { name: "Radio 93.X", team: "x", line: "Absurdity radio. All human produced, crossfaded, on repeat." },
+    1: { name: "Radio Free NRG", team: "nrg", line: "Free power, played for laughs." },
+    2: { name: "Radio Free H2O", team: "h2o", line: "Free water, played for laughs." },
+    3: { name: "Back to the Mirai", team: "green", line: "“We’re flying back to the Mirai.”" },
+    4: { name: "Nexo to the Mirai", team: "green", line: "Yesterday, replayed." },
+    5: { name: "Cheese report", team: "cheese", line: "The cheese desk has the hour." },
+    6: { name: "Morning Report", team: "x", line: "A snapshot of the last day: boost levels, weather, flight radar, autopilot." }
+  },
+  openHour: { name: "Open hour", line: "No show has this hour yet. Music and stingers on the hour’s vibe until one takes it." },
+  legend: [ ["x", "Radio 93.X"], ["nrg", "Radio Free NRG"], ["h2o", "Radio Free H2O"], ["green", "Mirai hours"], ["cheese", "Cheese report"] ],
+
+  linesTitle: "The track and the road",
+  linesLine: "Two lines meet at this crossing. The inside line is the station talking to itself. The road is where the public stations run.",
+  track: { label: "The track · inside line", stations: [ { num: "93.X", note: "Walkie-talkie, for now. Crosses the road here." } ] },
+  road: { label: "The road · public side, asaaab radio", stations: [ { num: "92", note: "asaaab radio" }, { num: "94", note: "asaaab radio" }, { num: "96", note: "asaaab radio" } ] },
+  fight: [
+    { text: "Radio Free NRG, Radio Free Wim Z and Radio Free H2O are “competing” for your attention, but they are basically the same show, " },
+    { text: "“sliiiiiiightly different”", his: true },
+    { text: ". Which one ends up on which number? " },
+    { text: "“they fight for the numbers its a tough market ive heard”", his: true },
+    { text: "." }
+  ],
+  ask: "If you had a crossing of your own, what would you send through it first?",
+
+  sign: "“When you have a different perspective on things, you don’t just build another car, you build a radio station.”",
+  signBy: "The Captain",
+  foot: "asaaab · Democratic People’s Republic of North America · Radio 93.X Level Crossing No. 0 · all times Pacific · live, one layer at a time · nothing to buy here"
+};
+
+/* ====================================================================== */
+(function () {
+  const D = CROSSING;
+  const $ = (id) => document.getElementById(id);
+  const NS = "http://www.w3.org/2000/svg";
+  const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const el = (tag, attrs, parent, text) => {
+    const n = document.createElement(tag);
+    if (attrs) for (const k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    if (parent) parent.appendChild(n);
+    return n;
+  };
+  const sv = (tag, attrs, parent, text) => {
+    const n = document.createElementNS(NS, tag);
+    if (attrs) for (const k in attrs) n.setAttribute(k, attrs[k]);
+    if (text != null) n.textContent = text;
+    if (parent) parent.appendChild(n);
+    return n;
+  };
+
+  /* ---------- words ---------- */
+  $("xno").textContent = D.crossingNo;
+  $("mp").textContent = D.milepost;
+  $("kicker").textContent = D.kicker;
+  $("h1").innerHTML = D.h1; // markup is authored in the data block above, not user input
+  $("lede").textContent = D.lede;
+  $("status").textContent = D.status;
+  $("noticeno").textContent = D.noticeNo;
+  $("noticeh").textContent = D.noticeTitle;
+  $("noticeline").textContent = D.noticeLine;
+  $("noticefine").textContent = D.noticeFine;
+  const artColors = [["#9fd8ff", "#3a8fd0"], ["#ffc65a", "#d27a00"], [ "#ff8a8a", "#c8141f"], ["#8be06a", "#2c8a1c"], ["#c9b6ff", "#6b4fd0"], ["#e8f6ff", "#8fb4cc"]];
+  D.articles.forEach((a, i) => {
+    const li = el("li", { class: "art" }, $("articles"));
+    const h = el("header", null, li);
+    const o = el("span", { class: "o orbish", "aria-hidden": "true" }, h, a.n);
+    o.style.setProperty("--c1", artColors[i % 6][0]); o.style.setProperty("--c2", artColors[i % 6][1]);
+    const t = el("div", null, h);
+    el("p", { class: "mono" }, t, "Article " + a.n);
+    el("h3", null, t, a.title);
+    el("p", null, li, a.text);
+  });
+  $("aboveh").textContent = D.aboveTitle;
+  $("aboveline").textContent = D.aboveLine;
+  $("linesh").textContent = D.linesTitle;
+  $("linesline").textContent = D.linesLine;
+  $("tracklbl").textContent = D.track.label;
+  $("roadlbl").textContent = D.road.label;
+  const knob = (s, parent, inside) => {
+    const d = el("div", { class: "stn" + (inside ? " inside" : "") }, parent);
+    el("div", { class: "knob orbish" }, d, s.num);
+    el("p", null, d, s.note);
+  };
+  D.track.stations.forEach((s) => knob(s, $("trackknobs"), true));
+  D.road.stations.forEach((s) => knob(s, $("roadknobs"), false));
+  D.fight.forEach((f) => { if (f.his) el("q", null, $("fight"), f.text.replace(/^“|”$/g, "")); else $("fight").appendChild(document.createTextNode(f.text)); });
+  $("ask").textContent = D.ask;
+  $("sign").textContent = D.sign;
+  $("signby").textContent = D.signBy;
+  $("foot").textContent = D.foot;
+  $("ringhint").textContent = D.ringHint;
+  D.legend.forEach(([team, name]) => { const s = el("span", null, $("legend")); const i = el("i", null, s); i.style.setProperty("--c", D.teams[team][0]); s.appendChild(document.createTextNode(name)); });
+  { const s = el("span", null, $("legend")); el("i", { class: "dash" }, s); s.appendChild(document.createTextNode("Open hour")); }
+
+  /* ---------- the mast: crossbuck, lamps, bell, gate ---------- */
+  const m = $("mast");
+  const defs = sv("defs", null, m);
+  const grad = (id, stops, attrs) => { const g = sv(attrs && attrs.r ? "radialGradient" : "linearGradient", Object.assign({ id }, attrs || { x1: 0, y1: 0, x2: 0, y2: 1 }), defs); stops.forEach(([o, c, op]) => sv("stop", { offset: o, "stop-color": c, "stop-opacity": op == null ? 1 : op }, g)); };
+  grad("pole", [[0, "#ffffff"], [0.45, "#cfe6f4"], [1, "#7fa6bf"]], { x1: 0, y1: 0, x2: 1, y2: 0 });
+  grad("buck", [[0, "#ffffff"], [0.5, "#f2f9ff"], [1, "#c7dcea"]]);
+  grad("shine", [[0, "#ffffff", 0.95], [1, "#ffffff", 0]]);
+  grad("red", [[0, "#ffd0d0"], [0.35, "#ff4a4a"], [1, "#8a0008"]], { r: "0.7", cx: "0.38", cy: "0.3" });
+  grad("redoff", [[0, "#c99"], [0.5, "#7a2a2e"], [1, "#3a0a0e"]], { r: "0.7", cx: "0.38", cy: "0.3" });
+  grad("halo", [[0, "#ff5050", 0.8], [1, "#ff5050", 0]], { r: "0.5", cx: "0.5", cy: "0.5" });
+  grad("back", [[0, "#2a5266"], [1, "#061c26"]], { r: "0.7", cx: "0.4", cy: "0.3" });
+  grad("gold", [[0, "#fff2c2"], [0.4, "#ffc65a"], [1, "#b56a00"]], { r: "0.8", cx: "0.35", cy: "0.25" });
+  const PX = 180; // pole x
+  // ground shadow
+  sv("ellipse", { cx: PX, cy: 540, rx: 90, ry: 12, fill: "#0c3550", "fill-opacity": 0.18 }, m);
+  // pole
+  sv("rect", { x: PX - 11, y: 40, width: 22, height: 500, rx: 11, fill: "url(#pole)", stroke: "#fff", "stroke-width": 2 }, m);
+  // bell on top
+  const bell = sv("g", { id: "bell" }, m);
+  sv("path", { d: `M${PX - 26} 44 Q${PX - 26} 10 ${PX} 10 Q${PX + 26} 10 ${PX + 26} 44 Z`, fill: "url(#gold)", stroke: "#fff", "stroke-width": 2 }, bell);
+  sv("circle", { cx: PX, cy: 48, r: 6, fill: "#b56a00", stroke: "#fff", "stroke-width": 1.5 }, bell);
+  // crossbuck: arm behind reads 93 · X (the front arm is the dot), arm in front reads RADIO CROSSING
+  const CY = 128, AW = 344, AH = 50;
+  const arm = (deg, words) => {
+    const g = sv("g", { transform: `rotate(${deg} ${PX} ${CY})` }, m);
+    sv("rect", { x: PX - AW / 2, y: CY - AH / 2, width: AW, height: AH, rx: AH / 2, fill: "url(#buck)", stroke: "#0c3550", "stroke-opacity": 0.35, "stroke-width": 2 }, g);
+    sv("rect", { x: PX - AW / 2 + 10, y: CY - AH / 2 + 4, width: AW - 20, height: AH / 2.6, rx: AH / 5, fill: "url(#shine)" }, g);
+    words.forEach(([x, t, anchor]) => sv("text", { x: PX + x, y: CY + 9, "text-anchor": anchor, "font-family": "Varela Round, sans-serif", "font-size": 22, fill: "#0c3550", "letter-spacing": 1.5 }, g, t));
+    return g;
+  };
+  arm(-32, [[-74, "93", "middle"], [74, "X", "middle"]]);
+  arm(32, [[-6, "RADIO", "end"], [6, "CROSSING", "start"]]);
+  // number plate (like the tracks plate under a real crossbuck)
+  sv("rect", { x: PX - 58, y: 222, width: 116, height: 40, rx: 20, fill: "url(#buck)", stroke: "#0c3550", "stroke-opacity": 0.3, "stroke-width": 2 }, m);
+  sv("text", { x: PX, y: 249, "text-anchor": "middle", "font-family": "DM Mono, monospace", "font-size": 17, fill: "#0c3550", "letter-spacing": 1 }, m, "1 STATION");
+  // lamp crossarm and lamps
+  sv("rect", { x: PX - 120, y: 300, width: 240, height: 16, rx: 8, fill: "url(#pole)", stroke: "#fff", "stroke-width": 1.5 }, m);
+  const lamp = (x, cls) => {
+    sv("circle", { cx: x, cy: 340, r: 50, fill: "url(#back)", stroke: "#fff", "stroke-width": 3 }, m);
+    sv("circle", { cx: x, cy: 340, r: 30, fill: "url(#redoff)" }, m);
+    const on = sv("g", { class: "lamp-glow " + cls }, m);
+    sv("circle", { cx: x, cy: 340, r: 70, fill: "url(#halo)" }, on);
+    sv("circle", { cx: x, cy: 340, r: 30, fill: "url(#red)" }, on);
+    sv("ellipse", { cx: x - 9, cy: 328, rx: 12, ry: 7, fill: "#fff", "fill-opacity": 0.85 }, m);
+    sv("path", { d: `M${x - 40} 318 A42 42 0 0 1 ${x + 40} 318 L${x + 34} 324 A36 36 0 0 0 ${x - 34} 324 Z`, fill: "#061c26" }, m);
+  };
+  lamp(PX - 80, "a"); lamp(PX + 80, "b");
+  // gate mechanism and arm, down
+  sv("rect", { x: PX + 8, y: 430, width: 56, height: 70, rx: 22, fill: "url(#pole)", stroke: "#fff", "stroke-width": 2 }, m);
+  const gate = sv("g", null, m);
+  const GX = PX + 50, GY = 452, GL = 530 - PX - 50;
+  const stripes = sv("clipPath", { id: "gateclip" }, defs);
+  sv("rect", { x: GX, y: GY, width: GL, height: 26, rx: 13 }, stripes);
+  sv("rect", { x: GX, y: GY, width: GL, height: 26, rx: 13, fill: "#fff", stroke: "#0c3550", "stroke-opacity": 0.3, "stroke-width": 2 }, gate);
+  const sg = sv("g", { "clip-path": "url(#gateclip)" }, gate);
+  for (let x = GX + 20; x < GX + GL; x += 56) sv("path", { d: `M${x} ${GY + 26} L${x + 18} ${GY} L${x + 46} ${GY} L${x + 28} ${GY + 26} Z`, fill: "#e0202a" }, sg);
+  sv("rect", { x: GX + 6, y: GY + 3, width: GL - 12, height: 8, rx: 4, fill: "#fff", "fill-opacity": 0.55 }, gate);
+  [0.45, 0.95].forEach((f, i) => {
+    const x = GX + GL * f - 14;
+    sv("circle", { cx: x, cy: GY - 10, r: 9, fill: "url(#redoff)", stroke: "#fff", "stroke-width": 1.5 }, gate);
+    const g = sv("g", { class: "lamp-glow " + (i ? "a" : "b") }, gate);
+    sv("circle", { cx: x, cy: GY - 10, r: 22, fill: "url(#halo)" }, g);
+    sv("circle", { cx: x, cy: GY - 10, r: 9, fill: "url(#red)" }, g);
+  });
+  sv("circle", { cx: GX, cy: GY + 13, r: 14, fill: "url(#gold)", stroke: "#fff", "stroke-width": 2 }, gate);
+
+  /* ---------- the bell: synthesized, click only ---------- */
+  let ctx = null;
+  $("ring").addEventListener("click", () => {
+    try {
+      ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
+      const t0 = ctx.currentTime + 0.02;
+      for (let i = 0; i < 8; i++) {
+        const t = t0 + i * 0.32;
+        [[880, 0.22], [2210, 0.07], [3520, 0.03]].forEach(([f, v]) => {
+          const o = ctx.createOscillator(), g = ctx.createGain();
+          o.type = "sine"; o.frequency.value = f;
+          g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(v, t + 0.005); g.gain.exponentialRampToValueAtTime(0.0001, t + 0.28);
+          o.connect(g).connect(ctx.destination); o.start(t); o.stop(t + 0.3);
+        });
+      }
+    } catch (e) { /* no sound available; the lamps still flash */ }
+  });
+
+  /* ---------- the scope: crossing from above ---------- */
+  const S = $("scope"), C = 300, R = 296, RC = 255;
+  const sd = sv("defs", null, S);
+  const rg = sv("radialGradient", { id: "sc", cx: "0.5", cy: "0.42", r: "0.62" }, sd);
+  [[0, "#0d4b5c"], [0.6, "#08303c"], [1, "#041a22"]].forEach(([o, c]) => sv("stop", { offset: o, "stop-color": c }, rg));
+  sv("circle", { cx: C, cy: C, r: R, fill: "url(#sc)" }, S);
+  [80, 150, 220, 285].forEach((r) => sv("circle", { cx: C, cy: C, r, fill: "none", stroke: "#7df9c8", "stroke-opacity": 0.13, "stroke-width": 1.2 }, S));
+  // the road, left to right
+  sv("rect", { x: 0, y: C - 40, width: 600, height: 80, fill: "#9fd8ff", "fill-opacity": 0.09 }, S);
+  sv("line", { x1: 0, y1: C - 40, x2: 600, y2: C - 40, stroke: "#bfeefe", "stroke-opacity": 0.35, "stroke-width": 2 }, S);
+  sv("line", { x1: 0, y1: C + 40, x2: 600, y2: C + 40, stroke: "#bfeefe", "stroke-opacity": 0.35, "stroke-width": 2 }, S);
+  sv("line", { x1: 0, y1: C, x2: 600, y2: C, stroke: "#ffc65a", "stroke-opacity": 0.5, "stroke-width": 2, "stroke-dasharray": "16 14" }, S);
+  // the track, top to bottom: ties and two rails
+  for (let y = 8; y < 600; y += 18) sv("rect", { x: C - 30, y, width: 60, height: 7, rx: 3.5, fill: "#7df9c8", "fill-opacity": 0.14 }, S);
+  [-18, 18].forEach((dx) => sv("line", { x1: C + dx, y1: 0, x2: C + dx, y2: 600, stroke: "#7df9c8", "stroke-opacity": 0.55, "stroke-width": 3 }, S));
+  // the painted X on the road, both approaches
+  [C - 150, C + 150].forEach((x) => { sv("path", { d: `M${x - 22} ${C - 26} L${x + 22} ${C + 26} M${x + 22} ${C - 26} L${x - 22} ${C + 26}`, stroke: "#fff", "stroke-opacity": 0.35, "stroke-width": 6, "stroke-linecap": "round" }, S); });
+  // the sweep
+  const arcPath = (r0, r1, a0, a1) => {
+    const p = (r, a) => [C + r * Math.sin(a * Math.PI / 180), C - r * Math.cos(a * Math.PI / 180)];
+    const [x0, y0] = p(r1, a0), [x1, y1] = p(r1, a1);
+    return `M${C} ${C} L${x0} ${y0} A${r1} ${r1} 0 0 1 ${x1} ${y1} Z`;
+  };
+  const sweep = sv("g", null, S);
+  for (let i = 0; i < 20; i++) sv("path", { d: arcPath(0, R - 2, -(i + 1) * 3.2, -i * 3.2 + 0.05), fill: "#7df9c8", "fill-opacity": (0.38 * Math.pow(1 - i / 20, 1.7)).toFixed(3) }, sweep);
+  sv("line", { x1: C, y1: C, x2: C, y2: C - R + 2, stroke: "#7df9c8", "stroke-width": 2.5, "stroke-opacity": 0.95 }, sweep);
+
+  const dial = $("dial");
+  const blips = [];
+  const label = (h) => (h % 12 === 0 ? 12 : h % 12) + (h < 12 ? "a" : "p");
+  const hourName = (h) => { const f = (x) => (x % 12 === 0 ? 12 : x % 12) + (x % 24 < 12 ? " AM" : " PM"); return f(h) + " to " + f((h + 1) % 24) + " PT"; };
+  const show = (h) => D.lineup[h] || null;
+  for (let h = 0; h < 24; h++) {
+    const a = h * 15, s = show(h);
+    const b = el("button", { type: "button", class: "blip " + (s ? "orbish" : "open"), "aria-label": hourName(h) + ": " + (s ? s.name : D.openHour.name) }, dial, label(h));
+    b.style.left = (50 + (RC / 6) * Math.sin(a * Math.PI / 180)) + "%";
+    b.style.top = (50 - (RC / 6) * Math.cos(a * Math.PI / 180)) + "%";
+    if (s) { b.style.setProperty("--c1", D.teams[s.team][0]); b.style.setProperty("--c2", D.teams[s.team][1]); }
+    b.addEventListener("click", () => { peek = h; paint(); });
+    blips.push(b);
+  }
+
+  /* ---------- time ---------- */
+  const fmt = new Intl.DateTimeFormat("en-US", { timeZone: D.tz, hour: "numeric", minute: "2-digit", second: "2-digit", hour12: false });
+  const now = () => { const o = {}; fmt.formatToParts(new Date()).forEach((p) => (o[p.type] = p.value)); return { h: (+o.hour) % 24, m: +o.minute, s: +o.second }; };
+  const clockFmt = new Intl.DateTimeFormat("en-US", { timeZone: D.tz, hour: "numeric", minute: "2-digit" });
+  let peek = null, lastKey = "";
+  function nextShow(h) { for (let i = 1; i <= 24; i++) { const k = (h + i) % 24; if (show(k)) return [k, show(k)]; } return null; }
+  function paint() {
+    const t = now(), h = peek == null ? t.h : peek, tt = P && P.timetable.find((x) => x.h === h);
+    const s = show(h) || (tt ? { name: tt.daypart, line: tt.energy + " · the hour’s vibe" } : D.openHour);
+    blips.forEach((b, i) => { b.classList.toggle("now", i === t.h); b.classList.toggle("peek", peek != null && i === peek && i !== t.h); });
+    $("beye").textContent = (peek == null ? D.board.now : D.board.peek) + " · " + hourName(h);
+    $("bname").textContent = s.name;
+    $("bline").textContent = s.line;
+    $("bhour").textContent = hourName(h);
+    $("bgate").textContent = live ? D.board.gateUp : D.board.gateDown;
+    const n = nextShow(h);
+    $("bnext").textContent = n ? n[1].name + " " + D.board.nextAt + " " + hourName(n[0]).split(" to ")[0] + " PT" : "";
+    $("back").hidden = peek == null;
+  }
+  $("back").addEventListener("click", () => { peek = null; paint(); });
+
+  function tick() {
+    const t = now();
+    $("clock").textContent = clockFmt.format(new Date());
+    const key = t.h + ":" + t.m;
+    if (key !== lastKey) { lastKey = key; paint(); }
+    return t;
+  }
+  function frame() {
+    const t = tick();
+    const ang = (t.h + t.m / 60 + t.s / 3600) * 15;
+    sweep.setAttribute("transform", "rotate(" + ang.toFixed(3) + " " + C + " " + C + ")");
+    blips.forEach((b, i) => { let d = (ang - i * 15 + 360) % 360; b.style.setProperty("--g", Math.max(0.15, 1 - d / 60).toFixed(2)); });
+  }
+
+  /* ---------- live: the packet, the bed, the stager ----------
+     The page publishes no recordings of its own. It reads packet.json,
+     plays the station's theme (made by real people) in time with the clock,
+     and drops the 4-second stinger at the top and bottom of the hour. */
+  let P = null, live = false, bed = null, gAng = 0, lastStg = "";
+  fetch("packet.json", { cache: "no-store" }).then((r) => r.json()).then((p) => { P = p; paint(); })
+    .catch(() => { $("status").textContent = "The packet didn’t arrive. Something is missing, and now we know."; });
+  const bedAt = () => (Date.now() / 1000) % P.layers[0].seconds;
+  function lift(up) {
+    const target = up ? -72 : 0, from = gAng, t0 = performance.now(), py = GY + 13;
+    const set = (a) => { gAng = a; gate.setAttribute("transform", "rotate(" + a.toFixed(2) + " " + GX + " " + py + ")"); };
+    if (reduce) return set(target);
+    const step = (t) => { const k = Math.min(1, (t - t0) / 1400), e = k < 0.5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2; set(from + (target - from) * e); if (k < 1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  }
+  function stinger() {
+    const g = new Audio(P.stager.src); g.currentTime = P.stager.from;
+    bed.volume = 0.3; g.play().catch(() => {});
+    setTimeout(() => { g.pause(); if (bed) bed.volume = 1; }, P.stager.seconds * 1000);
+  }
+  $("tune").addEventListener("click", () => {
+    if (!P) return;
+    if (!live) {
+      bed = bed || new Audio(P.layers[0].src); bed.loop = true; bed.volume = 1;
+      bed.currentTime = bedAt();
+      bed.play().then(() => {
+        live = true; document.body.classList.add("live"); lift(true);
+        $("status").textContent = D.statusLive; $("tune").textContent = "Lower the gate"; paint();
+      }).catch(() => { $("status").textContent = "Your browser held the sound back. Tap again to lift the gate."; });
+    } else {
+      bed.pause(); live = false; document.body.classList.remove("live"); lift(false);
+      $("status").textContent = D.status; $("tune").textContent = "Lift the gate · tune in"; paint();
+    }
+  });
+  setInterval(() => {
+    if (!live || !P) return;
+    const L = P.layers[0].seconds, want = bedAt(), d = Math.abs(bed.currentTime - want);
+    if (d > 0.6 && d < L - 0.6) bed.currentTime = want; // stay on the shared second
+    const t = now(), key = t.h + ":" + t.m;
+    if (P.stager.at_minutes.indexOf(t.m) >= 0 && t.s < 3 && key !== lastStg) { lastStg = key; stinger(); }
+  }, 1000);
+
+  frame();
+  if (reduce) setInterval(frame, 30000);
+  else setInterval(frame, 1000);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+{
+ "station": "Radio 93.X",
+ "crossing": "No. 0",
+ "tz": "America/Los_Angeles",
+ "version": "live v0",
+ "rule": "Everyone who lifts the gate hears the same second: the bed plays at (unix seconds mod its length).",
+ "stager": {
+  "at_minutes": [
+   0,
+   30
+  ],
+  "src": "/theme.mp3",
+  "from": 0,
+  "seconds": 4,
+  "note": "Top and bottom of the hour: the 4-second stinger. If the radio gets stuck, restart the transmission."
+ },
+ "layers": [
+  {
+   "name": "theme",
+   "src": "/theme.mp3",
+   "seconds": 51.024,
+   "role": "bed",
+   "made_by": "real people"
+  }
+ ],
+ "timetable": [
+  {
+   "h": 0,
+   "daypart": "Midnight Drift",
+   "energy": "Low (85 - 95 BPM)",
+   "vibe": "Lo-fi Hip Hop, Downtempo, Ambient Soul"
+  },
+  {
+   "h": 1,
+   "daypart": "Deep Space Chill",
+   "energy": "Low (88 - 98 BPM)",
+   "vibe": "Dub Techno, Deep House, Atmospheric Beats"
+  },
+  {
+   "h": 2,
+   "daypart": "Nocturnal Pulse",
+   "energy": "Low-Med (95 - 105 BPM)",
+   "vibe": "Minimal Groove, Trip Hop, Night Drive Synth"
+  },
+  {
+   "h": 3,
+   "daypart": "The Insomnia Club",
+   "energy": "Medium (100 - 110 BPM)",
+   "vibe": "Underground Garage, Electro Lounge, Deep Disco"
+  },
+  {
+   "h": 4,
+   "daypart": "Dawn Ascent",
+   "energy": "Low-Med (95 - 105 BPM)",
+   "vibe": "Acoustic Chill, Neo-Soul, Morning Ambient"
+  },
+  {
+   "h": 5,
+   "daypart": "Early Riser Kickoff",
+   "energy": "Med-High (110 - 118 BPM)",
+   "vibe": "Motown Grooves, Upbeat Indie, Nu-Disco"
+  },
+  {
+   "h": 6,
+   "daypart": "Sunrise Commute (Hr 1)",
+   "energy": "High (118 - 124 BPM)",
+   "vibe": "High-Energy Funk, Classic Rock Hooks, Pop Bangers"
+  },
+  {
+   "h": 7,
+   "daypart": "Prime Morning Rush (Hr 2)",
+   "energy": "Peak (122 - 128 BPM)",
+   "vibe": "Peak Pop, Driving Alt-Rock, Uptempo Synthwave"
+  },
+  {
+   "h": 8,
+   "daypart": "Prime Morning Rush (Hr 3)",
+   "energy": "Peak (122 - 128 BPM)",
+   "vibe": "High-Voltage Hits, Chart Toppers, Electropop"
+  },
+  {
+   "h": 9,
+   "daypart": "Morning Rollout",
+   "energy": "High (118 - 124 BPM)",
+   "vibe": "Modern Rock, 90s Throwback Bangers, Groove Funk"
+  },
+  {
+   "h": 10,
+   "daypart": "Workday Flow (Hr 1)",
+   "energy": "Medium (112 - 118 BPM)",
+   "vibe": "Focus Beats, Melodic House, R&B Grooves"
+  },
+  {
+   "h": 11,
+   "daypart": "Workday Flow (Hr 2)",
+   "energy": "Medium (114 - 120 BPM)",
+   "vibe": "Indie Dance, Modern Synth-Pop, Nu-Funk"
+  },
+  {
+   "h": 12,
+   "daypart": "Lunch Power Mix",
+   "energy": "Peak (125 - 130 BPM)",
+   "vibe": "80s/90s Anthems, Party Mashups, Eurodance"
+  },
+  {
+   "h": 13,
+   "daypart": "Afternoon Reset",
+   "energy": "Med-High (116 - 122 BPM)",
+   "vibe": "Chillwave, Tech-Funk, Alt-Pop Grooves"
+  },
+  {
+   "h": 14,
+   "daypart": "The Midday Hustle",
+   "energy": "High (118 - 125 BPM)",
+   "vibe": "Motown Soul, Skate Punk, 2000s Hip-Hop Anthems"
+  },
+  {
+   "h": 15,
+   "daypart": "Drive Time Warmup",
+   "energy": "High (120 - 126 BPM)",
+   "vibe": "Electronic Pop, Nu-Disco, Power Chords"
+  },
+  {
+   "h": 16,
+   "daypart": "Sunset Commute (Hr 1)",
+   "energy": "Peak (124 - 130 BPM)",
+   "vibe": "Hard-Hitting Rock, Heavy Bass Hip-Hop, EDM Bangers"
+  },
+  {
+   "h": 17,
+   "daypart": "Heavy Traffic Rush (Hr 2)",
+   "energy": "Peak (126 - 132 BPM)",
+   "vibe": "Maximum Energy, Peak Dance Anthems, Stadium Rock"
+  },
+  {
+   "h": 18,
+   "daypart": "Evening Unwind",
+   "energy": "Med-High (115 - 122 BPM)",
+   "vibe": "Neo-Soul, West Coast G-Funk, Indie Pop"
+  },
+  {
+   "h": 19,
+   "daypart": "The Sunset Session",
+   "energy": "Medium (108 - 116 BPM)",
+   "vibe": "Tropical House, Reggae Dub, Balearic Beats"
+  },
+  {
+   "h": 20,
+   "daypart": "Underground Showcase",
+   "energy": "Med-High (120 - 128 BPM)",
+   "vibe": "Breakbeat, UK Garage, Deep Basslines"
+  },
+  {
+   "h": 21,
+   "daypart": "Prime Time Club Mix",
+   "energy": "Peak (126 - 134 BPM)",
+   "vibe": "Peak Progressive House, Trance, Techno Anthems"
+  },
+  {
+   "h": 22,
+   "daypart": "The After-Party",
+   "energy": "High (122 - 128 BPM)",
+   "vibe": "French Touch, Electro-Funk, Dark Disco"
+  },
+  {
+   "h": 23,
+   "daypart": "Midnight Wind-Down",
+   "energy": "Med-Low (100 - 110 BPM)",
+   "vibe": "Chillhop, Downtempo Electronica, Late Night Jazz"
+  }
+ ],
+ "source": "93.X 24-hour master legend (dayparts, energy, vibe columns only)"
+}
